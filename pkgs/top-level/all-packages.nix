@@ -28238,6 +28238,8 @@ in
 
   pioneers = callPackage ../games/pioneers { };
 
+  pixelwheels = callPackage ../games/pixelwheels { };
+
   planetary_annihilation = callPackage ../games/planetaryannihilation { };
 
   pong3d = callPackage ../games/pong3d { };
