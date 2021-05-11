@@ -4749,6 +4749,8 @@ in {
 
   packet-python = callPackage ../development/python-modules/packet-python { };
 
+  pafx = callPackage ../development/python-modules/pafx { };
+
   pafy = callPackage ../development/python-modules/pafy { };
 
   pagelabels = callPackage ../development/python-modules/pagelabels { };
