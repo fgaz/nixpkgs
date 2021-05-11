@@ -5972,6 +5972,8 @@ in {
 
   pyplatec = callPackage ../development/python-modules/pyplatec { };
 
+  pypng = callPackage ../development/python-modules/pypng { };
+
   pyppeteer = callPackage ../development/python-modules/pyppeteer { };
 
   pyprind = callPackage ../development/python-modules/pyprind { };
