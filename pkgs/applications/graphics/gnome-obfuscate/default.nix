@@ -20,20 +20,20 @@
 
 stdenv.mkDerivation rec {
   pname = "gnome-obfuscate";
-  version = "0.0.7";
+  version = "0.0.8";
 
   src = fetchFromGitLab {
     domain = "gitlab.gnome.org";
     owner = "World";
     repo = "Obfuscate";
     rev = version;
-    sha256 = "sha256-jEMOg2yHi6K57XhA/7hkwwvedmikoB8pGV3ka+jixq8=";
+    sha256 = "sha256-gGQqJd5hAeOXZJ1+MrbchQJK2qPidcgcz8Hr88nZmo8=";
   };
 
   cargoDeps = rustPlatform.fetchCargoTarball {
     inherit src;
     name = "${pname}-${version}";
-    sha256 = "sha256-P04BeidLXouPLzT/vsa4VC5AOENF0W4gqXqzdmRFhmE=";
+    sha256 = "sha256-uycFGFxBNzUlsJoFPvEtb0HifIn3SuWOgbEX8lyS8eU=";
   };
 
   nativeBuildInputs = [
