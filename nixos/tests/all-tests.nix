@@ -1175,6 +1175,7 @@ in
   pghero = runTest ./pghero.nix;
   pgmanage = runTest ./pgmanage.nix;
   pgweb = runTest ./pgweb.nix;
+  phorge = handleTest ./phorge.nix {};
   phosh = runTest ./phosh.nix;
   photonvision = runTest ./photonvision.nix;
   photoprism = runTest ./photoprism.nix;

@@ -47,6 +47,8 @@ stdenvNoCC.mkDerivation (finalAttrs: {
     ln -s /etc/phorge/local.json $out/phorge/conf/local/local.json
   '';
 
+  passthru.tests.nixosTest = nixosTests.phorge;
+
   meta = {
     description = "An open source, opinionated, community-driven platform for collaborating, managing, organizing and reviewing software development projects. Fork of Phabricator";
     homepage = "https://phorge.it/";
