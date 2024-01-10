@@ -720,6 +720,7 @@ in {
   pgjwt = handleTest ./pgjwt.nix {};
   pgmanage = handleTest ./pgmanage.nix {};
   pgvecto-rs = handleTest ./pgvecto-rs.nix {};
+  phorge = handleTest ./phorge.nix {};
   phosh = handleTest ./phosh.nix {};
   photonvision = handleTest ./photonvision.nix {};
   photoprism = handleTest ./photoprism.nix {};
