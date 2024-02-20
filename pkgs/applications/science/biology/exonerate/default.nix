@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, glib, pkg-config }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "2.4.0";
   pname = "exonerate";
 
   src = fetchurl {
-    url = "http://ftp.ebi.ac.uk/pub/software/vertebrategenomics/exonerate/${pname}-${version}.tar.gz";
+    url = "http://ftp.ebi.ac.uk/pub/software/vertebrategenomics/exonerate/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     sha256 = "0hj0m9xygiqsdxvbg79wq579kbrx1mdrabi2bzqz2zn9qwfjcjgq";
   };
 
@@ -22,4 +22,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.bzizou ];
     platforms = platforms.unix ;
   };
-}
+})
