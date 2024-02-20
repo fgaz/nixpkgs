@@ -1,14 +1,14 @@
 { stdenv, lib, fetchFromGitHub, libX11, libXft, freetype, patches ? [ ],
   extraLibs ? [ ] }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "herbe";
   version = "1.0.0";
 
   src = fetchFromGitHub {
     owner = "dudik";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "0358i5jmmlsvy2j85ij7m1k4ar2jr5lsv7y1c58dlf9710h186cv";
   };
 
@@ -30,4 +30,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ wishfort36 ];
   };
-}
+})
