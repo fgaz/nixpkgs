@@ -6,14 +6,14 @@
 , nixosTests
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "catatonit";
   version = "0.2.0";
 
   src = fetchFromGitHub {
     owner = "openSUSE";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-AqJURf4OrPHfTm5joA3oPXH4McE1k0ouvDXAF3jiwgk=";
   };
 
@@ -38,4 +38,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     mainProgram = "catatonit";
   };
-}
+})
