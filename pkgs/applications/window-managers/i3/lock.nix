@@ -1,14 +1,14 @@
 { stdenv, lib, fetchFromGitHub, meson, ninja, pkg-config, libxcb, xcbutilkeysyms, xcbutilimage,
   xcbutilxrm, pam, libX11, libev, cairo, libxkbcommon, libxkbfile, xorg }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "i3lock";
   version = "2.14.1";
 
   src = fetchFromGitHub {
     owner = "i3";
     repo = "i3lock";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-cC908c47fkU6msLqZSxpEbKxO1/PatH81QeuCzBSZGw=";
   };
 
@@ -30,4 +30,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.all;
   };
 
-}
+})
