@@ -8,12 +8,12 @@
 let
   dim = toString dimensions;
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "palp";
   version = "2.20";
 
   src = fetchurl {
-    url = "http://hep.itp.tuwien.ac.at/~kreuzer/CY/palp/${pname}-${version}.tar.gz";
+    url = "http://hep.itp.tuwien.ac.at/~kreuzer/CY/palp/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     sha256 = "1q1cl3vpdir16szy0jcadysydcrjp48hqxyx42kr8g9digkqjgkj";
   };
 
@@ -82,10 +82,10 @@ stdenv.mkDerivation rec {
     # be reviewed on update.
     changelog = "http://hep.itp.tuwien.ac.at/~kreuzer/CY/CYpalp.html";
     # Just a link on the website pointing to gpl -- now gplv3. When the last
-    # version was released that pointed to gplv2 however, so thats probably
+    # finalAttrs.version was released that pointed to gplv2 however, so thats probably
     # the right license.
     license = licenses.gpl2;
     maintainers = teams.sage.members;
     platforms = platforms.unix;
   };
-}
+})
