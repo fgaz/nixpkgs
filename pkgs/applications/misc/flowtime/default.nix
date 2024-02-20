@@ -15,14 +15,14 @@
 , appstream-glib
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "flowtime";
   version = "6.1";
 
   src = fetchFromGitHub {
     owner = "Diego-Ivan";
     repo = "Flowtime";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-wTqHTkt1O3Da2fzxf6DiQjrqOt65ZEhLOkGK5C6HzIk=";
   };
 
@@ -53,4 +53,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ foo-dogsquared pokon548 ];
     platforms = platforms.linux;
   };
-}
+})
