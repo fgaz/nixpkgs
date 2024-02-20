@@ -1,13 +1,13 @@
 { stdenv, lib, fetchurl, makeDesktopItem, copyDesktopItems, makeWrapper,
 electron, libsecret }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "tutanota-desktop";
   version = "3.119.3";
 
   src = fetchurl {
-    url = "https://github.com/tutao/tutanota/releases/download/tutanota-desktop-release-${version}/${pname}-${version}-unpacked-linux.tar.gz";
-    name = "tutanota-desktop-${version}.tar.gz";
+    url = "https://github.com/tutao/tutanota/releases/download/tutanota-desktop-release-${finalAttrs.version}/${finalAttrs.pname}-${finalAttrs.version}-unpacked-linux.tar.gz";
+    name = "tutanota-desktop-${finalAttrs.version}.tar.gz";
     hash = "sha256-TdjvU12nh1sTfGTdBn+7dbEunaF38YjDvceEns4iRbA=";
   };
 
@@ -20,10 +20,10 @@ stdenv.mkDerivation rec {
   dontBuild = true;
 
   desktopItems = makeDesktopItem {
-    name = pname;
+    name = finalAttrs.pname;
     exec = "tutanota-desktop";
     icon = "tutanota-desktop";
-    comment = meta.description;
+    comment = finalAttrs.meta.description;
     desktopName = "Tutanota Desktop";
     genericName = "Email Reader";
   };
@@ -54,10 +54,10 @@ stdenv.mkDerivation rec {
   meta = with lib; {
     description = "Tutanota official desktop client";
     homepage = "https://tutanota.com/";
-    changelog = "https://github.com/tutao/tutanota/releases/tag/tutanota-desktop-release-${version}";
+    changelog = "https://github.com/tutao/tutanota/releases/tag/tutanota-desktop-release-${finalAttrs.version}";
     license = licenses.gpl3Only;
     maintainers = with maintainers; [ wolfangaukang ];
     mainProgram = "tutanota-desktop";
     platforms = [ "x86_64-linux" ];
   };
-}
+})
