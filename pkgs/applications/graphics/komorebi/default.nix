@@ -16,14 +16,14 @@
 , komorebi
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "komorebi";
   version = "2.2.1";
 
   src = fetchFromGitHub {
     owner = "Komorebi-Fork";
     repo = "komorebi";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-vER69dSxu4JuWNAADpkxHE/zjOMhQp+Fc21J+JHQ8xk=";
   };
 
@@ -53,4 +53,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ kranzes ];
     platforms = platforms.linux;
   };
-}
+})
