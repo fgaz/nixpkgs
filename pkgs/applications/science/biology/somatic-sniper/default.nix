@@ -1,13 +1,13 @@
 {lib, stdenv, fetchFromGitHub, cmake, zlib, ncurses}:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "somatic-sniper";
   version = "1.0.5.0";
 
   src = fetchFromGitHub {
     owner = "genome";
     repo = "somatic-sniper";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "0lk7p9sp6mp50f6w1nppqhr40fcwy1asw06ivw8w8jvvnwaqf987";
   };
 
@@ -26,4 +26,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
   };
 
-}
+})
