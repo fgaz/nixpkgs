@@ -22,7 +22,7 @@
 }:
 let
   # packages absolutely required for gap to start
-  # `*` represents the version where applicable
+  # `*` represents the finalAttrs.version where applicable
   requiredPackages = [
     "gapdoc"
     "primgrp"
@@ -63,13 +63,13 @@ let
     -exec rm -r '{}' \;
   '';
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gap";
   # https://www.gap-system.org/Releases/
   version = "4.12.2";
 
   src = fetchurl {
-    url = "https://github.com/gap-system/gap/releases/download/v${version}/gap-${version}.tar.gz";
+    url = "https://github.com/gap-system/gap/releases/download/v${finalAttrs.version}/gap-${finalAttrs.version}.tar.gz";
     sha256 = "sha256-ZyMIdF63iiIklO6N1nhu3VvDMUVvzGRWrAZL2yjVh6g=";
   };
 
@@ -155,4 +155,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl2;
     homepage = "https://www.gap-system.org";
   };
-}
+})
