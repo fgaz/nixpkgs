@@ -1,6 +1,6 @@
 { lib, stdenv, fetchgit, autoconf, automake, libtool, gmp }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "git-annex-utils";
   version = "0.04-3-g531bb33";
   src = fetchgit {
@@ -24,4 +24,4 @@ stdenv.mkDerivation rec {
     mainProgram = "gadu";
     platforms = lib.platforms.all;
   };
-}
+})
