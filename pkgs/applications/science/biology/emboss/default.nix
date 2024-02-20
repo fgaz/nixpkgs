@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, readline, perl, libharu, libX11, libpng, libXt, zlib }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "emboss";
   version = "6.6.0";
 
   src = fetchurl {
-    url = "ftp://emboss.open-bio.org/pub/EMBOSS/EMBOSS-${version}.tar.gz";
+    url = "ftp://emboss.open-bio.org/pub/EMBOSS/EMBOSS-${finalAttrs.version}.tar.gz";
     sha256 = "7184a763d39ad96bb598bfd531628a34aa53e474db9e7cac4416c2a40ab10c6e";
   };
 
@@ -27,4 +27,4 @@ stdenv.mkDerivation rec {
     license = lib.licenses.gpl2;
     homepage = "https://emboss.sourceforge.net/";
   };
-}
+})
