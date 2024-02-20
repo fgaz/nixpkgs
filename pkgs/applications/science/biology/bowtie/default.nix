@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, fetchpatch, zlib }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "bowtie";
   version = "1.3.1";
 
   src = fetchFromGitHub {
     owner = "BenLangmead";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-mWItmrTMPst/NnzSpxxTHcBztDqHPCza9yOsZPwp7G4=";
   };
 
@@ -21,7 +21,7 @@ stdenv.mkDerivation rec {
     })
 
     # Without this patch, compilation adds the current source directory to the
-    # include search path, and #include <version> in standard library code can
+    # include search path, and #include <finalAttrs.version> in standard library code can
     # end up picking the unrelated VERSION source code file on case-insensitive
     # file systems.
     (fetchpatch {
@@ -42,4 +42,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ prusnak ];
     platforms = platforms.all;
   };
-}
+})
