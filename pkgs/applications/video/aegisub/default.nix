@@ -59,14 +59,14 @@ let
   inherit (lib) optional;
   inherit (darwin.apple_sdk.frameworks) CoreText CoreFoundation AppKit Carbon IOKit Cocoa;
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "aegisub";
   version = "3.3.3";
 
   src = fetchFromGitHub {
     owner = "wangqr";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-oKhLv81EFudrJaaJ2ga3pVh4W5Hd2YchpjsoYoqRm78=";
   };
 
@@ -137,7 +137,7 @@ stdenv.mkDerivation rec {
   NIX_CFLAGS_LINK = "-L${luajit52}/lib";
 
   configurePhase = ''
-    export FORCE_GIT_VERSION=${version}
+    export FORCE_GIT_VERSION=${finalAttrs.version}
     # Workaround for a Nixpkgs bug; remove when the fix arrives
     mkdir build-dir
     cd build-dir
@@ -160,4 +160,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     mainProgram = "aegisub";
   };
-}
+})
