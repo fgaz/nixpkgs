@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, cmake, expat, openssl, zlib, lmdb, curl, wxGTK32, wrapGAppsHook }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "tqsl";
   version = "2.6.5";
 
   src = fetchurl {
-    url = "https://www.arrl.org/files/file/LoTW%20Instructions/${pname}-${version}.tar.gz";
+    url = "https://www.arrl.org/files/file/LoTW%20Instructions/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     sha256 = "sha256-UGPMp1mAarHWuLbZu2wWpjgCdf8ZKj0Mwkqp32U5/8w=";
   };
 
@@ -26,4 +26,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = [ maintainers.dpflug ];
   };
-}
+})
