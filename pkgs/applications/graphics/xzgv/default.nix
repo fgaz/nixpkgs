@@ -1,10 +1,10 @@
 { lib, stdenv, fetchurl, gtk2, libexif, pkg-config, texinfo }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "xzgv";
   version = "0.9.2";
   src = fetchurl {
-    url = "mirror://sourceforge/xzgv/xzgv-${version}.tar.gz";
+    url = "mirror://sourceforge/xzgv/xzgv-${finalAttrs.version}.tar.gz";
     sha256 = "17l1xr9v07ggwga3vn0z1i4lnwjrr20rr8z1kjbw71aaijxl18i5";
   };
   nativeBuildInputs = [ pkg-config texinfo ];
@@ -25,4 +25,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.womfoo ];
     platforms = platforms.linux;
   };
-}
+})
