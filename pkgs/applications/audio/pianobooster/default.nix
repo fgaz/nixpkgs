@@ -16,14 +16,14 @@
 , wrapQtAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "pianobooster";
   version = "1.0.0";
 
   src = fetchFromGitHub {
     owner = "pianobooster";
     repo = "PianoBooster";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-1WOlAm/HXSL6QK0Kd1mnFEZxxpMseTG+6WzgMNWt+RA=";
   };
 
@@ -68,4 +68,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ goibhniu orivej ];
   };
-}
+})
