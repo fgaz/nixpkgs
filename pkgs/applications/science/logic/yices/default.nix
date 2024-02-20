@@ -1,14 +1,14 @@
 { lib, stdenv, fetchFromGitHub, cudd, gmp-static, gperf, autoreconfHook, libpoly }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "yices";
-  # We never want X.Y.${odd} versions as they are moving development tags.
+  # We never want X.Y.${odd} finalAttrs.versions as they are moving development tags.
   version = "2.6.4";
 
   src = fetchFromGitHub {
     owner  = "SRI-CSL";
     repo   = "yices2";
-    rev    = "Yices-${version}";
+    rev    = "Yices-${finalAttrs.version}";
     sha256 = "sha256-qdxh86CkKdm65oHcRgaafTG9GUOoIgTDjeWmRofIpNE=";
   };
 
@@ -36,4 +36,4 @@ stdenv.mkDerivation rec {
     platforms   = with platforms; linux ++ darwin;
     maintainers = with maintainers; [ thoughtpolice ];
   };
-}
+})
