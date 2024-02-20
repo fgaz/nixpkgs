@@ -4,14 +4,14 @@
 , cmake
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "primesieve";
   version = "11.2";
 
   src = fetchFromGitHub {
     owner = "kimwalisch";
     repo = "primesieve";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-HtVuUS4dmTC7KosyBhqZ0QRstvon9WMxYf9Ocs1XIrs=";
   };
 
@@ -19,7 +19,7 @@ stdenv.mkDerivation rec {
 
   meta = with lib; {
     homepage = "https://primesieve.org/";
-    changelog = "https://github.com/kimwalisch/primesieve/blob/v${version}/ChangeLog";
+    changelog = "https://github.com/kimwalisch/primesieve/blob/v${finalAttrs.version}/ChangeLog";
     description = "Fast C/C++ prime number generator";
     longDescription = ''
       primesieve is a command-line program and C/C++ library for quickly
@@ -34,4 +34,4 @@ stdenv.mkDerivation rec {
       (with maintainers; [ abbradar AndersonTorres ]);
     platforms = platforms.unix;
   };
-}
+})
