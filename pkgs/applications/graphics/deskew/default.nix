@@ -1,14 +1,14 @@
 { lib, stdenv, fetchFromGitHub, libtiff, fpc }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
 
   pname = "deskew";
   version = "1.30";
 
   src = fetchFromGitHub {
     owner = "galfar";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     hash = "sha256-xghVOEMkQ/mXpOzJqMaT3SII7xneMNoFqRlqjtzmDnA=";
   };
 
@@ -42,4 +42,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.all;
   };
 
-}
+})
