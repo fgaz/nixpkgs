@@ -18,12 +18,12 @@
 , wxGTK32
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "survex";
   version = "1.4.3";
 
   src = fetchurl {
-    url = "https://survex.com/software/${version}/${pname}-${version}.tar.gz";
+    url = "https://survex.com/software/${finalAttrs.version}/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     hash = "sha256-7NtGTe9xNRPEvG9fQ2fC6htQLEMHfqGmBM2ezhi6oNM=";
   };
 
@@ -75,9 +75,9 @@ stdenv.mkDerivation rec {
       variety of platforms, including Linux/Unix, macOS, and Microsoft Windows.
     '';
     homepage = "https://survex.com/";
-    changelog = "https://github.com/ojwb/survex/raw/v${version}/NEWS";
+    changelog = "https://github.com/ojwb/survex/raw/v${finalAttrs.version}/NEWS";
     license = licenses.gpl2Plus;
     maintainers = [ maintainers.matthewcroughan ];
     platforms = platforms.all;
   };
-}
+})
