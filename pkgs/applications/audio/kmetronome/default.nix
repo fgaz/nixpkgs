@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, cmake, pkg-config, qttools, alsa-lib, drumstick, qtbase, qtsvg }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "kmetronome";
   version = "1.2.0";
 
   src = fetchurl {
-    url = "mirror://sourceforge/${pname}/${version}/${pname}-${version}.tar.bz2";
+    url = "mirror://sourceforge/${finalAttrs.pname}/${finalAttrs.version}/${finalAttrs.pname}-${finalAttrs.version}.tar.bz2";
     sha256 = "1ln0nm24w6bj7wc8cay08j5azzznigd39cbbw3h4skg6fxd8p0s7";
   };
 
@@ -22,4 +22,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ orivej ];
     platforms = platforms.linux;
   };
-}
+})
