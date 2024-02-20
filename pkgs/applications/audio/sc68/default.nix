@@ -11,7 +11,7 @@
 , curl
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "sc68";
   version = "unstable-2022-11-24";
 
@@ -47,4 +47,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ OPNA2608 ];
     platforms = platforms.all;
   };
-}
+})
