@@ -14,14 +14,14 @@
 , python3
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "particl-core";
   version = "23.0.3.0";
 
   src = fetchFromGitHub {
     owner = "particl";
     repo = "particl-core";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-jrIsErKeHP9CMUWsrD42RmfmApP7J091OLA5JNY0fe0=";
   };
 
@@ -31,7 +31,7 @@ stdenv.mkDerivation rec {
   configureFlags = [
     "--disable-bench"
     "--with-boost-libdir=${boost.out}/lib"
-  ] ++ lib.optionals (!doCheck) [
+  ] ++ lib.optionals (!finalAttrs.doCheck) [
     "--enable-tests=no"
   ];
 
@@ -52,4 +52,4 @@ stdenv.mkDerivation rec {
     license = licenses.mit;
     platforms = platforms.unix;
   };
-}
+})
