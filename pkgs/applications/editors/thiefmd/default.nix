@@ -22,14 +22,14 @@
 , webkitgtk_4_1
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "thiefmd";
   version = "0.2.7";
 
   src = fetchFromGitHub {
     owner = "kmwallio";
     repo = "ThiefMD";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-noNfGFMeIyKhAgiovJDn91TLELAOQ4nD/5QlQfsKTII=";
     fetchSubmodules = true;
   };
@@ -68,4 +68,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ wolfangaukang ];
   };
-}
+})
