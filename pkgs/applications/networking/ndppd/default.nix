@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, gzip }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "ndppd";
   version = "0.2.5";
 
   src = fetchFromGitHub {
     owner = "DanielAdolfsson";
     repo = "ndppd";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "0niri5q9qyyyw5lmjpxk19pv3v4srjvmvyd5k6ks99mvqczjx9c0";
   };
 
@@ -34,4 +34,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ fadenb ];
     mainProgram = "ndppd";
   };
-}
+})
