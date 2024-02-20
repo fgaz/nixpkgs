@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, makeWrapper, jre }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "besu";
   version = "23.10.3";
 
   src = fetchurl {
-    url = "https://hyperledger.jfrog.io/artifactory/${pname}-binaries/${pname}/${version}/${pname}-${version}.tar.gz";
+    url = "https://hyperledger.jfrog.io/artifactory/${finalAttrs.pname}-binaries/${finalAttrs.pname}/${finalAttrs.version}/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     sha256 = "sha256-c8g0zzLHu+JV19jMfKXR6w34QwuRFJNcjc86Z1sqy8I=";
   };
 
@@ -16,7 +16,7 @@ stdenv.mkDerivation rec {
     cp -r bin $out/
     mkdir -p $out/lib
     cp -r lib $out/
-    wrapProgram $out/bin/${pname} --set JAVA_HOME "${jre}"
+    wrapProgram $out/bin/${finalAttrs.pname} --set JAVA_HOME "${jre}"
   '';
 
   meta = with lib; {
@@ -27,4 +27,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.all;
     maintainers = with maintainers; [ mmahut ];
   };
-}
+})
