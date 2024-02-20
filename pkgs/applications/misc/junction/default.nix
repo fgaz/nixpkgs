@@ -15,14 +15,14 @@
 , libportal-gtk4
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "junction";
   version = "1.7";
 
   src = fetchFromGitHub {
     owner = "sonnyp";
     repo = "junction";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-qPseu2rzK6xp7eb/SrWK6fML/6xh4raP0MEreyZgqVI=";
     fetchSubmodules = true;
   };
@@ -70,4 +70,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ hqurve ];
     platforms = platforms.linux;
   };
-}
+})
