@@ -40,18 +40,18 @@ let
   inherit (lib) optionals;
 
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "strawberry";
   version = "1.0.21";
 
   src = fetchFromGitHub {
     owner = "jonaski";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     hash = "sha256-McwnYHaw0LYDeHLDQzfqRIYMV2FoiMdHyOL/EE8/esU=";
   };
 
-  # the big strawberry shown in the context menu is *very* much in your face, so use the grey version instead
+  # the big strawberry shown in the context menu is *very* much in your face, so use the grey finalAttrs.version instead
   postPatch = ''
     substituteInPlace src/context/contextalbum.cpp \
       --replace pictures/strawberry.png pictures/strawberry-grey.png
@@ -111,11 +111,11 @@ stdenv.mkDerivation rec {
   meta = with lib; {
     description = "Music player and music collection organizer";
     homepage = "https://www.strawberrymusicplayer.org/";
-    changelog = "https://raw.githubusercontent.com/jonaski/strawberry/${version}/Changelog";
+    changelog = "https://raw.githubusercontent.com/jonaski/strawberry/${finalAttrs.version}/Changelog";
     license = licenses.gpl3Only;
     maintainers = with maintainers; [ peterhoeg ];
     # upstream says darwin should work but they lack maintainers as of 0.6.6
     platforms = platforms.linux;
     mainProgram = "strawberry";
   };
-}
+})
