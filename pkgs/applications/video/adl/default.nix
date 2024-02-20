@@ -1,6 +1,6 @@
 { lib, stdenv, fetchFromGitHub, pkgs, makeWrapper, ... }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "adl";
   version = "3.0.1";
 
@@ -30,7 +30,7 @@ stdenv.mkDerivation rec {
     mkdir -p $out/bin
     cp $src/adl $out/bin
     wrapProgram $out/bin/adl \
-      --prefix PATH : ${lib.makeBinPath buildInputs}
+      --prefix PATH : ${lib.makeBinPath finalAttrs.buildInputs}
   '';
 
   meta = with lib; {
@@ -41,4 +41,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ ];
     mainProgram = "adl";
   };
-}
+})
