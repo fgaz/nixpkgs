@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, fetchpatch, cmake, wrapQtAppsHook, qtbase }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "rclone-browser";
   version = "1.8.0";
 
   src = fetchFromGitHub {
     owner = "kapitainsky";
     repo = "RcloneBrowser";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "14ckkdypkfyiqpnz0y2b73wh1py554iyc3gnymj4smy0kg70ai33";
   };
 
@@ -30,4 +30,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ dotlambda ];
   };
-}
+})
