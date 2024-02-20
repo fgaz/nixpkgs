@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, python, installShellFiles }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "googler";
   version = "4.3.2";
 
   src = fetchFromGitHub {
     owner = "jarun";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-PgWg396AQ15CAnfTXGDpSg1UXx7mNCtknEjJd/KV4MU=";
   };
 
@@ -30,4 +30,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ koral Br1ght0ne ];
     platforms = python.meta.platforms;
   };
-}
+})
