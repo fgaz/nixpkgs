@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, autoconf, gfortran, hepmc2, fastjet, lhapdf, rivet, sqlite }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "sherpa";
   version = "2.2.15";
 
   src = fetchurl {
-    url = "https://www.hepforge.org/archive/sherpa/SHERPA-MC-${version}.tar.gz";
+    url = "https://www.hepforge.org/archive/sherpa/SHERPA-MC-${finalAttrs.version}.tar.gz";
     sha256 = "sha256-3zvLa1k/bm7uOWKUsTyQM39cPBXJJlF1OgPgznl1hks=";
   };
 
@@ -37,4 +37,4 @@ stdenv.mkDerivation rec {
     # never built on aarch64-darwin since first introduction in nixpkgs
     broken = stdenv.isDarwin && stdenv.isAarch64;
   };
-}
+})
