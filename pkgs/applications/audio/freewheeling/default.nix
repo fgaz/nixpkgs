@@ -6,14 +6,14 @@ let
   makeSDLFlags = map (p: "-I${lib.getDev p}/include/SDL");
 in
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "freewheeling";
   version = "0.6.6";
 
   src = fetchFromGitHub {
     owner = "free-wheeling";
     repo = "freewheeling";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "1xff5whr02cixihgd257dc70hnyf22j3zamvhsvg4lp7zq9l2in4";
   };
 
@@ -49,4 +49,4 @@ stdenv.mkDerivation rec {
     maintainers = [ lib.maintainers.sepi ];
     platforms = lib.platforms.linux;
   };
-}
+})
