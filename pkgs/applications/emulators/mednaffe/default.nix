@@ -8,14 +8,14 @@
 , wrapGAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "mednaffe";
   version = "0.9.2";
 
   src = fetchFromGitHub {
     owner = "AmatCoder";
     repo = "mednaffe";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-zvSAt6CMcgdoPpTTA5sPlQaWUw9LUMsR2Xg9jM2UaWY=";
   };
 
@@ -38,4 +38,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ sheenobu yana AndersonTorres ];
     platforms = platforms.unix;
   };
-}
+})
