@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "3.8";
   pname = "xtermcontrol";
 
   src = fetchurl {
-    url = "https://thrysoee.dk/xtermcontrol/xtermcontrol-${version}.tar.gz";
+    url = "https://thrysoee.dk/xtermcontrol/xtermcontrol-${finalAttrs.version}.tar.gz";
     sha256 = "sha256-Vh6GNiDkjNhaD9U/3fG2LpMLN39L3jRUgG/FQeG1z40=";
   };
 
@@ -23,4 +23,4 @@ stdenv.mkDerivation rec {
     maintainers = [ lib.maintainers.derchris ];
     mainProgram = "xtermcontrol";
   };
-}
+})
