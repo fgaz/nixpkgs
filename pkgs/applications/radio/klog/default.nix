@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, hamlib, pkg-config, qtbase, qttools, qtserialport, qtcharts, qmake, wrapQtAppsHook }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "klog";
   version = "1.3.2";
 
   src = fetchurl {
-    url = "https://download.savannah.nongnu.org/releases/klog/${pname}-${version}.tar.gz";
+    url = "https://download.savannah.nongnu.org/releases/klog/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     sha256 = "1d5x7rq0mgfrqws3q1y4z8wh2qa3gvsmd0ssf2yqgkyq3fhdrb5c";
   };
 
@@ -25,4 +25,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ pulsation ];
   };
-}
+})
