@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, gtk3, rgbds, SDL2, wrapGAppsHook, glib }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "sameboy";
   version = "0.16.2";
 
   src = fetchFromGitHub {
     owner = "LIJI32";
     repo = "SameBoy";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-KEbwug/cwGLS/uhY1rKasLJWaKtiYYzdZvbAU2orfbI=";
   };
 
@@ -45,4 +45,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ NieDzejkob ];
     platforms = platforms.linux;
   };
-}
+})
