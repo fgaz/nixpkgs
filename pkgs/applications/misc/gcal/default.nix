@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, ncurses, gettext, fetchpatch }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gcal";
   version = "4.1";
 
   src = fetchurl {
-    url = "mirror://gnu/gcal/${pname}-${version}.tar.xz";
+    url = "mirror://gnu/gcal/${finalAttrs.pname}-${finalAttrs.version}.tar.xz";
     sha256 = "1av11zkfirbixn05hyq4xvilin0ncddfjqzc4zd9pviyp506rdci";
   };
 
@@ -25,7 +25,7 @@ stdenv.mkDerivation rec {
   meta = {
     description = "Program for calculating and printing calendars";
     longDescription = ''
-      Gcal is the GNU version of the trusty old cal(1). Gcal is a
+      Gcal is the GNU finalAttrs.version of the trusty old cal(1). Gcal is a
       program for calculating and printing calendars. Gcal displays
       hybrid and proleptic Julian and Gregorian calendar sheets.  It
       also displays holiday lists for many countries around the globe.
@@ -35,4 +35,4 @@ stdenv.mkDerivation rec {
     platforms = lib.platforms.unix;
     maintainers = [ lib.maintainers.romildo ];
   };
-}
+})
