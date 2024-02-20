@@ -16,7 +16,7 @@
 , template-glib
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "elastic";
   version = "0.1.4";
 
@@ -24,7 +24,7 @@ stdenv.mkDerivation rec {
     domain = "gitlab.gnome.org";
     owner = "World";
     repo = "elastic";
-    rev = version;
+    rev = finalAttrs.version;
     hash = "sha256-EExVhf71SEWVcAOAt+IuQH3umNOY4hzzkFVIqnESppo=";
   };
 
@@ -55,4 +55,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = with maintainers; [ _0xMRTT ];
   };
-}
+})
