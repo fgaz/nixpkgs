@@ -1,6 +1,6 @@
 { lib, stdenv, fetchurl, jre, runtimeShell }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "vue";
   version = "3.3.0";
   src = fetchurl {
@@ -12,7 +12,7 @@ stdenv.mkDerivation rec {
 
   installPhase = ''
     mkdir -p "$out"/{share/vue,bin}
-    cp ${src} "$out/share/vue/vue.jar"
+    cp ${finalAttrs.src} "$out/share/vue/vue.jar"
     echo '#!${runtimeShell}' >> "$out/bin/vue"
     echo '${jre}/bin/java -jar "'"$out/share/vue/vue.jar"'" "$@"' >> "$out/bin/vue"
     chmod a+x "$out/bin/vue"
@@ -25,4 +25,4 @@ stdenv.mkDerivation rec {
     sourceProvenance = with lib.sourceTypes; [ binaryBytecode ];
     license = lib.licenses.free; # Apache License fork, actually
   };
-}
+})
