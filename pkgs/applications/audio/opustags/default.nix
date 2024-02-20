@@ -1,14 +1,14 @@
 { stdenv, lib, fetchFromGitHub, cmake, pkg-config, libiconv, libogg
 , ffmpeg, glibcLocales, perl, perlPackages }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "opustags";
   version = "1.9.0";
 
   src = fetchFromGitHub {
     owner = "fmang";
     repo = "opustags";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-cRDyE6/nv8g0OWxZ/AqfwVrk3cSIycvbjvQm9CyQK7g=";
   };
 
@@ -37,4 +37,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ kmein ];
     license = licenses.bsd3;
   };
-}
+})
