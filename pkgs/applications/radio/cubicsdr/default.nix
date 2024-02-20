@@ -2,14 +2,14 @@
   liquid-dsp, pkg-config, soapysdr-with-plugins, wxGTK32, enableDigitalLab ? false,
   Cocoa, WebKit }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "cubicsdr";
   version = "0.2.7";
 
   src = fetchFromGitHub {
     owner = "cjcliffe";
     repo = "CubicSDR";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "0cyv1vk97x4i3h3hhh7dx8mv6d1ad0fypdbx5fl26bz661sr8j2n";
   };
 
@@ -37,4 +37,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ lasandell ];
     platforms = platforms.unix;
   };
-}
+})
