@@ -7,14 +7,14 @@
 , zlib
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "azpainter";
   version = "3.0.7";
 
   src = fetchFromGitLab {
     owner = "azelpg";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     hash = "sha256-RlsiN9pefpTYUh4M8j4Ty/Ipi9StoVcNcICd7QDirhI=";
   };
 
@@ -45,4 +45,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ dtzWill ];
     platforms = with platforms; linux ++ darwin;
   };
-}
+})
