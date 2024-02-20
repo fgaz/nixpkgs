@@ -2,14 +2,14 @@
 , openssl, ncurses, glib, gtk3, atk, pango, flex, bison, geoip, harfbuzz
 , pkg-config }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "ettercap";
   version = "0.8.3.1";
 
   src = fetchFromGitHub {
     owner = "Ettercap";
     repo = "ettercap";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "1sdf1ssa81ib6k0mc5m2jzbjl4jd1yv6ahv5dwx2x9w4b2pyqg1c";
   };
 
@@ -55,4 +55,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = with maintainers; [ pSub ];
   };
-}
+})
