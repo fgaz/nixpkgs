@@ -1,12 +1,12 @@
 { lib, stdenv, fetchFromGitHub, boost, zlib }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "starspace";
   version = "unstable-2019-12-13";
 
   src = fetchFromGitHub {
     owner = "facebookresearch";
-    repo = pname;
+    repo = finalAttrs.pname;
     rev = "8aee0a950aa607c023e5c91cff518bec335b5df5";
     sha256 = "0sc7a37z1skb9377a1qs8ggwrkz0nmpybx7sms38xj05b702kbvj";
   };
@@ -34,4 +34,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = [ maintainers.mausch ];
   };
-}
+})
