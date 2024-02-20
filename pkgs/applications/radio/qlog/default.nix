@@ -14,14 +14,14 @@
 , cups
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "qlog";
   version = "0.31.0";
 
   src = fetchFromGitHub {
     owner = "foldynl";
     repo = "QLog";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-tNTPT5AIQhKDyB+Pss+VdNeORcsHa+OSr15wLqID8PA=";
     fetchSubmodules = true;
   };
@@ -53,4 +53,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ oliver-koss mkg20001 ];
     platforms = with platforms; unix;
   };
-}
+})
