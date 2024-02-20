@@ -4,14 +4,14 @@
 , mesa # for libgbm
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "wf-recorder";
   version = "0.4.1";
 
   src = fetchFromGitHub {
     owner = "ammen99";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     hash = "sha256-SXPXvKXn236oO1WakkMNql3lj2flYYlmArVHGomH0/k=";
   };
 
@@ -23,10 +23,10 @@ stdenv.mkDerivation rec {
   meta = with lib; {
     description = "Utility program for screen recording of wlroots-based compositors";
     inherit (src.meta) homepage;
-    changelog = "https://github.com/ammen99/wf-recorder/releases/tag/v${version}";
+    changelog = "https://github.com/ammen99/wf-recorder/releases/tag/v${finalAttrs.version}";
     license = licenses.mit;
     maintainers = with maintainers; [ yuka ];
     platforms = platforms.linux;
     mainProgram = "wf-recorder";
   };
-}
+})
