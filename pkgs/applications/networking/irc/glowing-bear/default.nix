@@ -1,11 +1,11 @@
 { fetchFromGitHub, lib, stdenv }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "glowing-bear";
   version = "0.9.0";
 
   src = fetchFromGitHub {
-    rev = version;
+    rev = finalAttrs.version;
     owner = "glowing-bear";
     repo = "glowing-bear";
     sha256 = "0lf0j72m6rwlgqssdxf0m9si99lah08lww7q7i08p5i5lpv6zh2s";
@@ -24,4 +24,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ delroth ];
     platforms = platforms.unix;
   };
-}
+})
