@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, autoconf, automake, puredata }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "zexy";
   version = "2.2.4";
 
   src = fetchurl {
-    url = "https://puredata.info/downloads/zexy/releases/${version}/${pname}-${version}.tar.gz";
+    url = "https://puredata.info/downloads/zexy/releases/${finalAttrs.version}/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     sha256 = "1xpgl82c2lc6zfswjsa7z10yhv5jb7a4znzh3nc7ffrzm1z8vylp";
   };
 
@@ -34,4 +34,4 @@ stdenv.mkDerivation rec {
     maintainers = [ lib.maintainers.magnetophon ];
     platforms = lib.platforms.linux;
   };
-}
+})
