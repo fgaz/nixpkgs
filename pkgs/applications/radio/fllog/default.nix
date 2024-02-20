@@ -6,12 +6,12 @@
 , pkg-config
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "1.2.8";
   pname = "fllog";
 
   src = fetchurl {
-    url = "mirror://sourceforge/fldigi/${pname}-${version}.tar.gz";
+    url = "mirror://sourceforge/fldigi/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     sha256 = "sha256-kJLb1ifd8sUOwGgNsIEmlhH29fQLdTfDMjKLrzK7r1I=";
   };
 
@@ -31,4 +31,4 @@ stdenv.mkDerivation rec {
     maintainers = with lib.maintainers; [ dysinger ];
     platforms = lib.platforms.linux;
   };
-}
+})
