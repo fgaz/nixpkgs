@@ -1,14 +1,14 @@
 { lib, stdenv, fetchFromGitHub, zlib, bzip2, xz }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "freebayes";
   version = "1.3.1";
 
   src = fetchFromGitHub {
-    name = "freebayes-${version}-src";
+    name = "freebayes-${finalAttrs.version}-src";
     owner  = "ekg";
     repo   = "freebayes";
-    rev    = "v${version}";
+    rev    = "v${finalAttrs.version}";
     sha256 = "035nriknjqq8gvil81vvsmvqwi35v80q8h1cw24vd1gdyn1x7bys";
     fetchSubmodules = true;
   };
@@ -32,4 +32,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ jdagilliland ];
     platforms = [ "x86_64-linux" ];
   };
-}
+})
