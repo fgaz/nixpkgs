@@ -9,13 +9,13 @@
 , glib-networking
 , gettext
 }:
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "badwolf";
   version = "1.2.2";
 
   src = fetchgit {
     url = "git://hacktivis.me/git/badwolf.git";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-HfAsq6z+1kqMAsNxJjWJx9nd2cbv0XN4KRS8cYuhOsQ=";
   };
 
@@ -35,4 +35,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ laalsaas ];
   };
 
-}
+})
