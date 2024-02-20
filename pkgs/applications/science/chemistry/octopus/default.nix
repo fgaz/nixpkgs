@@ -28,14 +28,14 @@
 assert (!blas.isILP64) && (!lapack.isILP64);
 assert (blas.isILP64 == arpack.isILP64);
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "octopus";
   version = "13.0";
 
   src = fetchFromGitLab {
     owner = "octopus-code";
     repo = "octopus";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-CZ+Qmv6aBQ6w11mLvTP6QAJzaGs+vmmXuNGnSyAqVDU=";
   };
 
@@ -108,4 +108,4 @@ stdenv.mkDerivation rec {
     license = with licenses; [ gpl2Only asl20 lgpl3Plus bsd3 ];
     platforms = [ "x86_64-linux" ];
   };
-}
+})
