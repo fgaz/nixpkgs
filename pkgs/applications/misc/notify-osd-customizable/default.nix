@@ -12,7 +12,7 @@
 }:
 
 let baseURI = "https://launchpad.net/~leolik/+archive/leolik";
-in stdenv.mkDerivation rec {
+in stdenv.mkDerivation (finalAttrs: {
   pname = "notify-osd";
   version = "0.9.35+16.04.20160415";
 
@@ -44,4 +44,4 @@ in stdenv.mkDerivation rec {
     maintainers = [ maintainers.imalison ];
     platforms = platforms.linux;
   };
-}
+})
