@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, makeWrapper, hadoop, jre, bash }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "pig";
   version = "0.17.0";
 
   src = fetchurl {
-    url = "mirror://apache/pig/${pname}-${version}/${pname}-${version}.tar.gz";
+    url = "mirror://apache/pig/${finalAttrs.pname}-${finalAttrs.version}/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     sha256 = "1wwpg0w47f49rnivn2d26vrxgyfl9gpqx3vmzbl5lhx6x5l3fqbd";
 
   };
@@ -42,4 +42,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = [ ];
   };
-}
+})
