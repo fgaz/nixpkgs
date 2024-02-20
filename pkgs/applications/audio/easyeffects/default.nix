@@ -38,14 +38,14 @@
 , zita-convolver
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "easyeffects";
   version = "7.1.3";
 
   src = fetchFromGitHub {
     owner = "wwmm";
     repo = "easyeffects";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-OJy8HhojfpUwWo3zg+FgdFI4pMzWA61VMsdPE03MfeE=";
   };
 
@@ -108,7 +108,7 @@ stdenv.mkDerivation rec {
   separateDebugInfo = true;
 
   meta = with lib; {
-    changelog = "https://github.com/wwmm/easyeffects/blob/v${version}/CHANGELOG.md";
+    changelog = "https://github.com/wwmm/easyeffects/blob/v${finalAttrs.version}/CHANGELOG.md";
     description = "Audio effects for PipeWire applications.";
     homepage = "https://github.com/wwmm/easyeffects";
     license = licenses.gpl3Plus;
@@ -116,4 +116,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     mainProgram = "easyeffects";
   };
-}
+})
