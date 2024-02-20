@@ -13,14 +13,14 @@
 , gitUpdater
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "sticky";
   version = "1.19";
 
   src = fetchFromGitHub {
     owner = "linuxmint";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     hash = "sha256-nvnft62vZ9ivijYnQGULW7ff2aAVJiIx9xq09My2NxE=";
   };
 
@@ -83,4 +83,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ linsui bobby285271 ];
   };
-}
+})
