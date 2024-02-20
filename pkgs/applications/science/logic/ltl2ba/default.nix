@@ -1,11 +1,11 @@
 { fetchurl, lib, stdenv }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "ltl2ba";
   version = "1.3";
 
   src = fetchurl {
-    url    = "http://www.lsv.ens-cachan.fr/~gastin/ltl2ba/${pname}-${version}.tar.gz";
+    url    = "http://www.lsv.ens-cachan.fr/~gastin/ltl2ba/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     sha256 = "1bz9gjpvby4mnvny0nmxgd81rim26mqlcnjlznnxxk99575pfa4i";
   };
 
@@ -28,4 +28,4 @@ stdenv.mkDerivation rec {
     platforms   = lib.platforms.darwin ++ lib.platforms.linux;
     maintainers = [ lib.maintainers.thoughtpolice ];
   };
-}
+})
