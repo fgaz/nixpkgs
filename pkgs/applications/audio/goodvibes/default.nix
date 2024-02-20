@@ -15,14 +15,14 @@
 , desktop-file-utils
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "goodvibes";
   version = "0.7.9";
 
   src = fetchFromGitLab {
-    owner = pname;
-    repo = pname;
-    rev = "v${version}";
+    owner = finalAttrs.pname;
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     hash = "sha256-yXrCE3nsdZP4JHKVslzQafjZ380zC8sZv5TJf8dJqJw=";
   };
 
@@ -61,4 +61,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ zendo ];
   };
-}
+})
