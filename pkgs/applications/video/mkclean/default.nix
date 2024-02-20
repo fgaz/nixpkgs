@@ -1,6 +1,6 @@
 { dos2unix, fetchurl, lib, stdenv }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "mkclean";
   version = "0.8.10";
 
@@ -8,7 +8,7 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [ dos2unix ];
 
   src = fetchurl {
-    url = "mirror://sourceforge/matroska/${pname}-${version}.tar.bz2";
+    url = "mirror://sourceforge/matroska/${finalAttrs.pname}-${finalAttrs.version}.tar.bz2";
     sha256 = "0zbpi4sm68zb20d53kbss93fv4aafhcmz7dsd0zdf01vj1r3wxwn";
   };
 
@@ -34,4 +34,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ cawilliamson ];
     platforms = [ "i686-linux" "x86_64-linux" ];
   };
-}
+})
