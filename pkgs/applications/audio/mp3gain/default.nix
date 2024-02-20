@@ -1,10 +1,10 @@
 { lib, stdenv, fetchurl, fetchpatch, unzip, mpg123 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "mp3gain";
   version = "1.6.2";
   src = fetchurl {
-    url = "mirror://sourceforge/${pname}/${pname}-${lib.replaceStrings ["."] ["_"] version}-src.zip";
+    url = "mirror://sourceforge/${finalAttrs.pname}/${finalAttrs.pname}-${lib.replaceStrings ["."] ["_"] finalAttrs.version}-src.zip";
     sha256 = "0varr6y7k8zarr56b42r0ad9g3brhn5vv3xjg1c0v19jxwr4gh2w";
   };
 
@@ -34,4 +34,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = with maintainers; [ devhell ];
   };
-}
+})
