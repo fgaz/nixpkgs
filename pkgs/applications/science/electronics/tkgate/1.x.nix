@@ -4,12 +4,12 @@ let
   libiconvInc = lib.optionalString stdenv.isLinux "${glibc.dev}/include";
   libiconvLib = lib.optionalString stdenv.isLinux "${glibc.out}/lib";
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "tkgate";
   version = "1.8.7";
 
   src = fetchurl {
-    url = "http://www.tkgate.org/downloads/tkgate-${version}.tgz";
+    url = "http://www.tkgate.org/downloads/tkgate-${finalAttrs.version}.tgz";
     sha256 = "1pqywkidfpdbj18i03h97f4cimld4fb3mqfy8jjsxs12kihm18fs";
   };
 
@@ -39,4 +39,4 @@ stdenv.mkDerivation rec {
     license = lib.licenses.gpl2Plus;
     hydraPlatforms = lib.platforms.linux;
   };
-}
+})
