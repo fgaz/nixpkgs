@@ -35,14 +35,14 @@ let
     pybind11
   ]);
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "glaxnimate";
   version = "0.5.4";
 
   src = fetchFromGitLab {
     owner = "mattbas";
-    repo = "${pname}";
-    rev = version;
+    repo = "${finalAttrs.pname}";
+    rev = finalAttrs.version;
     sha256 = "sha256-8oHJCQdP2xxSSDM0MDkSrG89WgCtMKm1AKlddnq3gig=";
     fetchSubmodules = true;
   };
@@ -74,7 +74,7 @@ stdenv.mkDerivation rec {
 
   passthru.tests.version = lib.optionalAttrs stdenv.isLinux (testers.testVersion {
     package = glaxnimate;
-    command = "${xvfb-run}/bin/xvfb-run glaxnimate --version";
+    command = "${xvfb-run}/bin/xvfb-run glaxnimate --finalAttrs.version";
   });
 
   meta = with lib; {
@@ -84,4 +84,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ tobiasBora ];
     mainProgram = "glaxnimate";
   };
-}
+})
