@@ -2,14 +2,14 @@
 , libGLU, libGL, openal, pkg-config, sfml, lib, stdenv, zlib
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "attract-mode";
   version = "2.6.2";
 
   src = fetchFromGitHub {
     owner = "mickelson";
     repo = "attract";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-gKxUU2y6Gtm5a/tXYw/fsaTBrriNh5vouPGICs3Ph3c=";
   };
 
@@ -30,4 +30,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ hrdinka ];
     platforms = with platforms; linux;
   };
-}
+})
