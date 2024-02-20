@@ -1,7 +1,7 @@
 { lib, stdenv, fetchFromGitHub, cmake, pkg-config, wrapQtAppsHook, boost, libGL
 , qtbase, python3 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
 
   pname = "nano-wallet";
   version = "25.1";
@@ -9,7 +9,7 @@ stdenv.mkDerivation rec {
   src = fetchFromGitHub {
     owner = "nanocurrency";
     repo = "nano-node";
-    rev = "V${version}";
+    rev = "V${finalAttrs.version}";
     fetchSubmodules = true;
     hash = "sha256-YvYEXHC8kxviZLQwINs+pS61wITSfqfrrPmlR+zNRoE=";
   };
@@ -52,4 +52,4 @@ stdenv.mkDerivation rec {
     maintainers = with lib.maintainers; [ jluttine ];
   };
 
-}
+})
