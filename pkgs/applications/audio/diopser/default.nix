@@ -26,13 +26,13 @@ let
   };
 
 
-in  stdenv.mkDerivation rec {
+in  stdenv.mkDerivation (finalAttrs: {
   pname = "diopser";
   version = "unstable-2021-5-13";
 
   src = fetchFromGitHub {
     owner = "robbert-vdh";
-    repo = pname;
+    repo = finalAttrs.pname;
     fetchSubmodules = true;
     rev = "d5fdc92f1caf5a828e071dac99e106e58f06d84d";
     sha256 = "06y1h895yxh44gp4vxzrna59lf7nlfw7aacd3kk4l1g56jhy9pdx";
@@ -81,4 +81,4 @@ in  stdenv.mkDerivation rec {
     maintainers = with maintainers; [ magnetophon ];
     platforms = platforms.all;
   };
-}
+})
