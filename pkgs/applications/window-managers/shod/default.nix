@@ -11,14 +11,14 @@
 , conf ? null
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "shod";
   version = "2.6.2";
 
   src = fetchFromGitHub {
     owner = "phillbush";
     repo = "shod";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-0bKp1BTIdYVBDVdeGnTVo76UtBxa4UbXLZihdjHS/og=";
   };
 
@@ -55,4 +55,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ azahi ];
     platforms = platforms.unix;
   };
-}
+})
