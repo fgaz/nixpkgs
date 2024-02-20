@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "crumbs";
   version = "0.0.3";
 
   src = fetchFromGitHub
     { owner = "fasseg";
       repo = "crumbs";
-      rev = version;
+      rev = finalAttrs.version;
       sha256 = "0jjvydn4i4n9xv8vsal2jxpa95mk2lw6myv0gx9wih242k9vy0l7";
     };
 
@@ -30,4 +30,4 @@ stdenv.mkDerivation rec {
       platforms   = platforms.all;
       maintainers = with maintainers; [ thesola10 ];
     };
-}
+})
