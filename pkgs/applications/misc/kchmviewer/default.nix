@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, fetchpatch, qmake, wrapQtAppsHook, chmlib, libzip, qtwebengine }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "kchmviewer";
   version = "8.0";
 
   src = fetchFromGitHub {
     owner = "gyunaev";
-    repo = pname;
-    rev = "RELEASE_${lib.replaceStrings [ "." ] [ "_" ] version}";
+    repo = finalAttrs.pname;
+    rev = "RELEASE_${lib.replaceStrings [ "." ] [ "_" ] finalAttrs.version}";
     sha256 = "sha256-YNpiBf6AFBCRbAZRPODvqGbQQedJJJrZFQIQyzIeBlw=";
   };
 
@@ -45,4 +45,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ sikmir ];
     platforms = platforms.linux;
   };
-}
+})
