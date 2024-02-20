@@ -2,14 +2,14 @@
 , pkg-config, makeWrapper, nixosTests, gitUpdater
 , nixfmt, nix, gnused, coreutils, enableDecLocator ? true }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "xterm";
   version = "388";
 
   src = fetchurl {
     urls = [
-      "ftp://ftp.invisible-island.net/xterm/${pname}-${version}.tgz"
-      "https://invisible-mirror.net/archives/xterm/${pname}-${version}.tgz"
+      "ftp://ftp.invisible-island.net/xterm/${finalAttrs.pname}-${finalAttrs.version}.tgz"
+      "https://invisible-mirror.net/archives/xterm/${finalAttrs.pname}-${finalAttrs.version}.tgz"
     ];
     hash = "sha256-rEKTReb5N6WUWonUJaJl/ubCFfxmnb3GoDJuIfTF9nQ=";
   };
@@ -102,4 +102,4 @@ stdenv.mkDerivation rec {
     platforms = with lib.platforms; linux ++ darwin;
     changelog = "https://invisible-island.net/xterm/xterm.log.html";
   };
-}
+})
