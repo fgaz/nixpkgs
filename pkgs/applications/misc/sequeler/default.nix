@@ -9,14 +9,14 @@ let
     postgresSupport = true;
   };
 
-in stdenv.mkDerivation rec {
+in stdenv.mkDerivation (finalAttrs: {
   pname = "sequeler";
   version = "0.8.2";
 
   src = fetchFromGitHub {
     owner = "Alecaddd";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-MsHHTYERe0v+u3KnVtx+jmJTKORJTJ7bNfJMZHV9Ly4=";
   };
 
@@ -47,4 +47,4 @@ in stdenv.mkDerivation rec {
     platforms = platforms.linux;
     mainProgram = "com.github.alecaddd.sequeler";
   };
-}
+})
