@@ -13,13 +13,13 @@
 , procps
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "rofi-screenshot";
   version = "2023-07-02";
 
   src = fetchFromGitHub {
     owner = "ceuk";
-    repo = pname;
+    repo = finalAttrs.pname;
     rev = "365cfa51c6c7deb072d98d7bfd68cf4038bf2737";
     hash = "sha256-M1cab+2pOjZ2dElMg0Y0ZrIxRE0VwymVwcElgzFrmVs=";
   };
@@ -27,7 +27,7 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [ makeWrapper ];
 
   postFixup = ''
-    wrapProgram $out/bin/${pname} \
+    wrapProgram $out/bin/${finalAttrs.pname} \
       --set PATH ${
         lib.makeBinPath [
           libnotify
@@ -44,7 +44,7 @@ stdenv.mkDerivation rec {
   '';
 
   installPhase = ''
-    install -Dm755 ${pname} $out/bin/${pname}
+    install -Dm755 ${finalAttrs.pname} $out/bin/${finalAttrs.pname}
   '';
 
   meta = {
@@ -55,4 +55,4 @@ stdenv.mkDerivation rec {
     platforms = lib.platforms.all;
     license = lib.licenses.wtfpl;
   };
-}
+})
