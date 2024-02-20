@@ -13,12 +13,12 @@
 , fig2dev
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "xfig";
   version = "3.2.9";
 
   src = fetchurl {
-    url = "mirror://sourceforge/mcj/xfig-${version}.tar.xz";
+    url = "mirror://sourceforge/mcj/xfig-${finalAttrs.version}.tar.xz";
     hash = "sha256-E+2dBNG7wt7AnafvSc7sJ4OC0pD2zZJkdMLy0Bb+wvc=";
   };
 
@@ -59,7 +59,7 @@ stdenv.mkDerivation rec {
   enableParallelBuilding = true;
 
   meta = with lib; {
-    changelog = "https://sourceforge.net/p/mcj/xfig/ci/${version}/tree/CHANGES";
+    changelog = "https://sourceforge.net/p/mcj/xfig/ci/${finalAttrs.version}/tree/CHANGES";
     description = "An interactive drawing tool for X11";
     longDescription = ''
       Note that you need to have the <literal>netpbm</literal> tools
@@ -67,4 +67,4 @@ stdenv.mkDerivation rec {
     '';
     inherit (fig2dev.meta) license homepage platforms maintainers;
   };
-}
+})
