@@ -9,14 +9,14 @@
 , qtgraphicaleffects
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "graphia";
   version = "3.2";
 
   src = fetchFromGitHub {
     owner = "graphia-app";
     repo = "graphia";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-9kohXLXF4F/qoHm8qmvPM1y9ak0Thb4xvgKJlVuOPTg=";
   };
 
@@ -53,4 +53,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.bgamari ];
     platforms = platforms.all;
   };
-}
+})
