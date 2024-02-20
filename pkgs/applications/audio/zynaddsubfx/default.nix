@@ -55,14 +55,14 @@ let
   }.${guiModule};
 
   mruby-zest = callPackage ./mruby-zest { };
-in stdenv.mkDerivation rec {
+in stdenv.mkDerivation (finalAttrs: {
   pname = "zynaddsubfx";
   version = "3.0.6";
 
   src = fetchFromGitHub {
-    owner = pname;
-    repo = pname;
-    rev = "refs/tags/${version}";
+    owner = finalAttrs.pname;
+    repo = finalAttrs.pname;
+    rev = "refs/tags/${finalAttrs.version}";
     fetchSubmodules = true;
     sha256 = "sha256-0siAx141DZx39facXWmKbsi0rHBNpobApTdey07EcXg=";
   };
@@ -118,7 +118,7 @@ in stdenv.mkDerivation rec {
   '';
 
   # Use Zyn-Fusion logo for zest build
-  # An SVG version of the logo isn't hosted anywhere we can fetch, I
+  # An SVG finalAttrs.version of the logo isn't hosted anywhere we can fetch, I
   # had to manually derive it from the code that draws it in-app:
   # https://github.com/mruby-zest/mruby-zest-build/blob/3.0.6/src/mruby-zest/example/ZynLogo.qml#L65-L97
   postInstall = lib.optionalString (guiModule == "zest") ''
@@ -152,9 +152,9 @@ in stdenv.mkDerivation rec {
 
     # On macOS:
     # - Tests don't compile (ld: unknown option: --no-as-needed)
-    # - ZynAddSubFX LV2 & VST plugin fail to compile (not setup to use ObjC version of pugl)
+    # - ZynAddSubFX LV2 & VST plugin fail to compile (not setup to use ObjC finalAttrs.version of pugl)
     # - TTL generation crashes (`pointer being freed was not allocated`) for all VST plugins using AbstractFX
     # - Zest UI fails to start on pulg_setup: Could not open display, aborting.
     broken = stdenv.isDarwin;
   };
-}
+})
