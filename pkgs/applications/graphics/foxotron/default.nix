@@ -24,14 +24,14 @@
 , OpenGL
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "foxotron";
   version = "2023-07-16";
 
   src = fetchFromGitHub {
     owner = "Gargaj";
     repo = "Foxotron";
-    rev = version;
+    rev = finalAttrs.version;
     fetchSubmodules = true;
     sha256 = "sha256-s1eWZMVitVSP7nJJ5wXvnV8uI6yto7LmvlvocOwVAxw=";
   };
@@ -98,4 +98,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ OPNA2608 ];
     platforms = platforms.all;
   };
-}
+})
