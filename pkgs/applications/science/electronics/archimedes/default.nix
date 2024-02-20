@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, fetchpatch }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "archimedes";
   version = "2.0.1";
 
   src = fetchurl {
-    url = "mirror://gnu/archimedes/archimedes-${version}.tar.gz";
+    url = "mirror://gnu/archimedes/archimedes-${finalAttrs.version}.tar.gz";
     sha256 = "0jfpnd3pns5wxcxbiw49v5sgpmm5b4v8s4q1a5292hxxk2hzmb3z";
   };
 
@@ -25,4 +25,4 @@ stdenv.mkDerivation rec {
     license = lib.licenses.gpl2Plus;
     platforms = with lib.platforms; linux;
   };
-}
+})
