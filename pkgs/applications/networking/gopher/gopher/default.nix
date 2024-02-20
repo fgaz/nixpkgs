@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, ncurses }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gopher";
   version = "3.0.17";
 
   src = fetchFromGitHub {
     owner = "jgoerzen";
-    repo = pname;
-    rev = "release/${version}";
+    repo = finalAttrs.pname;
+    rev = "release/${finalAttrs.version}";
     sha256 = "1j6xh5l8v231d4mwl9gj1c34dc0jmazz6zg1qqfxmqr9y609jq3h";
   };
 
@@ -22,4 +22,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl2;
     maintainers = with maintainers; [ sternenseemann ];
   };
-}
+})
