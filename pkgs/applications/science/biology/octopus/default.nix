@@ -1,6 +1,6 @@
 {lib, stdenv, fetchurl, fetchFromGitHub, cmake, boost179, gmp, htslib, zlib, xz, pkg-config}:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "octopus";
   version = "0.7.4";
 
@@ -36,4 +36,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ jbedo ];
     platforms = platforms.x86_64;
   };
-}
+})
