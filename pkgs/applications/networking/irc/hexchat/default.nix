@@ -5,14 +5,14 @@
 , meson, ninja, makeWrapper
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "hexchat";
   version = "2.16.1";
 
   src = fetchFromGitHub {
     owner = "hexchat";
     repo = "hexchat";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-2IUlNUTL3TOJnDNMds2EWwkfn5NUOQ1ids96Ddo196E=";
   };
 
@@ -52,4 +52,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ romildo ];
   };
-}
+})
