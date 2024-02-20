@@ -3,12 +3,12 @@
 , qtbase, qtdeclarative, qtgraphicaleffects, qtquickcontrols2, qttools, wrapQtAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "nootka";
   version = "2.0.2";
 
   src = fetchurl {
-    url = "mirror://sourceforge/nootka/${pname}-${version}-source.tar.bz2";
+    url = "mirror://sourceforge/nootka/${finalAttrs.pname}-${finalAttrs.version}-source.tar.bz2";
     sha256 = "sha256-ZHdyLZ3+TCpQ77tcNuDlN2124qLDZu9DdH5x7RI1HIs=";
   };
 
@@ -40,4 +40,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ mmlb orivej ];
     platforms = platforms.linux;
   };
-}
+})
