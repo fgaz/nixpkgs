@@ -1,14 +1,14 @@
 { lib, stdenv, fetchFromGitHub, fetchpatch, meson, ninja, pkg-config, desktop-file-utils, gtk2, libpng, exiv2, lcms
 , intltool, gettext, shared-mime-info, glib, gdk-pixbuf, perl}:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "viewnior";
   version = "1.8";
 
   src = fetchFromGitHub {
     owner = "hellosiyan";
     repo = "Viewnior";
-    rev = "${pname}-${version}";
+    rev = "${finalAttrs.pname}-${finalAttrs.version}";
     hash = "sha256-LTahMmcAqgqviUxR624kTozJGTniAAGWKo1ZqXjoG5M=";
   };
 
@@ -59,4 +59,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ smironov artturin ];
     platforms = platforms.gnu ++ platforms.linux;
   };
-}
+})
