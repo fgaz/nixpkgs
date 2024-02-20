@@ -6,9 +6,9 @@
 
 # This package only builds ktikz without KDE integration because KDE4 is
 # deprecated and upstream does not (yet ?) support KDE5.
-# See historical versions of this file for building ktikz with KDE4.
+# See historical finalAttrs.versions of this file for building ktikz with KDE4.
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "0.12";
   pname = "qtikz";
 
@@ -26,12 +26,12 @@ stdenv.mkDerivation rec {
   src = fetchFromGitHub {
     owner = "fhackenberger";
     repo = "ktikz";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "1s83x8r2yi64wc6ah2iz09dj3qahy0fkxx6cfgpkavjw9x0j0582";
   };
 
   patches = [
-    # Fix version in qtikz.pro
+    # Fix finalAttrs.version in qtikz.pro
     (fetchpatch {
       url = "https://github.com/fhackenberger/ktikz/commit/972685a406517bb85eb561f2c8e26f029eacd7db.patch";
       sha256 = "13z40rcd4m4n088v7z2ns17lnpn0z3rzp31lsamic3qdcwjwa5k8";
@@ -57,4 +57,4 @@ stdenv.mkDerivation rec {
   ];
 
   qtWrapperArgs = [ ''--prefix PATH : "${gnuplot}/bin"'' ];
-}
+})
