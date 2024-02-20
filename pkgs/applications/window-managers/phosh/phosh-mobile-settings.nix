@@ -16,7 +16,7 @@
 , wayland-protocols
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "phosh-mobile-settings";
   version = "0.23.1";
 
@@ -24,7 +24,7 @@ stdenv.mkDerivation rec {
     domain = "gitlab.gnome.org";
     owner = "guidog";
     repo = "phosh-mobile-settings";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-D605efn25Dl3Bj92DZiagcx+MMcRz0GRaWxplBRcZhA=";
   };
 
@@ -64,9 +64,9 @@ stdenv.mkDerivation rec {
   meta = with lib; {
     description = "A settings app for mobile specific things";
     homepage = "https://gitlab.gnome.org/guidog/phosh-mobile-settings";
-    changelog = "https://gitlab.gnome.org/guidog/phosh-mobile-settings/-/blob/v${version}/debian/changelog";
+    changelog = "https://gitlab.gnome.org/guidog/phosh-mobile-settings/-/blob/v${finalAttrs.version}/debian/changelog";
     license = licenses.gpl3Plus;
     maintainers = with maintainers; [ colinsane ];
     platforms = platforms.linux;
   };
-}
+})
