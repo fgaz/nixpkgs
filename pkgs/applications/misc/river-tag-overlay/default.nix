@@ -2,14 +2,14 @@
 , wayland, pixman, pkg-config, wayland-scanner
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "river-tag-overlay";
   version = "1.0.0";
 
   src = fetchFromSourcehut {
     owner = "~leon_plickat";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     hash = "sha256-hLyXdLi/ldvwPJ1oQQsH5wgflQJuXu6vhYw/qdKAV9E=";
   };
 
@@ -36,4 +36,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ edrex ];
     platforms = platforms.linux;
   };
-}
+})
