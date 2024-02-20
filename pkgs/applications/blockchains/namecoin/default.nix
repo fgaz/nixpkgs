@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, openssl, boost, libevent, autoreconfHook, db4, miniupnpc, eject, pkg-config, hexdump }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "namecoind";
   version = "25.0";
 
   src = fetchFromGitHub {
     owner = "namecoin";
     repo = "namecoin-core";
-    rev = "nc${version}";
+    rev = "nc${finalAttrs.version}";
     sha256 = "sha256-2KMK5Vb8osuaKbzI1aaPSYg+te+v9CEcGUkrVI6Fk54=";
   };
 
@@ -39,4 +39,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ ];
     platforms = platforms.linux;
   };
-}
+})
