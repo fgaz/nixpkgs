@@ -1,11 +1,11 @@
 { fetchurl, lib, stdenv, lzip, texinfo }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "ocrad";
   version = "0.27";
 
   src = fetchurl {
-    url = "mirror://gnu/ocrad/${pname}-${version}.tar.lz";
+    url = "mirror://gnu/ocrad/${finalAttrs.pname}-${finalAttrs.version}.tar.lz";
     sha256 = "0divffvcaim89g4pvqs8kslbcxi475bcl3b4ynphf284k9zfdgx9";
   };
 
@@ -33,4 +33,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ pSub ];
     platforms = platforms.unix;
   };
-}
+})
