@@ -1,7 +1,7 @@
 { lib, stdenv, fetchFromGitHub, cmake, pkg-config, unbound, openssl, boost
 , lmdb, miniupnpc, readline, git, libsodium, rapidjson, cppzmq }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "masari";
   version = "unstable-2022-10-09";
 
@@ -36,4 +36,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ matthewcroughan ];
     platforms = platforms.linux;
   };
-}
+})
