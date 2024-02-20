@@ -3,14 +3,14 @@
 , libX11, libzip, glfw, libpng, xorg, gnome
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "tev";
   version = "1.26";
 
   src = fetchFromGitHub {
     owner = "Tom94";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     fetchSubmodules = true;
     sha256 = "sha256-6acFt0fyL0yStUwreGggJ+7Zi+0Fqburj/ytmf+Oi4w=";
   };
@@ -22,7 +22,7 @@ stdenv.mkDerivation rec {
   dontWrapGApps = true; # We also need zenity (see below)
 
   cmakeFlags = [
-    "-DTEV_DEPLOY=1" # Only relevant not to append "dev" to the version
+    "-DTEV_DEPLOY=1" # Only relevant not to append "dev" to the finalAttrs.version
   ];
 
   postInstall = ''
@@ -41,16 +41,16 @@ stdenv.mkDerivation rec {
       the values of individual pixels. Often, it is important to find exact
       differences between pairs of images. For this purpose, tev allows rapidly
       switching between opened images and visualizing various error metrics (L1,
-      L2, and relative versions thereof). To avoid clutter, opened images and
+      L2, and relative finalAttrs.versions thereof). To avoid clutter, opened images and
       their layers can be filtered by keywords.
       While the predominantly supported file format is OpenEXR certain other
       types of images can also be loaded.
     '';
     inherit (src.meta) homepage;
-    changelog = "https://github.com/Tom94/tev/releases/tag/v${version}";
+    changelog = "https://github.com/Tom94/tev/releases/tag/v${finalAttrs.version}";
     license = licenses.bsd3;
     platforms = platforms.unix;
     broken = stdenv.isDarwin; # needs apple frameworks + SDK fix? see #205247
     maintainers = with maintainers; [ ];
   };
-}
+})
