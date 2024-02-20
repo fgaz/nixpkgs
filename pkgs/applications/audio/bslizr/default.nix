@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, xorg, cairo, lv2, pkg-config }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "bslizr";
   version = "1.2.16";
 
   src = fetchFromGitHub {
     owner = "sjaehn";
     repo = "BSlizr";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-5DvVkTz79CLvZMZ3XnI0COIfxnhERDSvzbVoJAcqNRI=";
   };
 
@@ -25,4 +25,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     license = licenses.gpl3;
   };
-}
+})
