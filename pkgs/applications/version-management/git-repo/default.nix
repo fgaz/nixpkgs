@@ -2,14 +2,14 @@
 , python3, git, gnupg, less, openssh
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "git-repo";
   version = "2.39";
 
   src = fetchFromGitHub {
     owner = "android";
     repo = "tools_repo";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-Qw0x/YiXMDrlTy6boembfqVRvEYiMWOALJtaMrr7/WI=";
   };
 
@@ -58,4 +58,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     mainProgram = "repo";
   };
-}
+})
