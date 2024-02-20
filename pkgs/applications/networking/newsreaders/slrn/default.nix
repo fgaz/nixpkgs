@@ -1,12 +1,12 @@
 { lib, stdenv, fetchurl
 , slang, ncurses, openssl }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "slrn";
   version = "1.0.3a";
 
   src = fetchurl {
-    url = "http://www.jedsoft.org/releases/slrn/slrn-${version}.tar.bz2";
+    url = "http://www.jedsoft.org/releases/slrn/slrn-${finalAttrs.version}.tar.bz2";
     sha256 = "1b1d9iikr60w0vq86y9a0l4gjl0jxhdznlrdp3r405i097as9a1v";
   };
 
@@ -32,4 +32,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl2;
     platforms = with platforms; linux;
   };
-}
+})
