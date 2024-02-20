@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, makeWrapper, bashInteractive, xdg-utils, file, coreutils, w3m, xdotool }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "fff";
   version = "2.2";
 
   src = fetchFromGitHub {
     owner = "dylanaraps";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "14ymdw6l6phnil0xf1frd5kgznaiwppcic0v4hb61s1zpf4wrshg";
   };
 
@@ -30,4 +30,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.tadeokondrak ];
     platforms = platforms.all;
   };
-}
+})
