@@ -3,12 +3,12 @@
 , fetchurl
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "em";
   version = "1.0.0";
 
   src = fetchurl {
-    url = "http://pgas.freeshell.org/C/em/${pname}-${version}.tar.gz";
+    url = "http://pgas.freeshell.org/C/em/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     hash = "sha256-ijMBkl7U1f9MTXgli9kUFB8ttMG6TMQnxfDMP9AblTQ=";
   };
 
@@ -27,4 +27,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     mainProgram = "em";
   };
-}
+})
