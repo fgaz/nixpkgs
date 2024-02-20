@@ -8,12 +8,12 @@
 , copyDesktopItems
 , runtimeShell
 }:
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "fiji";
   version = "20201104-1356";
 
   src = fetchurl {
-    url = "https://downloads.imagej.net/${pname}/archive/${version}/${pname}-nojre.tar.gz";
+    url = "https://downloads.imagej.net/${finalAttrs.pname}/archive/${finalAttrs.version}/${finalAttrs.pname}-nojre.tar.gz";
     sha256 = "1jv4wjjkpid5spr2nk5xlvq3hg687qx1n5zh8zlw48y1y09c4q7a";
   };
 
@@ -73,4 +73,4 @@ stdenv.mkDerivation rec {
     license = with lib.licenses; [ gpl2Plus gpl3Plus bsd2 publicDomain ];
     maintainers = with maintainers; [ ];
   };
-}
+})
