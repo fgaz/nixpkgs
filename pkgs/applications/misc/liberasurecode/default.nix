@@ -7,7 +7,7 @@
 , zlib
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "liberasurecode";
   version = "1.6.3";
 
@@ -15,8 +15,8 @@ stdenv.mkDerivation rec {
 
   src = fetchFromGitHub {
     owner = "openstack";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "sha256-HCp+FQ9nq4twk6FtfKhzT80wXXJbvG+clrDO2/9ATpU=";
   };
 
@@ -53,4 +53,4 @@ stdenv.mkDerivation rec {
     license = licenses.bsd2;
     maintainers = teams.openstack.members;
   };
-}
+})
