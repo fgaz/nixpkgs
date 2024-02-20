@@ -40,12 +40,12 @@
 , discount
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "labplot";
   version = "2.10.1";
 
   src = fetchurl {
-    url = "mirror://kde/stable/labplot/labplot-${version}.tar.xz";
+    url = "mirror://kde/stable/labplot/labplot-${finalAttrs.version}.tar.xz";
     sha256 = "sha256-K24YFRfPtuDf/3uJXz6yDHzjWeZzLThUXgdXya6i2u8=";
   };
 
@@ -104,4 +104,4 @@ stdenv.mkDerivation rec {
     mainProgram = "labplot2";
     platforms = platforms.unix;
   };
-}
+})
