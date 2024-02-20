@@ -6,14 +6,14 @@
 , withX ? true, libXi, libXinerama, libXft, libXfixes, libXtst, libX11, libXext
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "warpd";
   version = "1.3.5";
 
   src = fetchFromGitHub {
     owner = "rvaiya";
     repo = "warpd";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-5B3Ec+R1vF2iI0ennYcsRlnFXJkSns0jVbyAWJA4lTU=";
     leaveDotGit = true;
   };
@@ -54,4 +54,4 @@ stdenv.mkDerivation rec {
     license = licenses.mit;
     platforms = platforms.linux;
   };
-}
+})
