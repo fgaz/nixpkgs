@@ -20,7 +20,7 @@
 , darwin
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "higan";
   version = "115+unstable=2021-08-18";
 
@@ -151,5 +151,5 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     broken = stdenv.isDarwin;
   };
-}
+})
 # TODO: select between Qt, GTK2 and GTK3
