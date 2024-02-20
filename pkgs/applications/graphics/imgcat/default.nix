@@ -1,6 +1,6 @@
 { lib, stdenv, fetchFromGitHub, cimg, ncurses }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "imgcat";
   version = "2.6.0";
 
@@ -14,8 +14,8 @@ stdenv.mkDerivation rec {
 
   src = fetchFromGitHub {
     owner = "eddieantonio";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-miFjlahTI0GDpgsjnA/K1R4R5654M8AoK78CycoLTqA=";
   };
 
@@ -28,5 +28,5 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ jwiegley ];
     platforms = platforms.unix;
   };
-}
+})
 
