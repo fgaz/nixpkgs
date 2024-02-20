@@ -15,12 +15,12 @@ let
     url = "https://imagej.net/media/icons/imagej.png";
     sha256 = "sha256-nU2nWI1wxZB/xlOKsZzdUjj+qiCTjO6GwEKYgZ5Risg=";
   };
-in stdenv.mkDerivation rec {
+in stdenv.mkDerivation (finalAttrs: {
   pname = "imagej";
   version = "153";
 
   src = fetchurl {
-    url = "https://wsr.imagej.net/distros/cross-platform/ij${version}.zip";
+    url = "https://wsr.imagej.net/distros/cross-platform/ij${finalAttrs.version}.zip";
     sha256 = "sha256-MGuUdUDuW3s/yGC68rHr6xxzmYScUjdXRawDpc1UQqw=";
   };
   nativeBuildInputs = [ copyDesktopItems makeWrapper unzip wrapGAppsHook ];
@@ -79,4 +79,4 @@ in stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = with maintainers; [ yuriaisaka ];
   };
-}
+})
