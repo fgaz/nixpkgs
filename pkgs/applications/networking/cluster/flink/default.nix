@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, makeWrapper, jre }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "flink";
   version = "1.18.0";
 
   src = fetchurl {
-    url = "mirror://apache/flink/${pname}-${version}/${pname}-${version}-bin-scala_2.12.tgz";
+    url = "mirror://apache/flink/${finalAttrs.pname}-${finalAttrs.version}/${finalAttrs.pname}-${finalAttrs.version}-bin-scala_2.12.tgz";
     sha256 = "sha256-mwlpRx/snaTymCubVLTnvN5SpXO2EWl9qZ8seNtNKtI=";
   };
 
@@ -35,4 +35,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.all;
     maintainers = with maintainers; [ mbode autophagy ];
   };
-}
+})
