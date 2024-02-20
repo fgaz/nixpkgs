@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, unzip, llvmPackages }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "bayescan";
   version = "2.1";
 
   src = fetchurl {
-    url = "http://cmpg.unibe.ch/software/BayeScan/files/BayeScan${version}.zip";
+    url = "http://cmpg.unibe.ch/software/BayeScan/files/BayeScan${finalAttrs.version}.zip";
     sha256 = "0ismima8j8z0zj9yc267rpf7z90w57b2pbqzjnayhc3ab8mcbfy6";
   };
 
@@ -15,7 +15,7 @@ stdenv.mkDerivation rec {
   # Disable FORTIFY_SOURCE or the binary fails with "buffer overflow"
   hardeningDisable = [ "fortify" ];
 
-  sourceRoot = "BayeScan${version}/source";
+  sourceRoot = "BayeScan${finalAttrs.version}/source";
 
   postPatch = ''
     substituteInPlace Makefile --replace "-static" "" \
@@ -25,7 +25,7 @@ stdenv.mkDerivation rec {
   installPhase = ''
     mkdir -p $out/bin
     mkdir -p $out/share/doc/bayescan
-    cp bayescan_${version} $out/bin
+    cp bayescan_${finalAttrs.version} $out/bin
     cp -r ../*pdf ../input_examples ../"R functions" $out/share/doc/bayescan
   '';
 
@@ -36,7 +36,7 @@ stdenv.mkDerivation rec {
     homepage = "http://cmpg.unibe.ch/software/BayeScan";
     license = licenses.gpl3;
     maintainers = [ maintainers.bzizou ];
-    mainProgram = "bayescan_${version}";
+    mainProgram = "bayescan_${finalAttrs.version}";
     platforms = lib.platforms.all;
   };
-}
+})
