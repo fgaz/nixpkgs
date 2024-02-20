@@ -1,12 +1,12 @@
 { lib, stdenv, fetchurl, pkg-config, gtk3, libxml2, gettext, libical, libnotify
 , libarchive, gspell, webkitgtk, libgringotts, wrapGAppsHook }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "osmo";
   version = "0.4.4";
 
   src = fetchurl {
-    url = "mirror://sourceforge/osmo-pim/${pname}-${version}.tar.gz";
+    url = "mirror://sourceforge/osmo-pim/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     sha256 = "19h3dnjgqbawnvgnycyp4n5b6mjsp5zghn3b69b6f3xa3fyi32qy";
   };
 
@@ -21,4 +21,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ pSub ];
   };
-}
+})
