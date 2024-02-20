@@ -5,12 +5,12 @@
 
 , postgresqlSupport ? true, postgresql }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gnunet";
   version = "0.20.0";
 
   src = fetchurl {
-    url = "mirror://gnu/gnunet/${pname}-${version}.tar.gz";
+    url = "mirror://gnu/gnunet/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     sha256 = "sha256-VgKeeKmcBNUrE1gJSuUHTkzY6puYz2hV9XrZryeslRg=";
   };
 
@@ -70,6 +70,6 @@ stdenv.mkDerivation rec {
     license = licenses.agpl3Plus;
     maintainers = with maintainers; [ pstn vrthra ];
     platforms = platforms.unix;
-    changelog = "https://git.gnunet.org/gnunet.git/tree/ChangeLog?h=v${version}";
+    changelog = "https://git.gnunet.org/gnunet.git/tree/ChangeLog?h=v${finalAttrs.version}";
   };
-}
+})
