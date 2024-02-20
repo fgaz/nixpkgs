@@ -22,14 +22,14 @@
 , nlohmann_json
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "giada";
   version = "0.26.1";
 
   src = fetchFromGitHub {
     owner = "monocasual";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "sha256-tONxVxzOFbwnuaW6YoHVZOmgd5S11qz38hcI+yQgjrQ=";
     fetchSubmodules = true;
   };
@@ -74,4 +74,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ kashw2 ];
     platforms = platforms.all;
   };
-}
+})
