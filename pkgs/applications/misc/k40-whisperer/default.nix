@@ -21,12 +21,12 @@ let
     SUBSYSTEM=="usb", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="5512", ENV{DEVTYPE}=="usb_device", MODE="0664", GROUP="${udevGroup}"
   '';
 
-in stdenv.mkDerivation rec {
+in stdenv.mkDerivation (finalAttrs: {
   pname = "k40-whisperer";
   version = "0.67";
 
   src = fetchzip {
-    url = "https://www.scorchworks.com/K40whisperer/K40_Whisperer-${version}_src.zip";
+    url = "https://www.scorchworks.com/K40whisperer/K40_Whisperer-${finalAttrs.version}_src.zip";
     stripRoot = true;
     sha256 = "sha256-jyny5uNZ5eL4AV47uAgOhBe4Zqg8GK3e86Z9gZbC68s=";
   };
@@ -70,5 +70,5 @@ in stdenv.mkDerivation rec {
     maintainers = with maintainers; [ fooker ];
     platforms = platforms.all;
   };
-}
+})
 
