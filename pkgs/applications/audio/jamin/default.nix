@@ -2,12 +2,12 @@
 , makeWrapper, pkg-config, perlPackages
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "0.95.0";
   pname = "jamin";
 
   src = fetchurl {
-    url = "mirror://sourceforge/jamin/jamin-${version}.tar.gz";
+    url = "mirror://sourceforge/jamin/jamin-${finalAttrs.version}.tar.gz";
     sha256 = "0g5v74cm0q3p3pzl6xmnp4rqayaymfli7c6z8s78h9rgd24fwbvn";
   };
 
@@ -32,4 +32,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.nico202 ];
     platforms = platforms.linux;
   };
-}
+})
