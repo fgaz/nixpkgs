@@ -22,18 +22,18 @@ let
   perlPackages = perl536Packages;
   inherit (perlPackages) perl;
 in
-# polymake compiles its own version of sympol and atint because we
+# polymake compiles its own finalAttrs.version of sympol and atint because we
 # don't have those packages. other missing optional dependencies:
 # javaview, libnormaliz, scip, soplex, jreality.
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "polymake";
   version = "4.11";
 
   src = fetchurl {
-    # "The minimal version is a packager friendly version which omits
+    # "The minimal finalAttrs.version is a packager friendly finalAttrs.version which omits
     # the bundled sources of cdd, lrs, libnormaliz, nauty and jReality."
-    url = "https://polymake.org/lib/exe/fetch.php/download/polymake-${version}-minimal.tar.bz2";
+    url = "https://polymake.org/lib/exe/fetch.php/download/polymake-${finalAttrs.version}-minimal.tar.bz2";
     sha256 = "sha256-XfbwrNcAEZvQxLV2Z2KFL/vYV3ZbXcyIgC/10hCK3SM=";
   };
 
@@ -75,9 +75,9 @@ stdenv.mkDerivation rec {
   meta = with lib; {
     description = "Software for research in polyhedral geometry";
     homepage = "https://www.polymake.org/doku.php";
-    changelog = "https://github.com/polymake/polymake/blob/V${version}/ChangeLog";
+    changelog = "https://github.com/polymake/polymake/blob/V${finalAttrs.version}/ChangeLog";
     license = licenses.gpl2Plus;
     maintainers = teams.sage.members;
     platforms = platforms.linux;
   };
-}
+})
