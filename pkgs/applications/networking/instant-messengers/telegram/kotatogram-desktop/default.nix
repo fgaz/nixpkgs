@@ -80,14 +80,14 @@ let
       CoreGraphics CoreVideo OpenGL Metal MetalKit CoreFoundation ApplicationServices;
   };
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "kotatogram-desktop";
   version = "1.4.9";
 
   src = fetchFromGitHub {
     owner = "kotatogram";
     repo = "kotatogram-desktop";
-    rev = "k${version}";
+    rev = "k${finalAttrs.version}";
     sha256 = "sha256-6bF/6fr8mJyyVg53qUykysL7chuewtJB8E22kVyxjHw=";
     fetchSubmodules = true;
   };
@@ -217,9 +217,9 @@ stdenv.mkDerivation rec {
     license = licenses.gpl3;
     platforms = platforms.all;
     homepage = "https://kotatogram.github.io";
-    changelog = "https://github.com/kotatogram/kotatogram-desktop/releases/tag/k{version}";
+    changelog = "https://github.com/kotatogram/kotatogram-desktop/releases/tag/k{finalAttrs.version}";
     maintainers = with maintainers; [ ilya-fedin ];
     # never built on aarch64-darwin since first introduction in nixpkgs
     broken = stdenv.isDarwin && stdenv.isAarch64;
   };
-}
+})
