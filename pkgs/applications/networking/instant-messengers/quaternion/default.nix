@@ -13,14 +13,14 @@
 , olm
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "quaternion";
   version = "0.0.96-beta4";
 
   src = fetchFromGitHub {
     owner = "quotient-im";
     repo = "Quaternion";
-    rev = "refs/tags/${version}";
+    rev = "refs/tags/${finalAttrs.version}";
     hash = "sha256-yItl31Ze48lRIIey+FlRLMVAkg4mHu8G1sFOceHvTJw=";
   };
 
@@ -57,4 +57,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ peterhoeg ];
     inherit (qtquickcontrols2.meta) platforms;
   };
-}
+})
