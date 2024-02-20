@@ -12,14 +12,14 @@
 , nix-update-script
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "ton";
   version = "2023.10";
 
   src = fetchFromGitHub {
     owner = "ton-blockchain";
     repo = "ton";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-K1RhhW7EvwYV7/ng3NPjSGdHEQvJZ7K97YXd7s5wghc=";
     fetchSubmodules = true;
   };
@@ -45,9 +45,9 @@ stdenv.mkDerivation rec {
   meta = with lib; {
     description = "A fully decentralized layer-1 blockchain designed by Telegram";
     homepage = "https://ton.org/";
-    changelog = "https://github.com/ton-blockchain/ton/blob/v${version}/Changelog.md";
+    changelog = "https://github.com/ton-blockchain/ton/blob/v${finalAttrs.version}/Changelog.md";
     license = licenses.lgpl2Only;
     platforms = platforms.all;
     maintainers = with maintainers; [ misuzu ];
   };
-}
+})
