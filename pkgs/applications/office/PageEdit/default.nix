@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, cmake, qtsvg, qtwebengine, wrapQtAppsHook, qttools }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "pageedit";
   version = "2.0.0";
 
   src = fetchFromGitHub {
     owner = "Sigil-Ebook";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     hash = "sha256-zwOSt1eyvuuqfQ1G2bCB4yj6GgixFRc2FLOgcCrdg3Q=";
   };
 
@@ -33,4 +33,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.pasqui23 ];
     platforms = platforms.all;
   };
-}
+})
