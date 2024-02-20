@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, libX11, libXt } :
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "0.13.42";
   pname = "wily";
 
   src = fetchurl {
-    url = "mirror://sourceforge/wily/${pname}-${version}.tar.gz";
+    url = "mirror://sourceforge/wily/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     sha256 = "1jy4czk39sh365b0mjpj4d5wmymj98x163vmwzyx3j183jqrhm2z";
   };
 
@@ -25,4 +25,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     mainProgram = "wily";
   };
-}
+})
