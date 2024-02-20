@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, libpulseaudio, SDL2, SDL2_image, SDL2_ttf, alsa-lib, libjack2 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "picoloop";
   version = "0.77e";
 
   src = fetchFromGitHub {
-    repo = pname;
+    repo = finalAttrs.pname;
     owner = "yoyz";
-    rev = "${pname}-${version}";
+    rev = "${finalAttrs.pname}-${finalAttrs.version}";
     sha256 = "0i8j8rgyha3ara6d4iis3wcimszf2csxdwrm5yq0wyhg74g7cvjd";
   };
 
@@ -21,7 +21,7 @@ stdenv.mkDerivation rec {
     libjack2
   ];
 
-  sourceRoot = "${src.name}/picoloop";
+  sourceRoot = "${finalAttrs.src.name}/picoloop";
 
   makeFlags = [ "-f Makefile.PatternPlayer_debian_RtAudio_sdl20" ];
 
@@ -47,4 +47,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     license = licenses.bsd3;
   };
-}
+})
