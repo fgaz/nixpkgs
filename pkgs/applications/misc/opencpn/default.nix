@@ -42,14 +42,14 @@
 , xorg
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "opencpn";
   version = "5.6.2";
 
   src = fetchFromGitHub {
     owner = "OpenCPN";
     repo = "OpenCPN";
-    rev = "Release_${version}";
+    rev = "Release_${finalAttrs.version}";
     hash = "sha256-sNZYf/2gtjRrrGPuazVnKTgcuIQpKPazhexqlK21T4g=";
   };
 
@@ -136,4 +136,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl2Plus;
     homepage = "https://opencpn.org/";
   };
-}
+})
