@@ -14,12 +14,12 @@
 , python3
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "kmymoney";
   version = "5.1.3";
 
   src = fetchurl {
-    url = "mirror://kde/stable/kmymoney/${version}/src/${pname}-${version}.tar.xz";
+    url = "mirror://kde/stable/kmymoney/${finalAttrs.version}/src/${finalAttrs.pname}-${finalAttrs.version}.tar.xz";
     sha256 = "sha256-OTi4B4tzkboy4Su0I5di+uE0aDoMLsGnUQXDAso+Xj8=";
   };
 
@@ -62,7 +62,7 @@ stdenv.mkDerivation rec {
   doInstallCheck = stdenv.hostPlatform == stdenv.buildPlatform;
   nativeInstallCheckInputs = [ xvfb-run ];
   installCheckPhase =
-    lib.optionalString doInstallCheck ''
+    lib.optionalString finalAttrs.doInstallCheck ''
       xvfb-run -s '-screen 0 1024x768x24' make test \
         ARGS="-E '(reports-chart-test)'" # Test fails, so exclude it for now.
     '';
@@ -81,4 +81,4 @@ stdenv.mkDerivation rec {
     license = lib.licenses.gpl2Plus;
     maintainers = with lib.maintainers; [ aidalgol das-g ];
   };
-}
+})
