@@ -9,14 +9,14 @@
 , stdenv
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "pidgin-indicator";
   version = "1.0.1";
 
   src = fetchFromGitHub {
     owner = "philipl";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "sha256-CdA/aUu+CmCRbVBKpJGydicqFQa/rEsLWS3MBKlH2/M=";
   };
 
@@ -30,4 +30,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl2;
     platforms = with platforms; linux;
   };
-}
+})
