@@ -21,7 +21,7 @@
 , libwebp
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "identity";
   version = "0.6.0";
 
@@ -29,7 +29,7 @@ stdenv.mkDerivation rec {
     domain = "gitlab.gnome.org";
     owner = "YaLTeR";
     repo = "identity";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-AiOaTjYOc7Eo+9kl1H91TKAkCKNUJNWobmBENZlHBhQ=";
   };
 
@@ -68,10 +68,10 @@ stdenv.mkDerivation rec {
   passthru.updateScript = nix-update-script { };
 
   meta = with lib; {
-    description = "A program for comparing multiple versions of an image or video";
+    description = "A program for comparing multiple finalAttrs.versions of an image or video";
     homepage = "https://gitlab.gnome.org/YaLTeR/identity";
     license = licenses.gpl3Plus;
     platforms = platforms.linux;
     maintainers = with maintainers; [ ];
   };
-}
+})
