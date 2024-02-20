@@ -1,11 +1,11 @@
 { stdenv, lib, makeWrapper, fetchzip, jre }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "bftools";
   version = "6.3.0";
 
   src = fetchzip {
-    url = "http://downloads.openmicroscopy.org/bio-formats/${version}/artifacts/bftools.zip";
+    url = "http://downloads.openmicroscopy.org/bio-formats/${finalAttrs.version}/artifacts/bftools.zip";
     sha256 = "02nvvmpfglpah1ihd08aw65g1794w588c988cdar1hfl4s80qwhb";
   };
 
@@ -39,4 +39,4 @@ stdenv.mkDerivation rec {
     homepage = "https://www.openmicroscopy.org/bio-formats/";
     maintainers = [ maintainers.tbenst ];
   };
-}
+})
