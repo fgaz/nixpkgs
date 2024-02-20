@@ -20,14 +20,14 @@ let
   inherit (stdenv) isLinux;
 in
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "qdmr";
   version = "0.11.3";
 
   src = fetchFromGitHub {
     owner = "hmatuschek";
     repo = "qdmr";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-YLGsKGcKIPd0ihd5IzlT71dYkxZfeH7BpnKQMEyY8dI=";
   };
 
@@ -60,7 +60,7 @@ stdenv.mkDerivation rec {
   postInstall = ''
     installManPage doc/dmrconf.1 doc/qdmr.1
     mkdir -p "$out/etc/udev/rules.d"
-    cp ${src}/dist/99-qdmr.rules $out/etc/udev/rules.d/
+    cp ${finalAttrs.src}/dist/99-qdmr.rules $out/etc/udev/rules.d/
   '';
 
   meta = {
@@ -70,4 +70,4 @@ stdenv.mkDerivation rec {
     maintainers = with lib.maintainers; [ janik _0x4A6F ];
     platforms = lib.platforms.linux;
   };
-}
+})
