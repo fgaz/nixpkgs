@@ -31,14 +31,14 @@
 , lsb-release
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "soundux";
   version = "0.2.7";
 
   src = fetchFromGitHub {
     owner = "Soundux";
     repo = "Soundux";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-aSCsg6nJt6F+6O7UeXnvYva0vllTfsxK/cjaeOhObZY=";
     fetchSubmodules = true;
   };
@@ -126,7 +126,7 @@ stdenv.mkDerivation rec {
   in ''
     # Wnck, PipeWire, and PulseAudio are dlopen-ed by Soundux, so they do
     # not end up on the RPATH during the build process.
-    patchelf --add-rpath "${rpaths}" "$out/opt/soundux-${version}"
+    patchelf --add-rpath "${rpaths}" "$out/opt/soundux-${finalAttrs.version}"
 
     # Work around upstream bug https://github.com/Soundux/Soundux/issues/435
     wrapProgram "$out/bin/soundux" \
@@ -141,4 +141,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ aidalgol ];
   };
-}
+})
