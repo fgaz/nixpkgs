@@ -1,6 +1,6 @@
 {lib, stdenv, fetchFromGitHub, cmake}:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "fasttext";
   version = "0.9.2-unstable-2023-11-28";
 
@@ -20,4 +20,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = [ ];
   };
-}
+})
