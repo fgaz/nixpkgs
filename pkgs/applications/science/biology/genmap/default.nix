@@ -6,14 +6,14 @@
 , which
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "genmap";
   version = "1.3.0";
 
   src = fetchFromGitHub {
     owner = "cpockrandt";
     repo = "genmap";
-    rev = "genmap-v${version}";
+    rev = "genmap-v${finalAttrs.version}";
     fetchSubmodules = true;
     sha256 = "sha256-7sIKBRMNzyCrZ/c2nXkknb6a5YsXe6DRE2IFhp6AviY=";
   };
@@ -37,4 +37,4 @@ stdenv.mkDerivation rec {
     maintainers = with lib.maintainers; [ jbedo ];
     platforms = lib.platforms.unix;
   };
-}
+})
