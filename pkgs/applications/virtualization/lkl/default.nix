@@ -4,7 +4,7 @@
 , firewallSupport ? false
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "lkl";
 
   # NOTE: pinned to the last known version that doesn't have a hang in cptofs.
@@ -90,4 +90,4 @@ stdenv.mkDerivation rec {
     license     = licenses.gpl2;
     maintainers = with maintainers; [ copumpkin raitobezarius ];
   };
-}
+})
