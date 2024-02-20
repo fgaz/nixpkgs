@@ -3,12 +3,12 @@
 , fetchpatch
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "telepathy-gabble";
   version = "0.18.4";
 
   src = fetchurl {
-    url = "https://telepathy.freedesktop.org/releases/telepathy-gabble/telepathy-gabble-${version}.tar.gz";
+    url = "https://telepathy.freedesktop.org/releases/telepathy-gabble/telepathy-gabble-${finalAttrs.version}.tar.gz";
     sha256 = "174nlkqm055vrhv11gy73m20jbsggcb0ddi51c7s9m3j5ibr2p0i";
   };
 
@@ -35,4 +35,4 @@ stdenv.mkDerivation rec {
     license = licenses.lgpl21Plus;
     platforms = lib.platforms.unix;
   };
-}
+})
