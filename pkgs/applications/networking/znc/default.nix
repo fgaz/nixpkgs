@@ -9,12 +9,12 @@
 , withDebug ? false
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "znc";
   version = "1.8.2";
 
   src = fetchurl {
-    url = "https://znc.in/releases/archive/${pname}-${version}.tar.gz";
+    url = "https://znc.in/releases/archive/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     sha256 = "03fyi0j44zcanj1rsdx93hkdskwfvhbywjiwd17f9q1a7yp8l8zz";
   };
 
@@ -46,4 +46,4 @@ stdenv.mkDerivation rec {
     license = licenses.asl20;
     platforms = platforms.unix;
   };
-}
+})
