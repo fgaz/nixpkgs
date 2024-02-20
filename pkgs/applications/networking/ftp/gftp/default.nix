@@ -13,14 +13,14 @@
 , readline
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gftp";
   version = "2.9.1b";
 
   src = fetchFromGitHub {
     owner = "masneyb";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     hash = "sha256-0zdv2oYl24BXh61IGCWby/2CCkzNjLpDrAFc0J89Pw4=";
   };
 
@@ -53,5 +53,5 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ AndersonTorres ];
     platforms = platforms.unix;
   };
-}
+})
 # TODO: report the hardeningDisable to upstream
