@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, cmake, libuuid, gnutls, python3, xdg-utils, installShellFiles }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "taskwarrior";
   version = "2.6.2";
 
   src = fetchFromGitHub {
     owner = "GothenburgBitFactory";
     repo = "taskwarrior";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-0YveqiylXJi4cdDCfnPtwCVOJbQrZYsxnXES+9B4Yfw=";
     fetchSubmodules = true;
   };
@@ -48,4 +48,4 @@ stdenv.mkDerivation rec {
     mainProgram = "task";
     platforms = platforms.unix;
   };
-}
+})
