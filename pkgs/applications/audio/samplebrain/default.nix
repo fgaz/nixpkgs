@@ -11,14 +11,14 @@
 , wrapQtAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "samplebrain";
   version = "0.18.5";
 
   src = fetchFromGitLab {
     owner = "then-try-this";
     repo = "samplebrain";
-    rev = "v${version}_release";
+    rev = "v${finalAttrs.version}_release";
     hash = "sha256-/pMHmwly5Dar7w/ZawvR3cWQHw385GQv/Wsl1E2w5p4=";
   };
 
@@ -37,11 +37,11 @@ stdenv.mkDerivation rec {
 
   desktopItem = makeDesktopItem {
     type = "Application";
-    desktopName = pname;
-    name = pname;
+    desktopName = finalAttrs.pname;
+    name = finalAttrs.pname;
     comment = "A sample masher designed by Aphex Twin";
-    exec = pname;
-    icon = pname;
+    exec = finalAttrs.pname;
+    icon = finalAttrs.pname;
     categories = [ "Audio" ];
   };
 
@@ -54,9 +54,9 @@ stdenv.mkDerivation rec {
   meta = with lib; {
     description = "A custom sample mashing app";
     homepage = "https://thentrythis.org/projects/samplebrain";
-    changelog = "https://gitlab.com/then-try-this/samplebrain/-/releases/v${version}_release";
+    changelog = "https://gitlab.com/then-try-this/samplebrain/-/releases/v${finalAttrs.version}_release";
     maintainers = with maintainers; [ mitchmindtree ];
     license = licenses.gpl2;
     platforms = platforms.linux;
   };
-}
+})
