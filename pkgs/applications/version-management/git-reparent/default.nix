@@ -1,6 +1,6 @@
 { lib, stdenv, fetchFromGitHub, makeWrapper, git, gnused }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "git-reparent";
   version = "unstable-2017-09-03";
 
@@ -31,4 +31,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     mainProgram = "git-reparent";
   };
-}
+})
