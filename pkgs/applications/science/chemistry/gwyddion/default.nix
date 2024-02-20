@@ -19,11 +19,11 @@ let
     inherit (python2Packages) pygtk pygobject2 python;
 in
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gwyddion";
    version = "2.65";
   src = fetchurl {
-    url = "mirror://sourceforge/gwyddion/gwyddion-${version}.tar.xz";
+    url = "mirror://sourceforge/gwyddion/gwyddion-${finalAttrs.version}.tar.xz";
     sha256 = "sha256-kRX7CoPJY8YkYNode5g0OCyWmL+5sM8puCmk9ZE2nqM=";
   };
 
@@ -71,4 +71,4 @@ stdenv.mkDerivation rec {
     # never built on aarch64-darwin since first introduction in nixpkgs
     broken = stdenv.isDarwin && stdenv.isAarch64;
   };
-}
+})
