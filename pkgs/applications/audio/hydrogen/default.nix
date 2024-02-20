@@ -3,14 +3,14 @@
 , qtbase, qttools, qtxmlpatterns
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "hydrogen";
   version = "1.2.3";
 
   src = fetchFromGitHub {
     owner = "hydrogen-music";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "sha256-7dgckFscyms+HW3xrsr3+lMua/H82U2jLkm/OKw3YWE=";
   };
 
@@ -31,4 +31,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ goibhniu orivej ];
   };
-}
+})
