@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, rsync, ocamlPackages }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "abella";
   version = "2.0.8";
 
   src = fetchurl {
-    url = "http://abella-prover.org/distributions/${pname}-${version}.tar.gz";
+    url = "http://abella-prover.org/distributions/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     sha256 = "sha256-80b/RUpE3KRY0Qu8eeTxAbk6mwGG6jVTPOP0qFjyj2M=";
   };
 
@@ -38,4 +38,4 @@ stdenv.mkDerivation rec {
     maintainers = with lib.maintainers; [ bcdarwin ciil ];
     platforms = lib.platforms.unix;
   };
-}
+})
