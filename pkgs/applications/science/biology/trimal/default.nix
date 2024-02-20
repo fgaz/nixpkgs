@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "trimal";
   version = "1.4.1";
 
   src = fetchFromGitHub {
-    repo = pname;
+    repo = finalAttrs.pname;
     owner = "scapella";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "0isc7s3514di4z953xq53ncjkbi650sh4q9yyw5aag1n9hqnh7k0";
   };
 
@@ -28,4 +28,4 @@ stdenv.mkDerivation rec {
     homepage = "http://trimal.cgenomics.org";
     maintainers = [ maintainers.bzizou ];
   };
-}
+})
