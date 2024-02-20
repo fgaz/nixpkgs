@@ -26,14 +26,14 @@
 , libXNVCtrl
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "monitor";
   version = "0.17.0";
 
   src = fetchFromGitHub {
     owner = "stsdc";
     repo = "monitor";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-GUNMA4CRO4cKBjNr7i8yRflstbT8g2ciDHppjUUbAOc=";
     fetchSubmodules = true;
   };
@@ -105,4 +105,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl3Plus;
     mainProgram = "com.github.stsdc.monitor";
   };
-}
+})
