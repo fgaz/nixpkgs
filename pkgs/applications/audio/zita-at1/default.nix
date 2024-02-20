@@ -3,12 +3,12 @@
 , xorgproto, zita-resampler
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "zita-at1";
   version = "0.6.2";
 
   src = fetchurl {
-    url = "https://kokkinizita.linuxaudio.org/linuxaudio/downloads/${pname}-${version}.tar.bz2";
+    url = "https://kokkinizita.linuxaudio.org/linuxaudio/downloads/${finalAttrs.pname}-${finalAttrs.version}.tar.bz2";
     sha256 = "0mxfn61zvhlq3r1mqipyqzjbanrfdkk8x4nxbz8nlbdk0bf3vfqr";
   };
 
@@ -34,4 +34,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ orivej ];
     platforms = platforms.linux;
   };
-}
+})
