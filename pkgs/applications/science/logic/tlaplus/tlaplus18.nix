@@ -1,6 +1,6 @@
 { lib, stdenv, fetchurl, makeWrapper, jre }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "tlaplus";
   version = "1.8.0";
 
@@ -36,4 +36,4 @@ stdenv.mkDerivation rec {
     platforms   = lib.platforms.unix;
     maintainers = with lib.maintainers; [ florentc thoughtpolice mgregson ];
   };
-}
+})
