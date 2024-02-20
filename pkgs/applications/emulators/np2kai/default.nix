@@ -111,9 +111,9 @@ let
       "xnp21kai_haxm"
     ]);
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "np2kai";
-  version = "0.86rev22"; #update src.rev to commit rev accordingly
+  version = "0.86rev22"; #update finalAttrs.src.rev to commit rev accordingly
 
   src = fetchFromGitHub rec {
     owner = "AZO234";
@@ -123,7 +123,7 @@ stdenv.mkDerivation rec {
   };
 
   configurePhase = ''
-    export GIT_VERSION=${builtins.substring 0 7 src.rev}
+    export GIT_VERSION=${builtins.substring 0 7 finalAttrs.src.rev}
     buildFlags="$buildFlags ''${enableParallelBuilding:+-j$NIX_BUILD_CORES}"
   '' + optionalString enableX11 ''
     cd x11
@@ -196,4 +196,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ OPNA2608 ];
     platforms = platforms.x86;
   };
-}
+})
