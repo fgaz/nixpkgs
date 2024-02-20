@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, fetchpatch, pkg-config, gtk2, poppler }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "epdfview";
   version = "0.1.8";
 
   src = fetchurl {
-    url = "mirror://debian/pool/main/e/epdfview/epdfview_${version}.orig.tar.gz";
+    url = "mirror://debian/pool/main/e/epdfview/epdfview_${finalAttrs.version}.orig.tar.gz";
     sha256 = "0ibyb60a0b4n34bsjgvhdw8yf24463ky0hpmf6a2jjqsbm5g4v64";
   };
 
@@ -38,4 +38,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.astsmtl ];
     platforms = platforms.linux;
   };
-}
+})
