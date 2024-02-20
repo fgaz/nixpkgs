@@ -5,14 +5,14 @@
 , perl
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "openvi";
   version = "7.4.27";
 
   src = fetchFromGitHub {
     owner = "johnsonjh";
     repo = "OpenVi";
-    rev = version;
+    rev = finalAttrs.version;
     hash = "sha256-3cqe6woJvJt0ckI3aOhF0gARKy8VMCfWxIiiglkHBTo=";
   };
 
@@ -36,4 +36,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ aleksana ];
     mainProgram = "ovi";
   };
-}
+})
