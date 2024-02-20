@@ -1,18 +1,18 @@
 { lib, stdenv, fetchFromGitHub, ncurses, hdate, lua5_2 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "12010904";
   pname = "dozenal";
   src = fetchFromGitHub {
     owner = "dgoodmaniii";
     repo = "dozenal";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "1ic63gpdda762x6ks3al71dwgmsy2isicqyr2935bd245jx8s209";
   };
   makeFlags = [
               # author do not use configure and prefix directly using $prefix
               "prefix=$(out)"
-              # graphical version of dozdc requires xforms, which is not i nixpkgs so I turned it down
+              # graphical finalAttrs.version of dozdc requires xforms, which is not i nixpkgs so I turned it down
               "XFORMS_FLAGS=-UXFORMS"
               "LUALIB=-llua"
               "bindir=$(prefix)/bin/"
@@ -66,4 +66,4 @@ stdenv.mkDerivation rec {
     maintainers = with lib.maintainers; [ CharlesHD ];
     license = lib.licenses.gpl3;
   };
-}
+})
