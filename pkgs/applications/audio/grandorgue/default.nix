@@ -3,14 +3,14 @@
 , imagemagick, libicns, makeWrapper, Cocoa
 , includeDemo ? true }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "grandorgue";
   version = "3.11.0";
 
   src = fetchFromGitHub {
     owner = "GrandOrgue";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     fetchSubmodules = true;
     sha256 = "sha256-l1KqER/vkNwgKLXIFUzHnYLw2ivGNP7hRiKhIOzn7pw=";
   };
@@ -54,4 +54,4 @@ stdenv.mkDerivation rec {
     platforms = lib.platforms.unix;
     maintainers = [ lib.maintainers.puzzlewolf ];
   };
-}
+})
