@@ -30,13 +30,13 @@ let
     comment = "A simple terminal emulator";
   };
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "wayst";
   version = "unstable-2023-07-16";
 
   src = fetchFromGitHub {
     owner = "91861";
-    repo = pname;
+    repo = finalAttrs.pname;
     rev = "f8b218eec1af706fd5ae287f5073e6422eb8b6d8";
     hash = "sha256-tA2R6Snk5nqWkPXSbs7wmovWkT97xafdK0e/pKBUIUg=";
   };
@@ -85,4 +85,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ berbiche ];
   };
-}
+})
