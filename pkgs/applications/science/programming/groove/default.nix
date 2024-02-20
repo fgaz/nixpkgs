@@ -10,12 +10,12 @@ let
     categories = [ "Science" "ComputerScience" ];
   };
 
-in stdenv.mkDerivation rec {
+in stdenv.mkDerivation (finalAttrs: {
   pname = "groove";
   version = "5.8.1";
 
   src = fetchurl {
-    url = "mirror://sourceforge/groove/groove/${version}/${pname}-${builtins.replaceStrings ["."] ["_"] version}-bin.zip";
+    url = "mirror://sourceforge/groove/groove/${finalAttrs.version}/${finalAttrs.pname}-${builtins.replaceStrings ["."] ["_"] finalAttrs.version}-bin.zip";
     sha256 = "sha256-JwoUlO6F2+8NtCnLC+xm5q0Jm8RIyU1rnuKGmjgJhFU=";
   };
 
@@ -52,4 +52,4 @@ in stdenv.mkDerivation rec {
     platforms = platforms.all;
     maintainers = with maintainers; [ ];
   };
-}
+})
