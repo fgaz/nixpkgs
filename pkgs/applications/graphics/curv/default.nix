@@ -14,14 +14,14 @@
 , llvmPackages
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "curv";
   version = "0.5";
 
   src = fetchFromGitHub {
     owner = "curv3d";
     repo = "curv";
-    rev = "refs/tags/${version}";
+    rev = "refs/tags/${finalAttrs.version}";
     hash = "sha256-m4p5uxRk6kEJUilmbQ1zJcQDRvRCV7pkxnqupZJxyjo=";
     fetchSubmodules = true;
   };
@@ -65,4 +65,4 @@ stdenv.mkDerivation rec {
     broken = stdenv.isDarwin;
     maintainers = with maintainers; [ pbsds ];
   };
-}
+})
