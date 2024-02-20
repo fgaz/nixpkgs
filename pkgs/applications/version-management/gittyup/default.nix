@@ -16,14 +16,14 @@
 , wrapQtAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gittyup";
   version = "1.3.0";
 
   src = fetchFromGitHub {
     owner = "Murmele";
     repo = "Gittyup";
-    rev = "gittyup_v${version}";
+    rev = "gittyup_v${finalAttrs.version}";
     hash = "sha256-/8Uipz2R/LuA3KUcFsROOmldIKnCVLfIpIQ9YLpPA+k=";
     fetchSubmodules = true;
   };
@@ -75,4 +75,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     broken = stdenv.isDarwin;
   };
-}
+})
