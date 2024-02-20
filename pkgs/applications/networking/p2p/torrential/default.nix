@@ -24,14 +24,14 @@
 , pantheon
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "torrential";
   version = "3.0.0";
 
   src = fetchFromGitHub {
     owner = "davidmhewitt";
     repo = "torrential";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-uHc/VNtbhetmGyuhynZH1TvxJscVX17eWO6dzX6Ft3A=";
   };
 
@@ -81,4 +81,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl2Plus;
     mainProgram = "com.github.davidmhewitt.torrential";
   };
-}
+})
