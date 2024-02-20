@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, cmake, stormlib }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "smpq";
   version = "1.6";
 
   src = fetchurl {
-    url = "https://launchpad.net/smpq/trunk/${version}/+download/${pname}_${version}.orig.tar.gz";
+    url = "https://launchpad.net/smpq/trunk/${finalAttrs.version}/+download/${finalAttrs.pname}_${finalAttrs.version}.orig.tar.gz";
     sha256 = "1jqq5x3b17jy66x3kkf5hs5l322dx2v14djxxrqrnqp8bn5drlmm";
   };
 
@@ -23,4 +23,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.all;
     maintainers = with maintainers; [ aanderse karolchmist ];
   };
-}
+})
