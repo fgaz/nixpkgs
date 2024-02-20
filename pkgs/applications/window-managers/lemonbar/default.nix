@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, perl, libxcb }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "lemonbar";
   version = "1.4";
 
   src = fetchFromGitHub {
     owner = "LemonBoy";
     repo = "bar";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-lmppcnQ8r4jEuhegpTBxYqxfTTS/IrbtQVZ44HqnoWo=";
   };
 
@@ -23,4 +23,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     mainProgram = "lemonbar";
   };
-}
+})
