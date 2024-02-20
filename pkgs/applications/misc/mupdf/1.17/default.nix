@@ -12,7 +12,7 @@ let
     lib.versions.majorMinor (lib.getVersion openjpeg);
 
 
-in stdenv.mkDerivation rec {
+in stdenv.mkDerivation (finalAttrs: {
   version = "1.17.0";
   pname = "mupdf";
 
@@ -91,4 +91,4 @@ in stdenv.mkDerivation rec {
       "CVE-2017-5991: NULL pointer dereference"
     ];
   };
-}
+})
