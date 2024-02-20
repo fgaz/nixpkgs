@@ -21,14 +21,14 @@
 , sqlite
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "megacmd";
   version = "1.6.3";
 
   src = fetchFromGitHub {
     owner = "meganz";
     repo = "MEGAcmd";
-    rev = "${version}_Linux";
+    rev = "${finalAttrs.version}_Linux";
     sha256 = "sha256-JnxfFbM+NyeUrEMok62zlsQIxjrUvLLg4tUTiKPDZFc=";
     fetchSubmodules = true;
   };
@@ -77,4 +77,4 @@ stdenv.mkDerivation rec {
     platforms = [ "i686-linux" "x86_64-linux" ];
     maintainers = with maintainers; [ lunik1 ];
   };
-}
+})
