@@ -23,14 +23,14 @@
 , makeWrapper
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "espeak-ng";
   version = "1.51.1";
 
   src = fetchFromGitHub {
     owner = "espeak-ng";
     repo = "espeak-ng";
-    rev = version;
+    rev = finalAttrs.version;
     hash = "sha256-aAJ+k+kkOS6k835mEW7BvgAIYGhUHxf7Q4P5cKO8XTk=";
   };
 
@@ -92,10 +92,10 @@ stdenv.mkDerivation rec {
   meta = with lib; {
     description = "Open source speech synthesizer that supports over 70 languages, based on eSpeak";
     homepage = "https://github.com/espeak-ng/espeak-ng";
-    changelog = "https://github.com/espeak-ng/espeak-ng/blob/${version}/CHANGELOG.md";
+    changelog = "https://github.com/espeak-ng/espeak-ng/blob/${finalAttrs.version}/CHANGELOG.md";
     license = licenses.gpl3Plus;
     maintainers = with maintainers; [ aske ];
     platforms = platforms.all;
     mainProgram = "espeak-ng";
   };
-}
+})
