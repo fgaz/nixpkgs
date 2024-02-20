@@ -1,12 +1,12 @@
 { lib, stdenv, fetchFromGitHub, cmake, git, gfortran, mpi, blas, liblapack, pkg-config, libGL, libGLU, opencascade-occt, libsForQt5, tbb, vtkWithQt5 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "elmerfem";
   version = "unstable-2023-09-18";
 
   src = fetchFromGitHub {
     owner = "elmercsc";
-    repo = pname;
+    repo = finalAttrs.pname;
     rev = "0fcced06f91c93f44557efd6a5f10b2da5c7066c";
     hash = "sha256-UuARDYW7D3a4dB6I86s2Ed5ecQxc+Y/es3YIeF2VyTc=";
   };
@@ -40,7 +40,7 @@ stdenv.mkDerivation rec {
   storepath = placeholder "out";
 
   cmakeFlags = [
-  "-DELMER_INSTALL_LIB_DIR=${storepath}/lib"
+  "-DELMER_INSTALL_LIB_DIR=${finalAttrs.storepath}/lib"
   "-DWITH_OpenMP:BOOLEAN=TRUE"
   "-DWITH_MPI:BOOLEAN=TRUE"
   "-DWITH_QT5:BOOLEAN=TRUE"
@@ -60,4 +60,4 @@ stdenv.mkDerivation rec {
     license = licenses.lgpl21;
   };
 
-}
+})
