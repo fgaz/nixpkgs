@@ -8,14 +8,14 @@
 , nixosTests
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "pulseaudio-module-xrdp";
   version = "0.7";
 
   src = fetchFromGitHub {
     owner = "neutrinolabs";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     hash = "sha256-GT0kBfq6KvuiX30B9JzCiUxgSm9E6IhdJuQKKKprDCE=";
   };
 
@@ -61,4 +61,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     sourceProvenance = [ sourceTypes.fromSource ];
   };
-}
+})
