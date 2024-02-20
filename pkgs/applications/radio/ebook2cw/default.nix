@@ -1,12 +1,12 @@
 { lib, stdenv, fetchgit, fetchpatch, lame, libvorbis, gettext }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "ebook2cw";
   version = "0.8.4";
 
   src = fetchgit {
     url = "https://git.fkurz.net/dj1yfk/ebook2cw.git";
-    rev = "${pname}-${version}";
+    rev = "${finalAttrs.pname}-${finalAttrs.version}";
     sha256 = "0h7lg59m3dcydzkc8szipnwzag8fqwwvppa9fspn5xqd4blpcjd5";
   };
 
@@ -29,4 +29,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.all;
     maintainers = with maintainers; [ earldouglas ];
   };
-}
+})
