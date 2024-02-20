@@ -1,13 +1,13 @@
 { stdenv, lib, fetchFromGitHub, fetchpatch, ncurses }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "hexcurse";
   version = "1.60.0";
 
   src = fetchFromGitHub {
     owner = "LonnyGomes";
     repo = "hexcurse";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "17ckkxfzbqvvfdnh10if4aqdcq98q3vl6dn1v6f4lhr4ifnyjdlk";
   };
   buildInputs = [ ncurses ];
@@ -49,4 +49,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ ];
     mainProgram = "hexcurse";
   };
-}
+})
