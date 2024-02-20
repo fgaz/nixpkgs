@@ -29,7 +29,7 @@ let
     sha256 = "sha256-YK9fJ3awmhf1FAhdz95T/POivSO93jsNApm+u4OOZ80=";
   };
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "feedbackd";
   version = "0.2.0";
 
@@ -39,7 +39,7 @@ stdenv.mkDerivation rec {
     domain = "source.puri.sm";
     owner = "Librem5";
     repo = "feedbackd";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-l5rfMx3ElW25A5WVqzfKBp57ebaNC9msqV7mvnwv10s=";
     fetchSubmodules = true;
   };
@@ -104,4 +104,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ pacman99 tomfitzhenry ];
     platforms = platforms.linux;
   };
-}
+})
