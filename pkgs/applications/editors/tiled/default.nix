@@ -18,14 +18,14 @@ let
   qtEnv = env "tiled-qt-env" [ qtbase qtdeclarative qtsvg qttools ];
 in
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "tiled";
   version = "1.10.2";
 
   src = fetchFromGitHub {
     owner = "mapeditor";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-4Ykr60u2t5cyIZdpFHiRirXg2FqSLCzJzsdvw6r/LK8=";
   };
 
@@ -72,4 +72,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ dywedir ];
     platforms = platforms.linux;
   };
-}
+})
