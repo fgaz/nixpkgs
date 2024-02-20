@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, libX11, libXinerama, libXft, writeText, patches ? [ ], conf ? null}:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "dwm";
   version = "6.4";
 
   src = fetchurl {
-    url = "https://dl.suckless.org/dwm/${pname}-${version}.tar.gz";
+    url = "https://dl.suckless.org/dwm/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     sha256 = "sha256-+pwNaaWESFB2z8GICf1wXlwggNr7E9XnKaNkbKdwOm4=";
   };
 
@@ -46,4 +46,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.all;
     mainProgram = "dwm";
   };
-}
+})
