@@ -1,11 +1,11 @@
 {lib, stdenv, fetchurl, jre, makeWrapper}:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "picard-tools";
   version = "3.1.1";
 
   src = fetchurl {
-    url = "https://github.com/broadinstitute/picard/releases/download/${version}/picard.jar";
+    url = "https://github.com/broadinstitute/picard/releases/download/${finalAttrs.version}/picard.jar";
     sha256 = "sha256-FcefUf0KwAEEn53XubrB2991ncsCMKicf20fJG6LurQ=";
   };
 
@@ -30,4 +30,4 @@ stdenv.mkDerivation rec {
     mainProgram = "picard";
     platforms = platforms.all;
   };
-}
+})
