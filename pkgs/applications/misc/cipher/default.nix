@@ -13,14 +13,14 @@
 , libgee
 , wrapGAppsHook }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "cipher";
   version = "2.5.0";
 
   src = fetchFromGitHub {
     owner = "arshubham";
     repo = "cipher";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "00azc5ck17zkdypfza6x1viknwhimd9fqgk2ybff3mx6aphmla7a";
   };
 
@@ -60,4 +60,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl3Plus;
     mainProgram = "com.github.arshubham.cipher";
   };
-}
+})
