@@ -4,13 +4,13 @@ let emojiJSON = fetchurl {
   url = "https://raw.githubusercontent.com/muan/emojilib/v3.0.10/dist/emoji-en-US.json";
   hash = "sha256-UhAB5hVp5vV2d1FjIb2TBd2FJ6OPBbiP31HGAEDQFnA=";};
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "wofi-emoji";
   version = "unstable-2023-12-22";
 
   src = fetchFromGitHub {
     owner = "Zeioth";
-    repo = pname;
+    repo = finalAttrs.pname;
     rev = "2cc95880848134a3bbe0675bcb62a0dae1d0f572";
     hash = "sha256-t9M8z8JxuvBDzNs98L7YTNUfTK23W1DYGdHDiXNQOgk=";
   };
@@ -51,4 +51,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.ymarkus ];
     platforms = platforms.all;
   };
-}
+})
