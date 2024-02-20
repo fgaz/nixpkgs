@@ -1,11 +1,11 @@
 { fetchurl, lib, stdenv, bash }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "3.5-rc1";
   pname = "nanoblogger";
 
   src = fetchurl {
-    url = "mirror://sourceforge/nanoblogger/${pname}-${version}.tar.gz";
+    url = "mirror://sourceforge/nanoblogger/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     sha256 = "09mv52a5f0h3das8x96irqyznm69arfskx472b7w3b9q4a2ipxbq";
   };
 
@@ -28,4 +28,4 @@ stdenv.mkDerivation rec {
     mainProgram = "nb";
     platforms = lib.platforms.unix;
   };
-}
+})
