@@ -10,14 +10,14 @@
 , bash-completion
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "1.2.0";
   pname = "jp2a";
 
   src = fetchFromGitHub {
     owner = "Talinx";
     repo = "jp2a";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-TyXEaHemKfCMyGwK6P2vVL9gPWRLbkaNP0g+/UYGSVc=";
   };
 
@@ -41,4 +41,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.FlorianFranzen ];
     platforms = platforms.unix;
   };
-}
+})
