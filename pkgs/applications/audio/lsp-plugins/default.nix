@@ -3,12 +3,12 @@
 , libGLU, libGL, lv2, cairo
 , ladspaH, php, libXrandr }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "lsp-plugins";
   version = "1.2.14";
 
   src = fetchurl {
-    url = "https://github.com/sadko4u/${pname}/releases/download/${version}/${pname}-src-${version}.tar.gz";
+    url = "https://github.com/sadko4u/${finalAttrs.pname}/releases/download/${finalAttrs.version}/${finalAttrs.pname}-src-${finalAttrs.version}.tar.gz";
     sha256 = "sha256-GjNZ7ouKgpcb1+nuq+Q/WM5rSkeT2F+xb5exAOTt7po=";
   };
 
@@ -40,9 +40,9 @@ stdenv.mkDerivation rec {
 
         - CLAP - set of plugins for Clever Audio Plugins API
         - LADSPA - set of plugins for Linux Audio Developer's Simple Plugin API
-        - LV2 - set of plugins and UIs for Linux Audio Developer's Simple Plugin API (LADSPA) version 2
+        - LV2 - set of plugins and UIs for Linux Audio Developer's Simple Plugin API (LADSPA) finalAttrs.version 2
         - LinuxVST - set of plugins and UIs for Steinberg's VST 2.4 format ported on GNU/Linux Platform
-        - JACK - Standalone versions for JACK Audio connection Kit with UI
+        - JACK - Standalone finalAttrs.versions for JACK Audio connection Kit with UI
 
         Contains the following plugins (https://lsp-plug.in/?page=plugins)
 
@@ -98,4 +98,4 @@ stdenv.mkDerivation rec {
       license = licenses.gpl2;
       platforms = platforms.linux;
     };
-}
+})
