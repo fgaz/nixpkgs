@@ -1,13 +1,13 @@
 { stdenv, lib, fetchFromGitHub, git, linux-pam, libxcb }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "ly";
   version = "0.6.0";
 
   src = fetchFromGitHub {
     owner = "fairyglade";
     repo = "ly";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-78XD6DK9aQi8hITWJWnFZ3U9zWTcuw3vtRiU3Lhu7O4=";
     fetchSubmodules = true;
   };
@@ -28,4 +28,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.vidister ];
     platforms = platforms.linux;
   };
-}
+})
