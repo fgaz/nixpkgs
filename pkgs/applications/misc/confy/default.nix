@@ -14,14 +14,14 @@
 , wrapGAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "confy";
   version = "0.7.0";
 
   src = fetchFromSourcehut {
     owner = "~fabrixxm";
     repo = "confy";
-    rev = version;
+    rev = finalAttrs.version;
     hash = "sha256-q8WASTNbiBuKb2tPQBmUL9ji60PRAPnYOTYxnUn0MAw=";
   };
 
@@ -52,8 +52,8 @@ stdenv.mkDerivation rec {
   meta = with lib; {
     description = "Conferences schedule viewer";
     homepage = "https://confy.kirgroup.net/";
-    changelog = "https://git.sr.ht/~fabrixxm/confy/refs/${version}";
+    changelog = "https://git.sr.ht/~fabrixxm/confy/refs/${finalAttrs.version}";
     license = licenses.gpl3;
     maintainers = with maintainers; [ michaelgrahamevans ];
   };
-}
+})
