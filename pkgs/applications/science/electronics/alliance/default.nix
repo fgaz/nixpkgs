@@ -2,7 +2,7 @@
 , flex, automake, autoconf, libtool
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "alliance";
   version = "unstable-2022-01-13";
 
@@ -55,4 +55,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ l-as ];
     platforms = with platforms; linux;
   };
-}
+})
