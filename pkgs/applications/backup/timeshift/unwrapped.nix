@@ -15,14 +15,14 @@
 , xapp
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "timeshift";
   version = "24.01.1";
 
   src = fetchFromGitHub {
     owner = "linuxmint";
     repo = "timeshift";
-    rev = version;
+    rev = finalAttrs.version;
     hash = "sha256-vAKUR0VsOuiQmB+1jPOR0KufzfXaxAsf3EOPzdgFt0A=";
   };
 
@@ -67,4 +67,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ ShamrockLee bobby285271 ];
   };
-}
+})
