@@ -13,12 +13,12 @@
 , bison
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "dvdauthor";
   version = "0.7.2";
 
   src = fetchurl {
-    url = "mirror://sourceforge/dvdauthor/dvdauthor-${version}.tar.gz";
+    url = "mirror://sourceforge/dvdauthor/dvdauthor-${finalAttrs.version}.tar.gz";
     hash = "sha256-MCCpLen3jrNvSLbyLVoAHEcQeCZjSnhaYt/NCA9hLrc=";
   };
 
@@ -35,4 +35,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl2;
     platforms = platforms.linux ++ platforms.darwin;
   };
-}
+})
