@@ -17,12 +17,12 @@
 , xwaylandSupport ? true, libXcursor, xwayland
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "weston";
   version = "13.0.0";
 
   src = fetchurl {
-    url = "https://gitlab.freedesktop.org/wayland/weston/-/releases/${version}/downloads/weston-${version}.tar.xz";
+    url = "https://gitlab.freedesktop.org/wayland/weston/-/releases/${finalAttrs.version}/downloads/weston-${finalAttrs.version}.tar.xz";
     hash = "sha256-Uv8dSqI5Si5BbIWjOLYnzpf6cdQ+t2L9Sq8UXTb8eVo=";
   };
 
@@ -76,9 +76,9 @@ stdenv.mkDerivation rec {
       provided.
     '';
     homepage = "https://gitlab.freedesktop.org/wayland/weston";
-    license = licenses.mit; # Expat version
+    license = licenses.mit; # Expat finalAttrs.version
     platforms = platforms.linux;
     mainProgram = "weston";
     maintainers = with maintainers; [ primeos qyliss ];
   };
-}
+})
