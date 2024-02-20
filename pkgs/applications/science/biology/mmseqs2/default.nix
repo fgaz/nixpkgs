@@ -14,14 +14,14 @@
 , bzip2
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "mmseqs2";
   version = "15-6f452";
 
   src = fetchFromGitHub {
     owner = "soedinglab";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "sha256-L+zOWrGkCLz/wqpBuji8H4/93sDFpcfnDOE8FHq1j84=";
   };
 
@@ -47,4 +47,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ natsukium ];
     platforms = platforms.unix;
   };
-}
+})
