@@ -9,7 +9,7 @@
 , enableExamples ? false
 , enableDocs ? false }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "unstable-2022-12-30";
   pname = "openmvg";
 
@@ -49,4 +49,4 @@ stdenv.mkDerivation rec {
     platforms = lib.platforms.unix;
     maintainers = with lib.maintainers; [ mdaiter bouk ];
   };
-}
+})
