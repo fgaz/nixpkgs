@@ -11,14 +11,14 @@
 let
   inherit (darwin.apple_sdk_11_0.frameworks) CoreServices IOKit;
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "xmrig-proxy";
   version = "6.21.0";
 
   src = fetchFromGitHub {
     owner = "xmrig";
     repo = "xmrig-proxy";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-ICRzd1iCm/TciVe0RqVFiiY74RK0KpEGPJ2v+wSRIEo=";
   };
 
@@ -57,4 +57,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl3Plus;
     maintainers = with maintainers; [ aij ];
   };
-}
+})
