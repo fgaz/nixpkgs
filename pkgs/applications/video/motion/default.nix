@@ -1,14 +1,14 @@
 { lib, stdenv, fetchFromGitHub, autoreconfHook, pkg-config
 , ffmpeg, libjpeg, libmicrohttpd }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "motion";
   version = "4.6.0";
 
   src = fetchFromGitHub {
     owner  = "Motion-Project";
     repo   = "motion";
-    rev    = "release-${version}";
+    rev    = "release-${finalAttrs.version}";
     sha256 = "sha256-f23glk91HWSEW/Glq/DdEikTQeg1eELEg4XG9zTsU78=";
   };
 
@@ -26,4 +26,4 @@ stdenv.mkDerivation rec {
     broken = stdenv.isDarwin && stdenv.isAarch64;
     mainProgram = "motion";
   };
-}
+})
