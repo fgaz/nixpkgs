@@ -19,12 +19,12 @@
 , perl
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "xawtv";
   version = "3.107";
 
   src = fetchurl {
-    url = "https://linuxtv.org/downloads/xawtv/xawtv-${version}.tar.bz2";
+    url = "https://linuxtv.org/downloads/xawtv/xawtv-${finalAttrs.version}.tar.bz2";
     sha256 = "055p0wia0xsj073l8mg4ifa6m81dmv6p45qyh99brramq5iylfy5";
   };
 
@@ -63,4 +63,4 @@ stdenv.mkDerivation rec {
     maintainers = with lib.maintainers; [ domenkozar ];
     platforms = lib.platforms.linux;
   };
-}
+})
