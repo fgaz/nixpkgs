@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitLab, qmake, wrapQtAppsHook, libusb1, hidapi, pkg-config, coreutils, mbedtls_2, qtbase, qttools, symlinkJoin, openrgb }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "openrgb";
   version = "0.9";
 
   src = fetchFromGitLab {
     owner = "CalcProgrammer1";
     repo = "OpenRGB";
-    rev = "release_${version}";
+    rev = "release_${finalAttrs.version}";
     sha256 = "sha256-XBLj4EfupyeVHRc0pVI7hrXFoCNJ7ak2yO0QSfhBsGU=";
   };
 
@@ -29,7 +29,7 @@ stdenv.mkDerivation rec {
     let pluginsDir = symlinkJoin {
       name = "openrgb-plugins";
       paths = plugins;
-      # Remove all library version symlinks except one,
+      # Remove all library finalAttrs.version symlinks except one,
       # or they will result in duplicates in the UI.
       # We leave the one pointing to the actual library, usually the most
       # qualified one (eg. libOpenRGBHardwareSyncPlugin.so.1.0.0).
@@ -56,4 +56,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     mainProgram = "openrgb";
   };
-}
+})
