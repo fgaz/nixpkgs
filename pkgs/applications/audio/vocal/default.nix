@@ -24,14 +24,14 @@
 , wrapGAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "vocal";
   version = "2.4.2";
 
   src = fetchFromGitHub {
     owner = "needle-and-thread";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "1c4n89rdl9r13kmmh2qymmy9sa6shjwai7df48k2kfn0pnzq5mad";
   };
 
@@ -94,4 +94,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     mainProgram = "com.github.needleandthread.vocal";
   };
-}
+})
