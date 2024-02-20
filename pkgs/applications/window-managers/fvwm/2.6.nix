@@ -22,14 +22,14 @@
 , enableGestures ? false
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "fvwm";
   version = "2.7.0";
 
   src = fetchFromGitHub {
     owner = "fvwmorg";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     hash = "sha256-KcuX8las1n8UUE/BOHj7WOeZjva5hxgpFHtATMUk3bg=";
   };
 
@@ -79,4 +79,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ edanaher ];
   };
-}
+})
