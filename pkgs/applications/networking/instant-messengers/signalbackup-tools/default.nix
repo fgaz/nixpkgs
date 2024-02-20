@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, openssl, sqlite }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "signalbackup-tools";
   version = "20240115-3";
 
   src = fetchFromGitHub {
     owner = "bepaald";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     hash = "sha256-Ba+9irsOnGcAUJtCwbdes9DYS704dNuKAqNvJGXQKMM=";
   };
 
@@ -37,4 +37,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.malo ];
     platforms = platforms.all;
   };
-}
+})
