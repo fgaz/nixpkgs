@@ -1,14 +1,14 @@
 { lib, stdenv, linkFarm, lightdm-tiny-greeter, fetchFromGitHub
 , pkg-config, lightdm, gtk3, glib, wrapGAppsHook, config, conf ? config.lightdm-tiny-greeter.conf or "" }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "lightdm-tiny-greeter";
   version = "1.2";
 
   src = fetchFromGitHub {
     owner = "off-world";
     repo = "lightdm-tiny-greeter";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "08azpj7b5qgac9bgi1xvd6qy6x2nb7iapa0v40ggr3d1fabyhrg6";
   };
 
@@ -21,8 +21,8 @@ stdenv.mkDerivation rec {
 
   buildPhase = ''
     mkdir -p $out/bin $out/share/xgreeters
-    make ${pname}
-    mv ${pname} $out/bin/.
+    make ${finalAttrs.pname}
+    mv ${finalAttrs.pname} $out/bin/.
     mv lightdm-tiny-greeter.desktop $out/share/xgreeters
   '';
 
@@ -43,4 +43,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ edwtjo ];
     platforms = platforms.linux;
   };
-}
+})
