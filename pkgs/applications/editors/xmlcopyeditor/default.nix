@@ -14,12 +14,12 @@
 , Cocoa
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "xmlcopyeditor";
   version = "1.3.1.0";
 
   src = fetchurl {
-    url = "mirror://sourceforge/xml-copy-editor/${pname}-${version}.tar.gz";
+    url = "mirror://sourceforge/xml-copy-editor/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     sha256 = "sha256-6HHKl7hqyvF3gJ9vmjLjTT49prJ8KhEEV0qPsJfQfJE=";
   };
 
@@ -60,4 +60,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ candeira wegank ];
     mainProgram = "xmlcopyeditor";
   };
-}
+})
