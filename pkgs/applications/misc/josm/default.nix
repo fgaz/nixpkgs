@@ -20,7 +20,7 @@ let
     };
   };
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   inherit pname version;
 
   dontUnpack = true;
@@ -51,4 +51,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ rycee sikmir ];
     platforms = platforms.all;
   };
-}
+})
