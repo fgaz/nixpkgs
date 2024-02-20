@@ -21,14 +21,14 @@
 , SystemConfiguration
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "netease-cloud-music-gtk";
   version = "2.2.0";
 
   src = fetchFromGitHub {
     owner = "gmg137";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     hash = "sha256-9qUzRmm3WQEVjzhzHMT1vNw3r3ymWGlBWXnnPsYGSnk=";
   };
 
@@ -81,4 +81,4 @@ stdenv.mkDerivation rec {
     mainProgram = "netease-cloud-music-gtk4";
     platforms = platforms.linux;
   };
-}
+})
