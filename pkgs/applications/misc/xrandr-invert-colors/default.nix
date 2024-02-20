@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, libXrandr}:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "xrandr-invert-colors";
   version = "0.02";
 
   src = fetchFromGitHub {
     owner = "zoltanp";
     repo = "xrandr-invert-colors";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-MIbHNJFDQsvjPUbperTKKbHY5GSgItvRyV5OsfpzYT4=";
   };
 
@@ -26,4 +26,4 @@ stdenv.mkDerivation rec {
     maintainers = [lib.maintainers.magnetophon ];
     platforms = platforms.linux;
   };
-}
+})
