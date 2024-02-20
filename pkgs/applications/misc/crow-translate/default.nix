@@ -15,12 +15,12 @@
 , crow-translate
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "crow-translate";
   version = "2.11.1";
 
   src = fetchzip {
-    url = "https://github.com/${pname}/${pname}/releases/download/${version}/${pname}-${version}-source.tar.gz";
+    url = "https://github.com/${finalAttrs.pname}/${finalAttrs.pname}/releases/download/${finalAttrs.version}/${finalAttrs.pname}-${finalAttrs.version}-source.tar.gz";
     hash = "sha256-1rq1pF4tOaZNEaHflxlBuHta80EzD9m3O99geR1EPxE=";
   };
 
@@ -65,4 +65,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     mainProgram = "crow";
   };
-}
+})
