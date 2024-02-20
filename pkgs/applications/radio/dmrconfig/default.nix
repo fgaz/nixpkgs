@@ -1,14 +1,14 @@
 { lib, stdenv, fetchFromGitHub, fetchpatch
 , libusb1, systemd }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "dmrconfig";
   version = "1.1";
 
   src = fetchFromGitHub {
     owner = "sergev";
     repo = "dmrconfig";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "1qwix75z749628w583fwp7m7kxbj0k3g159sxb7vgqxbadqqz1ab";
   };
 
@@ -30,7 +30,7 @@ stdenv.mkDerivation rec {
       --replace /usr/local/bin/dmrconfig $out/bin/dmrconfig
   '';
 
-  makeFlags = [ "VERSION=${version}" "GITCOUNT=0" ];
+  makeFlags = [ "VERSION=${finalAttrs.version}" "GITCOUNT=0" ];
 
   installPhase = ''
     mkdir -p $out/bin $out/lib/udev/rules.d
@@ -48,4 +48,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ ];
     platforms = platforms.linux;
   };
-}
+})
