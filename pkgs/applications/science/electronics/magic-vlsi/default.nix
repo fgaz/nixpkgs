@@ -11,12 +11,12 @@
 , tk
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "magic-vlsi";
   version = "8.3.456";
 
   src = fetchurl {
-    url    = "http://opencircuitdesign.com/magic/archive/magic-${version}.tgz";
+    url    = "http://opencircuitdesign.com/magic/archive/magic-${finalAttrs.version}.tgz";
     sha256 = "sha256-PrKbLecFJ+th0x9A0fp550RnA8w9oWETMtFpQZP8tzw=";
   };
 
@@ -52,4 +52,4 @@ stdenv.mkDerivation rec {
     license     = licenses.mit;
     maintainers = with maintainers; [ thoughtpolice AndersonTorres ];
   };
-}
+})
