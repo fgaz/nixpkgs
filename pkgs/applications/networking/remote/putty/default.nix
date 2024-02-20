@@ -2,14 +2,14 @@
 , gtk3, ncurses, darwin
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "0.80";
   pname = "putty";
 
   src = fetchurl {
     urls = [
-      "https://the.earth.li/~sgtatham/putty/${version}/${pname}-${version}.tar.gz"
-      "ftp://ftp.wayne.edu/putty/putty-website-mirror/${version}/${pname}-${version}.tar.gz"
+      "https://the.earth.li/~sgtatham/putty/${finalAttrs.version}/${finalAttrs.pname}-${finalAttrs.version}.tar.gz"
+      "ftp://ftp.wayne.edu/putty/putty-website-mirror/${finalAttrs.version}/${finalAttrs.pname}-${finalAttrs.version}.tar.gz"
     ];
     hash = "sha256-IBPIOnIbF1NSnpCQ98ODDo/kyAoHDMznZFObrbP2cIE=";
   };
@@ -31,4 +31,4 @@ stdenv.mkDerivation rec {
     license = licenses.mit;
     platforms = platforms.unix ++ platforms.windows;
   };
-}
+})
