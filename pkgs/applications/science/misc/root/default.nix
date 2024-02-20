@@ -56,7 +56,7 @@
 , noSplash ? false
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "root";
   version = "6.30.02";
 
@@ -65,7 +65,7 @@ stdenv.mkDerivation rec {
   };
 
   src = fetchurl {
-    url = "https://root.cern.ch/download/root_v${version}.source.tar.gz";
+    url = "https://root.cern.ch/download/root_v${finalAttrs.version}.source.tar.gz";
     hash = "sha256-eWWkVtGtHuDV/kdpv1qP7Cka9oTtk9sPMICpw2JDUYM=";
   };
 
@@ -145,7 +145,7 @@ stdenv.mkDerivation rec {
     # Eliminate impure reference to /System/Library/PrivateFrameworks
     substituteInPlace core/macosx/CMakeLists.txt \
       --replace "-F/System/Library/PrivateFrameworks " ""
-  '' + lib.optionalString (stdenv.isDarwin && lib.versionAtLeast stdenv.hostPlatform.darwinMinVersion "11") ''
+  '' + lib.optionalString (stdenv.isDarwin && lib.finalAttrs.versionAtLeast stdenv.hostPlatform.darwinMinVersion "11") ''
     MACOSX_DEPLOYMENT_TARGET=10.16
   '';
 
@@ -276,4 +276,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.veprbl ];
     license = licenses.lgpl21;
   };
-}
+})
