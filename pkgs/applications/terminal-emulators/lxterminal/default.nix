@@ -3,14 +3,14 @@
 , pcre2
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "lxterminal";
   version = "0.4.0";
 
   src = fetchFromGitHub {
     owner = "lxde";
     repo = "lxterminal";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-bCF/V6yFe4vKqVMOtNlwYyw/ickj1LFuFn4IyypwIg0=";
   };
 
@@ -51,4 +51,4 @@ stdenv.mkDerivation rec {
     platforms = lib.platforms.linux;
     mainProgram = "lxterminal";
   };
-}
+})
