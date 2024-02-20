@@ -1,9 +1,9 @@
 { fetchzip, lib, stdenv, makeWrapper, openjdk }:
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gremlin-server";
   version = "3.7.0";
   src = fetchzip {
-    url = "https://downloads.apache.org/tinkerpop/${version}/apache-tinkerpop-gremlin-server-${version}-bin.zip";
+    url = "https://downloads.apache.org/tinkerpop/${finalAttrs.version}/apache-tinkerpop-gremlin-server-${finalAttrs.version}-bin.zip";
     sha256 = "sha256-cS7R7Raz5tkrr5DNeW7jbEYDee2OgE4htTXJRnqXlqI=";
   };
 
@@ -30,4 +30,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.jrpotter ];
     platforms = platforms.all;
   };
-}
+})
