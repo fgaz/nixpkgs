@@ -1,13 +1,13 @@
 { lib, stdenv, qmake, fetchFromGitHub, qtbase, qttools, wrapQtAppsHook }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "kapow";
   version = "1.5.10";
 
   src = fetchFromGitHub {
     owner = "gottcode";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "1fz9fb4w21ax8hjs6dwfn2410ig4lqvzdlijq0jcj3jbgxd4i1gw";
   };
 
@@ -22,4 +22,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     license = licenses.gpl3Plus;
   };
-}
+})
