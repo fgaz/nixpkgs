@@ -1,13 +1,13 @@
 { stdenv, lib, fetchFromGitHub, pkg-config, gtk2 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "spnavcfg";
   version = "0.3.1";
 
   src = fetchFromGitHub {
     owner = "FreeSpacenav";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "180mkdis15gxs79rr3f7hpwa1p6v81bybw37pzzdjnmqwqrc08a0";
   };
 
@@ -36,4 +36,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = with maintainers; [ gebner ];
   };
-}
+})
