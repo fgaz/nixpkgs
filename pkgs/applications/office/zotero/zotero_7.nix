@@ -42,7 +42,7 @@
 , libXtst
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "zotero";
   version = "7.0.0-beta";
 
@@ -147,4 +147,4 @@ stdenv.mkDerivation rec {
     platforms = [ "x86_64-linux" ];
     maintainers = with maintainers; [ atila ];
   };
-}
+})
