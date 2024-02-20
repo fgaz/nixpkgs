@@ -2,13 +2,13 @@
 , wrapGAppsHook, libcdio, nasm, ffmpeg_4, file
 , fetchpatch }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "pcsxr";
   version = "1.9.94";
 
   # codeplex does not support direct downloading
   src = fetchurl {
-    url = "mirror://debian/pool/main/p/pcsxr/pcsxr_${version}.orig.tar.xz";
+    url = "mirror://debian/pool/main/p/pcsxr/pcsxr_${finalAttrs.version}.orig.tar.xz";
     sha256 = "0q7nj0z687lmss7sgr93ij6my4dmhkm2nhjvlwx48dn2lxl6ndla";
   };
 
@@ -71,18 +71,18 @@ stdenv.mkDerivation rec {
     "--enable-opengl"
     "--enable-ccdda"
     "--enable-libcdio"
-    "--enable-dynarec=${dynarecTarget}"
+    "--enable-dynarec=${finalAttrs.dynarecTarget}"
   ];
 
   postInstall = ''
-    mkdir -p "$out/share/doc/${pname}-${version}"
+    mkdir -p "$out/share/doc/${finalAttrs.pname}-${finalAttrs.version}"
     cp README \
        AUTHORS \
        doc/keys.txt \
        doc/tweaks.txt \
        ChangeLog.df \
        ChangeLog \
-       "$out/share/doc/${pname}-${version}"
+       "$out/share/doc/${finalAttrs.pname}-${finalAttrs.version}"
   '';
 
   meta = with lib; {
@@ -94,4 +94,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.all;
     mainProgram = "pcsxr";
   };
-}
+})
