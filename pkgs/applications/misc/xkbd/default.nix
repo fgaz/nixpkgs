@@ -2,14 +2,14 @@
 , xinput, libXi, libXext, libXtst, libXpm, libX11, autoreconfHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "xkbd";
   version = "0.8.18";
 
   src = fetchFromGitHub {
     owner = "mahatma-kaganovich";
     repo = "xkbd";
-    rev = "${pname}-${version}";
+    rev = "${finalAttrs.pname}-${finalAttrs.version}";
     sha256 = "05ry6q75jq545kf6p20nhfywaqf2wdkfiyp6iwdpv9jh238hf7m9";
   };
 
@@ -27,4 +27,4 @@ stdenv.mkDerivation rec {
     maintainers = [ ];
     platforms = platforms.linux;
   };
-}
+})
