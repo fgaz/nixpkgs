@@ -18,14 +18,14 @@
 , hexdump
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gridcoin-research";
   version = "5.4.5.0";
 
   src = fetchFromGitHub {
     owner = "gridcoin-community";
     repo = "Gridcoin-Research";
-    rev = "${version}";
+    rev = "${finalAttrs.version}";
     sha256 = "1a174m7821c7d3yh9lyh0r3ds6qn06x16aa1qxcbrqyxxc127yky";
   };
 
@@ -70,4 +70,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ gigglesquid ];
     platforms = platforms.linux;
   };
-}
+})
