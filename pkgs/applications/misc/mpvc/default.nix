@@ -1,13 +1,13 @@
 { lib, stdenv, socat, fetchFromGitHub, makeWrapper }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "mpvc";
   version = "1.3";
 
   src = fetchFromGitHub {
     owner = "lwilletts";
     repo = "mpvc";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-wPETEG0BtNBEj3ZyP70byLzIP+NMUKbnjQ+kdvrvK3s=";
   };
 
@@ -28,4 +28,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.neeasade ];
     platforms = platforms.linux;
   };
-}
+})
