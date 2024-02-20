@@ -19,12 +19,12 @@
 let
   gtkmm2_with_pango242 = gtkmm2.override { pangomm = pangomm_2_42; };
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gigedit";
   version = "1.1.1";
 
   src = fetchurl {
-    url = "https://download.linuxsampler.org/packages/${pname}-${version}.tar.bz2";
+    url = "https://download.linuxsampler.org/packages/${finalAttrs.pname}-${finalAttrs.version}.tar.bz2";
     sha256 = "08db12crwf0dy1dbyrmivqqpg5zicjikqkmf2kb1ywpq0a9hcxrb";
   };
 
@@ -43,4 +43,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.goibhniu ];
     platforms = platforms.linux;
   };
-}
+})
