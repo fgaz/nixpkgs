@@ -60,7 +60,7 @@ assert builtins.all
   (b: lib.assertOneOf "each backend" b (builtins.attrNames backends))
   withBackends;
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "imv";
   version = "4.4.0";
   outputs = [ "out" "man" ];
@@ -68,7 +68,7 @@ stdenv.mkDerivation rec {
   src = fetchFromSourcehut {
     owner = "~exec64";
     repo = "imv";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-LLEEbriHzZhAOQivqHqdr6g7lh4uj++ytlme8AfRjf4=";
   };
 
@@ -123,4 +123,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.all;
     badPlatforms = platforms.darwin;
   };
-}
+})
