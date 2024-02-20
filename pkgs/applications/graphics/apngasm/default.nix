@@ -1,12 +1,12 @@
 { lib, stdenv, fetchFromGitHub, fetchpatch, cmake, boost, libpng, zlib }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "apngasm";
   version = "3.1.10";
 
   src = fetchFromGitHub {
-    owner = pname;
-    repo = pname;
+    owner = finalAttrs.pname;
+    repo = finalAttrs.pname;
     rev = "f105b2d6024ef3113bb407d68e27e476a17fa998";
     sha256 = "sha256-lTk2sTllKHRUaWPPEkC4qU5K10oRaLrdWBgN4MUGKeo=";
   };
@@ -31,4 +31,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
   };
 
-}
+})
