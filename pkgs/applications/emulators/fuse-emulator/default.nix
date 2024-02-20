@@ -2,12 +2,12 @@
 , SDL, bzip2, glib, gtk3, libgcrypt, libpng, libspectrum, libxml2, zlib
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "fuse-emulator";
   version = "1.6.0";
 
   src = fetchurl {
-    url = "mirror://sourceforge/${pname}/fuse-${version}.tar.gz";
+    url = "mirror://sourceforge/${finalAttrs.pname}/fuse-${finalAttrs.version}.tar.gz";
     sha256 = "sha256-Oo/t8v/pR8VxVhusVaWa2tTFkzj3TkSbfnpn2coEcJY=";
   };
 
@@ -26,4 +26,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ orivej ];
   };
-}
+})
