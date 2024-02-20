@@ -1,14 +1,14 @@
 { lib, stdenv, fetchFromGitHub, autoreconfHook, pkg-config, curl, libnotify
 , gdk-pixbuf, libnotifySupport ? stdenv.isLinux, debug ? false }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "cmusfm";
   version = "0.5.0";
 
   src = fetchFromGitHub {
     owner = "Arkq";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-CA585ZpkxMMLgzv81QB2kKMFg5R5CwKS9xAYrU+pAxs=";
   };
 
@@ -39,4 +39,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl3Plus;
     platforms = platforms.linux ++ platforms.darwin;
   };
-}
+})
