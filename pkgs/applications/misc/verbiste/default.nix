@@ -1,12 +1,12 @@
 { lib, stdenv, fetchurl, pkg-config, libgnomeui, libxml2 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "verbiste";
 
   version = "0.1.47";
 
   src = fetchurl {
-    url = "https://perso.b2b2c.ca/~sarrazip/dev/${pname}-${version}.tar.gz";
+    url = "https://perso.b2b2c.ca/~sarrazip/dev/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     sha256 = "02kzin3pky2q2jnihrch8y0hy043kqqmzxq8j741x80kl0j1qxkm";
   };
 
@@ -23,4 +23,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ orivej ];
   };
-}
+})
