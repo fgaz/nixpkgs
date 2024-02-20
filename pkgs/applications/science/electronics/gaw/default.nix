@@ -5,12 +5,12 @@
 , pkg-config
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gaw";
   version = "20220315";
 
   src = fetchurl {
-    url = "https://download.tuxfamily.org/gaw/download/gaw3-${version}.tar.gz";
+    url = "https://download.tuxfamily.org/gaw/download/gaw3-${finalAttrs.version}.tar.gz";
     sha256 = "0j2bqi9444s1mfbr7x9rqp232xf7ab9z7ifsnl305jsklp6qmrbg";
   };
 
@@ -31,4 +31,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ fbeffa ];
     platforms = platforms.linux;
   };
-}
+})
