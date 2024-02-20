@@ -1,14 +1,14 @@
 { lib, stdenv, fetchFromGitHub, libX11, libXinerama, libXrandr, libXft, bison, pkg-config }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
 
   pname = "cwm";
   version = "7.4";
 
   src = fetchFromGitHub {
     owner = "leahneukirchen";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     hash = "sha256-L3u4mH2UH2pTHhSPVr5dUi94b9DheslkIWL6EgQ05yA=";
   };
 
@@ -27,4 +27,4 @@ stdenv.mkDerivation rec {
     platforms   = platforms.linux;
     mainProgram = "cwm";
   };
-}
+})
