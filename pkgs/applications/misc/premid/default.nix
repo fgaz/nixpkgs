@@ -6,12 +6,12 @@
 , mesa, nspr, nss, pango, systemd, libappindicator-gtk3, libdbusmenu
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "premid";
   version = "2.3.4";
 
   src = fetchurl {
-    url = "https://github.com/premid/Linux/releases/download/v${version}/${pname}.tar.gz";
+    url = "https://github.com/premid/Linux/releases/download/v${finalAttrs.version}/${finalAttrs.pname}.tar.gz";
     sha256 = "sha256-ime6SCxm+fhMR2wagv1RItqwLjPxvJnVziW3DZafP50=";
   };
 
@@ -53,30 +53,30 @@ stdenv.mkDerivation rec {
     mkdir -p $out/{bin,opt/PreMiD,share/pixmaps}
     mv * $out/opt/PreMiD
 
-    chmod +x $out/opt/PreMiD/${pname}
+    chmod +x $out/opt/PreMiD/${finalAttrs.pname}
     patchelf --set-interpreter ${stdenv.cc.bintools.dynamicLinker} \
-        $out/opt/PreMiD/${pname}
+        $out/opt/PreMiD/${finalAttrs.pname}
 
-    wrapProgram $out/opt/PreMiD/${pname} \
+    wrapProgram $out/opt/PreMiD/${finalAttrs.pname} \
         "''${gappsWrapperArgs[@]}" \
         --prefix XDG_DATA_DIRS : "${gtk3}/share/gsettings-schemas/${gtk3.name}/" \
-        --prefix LD_LIBRARY_PATH : ${libPath}:$out/opt/${pname}
+        --prefix LD_LIBRARY_PATH : ${finalAttrs.libPath}:$out/opt/${finalAttrs.pname}
 
-    ln -s $out/opt/PreMiD/${pname} $out/bin/
+    ln -s $out/opt/PreMiD/${finalAttrs.pname} $out/bin/
   '';
 
   # This is the icon used by the desktop file
   postInstall = ''
-    ln -s $out/opt/PreMiD/assets/appIcon.png $out/share/pixmaps/${pname}.png
+    ln -s $out/opt/PreMiD/assets/appIcon.png $out/share/pixmaps/${finalAttrs.pname}.png
   '';
 
   desktopItems = [
     (makeDesktopItem {
-      name = pname;
+      name = finalAttrs.pname;
       exec = "PreMiD";
-      icon = pname;
+      icon = finalAttrs.pname;
       desktopName = "PreMiD";
-      genericName = meta.description;
+      genericName = finalAttrs.meta.description;
       mimeTypes = [ "x-scheme-handler/premid" ];
     })
   ];
@@ -90,4 +90,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ natto1784 ];
     platforms = [ "x86_64-linux" ];
   };
-}
+})
