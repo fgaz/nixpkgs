@@ -10,7 +10,7 @@
 , unstableGitUpdater
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "treesheets";
   version = "unstable-2024-01-26";
 
@@ -34,7 +34,7 @@ stdenv.mkDerivation rec {
     Cocoa
   ];
 
-  env.NIX_CFLAGS_COMPILE = "-DPACKAGE_VERSION=\"${builtins.replaceStrings [ "unstable-" ] [ "" ] version}\"";
+  env.NIX_CFLAGS_COMPILE = "-DPACKAGE_VERSION=\"${builtins.replaceStrings [ "unstable-" ] [ "" ] finalAttrs.version}\"";
 
   postInstall = lib.optionalString stdenv.isDarwin ''
     shopt -s extglob
@@ -65,4 +65,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     license = licenses.zlib;
   };
-}
+})
