@@ -22,15 +22,15 @@
 
 assert svgSupport -> enableCairo;
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "fuzzel";
   version = "1.9.2";
 
   src = fetchFromGitea {
     domain = "codeberg.org";
     owner = "dnkl";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     hash = "sha256-X1P/ghX97KCQcrNk44Cy2IAGuZ8DDwHBWzh1AHLDvd4=";
   };
 
@@ -65,7 +65,7 @@ stdenv.mkDerivation rec {
   ];
 
   meta = with lib; {
-    changelog = "https://codeberg.org/dnkl/fuzzel/releases/tag/${version}";
+    changelog = "https://codeberg.org/dnkl/fuzzel/releases/tag/${finalAttrs.version}";
     description = "Wayland-native application launcher, similar to rofi’s drun mode";
     homepage = "https://codeberg.org/dnkl/fuzzel";
     license = with licenses; [ mit zlib ];
@@ -73,4 +73,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ fionera polykernel rodrgz ];
     platforms = with platforms; linux;
   };
-}
+})
