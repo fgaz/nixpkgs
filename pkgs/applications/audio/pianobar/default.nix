@@ -1,11 +1,11 @@
 { fetchurl, lib, stdenv, pkg-config, libao, json_c, libgcrypt, ffmpeg, curl }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "pianobar";
   version = "2022.04.01";
 
   src = fetchurl {
-    url = "https://6xq.net/projects/pianobar/${pname}-${version}.tar.bz2";
+    url = "https://6xq.net/projects/pianobar/${finalAttrs.pname}-${finalAttrs.version}.tar.bz2";
     sha256 = "sha256-FnCyiGWouCpXu23+p/FuL6QUXS81SRC7FzgLMsm5R2M=";
   };
 
@@ -23,6 +23,6 @@ stdenv.mkDerivation rec {
     description = "A console front-end for Pandora.com";
     homepage = "https://6xq.net/pianobar/";
     platforms = platforms.unix;
-    license = licenses.mit; # expat version
+    license = licenses.mit; # expat finalAttrs.version
   };
-}
+})
