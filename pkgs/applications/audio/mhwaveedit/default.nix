@@ -2,14 +2,14 @@
 , ladspaPlugins, libsamplerate, libsndfile, pkg-config, libpulseaudio, lame
 , vorbis-tools }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "mhwaveedit";
   version = "1.4.24";
 
   src = fetchFromGitHub {
     owner = "magnush";
     repo = "mhwaveedit";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "037pbq23kh8hsih994x2sv483imglwcrqrx6m8visq9c46fi0j1y";
   };
 
@@ -36,4 +36,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = [ maintainers.goibhniu ];
   };
-}
+})
