@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, sbcl, libX11, libXpm, libICE, libSM, libXt, libXau, libXdmcp }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "fricas";
   version = "1.3.9";
 
   src = fetchurl {
-    url = "mirror://sourceforge/fricas/fricas/${version}/fricas-${version}-full.tar.bz2";
+    url = "mirror://sourceforge/fricas/fricas/${finalAttrs.version}/fricas-${finalAttrs.version}-full.tar.bz2";
     sha256 = "sha256-5RPcffM0GN0l6r8IgHJlwdxwwp2y4kIdJ5M3JnGZCzc=";
   };
 
@@ -21,4 +21,4 @@ stdenv.mkDerivation rec {
     platforms = lib.platforms.linux;
     maintainers = [ lib.maintainers.sprock ];
   };
-}
+})
