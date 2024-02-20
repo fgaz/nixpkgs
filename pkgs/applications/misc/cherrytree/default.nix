@@ -18,14 +18,14 @@
 , vte
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "cherrytree";
   version = "1.0.4";
 
   src = fetchFromGitHub {
     owner = "giuspen";
     repo = "cherrytree";
-    rev = "refs/tags/v${version}";
+    rev = "refs/tags/v${finalAttrs.version}";
     hash = "sha256-SMx3a0pzhNahRzmenZwPQPCBgqoBGo9n3RcNcimNGBE=";
   };
 
@@ -62,8 +62,8 @@ stdenv.mkDerivation rec {
       a Cherrytree document where you can easily find it.
     '';
     homepage = "https://www.giuspen.com/cherrytree";
-    changelog = "https://raw.githubusercontent.com/giuspen/cherrytree/${version}/changelog.txt";
+    changelog = "https://raw.githubusercontent.com/giuspen/cherrytree/${finalAttrs.version}/changelog.txt";
     license = licenses.gpl3Plus;
     maintainers = with maintainers; [ ];
   };
-}
+})
