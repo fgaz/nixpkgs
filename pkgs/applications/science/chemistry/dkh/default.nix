@@ -1,13 +1,13 @@
 { lib, stdenv, gfortran, fetchFromGitHub, cmake } :
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "dkh";
   version = "1.2";
 
   src = fetchFromGitHub  {
     owner = "psi4";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256= "1wb4qmb9f8rnrwnnw1gdhzx1fmhy628bxfrg56khxy3j5ljxkhck";
   };
 
@@ -29,4 +29,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = [ maintainers.sheepforce ];
   };
-}
+})
