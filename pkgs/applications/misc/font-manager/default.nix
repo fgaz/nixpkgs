@@ -22,14 +22,14 @@
 , withWebkit ? true, glib-networking, libsoup, webkitgtk
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "font-manager";
   version = "0.8.8";
 
   src = fetchFromGitHub {
     owner = "FontManager";
     repo = "font-manager";
-    rev = version;
+    rev = finalAttrs.version;
     hash = "sha256-M13Q9d2cKhc0tudkvw0zgqPAFTlmXwK+LltXeuDPWxo=";
   };
 
@@ -87,4 +87,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = [ maintainers.romildo ];
   };
-}
+})
