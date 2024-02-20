@@ -50,7 +50,7 @@ let
   };
 in
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "xyce";
   inherit version;
 
@@ -162,14 +162,14 @@ stdenv.mkDerivation rec {
       sed -i -E "s/\\includegraphics\[height=(0.[1-9]in)\]\{$img\}/\\mbox\{\\rule\{0mm\}\{\1\}\}/" ''${docFiles[2]}.tex
     done
 
-    install -d $doc/share/doc/${pname}-${version}/
+    install -d $doc/share/doc/${finalAttrs.pname}-${version}/
     for d in ''${docFiles[@]}; do
       # Use a public document class
       sed -i -E 's/\\documentclass\[11pt,report\]\{SANDreport\}/\\documentclass\[11pt,letterpaper\]\{scrreprt\}/' $d.tex
       sed -i -E 's/\\usepackage\[sand\]\{optional\}/\\usepackage\[report\]\{optional\}/' $d.tex
       pushd $(dirname $d)
       make
-      install -t $doc/share/doc/${pname}-${version}/ $(basename $d.pdf)
+      install -t $doc/share/doc/${finalAttrs.pname}-${version}/ $(basename $d.pdf)
       popd
     done
   '';
@@ -187,4 +187,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ fbeffa ];
     platforms = platforms.all;
   };
-}
+})
