@@ -17,14 +17,14 @@
 # only builds the package with the default set of plugins. If you'd like to
 # further customize dmenu-rs you can build it from the source.
 # See: https://github.com/Shizcow/dmenu-rs#plugins
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "dmenu-rs";
   version = "5.5.2";
 
   src = fetchFromGitHub {
     owner = "Shizcow";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "sha256-6yO2S6j/BD6x/bsuTFKAKvARl1n94KRiPwpmswmUOPU=";
   };
 
@@ -85,4 +85,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     broken = (stdenv.isLinux && stdenv.isAarch64);
   };
-}
+})
