@@ -18,14 +18,14 @@
 , webkitgtk
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "meteo";
   version = "0.9.9.2";
 
   src = fetchFromGitLab {
     owner = "bitseater";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "sha256-9+FNpLjiX0zdsUnbBnNSLt/Ma/cqtclP25tl+faPlpU=";
   };
 
@@ -66,4 +66,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     mainProgram = "com.gitlab.bitseater.meteo";
   };
-}
+})
