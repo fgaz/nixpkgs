@@ -16,14 +16,14 @@
 , wayland
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "wayvnc";
   version = "0.7.2";
 
   src = fetchFromGitHub {
     owner = "any1";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-6at0p1Xc25K5l6sq2uMWpaLVvZMNlWC0ybyZyrIw41I=";
   };
 
@@ -68,9 +68,9 @@ stdenv.mkDerivation rec {
       display attached.
     '';
     inherit (src.meta) homepage;
-    changelog = "https://github.com/any1/wayvnc/releases/tag/v${version}";
+    changelog = "https://github.com/any1/wayvnc/releases/tag/v${finalAttrs.version}";
     license = licenses.isc;
     platforms = platforms.linux;
     maintainers = with maintainers; [ nickcao ];
   };
-}
+})
