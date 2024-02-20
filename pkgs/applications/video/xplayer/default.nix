@@ -25,14 +25,14 @@
 , xapp
 , yelp-tools }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "xplayer";
   version = "2.4.4";
 
   src = fetchFromGitHub {
     owner = "linuxmint";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "sha256-o2vLNIELd1EYWG26t5gOpnamJrBJeg4P6fcLirkcmfM=";
   };
 
@@ -94,4 +94,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ tu-maurice bobby285271 ];
     platforms = platforms.linux;
   };
-}
+})
