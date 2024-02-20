@@ -1,13 +1,13 @@
 { lib, stdenv, zlib, bzip2, xz, fetchFromGitHub } :
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "1.1.0";
   pname = "svaba";
 
   src = fetchFromGitHub {
     owner = "walaj";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "1vv5mc9z5d22kgdy7mm27ya5aahnqgkcrskdr2405058ikk9g8kp";
     fetchSubmodules = true;
   };
@@ -46,4 +46,4 @@ stdenv.mkDerivation rec {
     '';
 
   };
-}
+})
