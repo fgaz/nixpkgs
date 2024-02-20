@@ -7,14 +7,14 @@
 , wrapQtAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "cubiomes-viewer";
   version = "3.4.2";
 
   src = fetchFromGitHub {
     owner = "Cubitect";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "sha256-bZXsCRT2qBq7N3h2C7WQDDoQsJGlz3rDT7OZ0fUGtiI=";
     fetchSubmodules = true;
   };
@@ -65,4 +65,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl3Plus;
     maintainers = with maintainers; [ hqurve ];
   };
-}
+})
