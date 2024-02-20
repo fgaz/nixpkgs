@@ -3,7 +3,7 @@
 , python3, fetchpatch, desktopToDarwinBundle
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "dsview";
 
   version = "1.3.1";
@@ -11,7 +11,7 @@ stdenv.mkDerivation rec {
   src = fetchFromGitHub {
       owner = "DreamSourceLab";
       repo = "DSView";
-      rev = "v${version}";
+      rev = "v${finalAttrs.version}";
       sha256 = "sha256-LwrlB+Nwq34YjwGmnbUWS3W//ZHr8Do2Wf2te+2oBeI=";
   };
 
@@ -35,4 +35,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = with maintainers; [ bachp carlossless ];
   };
-}
+})
