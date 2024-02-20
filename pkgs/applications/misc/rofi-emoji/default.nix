@@ -15,14 +15,14 @@
 , xsel
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "rofi-emoji";
   version = "3.2.0";
 
   src = fetchFromGitHub {
     owner = "Mange";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-P7AHLwqicKYj5I0Rl9B5mdD/v9iW9aihkNo7enonRF4=";
   };
 
@@ -64,4 +64,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ cole-h ];
     platforms = platforms.linux;
   };
-}
+})
