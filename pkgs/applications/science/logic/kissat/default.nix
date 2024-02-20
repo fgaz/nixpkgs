@@ -2,14 +2,14 @@
 , drat-trim, p7zip
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "kissat";
   version = "3.1.1";
 
   src = fetchFromGitHub {
     owner = "arminbiere";
     repo = "kissat";
-    rev = "rel-${version}";
+    rev = "rel-${finalAttrs.version}";
     sha256 = "sha256-zK20/vhbVihrxmd52DjByDUO99pBAr8SlJtQpX5fmwY=";
   };
 
@@ -50,4 +50,4 @@ stdenv.mkDerivation rec {
     license = licenses.mit;
     homepage = "https://fmv.jku.at/kissat";
   };
-}
+})
