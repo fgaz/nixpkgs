@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, fetchpatch, ncurses, libvorbis, SDL }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "mp3blaster";
   version = "3.2.6";
 
   src = fetchFromGitHub {
     owner = "stragulus";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "0pzwml3yhysn8vyffw9q9p9rs8gixqkmg4n715vm23ib6wxbliqs";
   };
 
@@ -39,4 +39,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ earldouglas ];
     platforms = with platforms; linux ++ darwin;
   };
-}
+})
