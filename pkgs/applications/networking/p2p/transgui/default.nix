@@ -2,7 +2,7 @@
 , fpc, lazarus, libX11, glib, gtk2, gdk-pixbuf, pango, atk, cairo, openssl
 , unstableGitUpdater }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "transgui";
   version = "unstable-2023-10-19";
 
@@ -39,11 +39,11 @@ stdenv.mkDerivation rec {
   LCL_PLATFORM = "gtk2";
 
   desktopItem = makeDesktopItem {
-    name = pname;
-    exec = "${pname} %U";
-    icon = pname;
+    name = finalAttrs.pname;
+    exec = "${finalAttrs.pname} %U";
+    icon = finalAttrs.pname;
     type = "Application";
-    comment = meta.description;
+    comment = finalAttrs.meta.description;
     desktopName = "Transmission Remote GUI";
     genericName = "BitTorrent Client";
     categories = [ "Network" "FileTransfer" "P2P" "GTK" ];
@@ -70,4 +70,4 @@ stdenv.mkDerivation rec {
     mainProgram = "transgui";
     platforms = [ "x86_64-linux" "x86_64-darwin" ];
   };
-}
+})
