@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, python3, installShellFiles }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "2.4.4";
   pname = "weather";
 
   src = fetchurl {
-    url = "http://fungi.yuggoth.org/weather/src/${pname}-${version}.tar.xz";
+    url = "http://fungi.yuggoth.org/weather/src/${finalAttrs.pname}-${finalAttrs.version}.tar.xz";
     sha256 = "sha256-uBwcntmLmIAztbIOHEDx0Y0/kcoJqAHqBOM2yBiRHrU=";
   };
 
@@ -45,4 +45,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.matthiasbeyer ];
     platforms = platforms.unix;
   };
-}
+})
