@@ -27,12 +27,12 @@ let
       esac
     '';
 
-in stdenv.mkDerivation rec {
+in stdenv.mkDerivation (finalAttrs: {
   pname = "dvd-slideshow";
   version = "0.8.4-2";
 
   src = fetchurl {
-    url = "mirror://sourceforge/dvd-slideshow/files/${pname}-${version}.tar.gz";
+    url = "mirror://sourceforge/dvd-slideshow/files/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     sha256 = "17c09aqvippiji2sd0pcxjg3nb1mnh9k5nia4gn5lhcvngjcp1q5";
   };
 
@@ -69,4 +69,4 @@ in stdenv.mkDerivation rec {
     platforms = lib.platforms.linux;
     maintainers = [ lib.maintainers.robbinch ];
   };
-}
+})
