@@ -1,11 +1,11 @@
 {lib, stdenv, fetchurl, wxGTK, perl, python3, zlib, libGLU, libGL, libX11, SDL2}:
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "golly";
   version = "4.2";
 
   src = fetchurl {
     hash = "sha256-VpEoqSPaZMP/AGIYZAbk5R/f8Crqvx8pKYN1O9Bl6V0=";
-    url="mirror://sourceforge/project/golly/golly/golly-${version}/golly-${version}-src.tar.gz";
+    url="mirror://sourceforge/project/golly/golly/golly-${finalAttrs.version}/golly-${finalAttrs.version}-src.tar.gz";
   };
 
   buildInputs = [
@@ -49,4 +49,4 @@ stdenv.mkDerivation rec {
     platforms = lib.platforms.linux;
     downloadPage = "https://sourceforge.net/projects/golly/files/golly";
   };
-}
+})
