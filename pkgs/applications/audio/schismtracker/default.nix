@@ -9,14 +9,14 @@
 , Cocoa
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "schismtracker";
   version = "20231029";
 
   src = fetchFromGitHub {
-    owner = pname;
-    repo = pname;
-    rev = version;
+    owner = finalAttrs.pname;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "sha256-ELCV5c79fFX1C4+S9bnDFOx3jAs/R2TERH1Q9fkBGnY=";
   };
 
@@ -44,4 +44,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = with maintainers; [ ftrvxmtrx ];
   };
-}
+})
