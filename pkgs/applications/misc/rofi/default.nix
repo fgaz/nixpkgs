@@ -23,14 +23,14 @@
 , buildPackages
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "rofi-unwrapped";
   version = "1.7.5";
 
   src = fetchFromGitHub {
     owner = "davatorium";
     repo = "rofi";
-    rev = version;
+    rev = finalAttrs.version;
     fetchSubmodules = true;
     sha256 = "sha256-3XFusKeckagEPfbLtt1xAVTEfn1Qebdi/Iq1AYbHCR4=";
   };
@@ -69,4 +69,4 @@ stdenv.mkDerivation rec {
     platforms = with platforms; linux;
     mainProgram = "rofi";
   };
-}
+})
