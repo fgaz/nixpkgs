@@ -22,7 +22,7 @@ let
     categories = [ "Office" ];
   };
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "jameica";
   inherit version;
 
@@ -64,7 +64,7 @@ stdenv.mkDerivation rec {
       --add-flags "-cp $out/share/java/jameica.jar:$out/share/jameica-${version}/* ${
         lib.optionalString stdenv.isDarwin ''-Xdock:name="Jameica" -XstartOnFirstThread''
       } de.willuhn.jameica.Main" \
-      --prefix LD_LIBRARY_PATH : ${lib.escapeShellArg (lib.makeLibraryPath buildInputs)} \
+      --prefix LD_LIBRARY_PATH : ${lib.escapeShellArg (lib.makeLibraryPath finalAttrs.buildInputs)} \
       --chdir "$out/share/java/" \
       "''${gappsWrapperArgs[@]}"
   '';
@@ -84,4 +84,4 @@ stdenv.mkDerivation rec {
     platforms = [ "x86_64-linux" "i686-linux" "x86_64-darwin" "aarch64-linux" ];
     maintainers = with maintainers; [ flokli r3dl3g ];
   };
-}
+})
