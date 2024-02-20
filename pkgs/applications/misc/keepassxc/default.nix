@@ -38,14 +38,14 @@
 , nixosTests
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "keepassxc";
   version = "2.7.6";
 
   src = fetchFromGitHub {
     owner = "keepassxreboot";
     repo = "keepassxc";
-    rev = version;
+    rev = finalAttrs.version;
     hash = "sha256-xgrkMz7BCBxjfxHsAz/CFLv1d175LnrAJIOZMM3GmU0=";
   };
 
@@ -145,4 +145,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ jonafato blankparticle ];
     platforms = platforms.linux ++ platforms.darwin;
   };
-}
+})
