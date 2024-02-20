@@ -2,14 +2,14 @@
 , readline, makeWrapper, git, libiconv, autoreconfHook, findXMLCatalogs, pkg-config
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "tig";
   version = "2.5.8";
 
   src = fetchFromGitHub {
     owner = "jonas";
-    repo = pname;
-    rev = "${pname}-${version}";
+    repo = finalAttrs.pname;
+    rev = "${finalAttrs.pname}-${finalAttrs.version}";
     sha256 = "sha256-VuuqR5fj0YvqIfVPH7N3rpAfIbcTwOx9W3H60saCToQ=";
   };
 
@@ -54,4 +54,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     mainProgram = "tig";
   };
-}
+})
