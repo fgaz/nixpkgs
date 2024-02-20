@@ -16,12 +16,12 @@
 , udev
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "fldigi";
   version = "4.2.03";
 
   src = fetchurl {
-    url = "mirror://sourceforge/${pname}/${pname}-${version}.tar.gz";
+    url = "mirror://sourceforge/${finalAttrs.pname}/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     hash = "sha256-tcJYpIeFgoC+jXIdvc1ix+/6v9oPccfxgQbL0wIIKaY=";
   };
 
@@ -51,4 +51,4 @@ stdenv.mkDerivation rec {
     # Builds fine on aarch64-darwin
     broken = stdenv.system == "x86_64-darwin";
   };
-}
+})
