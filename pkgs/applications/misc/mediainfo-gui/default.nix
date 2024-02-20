@@ -4,12 +4,12 @@
 let
   inherit (darwin.apple_sdk.frameworks) Cocoa;
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "mediainfo-gui";
   version = "23.11";
 
   src = fetchurl {
-    url = "https://mediaarea.net/download/source/mediainfo/${version}/mediainfo_${version}.tar.xz";
+    url = "https://mediaarea.net/download/source/mediainfo/${finalAttrs.version}/mediainfo_${finalAttrs.version}.tar.xz";
     hash = "sha256-gByxsNG//MEibeymISoe41Mi6LsSYwozu7B6kqioycM=";
   };
 
@@ -23,7 +23,7 @@ stdenv.mkDerivation rec {
   enableParallelBuilding = true;
 
   meta = with lib; {
-    description = "Supplies technical and tag information about a video or audio file (GUI version)";
+    description = "Supplies technical and tag information about a video or audio file (GUI finalAttrs.version)";
     longDescription = ''
       MediaInfo is a convenient unified display of the most relevant technical
       and tag data for video and audio files.
@@ -34,4 +34,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.devhell ];
     mainProgram = "mediainfo-gui";
   };
-}
+})
