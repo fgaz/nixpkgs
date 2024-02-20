@@ -5,15 +5,15 @@
 , gpm
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "jupp";
   version = "40";
-  srcName = "joe-3.1${pname}${version}";
+  srcName = "joe-3.1${finalAttrs.pname}${finalAttrs.version}";
 
   src = fetchurl {
     urls = [
-      "https://www.mirbsd.org/MirOS/dist/jupp/${srcName}.tgz"
-      "https://pub.allbsd.org/MirOS/dist/jupp/${srcName}.tgz"
+      "https://www.mirbsd.org/MirOS/dist/jupp/${finalAttrs.srcName}.tgz"
+      "https://pub.allbsd.org/MirOS/dist/jupp/${finalAttrs.srcName}.tgz"
     ];
     sha256 = "S+1DnN5/K+KU6W5J7z6RPqkPvl6RTbiIQD46J+gDWxo=";
   };
@@ -38,15 +38,15 @@ stdenv.mkDerivation rec {
     downloadPage = "https://www.mirbsd.org/MirOS/dist/jupp/";
     description = "A portable fork of Joe's editor";
     longDescription = ''
-      This is the portable version of JOE's Own Editor, which is currently
+      This is the portable finalAttrs.version of JOE's Own Editor, which is currently
       developed at sourceforge, licenced under the GNU General Public License,
-      Version 1, using autoconf/automake. This version has been enhanced by
+      Version 1, using autoconf/automake. This finalAttrs.version has been enhanced by
       several functions intended for programmers or other professional users,
-      and has a lot of bugs fixed. It is based upon an older version of joe
+      and has a lot of bugs fixed. It is based upon an older finalAttrs.version of joe
       because these behave better overall.
     '';
     license = licenses.gpl1Only;
     maintainers = with maintainers; [ AndersonTorres ];
     platforms = with platforms; unix;
   };
-}
+})
