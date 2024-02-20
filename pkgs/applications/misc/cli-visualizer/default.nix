@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, cmake, fftw, ncurses5, libpulseaudio, makeWrapper }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "1.8";
   pname = "cli-visualizer";
 
   src = fetchFromGitHub {
     owner = "dpayne";
     repo = "cli-visualizer";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "003mbbwsz43mg3d7llphpypqa9g7rs1p1cdbqi1mbc2bfrc1gcq2";
   };
 
@@ -34,4 +34,4 @@ stdenv.mkDerivation rec {
     platforms = with lib.platforms; linux;
     mainProgram = "vis";
   };
-}
+})
