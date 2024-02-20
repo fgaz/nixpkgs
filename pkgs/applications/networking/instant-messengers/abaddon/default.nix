@@ -18,14 +18,14 @@
 , sqlite
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "abaddon";
   version = "0.1.14";
 
   src = fetchFromGitHub {
     owner = "uowuo";
     repo = "abaddon";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-Amp6PkQWd4PnwUL29fzGETLuQXVEaARr+jIRlfrxTKc=";
     fetchSubmodules = true;
   };
@@ -65,11 +65,11 @@ stdenv.mkDerivation rec {
 
   desktopItems = [
     (makeDesktopItem {
-      name = pname;
-      exec = pname;
+      name = finalAttrs.pname;
+      exec = finalAttrs.pname;
       desktopName = "Abaddon";
-      genericName = meta.description;
-      startupWMClass = pname;
+      genericName = finalAttrs.meta.description;
+      startupWMClass = finalAttrs.pname;
       categories = [ "Network" "InstantMessaging" ];
       mimeTypes = [ "x-scheme-handler/discord" ];
     })
@@ -82,4 +82,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ genericnerdyusername ];
     platforms = lib.platforms.linux;
   };
-}
+})
