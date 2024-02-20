@@ -1,11 +1,11 @@
 { lib, stdenv, fetchbzr, cmake, pkg-config, gettext, libXpm, libGL, fltk, hicolor-icon-theme, glib, gnome2, which }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "jwm-settings-manager";
   version = "2019-01-27";
 
   src = fetchbzr {
-    url = "lp:${pname}";
+    url = "lp:${finalAttrs.pname}";
     rev = "292";
     sha256 = "1yqc1ac2pbkc88z7p1qags1jygdlr5y1rhc5mx6gapcf54bk0lmi";
   };
@@ -45,4 +45,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = [ maintainers.romildo ];
   };
-}
+})
