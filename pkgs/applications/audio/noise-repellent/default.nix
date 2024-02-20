@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, meson, ninja, pkg-config, cmake, libspecbleach, lv2 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "noise-repellent";
   version = "0.2.3";
 
   src = fetchFromGitHub {
     owner = "lucianodato";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-d8csYC3z3vXdmN/G6mAK+H8ia0vOCsoUpoA3W8/OADc=";
   };
 
@@ -28,4 +28,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.magnetophon ];
     platforms = platforms.unix;
   };
-}
+})
