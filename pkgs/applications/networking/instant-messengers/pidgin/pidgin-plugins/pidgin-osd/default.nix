@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, pidgin, xosd
 , autoreconfHook } :
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "pidgin-osd";
   version = "0.2.0";
   src = fetchFromGitHub {
     owner = "edanaher";
     repo = "pidgin-osd";
-    rev = "${pname}-${version}";
+    rev = "${finalAttrs.pname}-${finalAttrs.version}";
     sha256 = "07wa9anz99hnv6kffpcph3fbq8mjbyq17ij977ggwgw37zb9fzb5";
   };
 
@@ -29,4 +29,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl3;
     platforms = platforms.linux;
   };
-}
+})
