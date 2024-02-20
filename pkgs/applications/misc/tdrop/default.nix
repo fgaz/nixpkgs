@@ -2,14 +2,14 @@
 , xwininfo, xdotool, xprop, gawk, coreutils
 , gnugrep, procps }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "tdrop";
   version = "0.5.0";
 
   src = fetchFromGitHub {
     owner = "noctuid";
     repo = "tdrop";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-fHvGXaZL7MMvTnkap341B79PDDo2lOVPPcOH4AX/zXo=";
   };
 
@@ -40,4 +40,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ ];
   };
-}
+})
