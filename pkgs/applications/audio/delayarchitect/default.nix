@@ -1,6 +1,6 @@
 { lib, stdenv, fetchFromGitHub, libGL, libX11, libXext, libXrandr, libXinerama, libXcursor, freetype, alsa-lib, cmake, pkg-config, gcc-unwrapped }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "delayarchitect";
   version = "unstable-2022-01-16";
 
@@ -37,4 +37,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.all;
     license = licenses.gpl3Plus;
   };
-}
+})
