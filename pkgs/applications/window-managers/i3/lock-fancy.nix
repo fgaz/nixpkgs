@@ -10,7 +10,7 @@
 , fontconfig
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "i3lock-fancy";
   version = "unstable-2018-11-25";
 
@@ -52,4 +52,4 @@ stdenv.mkDerivation rec {
     license = licenses.mit;
     platforms = platforms.linux;
   };
-}
+})
