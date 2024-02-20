@@ -12,14 +12,14 @@ let
     categories = [ "HamRadio" "Qt" "Network" ];
   };
 
-in stdenv.mkDerivation rec {
+in stdenv.mkDerivation (finalAttrs: {
   pname = "svxlink";
   version = "19.09.2";
 
   src = fetchFromGitHub {
     owner = "sm0svx";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "sha256-riyFEuEmJ7+jYT3UoTTsMUwFdO3y5mjo4z0fcC3O8gY=";
   };
 
@@ -67,4 +67,4 @@ in stdenv.mkDerivation rec {
     maintainers = with maintainers; [ zaninime ];
     platforms = platforms.linux;
   };
-}
+})
