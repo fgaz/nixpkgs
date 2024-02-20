@@ -5,14 +5,14 @@
 , libax25
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "xastir";
   version = "2.2.0";
 
   src = fetchFromGitHub {
-    owner = pname;
-    repo = pname;
-    rev = "Release-${version}";
+    owner = finalAttrs.pname;
+    repo = finalAttrs.pname;
+    rev = "Release-${finalAttrs.version}";
     hash = "sha256-EQXSfH4b5vMiprFcMXCUDNl+R1cHSj9CyhZnUPAMoCw=";
   };
 
@@ -39,4 +39,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.ehmry ];
     platforms   = platforms.linux;
   };
-}
+})
