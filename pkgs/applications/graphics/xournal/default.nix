@@ -8,11 +8,11 @@ let
   isGdkQuartzBackend = (gtk2.gdktarget == "quartz");
 in
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "0.4.8.2016";
   pname = "xournal";
   src = fetchurl {
-    url = "mirror://sourceforge/xournal/xournal-${version}.tar.gz";
+    url = "mirror://sourceforge/xournal/xournal-${finalAttrs.version}.tar.gz";
     sha256 = "09i88v3wacmx7f96dmq0l3afpyv95lh6jrx16xzm0jd1szdrhn5j";
   };
 
@@ -28,11 +28,11 @@ stdenv.mkDerivation rec {
     + lib.optionalString (!isGdkQuartzBackend) " -lX11";
 
   desktopItem = makeDesktopItem {
-    name = "xournal-${version}";
+    name = "xournal-${finalAttrs.version}";
     exec = "xournal";
     icon = "xournal";
     desktopName = "Xournal";
-    comment = meta.description;
+    comment = finalAttrs.meta.description;
     categories = [ "Office" "Graphics" ];
     mimeTypes = [ "application/pdf" "application/x-xoj" ];
     genericName = "PDF Editor";
@@ -48,7 +48,7 @@ stdenv.mkDerivation rec {
          </mime-type>
       </mime-info>
       EOF
-      cp --recursive ${desktopItem}/share/applications $out/share
+      cp --recursive ${finalAttrs.desktopItem}/share/applications $out/share
       mkdir --parents $out/share/icons
       cp $out/share/xournal/pixmaps/xournal.png $out/share/icons
   '';
@@ -60,4 +60,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl2;
     platforms = with platforms; linux ++ darwin;
   };
-}
+})
