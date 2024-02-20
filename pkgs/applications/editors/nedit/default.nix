@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, motif, libXpm, libXt }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "nedit";
   version = "5.7";
 
   src = fetchurl {
-    url = "mirror://sourceforge/nedit/nedit-source/${pname}-${version}-src.tar.gz";
+    url = "mirror://sourceforge/nedit/nedit-source/${finalAttrs.pname}-${finalAttrs.version}-src.tar.gz";
     sha256 = "0ym1zhjx9976rf2z5nr7dj4mjkxcicimhs686snjhdcpzxwsrndd";
   };
 
@@ -29,4 +29,4 @@ stdenv.mkDerivation rec {
     platforms = with platforms; linux ++ darwin;
     license = licenses.gpl2;
   };
-}
+})
