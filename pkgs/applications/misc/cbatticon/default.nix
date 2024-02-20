@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, pkg-config, gettext, glib, gtk3, libnotify, wrapGAppsHook }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "cbatticon";
   version = "1.6.13";
 
   src = fetchFromGitHub {
     owner = "valr";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "sha256-VQjJujF9lnVvQxV+0YqodLgnI9F90JKDAGBu5nM/Q/c=";
   };
 
@@ -28,4 +28,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = [ maintainers.domenkozar ];
   };
-}
+})
