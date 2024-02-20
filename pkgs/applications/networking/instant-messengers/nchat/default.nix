@@ -3,14 +3,14 @@
 , AppKit, Cocoa, Foundation
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "nchat";
   version = "3.67";
 
   src = fetchFromGitHub {
     owner = "d99kris";
     repo = "nchat";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-PhvZejtSoDptzoMP5uIe6T0Ws/bQQXVuYH9uoZo3JsI=";
   };
 
@@ -41,4 +41,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ sikmir ];
     platforms = platforms.unix;
   };
-}
+})
