@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, cmake, hdf5, boost }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "minia";
   version = "3.2.1";
 
   src = fetchFromGitHub {
     owner = "GATB";
     repo = "minia";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "0bmfrywixaaql898l0ixsfkhxjf2hb08ssnqzlzacfizxdp46siq";
     fetchSubmodules = true;
   };
@@ -30,4 +30,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ jbedo ];
     platforms = [ "x86_64-linux" ];
   };
-}
+})
