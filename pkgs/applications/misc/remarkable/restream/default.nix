@@ -8,14 +8,14 @@
 , makeWrapper
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "restream";
   version = "1.2.0";
 
   src = fetchFromGitHub {
     owner = "rien";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "0vyj0kng8c9inv2rbw1qdr43ic15s5x8fvk9mbw0vpc6g723x99g";
   };
 
@@ -25,8 +25,8 @@ stdenv.mkDerivation rec {
   installPhase = ''
     runHook preInstall
 
-    install -D ${src}/restream.arm.static $out/libexec/restream.arm.static
-    install -D ${src}/reStream.sh $out/bin/restream
+    install -D ${finalAttrs.src}/restream.arm.static $out/libexec/restream.arm.static
+    install -D ${finalAttrs.src}/reStream.sh $out/bin/restream
 
     runHook postInstall
   '';
@@ -55,4 +55,4 @@ stdenv.mkDerivation rec {
     license = licenses.mit;
     maintainers = [ maintainers.cpcloud ];
   };
-}
+})
