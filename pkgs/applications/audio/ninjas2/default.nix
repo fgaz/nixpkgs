@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, libjack2, libGL, pkg-config, xorg, mesa, libsndfile, libsamplerate }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "ninjas2";
   version = "0.2.0";
 
   src = fetchFromGitHub {
     owner = "clearly-broken-software";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "1kwp6pmnfar2ip9693gprfbcfscklgri1k1ycimxzlqr61nkd2k9";
     fetchSubmodules = true;
   };
@@ -36,4 +36,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.magnetophon ];
     platforms = platforms.linux;
   };
-}
+})
