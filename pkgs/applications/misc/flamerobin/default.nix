@@ -8,14 +8,14 @@
 , firebird
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "0.9.3.12";
   pname = "flamerobin";
 
   src = fetchFromGitHub {
     owner = "mariuz";
     repo = "flamerobin";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-uWx3riRc79VKh7qniWFjxxc7v6l6cW0i31HxoN1BSdA=";
   };
 
@@ -44,4 +44,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ uralbash ];
     platforms = platforms.unix;
   };
-}
+})
