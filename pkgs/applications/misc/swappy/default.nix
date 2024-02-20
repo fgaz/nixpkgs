@@ -15,14 +15,14 @@
 , hicolor-icon-theme
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "swappy";
   version = "1.5.1";
 
   src = fetchFromGitHub {
     owner = "jtheoof";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     hash = "sha256-/XPvy98Il4i8cDl9vH6f0/AZmiSqseSXnen7HfMqCDo=";
   };
 
@@ -47,4 +47,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.matthiasbeyer ];
     platforms = platforms.linux;
   };
-}
+})
