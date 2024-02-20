@@ -5,12 +5,12 @@
 , libjack2
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "sonic-lineup";
   version = "1.1";
 
   src = fetchurl {
-    url = "https://code.soundsoftware.ac.uk/attachments/download/2765/${pname}-${version}.tar.gz";
+    url = "https://code.soundsoftware.ac.uk/attachments/download/2765/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     sha256 = "0k45k9fawcm4s5yy05x00pgww7j8m7k2cxcc7g0fn9vqy7vcbq9h";
   };
 
@@ -47,4 +47,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.vandenoever ];
     platforms = platforms.linux;
   };
-}
+})
