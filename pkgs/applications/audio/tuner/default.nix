@@ -19,14 +19,14 @@
 , gst_all_1
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "tuner";
   version = "1.5.1";
 
   src = fetchFromGitHub {
     owner = "louis77";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "sha256-tG1AMEqHcp4jHNgWDy9fS2FtlxFTlpMD5MVbepIY+GY=";
   };
 
@@ -65,4 +65,4 @@ stdenv.mkDerivation rec {
     mainProgram = "com.github.louis77.tuner";
     maintainers = [ maintainers.abbe ];
   };
-}
+})
