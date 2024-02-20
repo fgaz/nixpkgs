@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, zlib }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "minimap2";
   version = "2.26";
 
   src = fetchFromGitHub {
-    repo = pname;
+    repo = finalAttrs.pname;
     owner = "lh3";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-vK8Z/j6Ndu1vMFYPPzViP4evtIhyVVFwsfTqNCYnXpQ=";
   };
 
@@ -29,4 +29,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.all;
     maintainers = [ maintainers.arcadio ];
   };
-}
+})
