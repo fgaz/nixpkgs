@@ -20,15 +20,15 @@
 , gcr
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "pan";
   version = "0.155";
 
   src = fetchFromGitLab {
     domain = "gitlab.gnome.org";
     owner = "GNOME";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     hash = "sha256-DsoTqZLcZOc3HlpCC8rmu/rcFeHkb9IWd4PSLwxKqJI=";
   };
 
@@ -59,4 +59,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     license = with licenses; [ gpl2Only fdl11Only ];
   };
-}
+})
