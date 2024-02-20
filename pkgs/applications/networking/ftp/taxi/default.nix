@@ -17,14 +17,14 @@
 , wrapGAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "taxi";
   version = "2.0.2";
 
   src = fetchFromGitHub {
     owner = "Alecaddd";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "1a4a14b2d5vqbk56drzbbldp0nngfqhwycpyv8d3svi2nchkvpqa";
   };
 
@@ -62,4 +62,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     mainProgram = "com.github.alecaddd.taxi";
   };
-}
+})
