@@ -20,12 +20,12 @@
 # The error is
 # /nix/store/*-lilv-0.24.10/include/lilv-0/lilv/lilvmm.hpp:272:53: error: 'nullptr' was not declared in this scope
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "ecasound";
   version = "2.9.3";
 
   src = fetchurl {
-    url = "https://ecasound.seul.org/download/ecasound-${version}.tar.gz";
+    url = "https://ecasound.seul.org/download/ecasound-${finalAttrs.version}.tar.gz";
     sha256 = "1m7njfjdb7sqf0lhgc4swihgdr4snkg8v02wcly08wb5ar2fr2s6";
   };
 
@@ -74,4 +74,4 @@ stdenv.mkDerivation rec {
     license = with lib.licenses;  [ gpl2 lgpl21 ];
     homepage = "http://nosignal.fi/ecasound/";
   };
-}
+})
