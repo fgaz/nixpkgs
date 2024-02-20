@@ -20,12 +20,12 @@
 , wrapGAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "abiword";
   version = "3.0.5";
 
   src = fetchurl {
-    url = "https://www.abisource.com/downloads/abiword/${version}/source/${pname}-${version}.tar.gz";
+    url = "https://www.abisource.com/downloads/abiword/${finalAttrs.version}/source/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     hash = "sha256-ElckfplwUI1tFFbT4zDNGQnEtCsl4PChvDJSbW86IbQ=";
   };
 
@@ -69,4 +69,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ pSub ylwghst sna ];
   };
-}
+})
