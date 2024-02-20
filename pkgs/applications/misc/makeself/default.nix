@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, which, zstd, pbzip2, installShellFiles }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "2.4.5";
   pname = "makeself";
 
   src = fetchFromGitHub {
     owner = "megastep";
     repo = "makeself";
-    rev = "release-${version}";
+    rev = "release-${finalAttrs.version}";
     fetchSubmodules = true;
     sha256 = "sha256-15lUtErGsbXF2Gn0f0rvA18mMuVMmkKrGO2poeYZU9g=";
   };
@@ -27,12 +27,12 @@ stdenv.mkDerivation rec {
     runHook preInstall
     installManPage makeself.1
     install -Dm555 makeself.sh $out/bin/makeself
-    install -Dm444 -t $out/share/${pname}/ makeself.lsm README.md makeself-header.sh
+    install -Dm444 -t $out/share/${finalAttrs.pname}/ makeself.lsm README.md makeself-header.sh
     runHook postInstall
   '';
 
   fixupPhase = ''
-    sed -e "s|^HEADER=.*|HEADER=$out/share/${pname}-${version}/makeself-header.sh|" -i $out/bin/makeself
+    sed -e "s|^HEADER=.*|HEADER=$out/share/${finalAttrs.pname}-${finalAttrs.version}/makeself-header.sh|" -i $out/bin/makeself
   '';
 
   meta = with lib; {
@@ -42,4 +42,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.wmertens ];
     platforms = platforms.all;
   };
-}
+})
