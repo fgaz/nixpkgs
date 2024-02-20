@@ -5,14 +5,14 @@ let
   path = lib.makeBinPath [ bc dbus gawk gnused libnotify pulseaudio ];
   pname = "pulseaudio-ctl";
 
-in stdenv.mkDerivation rec {
-  name = "${pname}-${version}";
+in stdenv.mkDerivation (finalAttrs: {
+  name = "${pname}-${finalAttrs.version}";
   version = "1.70";
 
   src = fetchFromGitHub {
     owner = "graysky2";
     repo = pname;
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-ZB1jrr31PF7+vNB+Xo5CATJmYbuDAPwewpDxCVnAowY=";
   };
 
@@ -38,4 +38,4 @@ in stdenv.mkDerivation rec {
     maintainers = with maintainers; [ peterhoeg ];
     platforms = platforms.linux;
   };
-}
+})
