@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, cmake, ace
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "yarp";
   version = "2.3.70.2";
   src = fetchFromGitHub {
     owner = "robotology";
     repo = "yarp";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "0mphh899niy30xbjjwi9xpsliq8mladfldbbbjfngdrqfhiray1a";
   };
 
@@ -32,5 +32,5 @@ stdenv.mkDerivation rec {
     platforms = lib.platforms.linux;
     maintainers = [ lib.maintainers.nico202 ];
   };
-}
+})
 
