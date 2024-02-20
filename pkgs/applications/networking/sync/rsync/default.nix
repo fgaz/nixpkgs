@@ -18,13 +18,13 @@
 , nixosTests
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "rsync";
   version = "3.2.7";
 
   src = fetchurl {
     # signed with key 0048 C8B0 26D4 C96F 0E58  9C2F 6C85 9FB1 4B96 A8C5
-    url = "mirror://samba/rsync/src/rsync-${version}.tar.gz";
+    url = "mirror://samba/rsync/src/rsync-${finalAttrs.version}.tar.gz";
     sha256 = "sha256-Tn2dP27RCHjFjF+3JKZ9rPS2qsc0CxPkiPstxBNG8rs=";
   };
 
@@ -52,7 +52,7 @@ stdenv.mkDerivation rec {
     # links them even.
     "--with-included-zlib=no"
   ] ++ lib.optionals (stdenv.hostPlatform.isMusl && stdenv.hostPlatform.isx86_64) [
-    # fix `multiversioning needs 'ifunc' which is not supported on this target` error
+    # fix `multifinalAttrs.versioning needs 'ifunc' which is not supported on this target` error
     "--disable-roll-simd"
   ];
 
@@ -68,4 +68,4 @@ stdenv.mkDerivation rec {
     maintainers = with lib.maintainers; [ ehmry kampfschlaefer ivan ];
     platforms = platforms.unix;
   };
-}
+})
