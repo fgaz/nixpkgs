@@ -22,12 +22,12 @@
 , wrapGAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "balsa";
   version = "2.6.4";
 
   src = fetchurl {
-    url = "https://pawsa.fedorapeople.org/balsa/${pname}-${version}.tar.xz";
+    url = "https://pawsa.fedorapeople.org/balsa/${finalAttrs.pname}-${finalAttrs.version}.tar.xz";
     sha256 = "1hcgmjka2x2igdrmvzlfs12mv892kv4vzv5iy90kvcqxa625kymy";
   };
 
@@ -76,4 +76,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = [ maintainers.romildo ];
   };
-}
+})
