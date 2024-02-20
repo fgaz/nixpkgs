@@ -19,14 +19,14 @@
 , wireplumber
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "pwvucontrol";
   version = "0.2";
 
   src = fetchFromGitHub {
     owner = "saivert";
     repo = "pwvucontrol";
-    rev = version;
+    rev = finalAttrs.version;
     hash = "sha256-jBvMLewBZi4LyX//YUyJQjqPvxnKqlpuLZAm9zpDMrA=";
   };
 
@@ -69,4 +69,4 @@ stdenv.mkDerivation rec {
     mainProgram = "pwvucontrol";
     platforms = platforms.linux;
   };
-}
+})
