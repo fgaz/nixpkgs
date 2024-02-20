@@ -11,14 +11,14 @@
 , Cocoa
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "ft2-clone";
   version = "1.75";
 
   src = fetchFromGitHub {
     owner = "8bitbubsy";
     repo = "ft2-clone";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-K+RUsRr19fc0E9VhZWIawxkGXCTwqXl3a13pRiRxDPg=";
   };
 
@@ -46,4 +46,4 @@ stdenv.mkDerivation rec {
     # > This code is NOT big-endian compatible
     platforms = platforms.littleEndian;
   };
-}
+})
