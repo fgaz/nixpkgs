@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, pkg-config, ncurses, buildPackages }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "mg";
   version = "7.3";
 
   src = fetchFromGitHub {
     owner = "ibara";
     repo = "mg";
-    rev = "mg-${version}";
+    rev = "mg-${finalAttrs.version}";
     sha256 = "sha256-88FrXN7h5uRLY8YMKSzUjBF4n18DEiiiDyoYr+7qXdQ=";
   };
 
@@ -28,10 +28,10 @@ stdenv.mkDerivation rec {
   buildInputs = [ ncurses ];
 
   meta = with lib; {
-    description = "Micro GNU/emacs, a portable version of the mg maintained by the OpenBSD team";
+    description = "Micro GNU/emacs, a portable finalAttrs.version of the mg maintained by the OpenBSD team";
     homepage = "https://man.openbsd.org/OpenBSD-current/man1/mg.1";
     license = licenses.publicDomain;
     mainProgram = "mg";
     platforms = platforms.all;
   };
-}
+})
