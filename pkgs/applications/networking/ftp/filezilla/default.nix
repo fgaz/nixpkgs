@@ -20,12 +20,12 @@
 , Security
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "filezilla";
   version = "3.66.4";
 
   src = fetchurl {
-    url = "https://download.filezilla-project.org/client/FileZilla_${version}_src.tar.xz";
+    url = "https://download.filezilla-project.org/client/FileZilla_${finalAttrs.version}_src.tar.xz";
     hash = "sha256-pA8E4C76rntQ0VFe4cNsSw5EWBhWbEUORAv9bHDpsgM=";
   };
 
@@ -71,4 +71,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ pSub ];
   };
-}
+})
