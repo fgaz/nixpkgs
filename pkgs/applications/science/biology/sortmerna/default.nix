@@ -1,13 +1,13 @@
 { lib, stdenv, cmake, rocksdb, rapidjson, pkg-config, fetchFromGitHub, zlib }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "sortmerna";
   version = "4.2.0";
 
   src = fetchFromGitHub {
-    repo = pname;
+    repo = finalAttrs.pname;
     owner = "biocore";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "0r91viylzr069jm7kpcgb45kagvf8sqcj5zc1af4arl9sgfs1f3j";
   };
 
@@ -42,4 +42,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ luispedro ];
     broken = stdenv.isDarwin;
   };
-}
+})
