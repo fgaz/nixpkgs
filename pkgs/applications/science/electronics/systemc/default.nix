@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, autoreconfHook }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "systemc";
   version = "2.3.4";
 
   src = fetchFromGitHub {
     owner = "accellera-official";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "0sj8wlkp68cjhmkd9c9lvm3lk3sckczpz7w9vby64inc1f9fnf0b";
   };
 
@@ -23,4 +23,4 @@ stdenv.mkDerivation rec {
     platforms   = platforms.linux;
     maintainers = with maintainers; [ victormignot amiloradovsky ];
   };
-}
+})
