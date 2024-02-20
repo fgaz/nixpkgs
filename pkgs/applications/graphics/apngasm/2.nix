@@ -1,6 +1,6 @@
 { lib, stdenv, fetchzip, libpng, zlib, zopfli }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "apngasm";
   version = "2.91";
 
@@ -32,4 +32,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
   };
 
-}
+})
