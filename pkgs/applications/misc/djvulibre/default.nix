@@ -7,12 +7,12 @@
 , bash
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "djvulibre";
   version = "3.5.28";
 
   src = fetchurl {
-    url = "mirror://sourceforge/djvu/${pname}-${version}.tar.gz";
+    url = "mirror://sourceforge/djvu/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     sha256 = "1p1fiygq9ny8aimwc4vxwjc6k9ykgdsq1sq06slfbzalfvm0kl7w";
   };
 
@@ -47,4 +47,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ Anton-Latukha ];
     platforms = platforms.all;
   };
-}
+})
