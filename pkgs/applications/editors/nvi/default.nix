@@ -1,16 +1,16 @@
 { lib, stdenv, fetchurl, fetchpatch, ncurses, db }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "nvi";
   version = "1.81.6";
 
   src = fetchurl {
-    url = "https://deb.debian.org/debian/pool/main/n/nvi/nvi_${version}.orig.tar.gz";
+    url = "https://deb.debian.org/debian/pool/main/n/nvi/nvi_${finalAttrs.version}.orig.tar.gz";
     sha256 = "13cp9iz017bk6ryi05jn7drbv7a5dyr201zqd3r4r8srj644ihwb";
   };
 
   patches = [
-    # Fix runtime error with modern versions of db.
+    # Fix runtime error with modern finalAttrs.versions of db.
     (fetchpatch {
       url = "https://src.fedoraproject.org/rpms/nvi/raw/f33/f/nvi-03-db4.patch";
       sha256 = "1vpnly3dcldwl8gwl0jrh5yh0vhgbdhsh6xn7lnwhrawlvk6d55y";
@@ -37,4 +37,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     broken = stdenv.isDarwin; # never built on Hydra https://hydra.nixos.org/job/nixpkgs/trunk/nvi.x86_64-darwin
   };
-}
+})
