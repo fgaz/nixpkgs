@@ -20,12 +20,12 @@
 , buildPackages
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "ipe";
   version = "7.2.27";
 
   src = fetchurl {
-    url = "https://github.com/otfried/ipe/releases/download/v${version}/ipe-${version}-src.tar.gz";
+    url = "https://github.com/otfried/ipe/releases/download/v${finalAttrs.version}/ipe-${finalAttrs.version}-src.tar.gz";
     sha256 = "sha256-wx/bZy8kB7dpZsz58BeRGdS1BzbrIoafgEmLyFg7wZU=";
   };
 
@@ -60,7 +60,7 @@ stdenv.mkDerivation rec {
 
   desktopItems = [
     (makeDesktopItem {
-      name = pname;
+      name = finalAttrs.pname;
       desktopName = "Ipe";
       genericName = "Drawing editor";
       comment = "A drawing editor for creating figures in PDF format";
@@ -75,7 +75,7 @@ stdenv.mkDerivation rec {
 
   postInstall = ''
     mkdir -p $out/share/icons/hicolor/128x128/apps
-    ln -s $out/share/ipe/${version}/icons/icon_128x128.png $out/share/icons/hicolor/128x128/apps/ipe.png
+    ln -s $out/share/ipe/${finalAttrs.version}/icons/icon_128x128.png $out/share/icons/hicolor/128x128/apps/ipe.png
   '';
 
   meta = with lib; {
@@ -90,4 +90,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ ttuegel ];
     platforms = platforms.linux;
   };
-}
+})
