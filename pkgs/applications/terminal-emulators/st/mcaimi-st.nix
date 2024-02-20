@@ -9,7 +9,7 @@
 , pkg-config
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "mcaimi-st";
   version = "0.pre+unstable=2021-08-30";
 
@@ -46,4 +46,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ AndersonTorres ];
     platforms = platforms.linux;
   };
-}
+})
