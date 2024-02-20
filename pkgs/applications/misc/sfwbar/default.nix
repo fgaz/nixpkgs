@@ -14,14 +14,14 @@
 , makeWrapper
 ,
 }:
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "sfwbar";
   version = "1.0_beta13";
 
   src = fetchFromGitHub {
     owner = "LBCrion";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     hash = "sha256-7oiuTEqdXDReKdakJX6+HRaSi1XovM+MkHFkaFZtq64=";
   };
 
@@ -54,4 +54,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ NotAShelf ];
     license = licenses.gpl3Only;
   };
-}
+})
