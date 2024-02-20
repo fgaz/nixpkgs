@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, gsl }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "est-sfs";
   version = "2.03";
 
   src = fetchurl {
-    url = "mirror://sourceforge/est-usfs/${pname}-release-${version}.tar.gz";
+    url = "mirror://sourceforge/est-usfs/${finalAttrs.pname}-release-${finalAttrs.version}.tar.gz";
     sha256 = "1hvamrgagz0xi89w8qafyd9mjrdpyika8zm22drddnjkp4sdj65n";
   };
 
@@ -17,9 +17,9 @@ stdenv.mkDerivation rec {
 
   installPhase = ''
     mkdir -p $out/bin
-    mkdir -p $out/share/doc/${pname}
+    mkdir -p $out/share/doc/${finalAttrs.pname}
     cp est-sfs $out/bin
-    cp est-sfs-documentation.pdf $out/share/doc/${pname}
+    cp est-sfs-documentation.pdf $out/share/doc/${finalAttrs.pname}
   '';
 
   meta = with lib; {
@@ -29,4 +29,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.bzizou ];
     platforms = platforms.all;
   };
-}
+})
