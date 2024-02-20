@@ -1,11 +1,11 @@
 { ctags, fetchurl, lib, libressl, ncurses, pkg-config, stdenv }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "catgirl";
   version = "2.2";
 
   src = fetchurl {
-    url = "https://git.causal.agency/catgirl/snapshot/${pname}-${version}.tar.gz";
+    url = "https://git.causal.agency/catgirl/snapshot/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     sha256 = "sha256-+20EoJkwOvBdJ4xwXBVC5+5hZDwDDWoLaN7FNxCAo8c=";
   };
 
@@ -33,4 +33,4 @@ stdenv.mkDerivation rec {
     mainProgram = "catgirl";
     maintainers = with maintainers; [ xfnw ];
   };
-}
+})
