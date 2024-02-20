@@ -6,11 +6,11 @@
 , ocamlPackages
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "cubicle";
   version = "1.2.0";
   src = fetchurl {
-    url = "https://github.com/cubicle-model-checker/cubicle/archive/refs/tags/${version}.tar.gz";
+    url = "https://github.com/cubicle-model-checker/cubicle/archive/refs/tags/${finalAttrs.version}.tar.gz";
     hash = "sha256-/EtbXpyXqRm0jGcMfGLAEwdr92061edjFys1V7/w6/Y=";
   };
 
@@ -42,4 +42,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = with maintainers; [ dwarfmaster ];
   };
-}
+})
