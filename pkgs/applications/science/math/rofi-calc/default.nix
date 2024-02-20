@@ -10,14 +10,14 @@
 , wrapGAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "rofi-calc";
   version = "2.2.0";
 
   src = fetchFromGitHub {
     owner = "svenstaro";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-SGDORHX+lk6PS5/sPAmKZLfZD99/A7XvDPDnuAygDAM=";
   };
 
@@ -50,5 +50,5 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ luc65r albakham ];
     platforms = with platforms; linux;
   };
-}
+})
 
