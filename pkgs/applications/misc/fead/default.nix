@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromSourcehut, python3, help2man }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "fead";
   version = "0.1.3";
 
   src = fetchFromSourcehut {
     owner = "~cnx";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "sha256-cW0GxyvC9url2QAAWD0M2pR4gBiPA3eeAaw77TwMV/0=";
   };
 
@@ -31,7 +31,7 @@ stdenv.mkDerivation rec {
     description = "Advert generator from web feeds";
     homepage = "https://git.sr.ht/~cnx/fead";
     license = licenses.agpl3Plus;
-    changelog = "https://git.sr.ht/~cnx/fead/refs/${version}";
+    changelog = "https://git.sr.ht/~cnx/fead/refs/${finalAttrs.version}";
     maintainers = with maintainers; [ McSinyx ];
   };
-}
+})
