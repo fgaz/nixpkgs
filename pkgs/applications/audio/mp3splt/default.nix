@@ -1,12 +1,12 @@
 { lib, stdenv, fetchurl, pkg-config, libmp3splt }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "mp3splt";
   version = "2.6.2";
 
 
   src = fetchurl {
-    url = "mirror://sourceforge/${pname}/${pname}-${version}.tar.gz";
+    url = "mirror://sourceforge/${finalAttrs.pname}/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     sha256 = "1aiv20gypb6r84qabz8gblk8vi42cg3x333vk2pi3fyqvl82phry";
   };
 
@@ -23,4 +23,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.bosu ];
     platforms = platforms.unix;
   };
-}
+})
