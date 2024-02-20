@@ -9,14 +9,14 @@
 , mesa
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "brlcad";
   version = "7.34.2";
 
   src = fetchFromGitHub {
     owner = "BRL-CAD";
-    repo = pname;
-    rev = "refs/tags/rel-${lib.replaceStrings [ "." ] [ "-" ] version}";
+    repo = finalAttrs.pname;
+    rev = "refs/tags/rel-${lib.replaceStrings [ "." ] [ "-" ] finalAttrs.version}";
     hash = "sha256-oafu255xElEIk8p4yvNyR2maykUfxQui/L5MkicA+JA=";
   };
 
@@ -43,4 +43,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ GaetanLepage ];
     platforms = platforms.linux;
   };
-}
+})
