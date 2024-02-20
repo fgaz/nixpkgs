@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, zlib, autoreconfHook, pkg-config, perl }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "vcftools";
   version = "0.1.16";
 
   src = fetchFromGitHub {
-    repo = pname;
+    repo = finalAttrs.pname;
     owner = "vcftools";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "0msb09d2cnm8rlpg8bsc1lhjddvp3kf3i9dsj1qs4qgsdlzhxkyx";
   };
 
@@ -21,4 +21,4 @@ stdenv.mkDerivation rec {
     homepage = "https://vcftools.github.io/index.html";
     maintainers = [ maintainers.rybern ];
   };
-}
+})
