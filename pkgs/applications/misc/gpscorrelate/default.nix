@@ -1,14 +1,14 @@
 { lib, stdenv, fetchFromGitHub, fetchpatch, pkg-config, exiv2, libxml2, gtk3
 , libxslt, docbook_xsl, docbook_xml_dtd_42, desktop-file-utils, wrapGAppsHook }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gpscorrelate";
   version = "2.0";
 
   src = fetchFromGitHub {
     owner = "dfandrich";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "1wkpb0nqnm0ik46hp2sibf96h2gxi6n951zm8c72scgmh4ciq4fl";
   };
 
@@ -70,4 +70,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = with maintainers; [ sikmir ];
   };
-}
+})
