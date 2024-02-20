@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, jdk, jre, ant }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "freemind";
   version = "1.0.1";
 
   src = fetchurl {
-    url = "mirror://sourceforge/freemind/freemind-src-${version}.tar.gz";
+    url = "mirror://sourceforge/freemind/freemind-src-${finalAttrs.version}.tar.gz";
     sha256 = "06c6pm7hpwh9hbmyah3lj2wp1g957x8znfwc5cwygsi7dc98b0h1";
   };
 
@@ -39,4 +39,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl2Plus;
     platforms = platforms.linux;
   };
-}
+})
