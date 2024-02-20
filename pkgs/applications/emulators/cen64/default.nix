@@ -1,6 +1,6 @@
 { lib, cmake, fetchFromGitHub, libGL, libiconv, libX11, openal, stdenv }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "cen64";
   version = "unstable-2022-10-02";
 
@@ -16,7 +16,7 @@ stdenv.mkDerivation rec {
 
   installPhase = ''
     runHook preInstall
-    install -D {,$out/bin/}${pname}
+    install -D {,$out/bin/}${finalAttrs.pname}
     runHook postInstall
   '';
 
@@ -27,4 +27,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers._414owen ];
     platforms = [ "x86_64-linux" ];
   };
-}
+})
