@@ -11,14 +11,14 @@
 , mpfr
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "csxcad";
   version = "0.6.3";
 
   src = fetchFromGitHub {
     owner = "thliebig";
     repo = "CSXCAD";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-SSV5ulx3rCJg99I/oOQbqe+gOSs+BfcCo6UkWHVhnSs=";
   };
 
@@ -44,4 +44,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ matthuszagh ];
     platforms = platforms.linux;
   };
-}
+})
