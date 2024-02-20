@@ -1,14 +1,14 @@
 { lib, stdenv, fetchFromGitHub, readline, ncurses
 , autoreconfHook, pkg-config, gettext }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "hstr";
   version = "3.1";
 
   src = fetchFromGitHub {
     owner  = "dvorka";
     repo   = "hstr";
-    rev    = version;
+    rev    = finalAttrs.version;
     hash   = "sha256-OuLy1aiEwUJDGy3+UXYF1Vx1nNXic46WIZEM1xrIPfA=";
   };
 
@@ -25,4 +25,4 @@ stdenv.mkDerivation rec {
     platforms = with lib.platforms; linux ++ darwin;
   };
 
-}
+})
