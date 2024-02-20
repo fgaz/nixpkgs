@@ -3,14 +3,14 @@
 , libobjc, IOKit, Security
 } :
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "soapyuhd";
   version = "0.4.1";
 
   src = fetchFromGitHub {
     owner = "pothosware";
     repo = "SoapyUHD";
-    rev = "soapy-uhd-${version}";
+    rev = "soapy-uhd-${finalAttrs.version}";
     sha256 = "14rk9ap9ayks2ma6mygca08yfds9bgfmip8cvwl87l06hwhnlwhj";
   };
 
@@ -31,4 +31,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ markuskowa ];
     platforms = platforms.unix;
   };
-}
+})
