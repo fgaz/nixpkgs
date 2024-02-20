@@ -11,15 +11,15 @@ let
     pygobject3 pycairo pypandoc chardet
   ]);
 
-in stdenv.mkDerivation rec {
+in stdenv.mkDerivation (finalAttrs: {
   pname = "apostrophe";
   version = "2.6.3";
 
   src = fetchFromGitLab {
     owner  = "World";
-    repo   = pname;
+    repo   = finalAttrs.pname;
     domain = "gitlab.gnome.org";
-    rev    = "v${version}";
+    rev    = "v${finalAttrs.version}";
     sha256 = "sha256-RBrrG1TO810LidIelYGNaK7PjDq84D0cA8VcMojAW3M=";
   };
 
@@ -56,4 +56,4 @@ in stdenv.mkDerivation rec {
     maintainers = [ maintainers.sternenseemann ];
     mainProgram = "apostrophe";
   };
-}
+})
