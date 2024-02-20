@@ -5,14 +5,14 @@ let
   python' = python3.withPackages (ps: with ps; [ dbus-python keyring packaging ]);
 
   apps = lib.makeBinPath [ openssh python' cron rsync sshfs-fuse encfs ];
-in stdenv.mkDerivation rec {
+in stdenv.mkDerivation (finalAttrs: {
   pname = "backintime-common";
   version = "1.3.3";
 
   src = fetchFromGitHub {
     owner = "bit-team";
     repo = "backintime";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-cKmzq155/dCl5wZA2SE3XjfCocHxTh4Wa2IdfzSfQHg=";
   };
 
@@ -49,4 +49,4 @@ in stdenv.mkDerivation rec {
       done by taking snapshots of a specified set of directories.
     '';
   };
-}
+})
