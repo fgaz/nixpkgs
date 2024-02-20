@@ -12,14 +12,14 @@
 assert enableGuile -> guile != null;
 assert enablePython -> python != null;
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "elinks";
   version = "0.16.1.1";
 
   src = fetchFromGitHub {
     owner = "rkd77";
     repo = "felinks";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-u6QGhfi+uWeIzSUFuYHAH3Xu0Fky0yw2h4NOKgYFLsM=";
   };
 
@@ -70,4 +70,4 @@ stdenv.mkDerivation rec {
     platforms = with platforms; linux ++ darwin;
     maintainers = with maintainers; [ iblech gebner ];
   };
-}
+})
