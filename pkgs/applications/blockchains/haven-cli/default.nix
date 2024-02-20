@@ -8,14 +8,14 @@
 , trezorSupport ? true, libusb1, protobuf, python3
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "haven-cli";
   version = "3.0.7";
 
   src = fetchFromGitHub {
     owner = "haven-protocol-org";
     repo = "haven-main";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-HLZ9j75MtF7FkHA4uefkrYp07pVZe1Ac1wny7T0CMpA=";
     fetchSubmodules = true;
   };
@@ -61,4 +61,4 @@ stdenv.mkDerivation rec {
     platforms   = platforms.all;
     maintainers = with maintainers; [ kim0 ];
   };
-}
+})
