@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, cmake, gcc, gcc-unwrapped }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "4.1";
   pname = "messer-slim";
 
   src = fetchFromGitHub {
     owner = "MesserLab";
     repo = "SLiM";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-mb6xcu28QYAFm2906lRNY0zciQBKSGcz3q/cvOEh/VE=";
   };
 
@@ -23,4 +23,4 @@ stdenv.mkDerivation rec {
      maintainers = with lib.maintainers; [ bzizou ];
      platforms = lib.platforms.all;
   };
-}
+})
