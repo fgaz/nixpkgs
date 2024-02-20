@@ -6,12 +6,12 @@
 , openssl
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "tinyemu";
   version = "2019-12-21";
 
   src = fetchurl {
-    url = "https://bellard.org/tinyemu/${pname}-${version}.tar.gz";
+    url = "https://bellard.org/tinyemu/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     hash = "sha256-voNR8hIYGbMXL87c5csYJvoSyH2ht+2Y8mnT6AKgVVU=";
   };
 
@@ -43,4 +43,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ jhhuh AndersonTorres ];
     platforms = platforms.linux;
   };
-}
+})
