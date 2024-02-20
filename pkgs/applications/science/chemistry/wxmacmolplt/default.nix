@@ -9,14 +9,14 @@
 , autoreconfHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "wxmacmolplt";
   version = "7.7.3";
 
   src = fetchFromGitHub {
     owner = "brettbode";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     hash = "sha256-gFGstyq9bMmBaIS4QE6N3EIC9GxRvyJYUr8DUvwRQBc=";
   };
 
@@ -40,4 +40,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ sheepforce markuskowa ];
   };
-}
+})
