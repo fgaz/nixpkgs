@@ -1,20 +1,20 @@
 { lib, stdenv, fetchFromGitHub, cmake, libarcus, stb, protobuf, fetchpatch }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "curaengine";
   version = "4.13.1";
 
   src = fetchFromGitHub {
     owner = "Ultimaker";
     repo = "CuraEngine";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-dx0Q6cuA66lG4nwR7quW5Tvs9sdxjdV4gtpxXirI4nY=";
   };
 
   nativeBuildInputs = [ cmake ];
   buildInputs = [ libarcus stb protobuf ];
 
-  cmakeFlags = [ "-DCURA_ENGINE_VERSION=${version}" ];
+  cmakeFlags = [ "-DCURA_ENGINE_VERSION=${finalAttrs.version}" ];
 
   # TODO already fixed in master, remove in next release
   patches = [
@@ -32,4 +32,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ abbradar gebner ];
   };
-}
+})
