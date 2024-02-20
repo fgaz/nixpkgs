@@ -20,14 +20,14 @@
 , numlockx
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "lightdm-slick-greeter";
   version = "2.0.3";
 
   src = fetchFromGitHub {
     owner = "linuxmint";
     repo = "slick-greeter";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-ROOCxOjqJ8dTZjfQpjmE9oDQJzt6QFVVf3nrJ26mFU8=";
   };
 
@@ -116,4 +116,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ water-sucks bobby285271 ];
     platforms = platforms.linux;
   };
-}
+})
