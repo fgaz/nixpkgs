@@ -9,14 +9,14 @@
 , limesuite
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "dump1090";
   version = "9.0";
 
   src = fetchFromGitHub {
     owner = "flightaware";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-rc4mg+Px+0p2r38wxIah/rHqWjHSU0+KCPgqj/Gl3oo=";
   };
 
@@ -31,9 +31,9 @@ stdenv.mkDerivation rec {
   ] ++ lib.optional stdenv.isLinux limesuite;
 
   env.NIX_CFLAGS_COMPILE = lib.optionalString stdenv.cc.isClang
-    "-Wno-implicit-function-declaration -Wno-int-conversion -Wno-unknown-warning-option";
+    "-Wno-implicit-function-declaration -Wno-int-confinalAttrs.version -Wno-unknown-warning-option";
 
-  buildFlags = [ "DUMP1090_VERSION=${version}" "dump1090" "view1090" ];
+  buildFlags = [ "DUMP1090_VERSION=${finalAttrs.version}" "dump1090" "view1090" ];
 
   doCheck = true;
 
@@ -54,4 +54,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = with maintainers; [ earldouglas ];
   };
-}
+})
