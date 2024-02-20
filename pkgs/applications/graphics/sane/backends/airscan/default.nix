@@ -1,6 +1,6 @@
 { lib, stdenv, fetchFromGitHub, meson, ninja, pkg-config, avahi, libjpeg, libpng
 , libxml2, gnutls, sane-backends }:
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "sane-airscan";
   version = "0.99.27";
 
@@ -9,8 +9,8 @@ stdenv.mkDerivation rec {
 
   src = fetchFromGitHub {
     owner = "alexpevzner";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "sha256-29IPoLF4rmq8sGTi5RmpT1Fq8RJJlaepTt+2GWDU3es=";
   };
 
@@ -24,4 +24,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ zaninime ];
   };
-}
+})
