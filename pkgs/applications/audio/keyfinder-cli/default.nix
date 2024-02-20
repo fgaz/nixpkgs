@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, ffmpeg, libkeyfinder }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "keyfinder-cli";
   version = "1.1.1";
 
   src = fetchFromGitHub {
     repo = "keyfinder-cli";
     owner = "EvanPurkhiser";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "1mlcygbj3gqii3cz8jd6ks1lz612i4jp0343qjg293xm39fg47ns";
   };
 
@@ -28,4 +28,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl3Plus;
     platforms = platforms.linux;
   };
-}
+})
