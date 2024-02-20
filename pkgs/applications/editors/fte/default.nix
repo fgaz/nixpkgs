@@ -1,6 +1,6 @@
 { lib, stdenv, fetchurl, unzip, perl, libX11, libXpm, gpm, ncurses, slang }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "fte";
   version = "0.50.02";
 
@@ -15,7 +15,7 @@ stdenv.mkDerivation rec {
     url = "mirror://sourceforge/fte/fte-20110708-common.zip";
     sha256 = "1xva4kh0674sj2b9rhf2amlr37yxmsvjkgyj89gpcn0rndw1ahaq";
   };
-  src = [ ftesrc ftecommon ];
+  src = [ finalAttrs.ftesrc finalAttrs.ftecommon ];
 
   env.NIX_CFLAGS_COMPILE = "-DHAVE_STRLCAT -DHAVE_STRLCPY";
 
@@ -30,4 +30,4 @@ stdenv.mkDerivation rec {
     maintainers = [ ];
     platforms = platforms.all;
   };
-}
+})
