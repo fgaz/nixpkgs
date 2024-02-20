@@ -1,12 +1,12 @@
 { lib, stdenv, fetchurl, cairo, expat, fftwSinglePrec, fluidsynth, glib
 , gtk2, libjack2, ladspaH , libglade, lv2, pkg-config }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "calf";
   version = "0.90.3";
 
   src = fetchurl {
-    url = "https://calf-studio-gear.org/files/${pname}-${version}.tar.gz";
+    url = "https://calf-studio-gear.org/files/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     sha256 = "17x4hylgq4dn9qycsdacfxy64f5cv57n2qgkvsdp524gnqzw4az3";
   };
 
@@ -27,4 +27,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.goibhniu ];
     platforms = platforms.linux;
   };
-}
+})
