@@ -10,14 +10,14 @@
 , gitUpdater
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "mpc-qt";
   version = "23.12";
 
   src = fetchFromGitHub {
     owner = "mpc-qt";
     repo = "mpc-qt";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-v22o5QtCY9Z8bPoIkwypG0oTBEPqPFeKZ8cWO+pKCD0=";
   };
 
@@ -41,7 +41,7 @@ stdenv.mkDerivation rec {
   '';
 
   qmakeFlags = [
-    "MPCQT_VERSION=${version}"
+    "MPCQT_VERSION=${finalAttrs.version}"
   ];
 
   passthru.updateScript = gitUpdater { rev-prefix = "v"; };
@@ -55,4 +55,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ romildo ];
     mainProgram = "mpc-qt";
   };
-}
+})
