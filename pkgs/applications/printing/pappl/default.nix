@@ -11,14 +11,14 @@
 , zlib
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "pappl";
   version = "1.1.0";
 
   src = fetchFromGitHub {
     owner = "michaelrsweet";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-FsmR0fFb9bU9G3oUyJU1eDLcoZ6OQ2//TINlPrW6lU0=";
   };
 
@@ -68,4 +68,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux; # should also work for darwin, but requires additional work
     maintainers = with maintainers; [ jonringer ];
   };
-}
+})
