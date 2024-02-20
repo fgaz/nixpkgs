@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, libosip, sqlite }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "siproxd";
   version = "0.8.3";
 
   src = fetchurl {
-    url = "mirror://sourceforge/siproxd/siproxd-${version}.tar.gz";
+    url = "mirror://sourceforge/siproxd/siproxd-${finalAttrs.version}.tar.gz";
     sha256 = "0dkpl3myxz3gvj2n2qpqrd19dip9il0vf7qybdvn5wgznrmplvcs";
   };
 
@@ -20,4 +20,4 @@ stdenv.mkDerivation rec {
     platforms = with lib.platforms; linux;
     license = lib.licenses.gpl2Plus;
   };
-}
+})
