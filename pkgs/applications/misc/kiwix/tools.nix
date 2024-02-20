@@ -9,14 +9,14 @@
 , stdenv
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "kiwix-tools";
   version = "3.5.0";
 
   src = fetchFromGitHub {
     owner = "kiwix";
     repo = "kiwix-tools";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-bOxi51H28LhA+5caX6kllIY5B3Q1FoGVFadFIhYRkG0=";
   };
 
@@ -40,5 +40,5 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ colinsane ];
   };
-}
+})
 
