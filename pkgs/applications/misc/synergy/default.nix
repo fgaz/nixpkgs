@@ -35,14 +35,14 @@
 , ScreenSaver
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "synergy";
   version = "1.14.6.19-stable";
 
   src = fetchFromGitHub {
     owner = "symless";
     repo = "synergy-core";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-0QqklfSsvcXh7I2jaHk82k0nY8gQOj9haA4WOjGqBqY=";
     fetchSubmodules = true;
   };
@@ -139,10 +139,10 @@ stdenv.mkDerivation rec {
   meta = with lib; {
     description = "Share one mouse and keyboard between multiple computers";
     homepage = "https://symless.com/synergy";
-    changelog = "https://github.com/symless/synergy-core/blob/${version}/ChangeLog";
+    changelog = "https://github.com/symless/synergy-core/blob/${finalAttrs.version}/ChangeLog";
     mainProgram = lib.optionalString (!withGUI) "synergyc";
     license = licenses.gpl2Only;
     maintainers = with maintainers; [ talyz ivar ];
     platforms = platforms.unix;
   };
-}
+})
