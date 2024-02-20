@@ -19,14 +19,14 @@
 , wikipediaSupport ? false
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "exaile";
   version = "4.1.3";
 
   src = fetchFromGitHub {
     owner = "exaile";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "sha256-9SK0nvGdz2j6qp1JTmSuLezxX/kB93CZReSfAnfKZzg=";
   };
 
@@ -97,4 +97,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ ryneeverett ];
     platforms = platforms.all;
   };
-}
+})
