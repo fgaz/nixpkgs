@@ -14,14 +14,14 @@
 , systemd
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "iptsd";
   version = "2";
 
   src = fetchFromGitHub {
     owner = "linux-surface";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     hash = "sha256-zTXTyDgSa1akViDZlYLtJk1yCREGCSJKxzF+HZAWx0c=";
   };
 
@@ -72,4 +72,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ tomberek dotlambda ];
     platforms = platforms.linux;
   };
-}
+})
