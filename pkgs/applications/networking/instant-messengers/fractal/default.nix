@@ -23,7 +23,7 @@
 , xdg-desktop-portal
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "fractal";
   version = "6";
 
@@ -31,7 +31,7 @@ stdenv.mkDerivation rec {
     domain = "gitlab.gnome.org";
     owner = "GNOME";
     repo = "fractal";
-    rev = version;
+    rev = finalAttrs.version;
     hash = "sha256-J4Jb7G5Rfou3N7mytetIdLl0dGY5dSvTjnu8aj4kWXQ=";
   };
 
@@ -81,10 +81,10 @@ stdenv.mkDerivation rec {
   meta = with lib; {
     description = "Matrix group messaging app";
     homepage = "https://gitlab.gnome.org/GNOME/fractal";
-    changelog = "https://gitlab.gnome.org/World/fractal/-/releases/${version}";
+    changelog = "https://gitlab.gnome.org/World/fractal/-/releases/${finalAttrs.version}";
     license = licenses.gpl3Plus;
     maintainers = teams.gnome.members ++ (with maintainers; [ anselmschueler dtzWill ]);
     platforms = platforms.linux;
     mainProgram = "fractal";
   };
-}
+})
