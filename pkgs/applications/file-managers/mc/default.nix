@@ -22,12 +22,12 @@
 , writeScript
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "mc";
   version = "4.8.30";
 
   src = fetchurl {
-    url = "https://www.midnight-commander.org/downloads/${pname}-${version}.tar.xz";
+    url = "https://www.midnight-commander.org/downloads/${finalAttrs.pname}-${finalAttrs.version}.tar.xz";
     sha256 = "sha256-Xrw8shRLlwxRSf2lVsStULeHgElGls3y0UpTIEyVx98=";
   };
 
@@ -81,9 +81,9 @@ stdenv.mkDerivation rec {
 
    set -eu -o pipefail
 
-   # Expect the text in format of "Current version is: 4.8.27; ...".
-   new_version="$(curl -s https://midnight-commander.org/ | pcregrep -o1 'Current version is: (([0-9]+\.?)+);')"
-   update-source-version mc "$new_version"
+   # Expect the text in format of "Current finalAttrs.version is: 4.8.27; ...".
+   new_version="$(curl -s https://midnight-commander.org/ | pcregrep -o1 'Current finalAttrs.version is: (([0-9]+\.?)+);')"
+   update-source-finalAttrs.version mc "$new_finalAttrs.version"
  '';
 
   meta = with lib; {
@@ -95,4 +95,4 @@ stdenv.mkDerivation rec {
     platforms = with platforms; linux ++ darwin;
     mainProgram = "mc";
   };
-}
+})
