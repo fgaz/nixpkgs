@@ -10,14 +10,14 @@
 let
   char2underscore = char: str: lib.replaceStrings [ char ] [ "_" ] str;
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "mt32emu-smf2wav";
   version = "1.9.0";
 
   src = fetchFromGitHub {
     owner = "munt";
     repo = "munt";
-    rev = "${char2underscore "-" pname}_${char2underscore "." version}";
+    rev = "${char2underscore "-" finalAttrs.pname}_${char2underscore "." finalAttrs.version}";
     sha256 = "sha256-XGds9lDfSiY0D8RhYG4TGyjYEVvVYuAfNSv9+VxiJEs=";
   };
 
@@ -49,4 +49,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ OPNA2608 ];
     platforms = platforms.all;
   };
-}
+})
