@@ -19,14 +19,14 @@
 , wrapGAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "formatter";
   version = "0.4.0";
 
   src = fetchFromGitHub {
     owner = "Djaler";
     repo = "Formatter";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-8lZ0jUwHuc3Kntz73Btj6dJvkW2bvShu2KWTSQszbJo=";
   };
 
@@ -74,4 +74,4 @@ stdenv.mkDerivation rec {
     license = licenses.lgpl2Plus;
     mainProgram = "com.github.djaler.formatter";
   };
-}
+})
