@@ -25,12 +25,12 @@
 , autoreconfHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "plank";
   version = "0.11.89";
 
   src = fetchurl {
-    url = "https://launchpad.net/${pname}/1.0/${version}/+download/${pname}-${version}.tar.xz";
+    url = "https://launchpad.net/${finalAttrs.pname}/1.0/${finalAttrs.version}/+download/${finalAttrs.pname}-${finalAttrs.version}.tar.xz";
     sha256 = "17cxlmy7n13jp1v8i4abxyx9hylzb39andhz3mk41ggzmrpa8qm6";
   };
 
@@ -85,4 +85,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ davidak ] ++ teams.pantheon.members;
   };
-}
+})
