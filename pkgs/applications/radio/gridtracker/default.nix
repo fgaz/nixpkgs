@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitLab, nix-update-script, nwjs, wrapGAppsHook }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gridtracker";
   version = "1.24.0104";
 
   src = fetchFromGitLab {
     owner = "gridtracker.org";
     repo = "gridtracker";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-p3PdYOk0yvG3QkM17grzZmf9upK1n0zo4aOrlhGTvTU=";
   };
 
@@ -40,4 +40,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ melling ];
   };
-}
+})
