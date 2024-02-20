@@ -25,14 +25,14 @@
 , enableSystemd ? false
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "elogind";
   version = "246.10";
 
   src = fetchFromGitHub {
     owner = "elogind";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-+Nv6FL9Yjmfxs24+2mUTP//wbjzGUq4ftgJLfuEqBJg=";
   };
 
@@ -77,4 +77,4 @@ stdenv.mkDerivation rec {
     license = licenses.lgpl21Plus;
     maintainers = with maintainers; [ nh2 ];
   };
-}
+})
