@@ -20,7 +20,7 @@ let
     platforms = [ "x86_64-linux" "x86_64-darwin" ];
   };
 
-  linux = stdenv.mkDerivation rec {
+  linux = stdenv.mkDerivation (finalAttrs: {
     inherit pname version meta;
 
     src = fetchurl linuxSource;
@@ -75,13 +75,13 @@ let
     # LD_LIBRARY_PATH "shouldn't" be needed, remove when possible :)
     # Error: libstdc++.so.6: cannot open shared object file: No such file or directory
     preFixup = ''
-      gappsWrapperArgs+=(--prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath buildInputs})
+      gappsWrapperArgs+=(--prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath finalAttrs.buildInputs})
     '';
 
     dontStrip = true;
 
     passthru.updateScript = ./update.sh;
-  };
+  });
 
   darwin = stdenv.mkDerivation {
     inherit pname version meta;
