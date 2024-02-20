@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, ncurses }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "clex";
   version = "4.7";
 
   src = fetchurl {
-    url = "https://github.com/xitop/clex/releases/download/v${version}/clex-${version}.tar.gz";
+    url = "https://github.com/xitop/clex/releases/download/v${finalAttrs.version}/clex-${finalAttrs.version}.tar.gz";
     hash = "sha256-3Y3ayJEy9pHLTUSeXYeekTVdopwKLZ8vVcVarLIFnpM=";
   };
 
@@ -26,4 +26,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl2Plus;
     platforms = with platforms; linux ++ darwin;
   };
-}
+})
