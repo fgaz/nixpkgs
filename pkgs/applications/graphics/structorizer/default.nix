@@ -8,7 +8,7 @@
 , nix-update-script
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "structorizer";
   version = "3.32-15";
 
@@ -18,9 +18,9 @@ stdenv.mkDerivation rec {
       name = "Structorizer";
       desktopName = "Structorizer";
       genericName = "Diagram creator";
-      comment = meta.description;
-      icon = pname;
-      exec = pname;
+      comment = finalAttrs.meta.description;
+      icon = finalAttrs.pname;
+      exec = finalAttrs.pname;
       terminal = false;
       mimeTypes = [ "application/nsd" ];
       categories = [
@@ -37,7 +37,7 @@ stdenv.mkDerivation rec {
   src = fetchFromGitHub {
     owner = "fesch";
     repo = "Structorizer.Desktop";
-    rev = version;
+    rev = finalAttrs.version;
     hash = "sha256-ZCVvMvbXMQIcZRk1F7QiRtNeuLicHe/aEvwp4FvhwoM=";
   };
 
@@ -71,9 +71,9 @@ stdenv.mkDerivation rec {
 
     install -d $out/bin $out/share/mime/packages
 
-    install -D ${pname}.jar -t $out/share/java/
-      makeWrapper ${jdk11}/bin/java $out/bin/${pname} \
-      --add-flags "-jar $out/share/java/${pname}.jar"
+    install -D ${finalAttrs.pname}.jar -t $out/share/java/
+      makeWrapper ${jdk11}/bin/java $out/bin/${finalAttrs.pname} \
+      --add-flags "-jar $out/share/java/${finalAttrs.pname}.jar"
 
     cat << EOF > $out/share/mime/packages/structorizer.xml
     <?xml version="1.0" encoding="UTF-8"?>
@@ -86,10 +86,10 @@ stdenv.mkDerivation rec {
     </mime-info>
     EOF
 
-    cd src/lu/fisch/${pname}/gui
-    install -vD icons/000_${pname}.png $out/share/icons/hicolor/16x16/apps/${pname}.png
+    cd src/lu/fisch/${finalAttrs.pname}/gui
+    install -vD icons/000_${finalAttrs.pname}.png $out/share/icons/hicolor/16x16/apps/${finalAttrs.pname}.png
     for icon_width in 24 32 48 64 128 256; do
-      install -vD icons_"$icon_width"/000_${pname}.png $out/share/icons/hicolor/"$icon_width"x"$icon_width"/apps/${pname}.png
+      install -vD icons_"$icon_width"/000_${finalAttrs.pname}.png $out/share/icons/hicolor/"$icon_width"x"$icon_width"/apps/${finalAttrs.pname}.png
     done
 
     runHook postInstall
@@ -105,4 +105,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ annaaurora ];
     mainProgram = "structorizer";
   };
-}
+})
