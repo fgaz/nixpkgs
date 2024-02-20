@@ -10,12 +10,12 @@
 , libmpdclient
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gjay";
   version = "0.3.2";
 
   src = fetchurl {
-    url = "mirror://sourceforge/project/gjay/${pname}-${version}.tar.gz";
+    url = "mirror://sourceforge/project/gjay/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     sha256 = "1a1vv4r0vnxjdyl0jyv7gga3zfd5azxlwjm1l6hjrf71lb228zn8";
   };
 
@@ -39,4 +39,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ pSub ];
     platforms = with platforms; linux;
   };
-}
+})
