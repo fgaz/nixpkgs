@@ -7,14 +7,14 @@
 
 assert pulseaudioSupport -> libpulseaudio != null;
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "snapcast";
   version = "0.27.0";
 
   src = fetchFromGitHub {
     owner  = "badaix";
     repo   = "snapcast";
-    rev    = "v${version}";
+    rev    = "v${finalAttrs.version}";
     sha256 = "sha256-dlK1xQQqst4VQjioC7MZzqXwMC+JfqtvnD5lrOqGhYI=";
   };
 
@@ -56,4 +56,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux ++ platforms.darwin;
     license = licenses.gpl3Plus;
   };
-}
+})
