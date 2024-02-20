@@ -12,12 +12,12 @@ let
     sha256 = "0773s5iz8aw9npgyasb0r2ybp6gvy2s9sq51az8w7h52bzn5blnn";
   };
 
-in stdenv.mkDerivation rec {
+in stdenv.mkDerivation (finalAttrs: {
   pname = "nano";
   version = "7.2";
 
   src = fetchurl {
-    url = "mirror://gnu/nano/${pname}-${version}.tar.xz";
+    url = "mirror://gnu/nano/${finalAttrs.pname}-${finalAttrs.version}.tar.xz";
     sha256 = "hvNEJ2i9KHPOxpP4PN+AtLRErTzBR2C3Q2FHT8h6RSY=";
   };
 
@@ -55,16 +55,16 @@ in stdenv.mkDerivation rec {
         ]
       }
 
-      oldVersion="$(nix-instantiate --eval -E "with import ./. {}; lib.getVersion ${pname}" | tr -d '"')"
-      latestTag="$(git -c 'versionsort.suffix=-' ls-remote --exit-code --refs --sort='version:refname' --tags git://git.savannah.gnu.org/nano.git '*' | tail --lines=1 | cut --delimiter='/' --fields=3 | sed 's|^v||g')"
+      oldVersion="$(nix-instantiate --eval -E "with import ./. {}; lib.getVersion ${finalAttrs.pname}" | tr -d '"')"
+      latestTag="$(git -c 'finalAttrs.versionsort.suffix=-' ls-remote --exit-code --refs --sort='finalAttrs.version:refname' --tags git://git.savannah.gnu.org/nano.git '*' | tail --lines=1 | cut --delimiter='/' --fields=3 | sed 's|^v||g')"
 
       if [ ! "$oldVersion" = "$latestTag" ]; then
-        update-source-version ${pname} "$latestTag" --version-key=version --print-changes
+        update-source-finalAttrs.version ${finalAttrs.pname} "$latestTag" --finalAttrs.version-key=finalAttrs.version --print-changes
         nixpkgs="$(git rev-parse --show-toplevel)"
         default_nix="$nixpkgs/pkgs/applications/editors/nano/default.nix"
         nixfmt "$default_nix"
       else
-        echo "${pname} is already up-to-date"
+        echo "${finalAttrs.pname} is already up-to-date"
       fi
     '';
   };
@@ -77,4 +77,4 @@ in stdenv.mkDerivation rec {
     platforms = platforms.all;
     mainProgram = "nano";
   };
-}
+})
