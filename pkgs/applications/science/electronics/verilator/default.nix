@@ -2,14 +2,14 @@
   which, cmake, ccache, help2man, makeWrapper, glibcLocales,
   systemc, git, numactl }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "verilator";
   version = "5.020";
 
   src = fetchFromGitHub {
-    owner = pname;
-    repo = pname;
-    rev = "v${version}";
+    owner = finalAttrs.pname;
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     hash = "sha256-7kxH/RPM+fjDuybwJgTYm0X6wpaqesGfu57plrExd8c=";
   };
 
@@ -44,4 +44,4 @@ stdenv.mkDerivation rec {
     platforms   = platforms.unix;
     maintainers = with maintainers; [ thoughtpolice amiloradovsky ];
   };
-}
+})
