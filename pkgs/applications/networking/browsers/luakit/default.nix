@@ -13,14 +13,14 @@
 , webkitgtk
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "luakit";
   version = "2.3.3";
 
   src = fetchFromGitHub {
     owner = "luakit";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     hash = "sha256-DtoixcLq+ddbacTAo+Qq6q4k1i6thirACw1zqUeOxXo=";
   };
 
@@ -87,4 +87,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.AndersonTorres ];
     platforms   = platforms.unix;
   };
-}
+})
