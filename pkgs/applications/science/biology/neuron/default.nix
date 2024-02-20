@@ -19,11 +19,11 @@
 }:
 
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "neuron";
   version = "8.2.3";
 
-  # format is for pythonModule conversion
+  # format is for pythonModule confinalAttrs.version
   format = "other";
 
   nativeBuildInputs = [
@@ -82,7 +82,7 @@ stdenv.mkDerivation rec {
   '';
 
   src = fetchurl {
-    url = "https://github.com/neuronsimulator/nrn/releases/download/${version}/full-src-package-${version}.tar.gz";
+    url = "https://github.com/neuronsimulator/nrn/releases/download/${finalAttrs.version}/full-src-package-${finalAttrs.version}.tar.gz";
     sha256 = "sha256-k8+71BRfh+a73sZho6v0QFRxVmrfx6jqrgaqammdtDI=";
   };
 
@@ -101,4 +101,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ adev davidcromp ];
     platforms = platforms.all;
   };
-}
+})
