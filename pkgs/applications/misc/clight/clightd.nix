@@ -8,14 +8,14 @@
 , enableScreen ? true
 , enableYoctolight ? true }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "clightd";
   version = "5.8";
 
   src = fetchFromGitHub {
     owner = "FedeDP";
     repo = "Clightd";
-    rev = version;
+    rev = finalAttrs.version;
     hash = "sha256-Lmno/TJVCQVNzfpKNZzuDf2OM6w6rbz+zJTr3zVo/CM=";
   };
 
@@ -77,4 +77,4 @@ stdenv.mkDerivation rec {
       eadwu
     ];
   };
-}
+})
