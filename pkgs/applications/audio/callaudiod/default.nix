@@ -9,15 +9,15 @@
 , libpulseaudio
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "callaudiod";
   version = "0.1.9";
 
   src = fetchFromGitLab {
     domain = "gitlab.com";
     owner = "mobian1";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "sha256-OuWn1DA+4LmN1KwouiqW3kn6CMg8jhm0FiyAgMSi1GI=";
   };
 
@@ -42,4 +42,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ pacman99 tomfitzhenry ];
     platforms = platforms.linux;
   };
-}
+})
