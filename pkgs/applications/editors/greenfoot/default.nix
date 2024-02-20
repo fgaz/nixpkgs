@@ -1,6 +1,6 @@
 { lib, stdenv, fetchurl, openjdk, glib, dpkg, wrapGAppsHook }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "greenfoot";
   version = "3.8.2";
 
@@ -8,7 +8,7 @@ stdenv.mkDerivation rec {
     # We use the deb here. First instinct might be to go for the "generic" JAR
     # download, but that is actually a graphical installer that is much harder
     # to unpack than the deb.
-    url = "https://www.greenfoot.org/download/files/Greenfoot-linux-${builtins.replaceStrings ["."] [""] version}.deb";
+    url = "https://www.greenfoot.org/download/files/Greenfoot-linux-${builtins.replaceStrings ["."] [""] finalAttrs.version}.deb";
     hash = "sha256-wpmgWtx2jTDjt+7p6HcjU/uy1PRmnAHpJ1rOYb+hV+U=";
   };
 
@@ -47,4 +47,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.chvp ];
     platforms = platforms.linux;
   };
-}
+})
