@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, glib, libsndfile, lilv, lv2, pkg-config, serd, sord, sratom }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "lv2bm";
   version = "1.1";
 
   src = fetchFromGitHub {
     owner = "moddevices";
     repo = "lv2bm";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "0vlppxfb9zbmffazs1kiyb79py66s8x9hihj36m2vz86zsq7ybl0";
   };
 
@@ -25,4 +25,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.magnetophon ];
     platforms = platforms.linux;
   };
-}
+})
