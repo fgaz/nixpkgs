@@ -22,13 +22,13 @@ let
     sha256 = "sha256-l61SKEx4pBocADrEGPVacQ6F2ep9IuvNZ8W08dKeZKg=";
   };
 
-in stdenv.mkDerivation rec {
+in stdenv.mkDerivation (finalAttrs: {
   pname = "sharpsat-td";
   version = "unstable-2021-09-05";
 
   src = fetchFromGitHub {
     owner = "Laakeri";
-    repo = pname;
+    repo = finalAttrs.pname;
     rev = "b9bb015305ea5d4e1ac7141691d0fe55ca983d31";
     sha256 = "sha256-FE+DUd58eRr5w9RFw0fMHfjIiNDWIcG7XbyWJ/pI28U=";
   };
@@ -80,4 +80,4 @@ in stdenv.mkDerivation rec {
     # uses clhash, which is non-portable
     platforms = [ "x86_64-linux" "x86_64-darwin" ];
   };
-}
+})
