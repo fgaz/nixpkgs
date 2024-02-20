@@ -1,6 +1,6 @@
 { lib, stdenv, fetchurl, lua, gettext, groff, libICE, libSM, libX11, libXext }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "ion";
   version = "3-20090110";
 
@@ -27,4 +27,4 @@ stdenv.mkDerivation rec {
     license = licenses.lgpl21;
     maintainers = with maintainers; [ ];
   };
-}
+})
