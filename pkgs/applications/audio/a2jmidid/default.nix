@@ -1,14 +1,14 @@
 { lib, stdenv, fetchFromGitHub, makeWrapper, pkg-config, alsa-lib, dbus, libjack2
 , python3Packages , meson, ninja }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "a2jmidid";
   version = "9";
 
   src = fetchFromGitHub {
     owner = "linuxaudio";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "sha256-WNt74tSWV8bY4TnpLp86PsnrjkqWynJJt3Ra4gZl2fQ=";
   };
 
@@ -27,4 +27,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.goibhniu ];
     platforms = [ "i686-linux" "x86_64-linux" "aarch64-linux" ];
   };
-}
+})
