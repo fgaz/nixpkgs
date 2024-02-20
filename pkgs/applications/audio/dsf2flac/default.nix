@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, autoreconfHook, boost, flac, id3lib, pkg-config
 , taglib, zlib }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "dsf2flac";
   version = "unstable-2021-07-31";
 
   src = fetchFromGitHub {
     owner = "hank";
-    repo = pname;
+    repo = finalAttrs.pname;
     rev = "6b109cd276ec7c7901f96455c77cf2d2ebfbb181";
     sha256 = "sha256-VlXfywgYhI2QuGQvpD33BspTTgT0jOKUV3gENq4HiBU=";
   };
@@ -31,4 +31,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ artemist ];
     platforms = [ "x86_64-linux" ];
   };
-}
+})
