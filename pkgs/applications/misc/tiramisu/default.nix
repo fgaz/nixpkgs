@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, pkg-config, glib, vala }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "tiramisu";
   version = "2.0.20211107";
 
   src = fetchFromGitHub {
     owner = "Sweets";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "1n1x1ybbwbanibw7b90k7v4cadagl41li17hz2l8s2sapacvq3mw";
   };
 
@@ -29,4 +29,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ wishfort36 moni ];
   };
-}
+})
