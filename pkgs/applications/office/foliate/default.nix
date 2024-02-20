@@ -17,14 +17,14 @@
 , libadwaita
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "foliate";
   version = "3.1.0";
 
   src = fetchFromGitHub {
     owner = "johnfactotum";
-    repo = pname;
-    rev = "refs/tags/${version}";
+    repo = finalAttrs.pname;
+    rev = "refs/tags/${finalAttrs.version}";
     hash = "sha256-6cymAqQxHHoTgzEyUKXC7zV/lUEJfIG+54+tLsc9iHo=";
     fetchSubmodules = true;
   };
@@ -55,4 +55,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl3Only;
     maintainers = with maintainers; [ onny ];
   };
-}
+})
