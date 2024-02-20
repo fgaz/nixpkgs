@@ -46,14 +46,14 @@
 , hidapi
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "dolphin-emu-primehack";
   version = "1.0.6a";
 
   src = fetchFromGitHub {
     owner = "shiiion";
     repo = "dolphin";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-gc4+ofoLKR+cvm+SaWEnGaKrSjWMKq7pF6pEIi75Rtk=";
     fetchSubmodules = true;
   };
@@ -147,4 +147,4 @@ stdenv.mkDerivation rec {
     broken = stdenv.isDarwin;
     platforms = platforms.unix;
   };
-}
+})
