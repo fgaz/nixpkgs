@@ -4,12 +4,12 @@
 
 let
   version = "0.2.99.4";
-in stdenv.mkDerivation rec {
+in stdenv.mkDerivation (finalAttrs: {
   pname = "synapse";
   inherit version;
 
   src = fetchurl {
-    url = "https://launchpad.net/synapse-project/0.3/${version}/+download/${pname}-${version}.tar.xz";
+    url = "https://launchpad.net/synapse-project/0.3/${version}/+download/${finalAttrs.pname}-${version}.tar.xz";
     sha256 = "1g6x9knb4jy1d8zgssjhzkgac583137pibisy9whjs8mckaj4k1j";
   };
 
@@ -34,4 +34,4 @@ in stdenv.mkDerivation rec {
     maintainers = with maintainers; [ mahe ];
     platforms = with platforms; all;
   };
-}
+})
