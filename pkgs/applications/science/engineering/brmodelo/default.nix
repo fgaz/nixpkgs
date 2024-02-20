@@ -9,14 +9,14 @@
 , copyDesktopItems
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "brmodelo";
   version = "3.31";
 
   src = fetchFromGitHub {
     owner = "chcandido";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "09qrhqhv264x8phnf3pnb0cwq75l7xdsj9xkwlvhry81nxz0d5v0";
   };
 
@@ -68,15 +68,15 @@ stdenv.mkDerivation rec {
       genericName = "Entity-relationship diagramming tool";
       exec = "brmodelo";
       icon = "brmodelo";
-      comment = meta.description;
+      comment = finalAttrs.meta.description;
       categories = [ "Development" "Education" "Database" "2DGraphics" "ComputerScience" "DataVisualization" "Engineering" "Java" ];
     })
   ];
 
   installPhase = ''
-    install -d $out/bin $out/share/doc/${pname} $out/share/java
+    install -d $out/bin $out/share/doc/${finalAttrs.pname} $out/share/java
 
-    cp -rv ./dist/javadoc $out/share/doc/${pname}/
+    cp -rv ./dist/javadoc $out/share/doc/${finalAttrs.pname}/
 
     install -Dm755 ./dist/brModelo.jar -t $out/share/java/
     # NOTE: The standard Java GUI toolkit has a
@@ -106,4 +106,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl3;
     maintainers = with maintainers; [ yuu ];
   };
-}
+})
