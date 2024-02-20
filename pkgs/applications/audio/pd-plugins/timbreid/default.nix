@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, unzip, puredata, fftw }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "0.7.0";
   pname = "timbreid";
 
   src = fetchurl {
-    url = "http://williambrent.conflations.com/pd/timbreID-${version}-src.zip";
+    url = "http://williambrent.conflations.com/pd/timbreID-${finalAttrs.version}-src.zip";
     sha256 = "14k2xk5zrzrw1zprdbwx45hrlc7ck8vq4drpd3l455i5r8yk4y6b";
   };
 
@@ -43,4 +43,4 @@ stdenv.mkDerivation rec {
     maintainers = [ lib.maintainers.magnetophon ];
     platforms = lib.platforms.linux;
   };
-}
+})
