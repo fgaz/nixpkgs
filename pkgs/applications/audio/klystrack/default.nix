@@ -3,14 +3,14 @@
 , pkg-config
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "klystrack";
   version = "1.7.6";
 
   src = fetchFromGitHub {
     owner = "kometbomb";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     fetchSubmodules = true;
     sha256 = "1h99sm2ddaq483hhk2s3z4bjbgn0d2h7qna7l7qq98wvhqix8iyz";
   };
@@ -55,4 +55,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ suhr ];
     platforms = platforms.linux;
   };
-}
+})
