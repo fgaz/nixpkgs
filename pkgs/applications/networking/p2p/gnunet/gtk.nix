@@ -11,12 +11,12 @@
 , wrapGAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gnunet-gtk";
   version = "0.20.0";
 
   src = fetchurl {
-    url = "mirror://gnu/gnunet/${pname}-${version}.tar.gz";
+    url = "mirror://gnu/gnunet/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     sha256 = "sha256-6ZHlDIKrTmr/aRz4k5FtRVxZ7B9Hlh2w42QT4YRsVi0=";
   };
 
@@ -48,4 +48,4 @@ stdenv.mkDerivation rec {
     description = "GNUnet GTK User Interface";
     homepage = "https://git.gnunet.org/gnunet-gtk.git";
   };
-}
+})
