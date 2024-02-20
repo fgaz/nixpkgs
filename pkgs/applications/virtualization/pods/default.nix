@@ -17,14 +17,14 @@
 , vte-gtk4
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "pods";
   version = "2.0.0";
 
   src = fetchFromGitHub {
     owner = "marhkb";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-jSN4WmyzYARhDkwAtTYD4iXNTM1QQbAAwQ/ICHg7k3k=";
   };
 
@@ -66,10 +66,10 @@ stdenv.mkDerivation rec {
   meta = with lib; {
     description = "A podman desktop application";
     homepage = "https://github.com/marhkb/pods";
-    changelog = "https://github.com/marhkb/pods/releases/tag/v${version}";
+    changelog = "https://github.com/marhkb/pods/releases/tag/v${finalAttrs.version}";
     license = licenses.gpl3Only;
     maintainers = with maintainers; [ figsoda ];
     platforms = platforms.linux;
     mainProgram = "pods";
   };
-}
+})
