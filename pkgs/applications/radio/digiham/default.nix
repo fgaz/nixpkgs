@@ -2,14 +2,14 @@
 , cmake, pkg-config, protobuf, icu, csdr, codecserver
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "digiham";
   version = "0.6.0";
 
   src = fetchFromGitHub {
     owner = "jketterl";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "sha256-nKNA5xAhM/lyyvFJnajWwY0hwVZhLApbDkXoUYFjlt0=";
   };
 
@@ -31,4 +31,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = teams.c3d2.members;
   };
-}
+})
