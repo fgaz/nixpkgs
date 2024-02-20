@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, fetchpatch, ncurses }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "tty-solitaire";
   version = "1.3.1";
 
   src = fetchFromGitHub {
     owner = "mpereira";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-zMLNWJieHxHALFQoSkdAxGbUBGuZnznLX86lI3P21F0=";
   };
 
@@ -37,4 +37,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.AndersonTorres ];
     mainProgram = "ttysolitaire";
   };
-}
+})
