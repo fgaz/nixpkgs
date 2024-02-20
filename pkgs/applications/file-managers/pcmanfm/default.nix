@@ -19,12 +19,12 @@ let
   gtk = if withGtk3 then gtk3 else gtk2;
   inherit (lib) optional;
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "pcmanfm";
   version = "1.3.2";
 
   src = fetchurl {
-    url = "mirror://sourceforge/pcmanfm/pcmanfm-${version}.tar.xz";
+    url = "mirror://sourceforge/pcmanfm/pcmanfm-${finalAttrs.version}.tar.xz";
     sha256 = "sha256-FMt7JHSTxMzmX7tZAmEeOtAKeocPvB5QrcUEKMUUDPc=";
   };
 
@@ -41,4 +41,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     mainProgram = "pcmanfm";
   };
-}
+})
