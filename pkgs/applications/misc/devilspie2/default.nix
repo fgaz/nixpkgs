@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, intltool, pkg-config, glib, gtk, lua, libwnck }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "devilspie2";
   version = "0.44";
 
   src = fetchurl {
-    url = "https://download.savannah.gnu.org/releases/devilspie2/devilspie2-${version}.tar.xz";
+    url = "https://download.savannah.gnu.org/releases/devilspie2/devilspie2-${finalAttrs.version}.tar.xz";
     sha256 = "Cp8erdKyKjGBY+QYAGXUlSIboaQ60gIepoZs0RgEJkA=";
   };
 
@@ -32,4 +32,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.ebzzry ];
     platforms = platforms.linux;
   };
-}
+})
