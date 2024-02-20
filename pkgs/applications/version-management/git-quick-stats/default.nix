@@ -9,14 +9,14 @@
 , util-linux
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "git-quick-stats";
   version = "2.5.4";
 
   src = fetchFromGitHub {
     repo = "git-quick-stats";
     owner = "arzzen";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-dbi48rq3ijPa45xtTi6kAly/IwkX4aK1P9hmcPNQEqM=";
   };
 
@@ -49,4 +49,4 @@ stdenv.mkDerivation rec {
     license = licenses.mit;
     mainProgram = "git-quick-stats";
   };
-}
+})
