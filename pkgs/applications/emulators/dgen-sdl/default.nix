@@ -5,12 +5,12 @@
 , SDL
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "dgen-sdl";
   version = "1.33";
 
   src = fetchurl {
-    url = "https://sourceforge.net/projects/dgen/files/dgen/${version}/${pname}-${version}.tar.gz";
+    url = "https://sourceforge.net/projects/dgen/files/dgen/${finalAttrs.version}/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     hash = "sha256-meLAYBfCKHPHf4gYbrzAmGckTrbgQsdjuwlLArje9h4=";
   };
 
@@ -54,7 +54,7 @@ stdenv.mkDerivation rec {
       - Screenshots, demos recording and playback
       - Musashi (generic) and StarScream (x86‐only) CPU cores
       - Cyclone 68000 and DrZ80 (both ARM‐only) CPU cores
-      - CZ80 (generic) and MZ80 (generic and x86‐only versions)
+      - CZ80 (generic) and MZ80 (generic and x86‐only finalAttrs.versions)
       - 16‐bit, 8000 to 48000Hz sound output
       - Support for 8, 15, 16, 24 and 32 bpp modes
       - Archived/compressed ROMs support
@@ -67,5 +67,5 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ AndersonTorres ];
     platforms = with platforms; unix;
   };
-}
+})
 # TODO: implement configure options
