@@ -19,12 +19,12 @@
 , rsync
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "surge";
   version = "1.9.0";
 
   src = fetchurl {
-    url = "https://github.com/surge-synthesizer/releases/releases/download/${version}/SurgeSrc_${version}.tgz";
+    url = "https://github.com/surge-synthesizer/releases/releases/download/${finalAttrs.version}/SurgeSrc_${finalAttrs.version}.tgz";
     sha256 = "00af4lfcipl0rn0dn4gfipx7nbk8ym1mrmji8v0ar98frsrpxg4k";
   };
 
@@ -39,7 +39,7 @@ stdenv.mkDerivation rec {
   };
 
   patches = [
-    # Fix build error due to newer glibc version by upgrading lib "catch 2"
+    # Fix build error due to newer glibc finalAttrs.version by upgrading lib "catch 2"
     # Issue: https://github.com/surge-synthesizer/surge/pull/4843
     # Patch: https://github.com/surge-synthesizer/surge/pull/4845
     (fetchpatch {
@@ -102,4 +102,4 @@ stdenv.mkDerivation rec {
     platforms = [ "x86_64-linux" ];
     maintainers = with maintainers; [ magnetophon orivej ];
   };
-}
+})
