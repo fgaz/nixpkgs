@@ -3,12 +3,12 @@
 , ghostscript, makeWrapper, tzdata, makeDesktopItem, copyDesktopItems
 , directoryListingUpdater }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "eaglemode";
   version = "0.96.1";
 
   src = fetchurl {
-    url = "mirror://sourceforge/eaglemode/${pname}-${version}.tar.bz2";
+    url = "mirror://sourceforge/eaglemode/${finalAttrs.pname}-${finalAttrs.version}.tar.bz2";
     hash = "sha256-FIhCcMghzLg7Odcsou9hBw7kIaqLVUFEAKUk9uwRNNw=";
   };
 
@@ -40,18 +40,18 @@ stdenv.mkDerivation rec {
     wrapProgram $out/bin/eaglemode --set EM_DIR "$out" --prefix LD_LIBRARY_PATH : "$out/lib" --prefix PATH : "${ghostscript}/bin"
     for i in 32 48 96; do
       mkdir -p $out/share/icons/hicolor/''${i}x''${i}/apps
-      ln -s $out/res/icons/${pname}$i.png $out/share/icons/hicolor/''${i}x''${i}/apps/${pname}.png
+      ln -s $out/res/icons/${finalAttrs.pname}$i.png $out/share/icons/hicolor/''${i}x''${i}/apps/${finalAttrs.pname}.png
     done
     runHook postInstall
   '';
 
   desktopItems = [
     (makeDesktopItem {
-      name = pname;
-      exec = pname;
-      icon = pname;
+      name = finalAttrs.pname;
+      exec = finalAttrs.pname;
+      icon = finalAttrs.pname;
       desktopName = "Eagle Mode";
-      genericName = meta.description;
+      genericName = finalAttrs.meta.description;
       categories = [ "Game" "Graphics" "System" "Utility" ];
     })
   ];
@@ -69,4 +69,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ chuangzhu ehmry ];
     platforms = platforms.linux;
   };
-}
+})
