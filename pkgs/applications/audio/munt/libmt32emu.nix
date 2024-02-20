@@ -4,14 +4,14 @@
 , cmake
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "libmt32emu";
   version = "2.7.1";
 
   src = fetchFromGitHub {
     owner = "munt";
     repo = "munt";
-    rev = "${pname}_${lib.replaceStrings [ "." ] [ "_" ] version}";
+    rev = "${finalAttrs.pname}_${lib.replaceStrings [ "." ] [ "_" ] finalAttrs.version}";
     sha256 = "sha256-zY1AFcm8uvFkrKUZHsqtKY2CYTY4bWmkTJ7bZPqXoxk=";
   };
 
@@ -41,4 +41,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ OPNA2608 ];
     platforms = platforms.unix; # Not tested on ReactOS yet :)
   };
-}
+})
