@@ -15,14 +15,14 @@
 , zeromq
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "srsran";
   version = "23.11";
 
   src = fetchFromGitHub {
     owner = "srsran";
     repo = "srsran";
-    rev = "release_${builtins.replaceStrings ["."] ["_"] version}";
+    rev = "release_${builtins.replaceStrings ["."] ["_"] finalAttrs.version}";
     sha256 = "sha256-3cQMZ75I4cyHpik2d/eBuzw7M4OgbKqroCddycw4uW8=";
   };
 
@@ -48,4 +48,4 @@ stdenv.mkDerivation rec {
     platforms = with platforms; linux ;
     maintainers = with maintainers; [ hexagonal-sun ];
   };
-}
+})
