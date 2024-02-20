@@ -1,6 +1,6 @@
 { lib, stdenv, fetchFromGitHub, freetype, libX11, libXi, libXt, libXft }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "deadpixi-sam-unstable";
   version = "2020-07-14";
 
@@ -40,4 +40,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ ramkromberg ];
     platforms = platforms.unix;
   };
-}
+})
