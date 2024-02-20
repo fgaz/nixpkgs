@@ -1,10 +1,10 @@
 { lib, stdenv, fetchurl, zlib }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "stacks";
   version = "2.66";
   src = fetchurl {
-    url = "http://catchenlab.life.illinois.edu/stacks/source/${pname}-${version}.tar.gz";
+    url = "http://catchenlab.life.illinois.edu/stacks/source/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     sha256 = "sha256-9pHmcLYMdn9xy3vhlOU42Io/4L61auoncfpZNRPUN/I=";
   };
 
@@ -17,4 +17,4 @@ stdenv.mkDerivation rec {
     license = lib.licenses.gpl3Plus;
     platforms = lib.platforms.linux;
   };
-}
+})
