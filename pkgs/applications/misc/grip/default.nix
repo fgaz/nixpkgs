@@ -9,12 +9,12 @@
 , libtool
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "grip";
   version = "4.2.4";
 
   src = fetchurl {
-    url = "mirror://sourceforge/grip/grip-${version}.tar.gz";
+    url = "mirror://sourceforge/grip/grip-${finalAttrs.version}.tar.gz";
     sha256 = "sha256-lXu0mLLfcX8K1EmoFH0vp2cHluyRwhTL0/bW5Ax36mI=";
   };
 
@@ -35,4 +35,4 @@ stdenv.mkDerivation rec {
     maintainers = with lib.maintainers; [ marcweber ];
     platforms = lib.platforms.linux;
   };
-}
+})
