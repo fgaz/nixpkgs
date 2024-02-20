@@ -1,6 +1,6 @@
 { lib, stdenv, fetchgit, libX11, perl, ... }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "xbattbar";
   version = "1.4.9";
 
@@ -8,7 +8,7 @@ stdenv.mkDerivation rec {
   # repository.
   src = fetchgit {
     url = "https://salsa.debian.org/debian/xbattbar.git";
-    rev = "upstream/${version}";
+    rev = "upstream/${finalAttrs.version}";
     sha256 = "10w7gs0l4hzhdn38yqyr3az7n4ncmfnd6hhhly6lk5dg7k441ck6";
   };
 
@@ -43,4 +43,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = [ maintainers.q3k ];
   };
-}
+})
