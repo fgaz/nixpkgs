@@ -2,13 +2,13 @@
 , contribPlugins ? false, hunspell, gamin, boost, wrapGAppsHook
 }:
 
-stdenv.mkDerivation rec {
-  name = "${pname}-${lib.optionalString contribPlugins "full-"}${version}";
+stdenv.mkDerivation (finalAttrs: {
+  name = "${finalAttrs.pname}-${lib.optionalString contribPlugins "full-"}${finalAttrs.version}";
   version = "20.03";
   pname = "codeblocks";
 
   src = fetchurl {
-    url = "mirror://sourceforge/codeblocks/Sources/${version}/codeblocks-${version}.tar.xz";
+    url = "mirror://sourceforge/codeblocks/Sources/${finalAttrs.version}/codeblocks-${finalAttrs.version}.tar.xz";
     sha256 = "1idaksw1vacmm83krxh5zlb12kad3dkz9ixh70glw1gaibib7vhm";
   };
 
@@ -139,4 +139,4 @@ stdenv.mkDerivation rec {
     homepage = "http://www.codeblocks.org";
     license = licenses.gpl3;
   };
-}
+})
