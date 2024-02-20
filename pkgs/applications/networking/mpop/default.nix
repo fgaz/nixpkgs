@@ -14,12 +14,12 @@
 }:
 assert lib.assertOneOf "sslLibrary" sslLibrary ["gnutls" "openssl" "no"];
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "mpop";
   version = "1.4.18";
 
   src = fetchurl {
-    url = "https://marlam.de/${pname}/releases/${pname}-${version}.tar.xz";
+    url = "https://marlam.de/${finalAttrs.pname}/releases/${finalAttrs.pname}-${finalAttrs.version}.tar.xz";
     sha256 = "sha256-YJmVAYT30JSngtHnq5gzc28SMI00pUSlm0aoRx2fhbc=";
   };
 
@@ -47,4 +47,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl3Plus;
     platforms = platforms.unix;
   };
-}
+})
