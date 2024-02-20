@@ -3,14 +3,14 @@
   libxkbfile, libjpeg_turbo, xcbutilxrm, xorg
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "2.13.c.5";
   pname = "i3lock-color";
 
   src = fetchFromGitHub {
     owner = "PandorasFox";
     repo = "i3lock-color";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-fuLeglRif2bruyQRqiL3nm3q6qxoHcPdVdL+QjGBR/k=";
   };
 
@@ -30,7 +30,7 @@ stdenv.mkDerivation rec {
     sed -i 's/\(^\|\s\|"\)i3lock\(\s\|$\)/\1i3lock-color\2/g' $out/share/man/man1/i3lock-color.1
   '';
   meta = with lib; {
-    description = "A simple screen locker like slock, enhanced version with extra configuration options";
+    description = "A simple screen locker like slock, enhanced finalAttrs.version with extra configuration options";
     longDescription = ''
       Simple screen locker. After locking, a colored background (default: white) or
       a configurable image is shown, and a ring-shaped unlock-indicator gives feedback
@@ -59,4 +59,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.all;
     broken = stdenv.isDarwin;
   };
-}
+})
