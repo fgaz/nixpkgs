@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, makeDesktopItem, copyDesktopItems, nwjs, wrapGAppsHook, gsettings-desktop-schemas, gtk3 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "inav-configurator";
   version = "5.1.0";
 
   src = fetchurl {
-    url = "https://github.com/iNavFlight/inav-configurator/releases/download/${version}/INAV-Configurator_linux64_${version}.tar.gz";
+    url = "https://github.com/iNavFlight/inav-configurator/releases/download/${finalAttrs.version}/INAV-Configurator_linux64_${finalAttrs.version}.tar.gz";
     sha256 = "sha256-ZvZxQICa5fnJBTx0aW/hqQCuhQW9MkcVa2sOjPYaPXM=";
   };
 
@@ -22,21 +22,21 @@ stdenv.mkDerivation rec {
     runHook preInstall
 
     mkdir -p $out/bin \
-             $out/opt/${pname}
+             $out/opt/${finalAttrs.pname}
 
     cp -r inav-configurator $out/opt/inav-configurator/
-    install -m 444 -D $icon $out/share/icons/hicolor/128x128/apps/${pname}.png
+    install -m 444 -D $icon $out/share/icons/hicolor/128x128/apps/${finalAttrs.pname}.png
 
     chmod +x $out/opt/inav-configurator/inav-configurator
-    makeWrapper ${nwjs}/bin/nw $out/bin/${pname} --add-flags $out/opt/inav-configurator/inav-configurator
+    makeWrapper ${nwjs}/bin/nw $out/bin/${finalAttrs.pname} --add-flags $out/opt/inav-configurator/inav-configurator
 
     runHook postInstall
   '';
 
   desktopItems = makeDesktopItem {
-    name = pname;
-    exec = pname;
-    icon = pname;
+    name = finalAttrs.pname;
+    exec = finalAttrs.pname;
+    icon = finalAttrs.pname;
     comment = "iNavFlight configuration tool";
     desktopName = "iNav Configurator";
     genericName = "Flight controller configuration tool";
@@ -55,4 +55,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ tilcreator wucke13 ];
     platforms = platforms.linux;
   };
-}
+})
