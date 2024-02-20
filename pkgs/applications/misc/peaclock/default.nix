@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, cmake, libpthreadstubs, icu }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "peaclock";
   version = "0.4.3";
 
   src = fetchFromGitHub {
     owner = "octobanana";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "1582vgslhpgbvcd7ipgf1d1razrvgpq1f93q069yr2bbk6xn8i16";
   };
 
@@ -21,4 +21,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = with maintainers; [ djanatyn ];
   };
-}
+})
