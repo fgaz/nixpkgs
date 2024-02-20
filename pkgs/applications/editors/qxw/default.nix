@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, pkg-config, gtk2, pcre }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "qxw";
   version = "20200708";
 
   src = fetchurl {
-    url = "https://www.quinapalus.com/qxw-${version}.tar.gz";
+    url = "https://www.quinapalus.com/qxw-${finalAttrs.version}.tar.gz";
     sha256 = "1si3ila7137c7x4mp3jv1q1mh3jp0p4khir1yz1rwy0mp3znwv7d";
   };
 
@@ -29,4 +29,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     mainProgram = "qxw";
   };
-}
+})
