@@ -1,20 +1,20 @@
 { lib, stdenv, fetchFromGitHub, scsh, feh, xorg }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "deco";
   version = "unstable-2019-04-03";
 
   src = fetchFromGitHub {
     owner = "ebzzry";
-    repo = pname;
+    repo = finalAttrs.pname;
     rev = "dd8ec7905bc85d085eb2ee3bddabea451054288c";
     sha256 = "sha256-/3GeNvWOCRPOYTUbodXDUxR5QVDEyx6x2Jt5PxsPdvk=";
   };
 
   installPhase = ''
     mkdir -p $out/bin
-    cp ${pname} $out/bin
-    chmod +x $out/bin/${pname}
+    cp ${finalAttrs.pname} $out/bin
+    chmod +x $out/bin/${finalAttrs.pname}
   '';
 
   postFixup = ''
@@ -32,4 +32,4 @@ stdenv.mkDerivation rec {
   };
 
   dontBuild = true;
-}
+})
