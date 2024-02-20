@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "samblaster";
   version = "0.1.26";
 
   src = fetchFromGitHub {
     owner = "GregoryFaust";
     repo = "samblaster";
-    rev = "v.${version}";
+    rev = "v.${finalAttrs.version}";
     sha256 = "0g24fq5hplnfgqkh3xqpg3lgx3wmxwnh9c7m6yw7pbi40lmgl1jv";
   };
 
@@ -25,4 +25,4 @@ stdenv.mkDerivation rec {
     homepage = "https://github.com/GregoryFaust/samblaster";
     platforms = platforms.x86_64;
   };
-}
+})
