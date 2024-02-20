@@ -12,19 +12,19 @@
 , python3
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "lttoolbox";
   version = "3.7.1";
 
   src = fetchFromGitHub {
     owner = "apertium";
     repo = "lttoolbox";
-    rev = "refs/tags/v${version}";
+    rev = "refs/tags/v${finalAttrs.version}";
     hash = "sha256-3lHXKtwQSrMGQEGOGr27e3kB2qKkTFZcEzeAnIm89Rg=";
   };
 
   patches = [
-    # can be removed once the version goes past this commit
+    # can be removed once the finalAttrs.version goes past this commit
     # https://github.com/apertium/lttoolbox/commit/e682fe18a96d5a865cfbd3e5661dbc7b3ace1821
     (fetchpatch {
       url = "https://github.com/apertium/lttoolbox/commit/e682fe18a96d5a865cfbd3e5661dbc7b3ace1821.patch";
@@ -58,8 +58,8 @@ stdenv.mkDerivation rec {
     description = "Finite state compiler, processor and helper tools used by apertium";
     homepage = "https://github.com/apertium/lttoolbox";
     maintainers = with maintainers; [ onthestairs ];
-    changelog = "https://github.com/apertium/lttoolbox/releases/tag/v${version}";
+    changelog = "https://github.com/apertium/lttoolbox/releases/tag/v${finalAttrs.version}";
     license = licenses.gpl2;
     platforms = platforms.linux ++ platforms.darwin;
   };
-}
+})
