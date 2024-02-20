@@ -7,14 +7,14 @@
 , opencv
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "focus-stack";
   version = "1.4";
 
   src = fetchFromGitHub {
     owner = "PetteriAimonen";
     repo = "focus-stack";
-    rev = version;
+    rev = finalAttrs.version;
     hash = "sha256-SoECgBMjWI+n7H6p3hf8J5E9UCLHGiiz5WAsEEioJsU=";
   };
 
@@ -29,4 +29,4 @@ stdenv.mkDerivation rec {
     license = licenses.mit;
     maintainers = with maintainers; [ paperdigits ];
   };
-}
+})
