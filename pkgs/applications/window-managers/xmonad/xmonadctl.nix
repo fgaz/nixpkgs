@@ -1,7 +1,7 @@
 { stdenv, lib, fetchFromGitHub, ghcWithPackages, haskellPackages, ... }:
 
 let xmonadctlEnv = ghcWithPackages (self: [ self.xmonad-contrib self.X11 ]);
-in stdenv.mkDerivation rec {
+in stdenv.mkDerivation (finalAttrs: {
   pname = "xmonadctl";
 
   inherit (haskellPackages.xmonad-contrib) src version;
@@ -21,4 +21,4 @@ in stdenv.mkDerivation rec {
     license = licenses.bsd3;
     maintainers = [ maintainers.ajgrf ];
   };
-}
+})
