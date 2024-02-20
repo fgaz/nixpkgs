@@ -18,14 +18,14 @@
 , withMpi ? false
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "nest";
   version = "3.6";
 
   src = fetchFromGitHub {
     owner = "nest";
     repo = "nest-simulator";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-sXtF4JmHYoLp0t3o4KF6R2E0qLnKrzSPMXOxVJAm+sU=";
   };
 
@@ -72,15 +72,15 @@ stdenv.mkDerivation rec {
 
   passthru.tests.version = testers.testVersion {
     package = nest;
-    command = "nest --version";
+    command = "nest --finalAttrs.version";
   };
 
   meta = with lib; {
     description = "NEST is a command line tool for simulating neural networks";
     homepage = "https://www.nest-simulator.org/";
-    changelog = "https://github.com/nest/nest-simulator/releases/tag/v${version}";
+    changelog = "https://github.com/nest/nest-simulator/releases/tag/v${finalAttrs.version}";
     license = licenses.gpl2Plus;
     maintainers = with maintainers; [ jiegec davidcromp ];
     platforms = platforms.unix;
   };
-}
+})
