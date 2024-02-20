@@ -7,14 +7,14 @@
 , openlibm
 } :
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "lite";
   version = "1.11";
 
   src = fetchFromGitHub {
     owner = "rxi";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "0wxqfb4ly8g7w5qph76xys95b55ackkags8jgd1nasmiyi8gcd5a";
   };
 
@@ -43,10 +43,10 @@ stdenv.mkDerivation rec {
   '';
 
   installPhase = ''
-    mkdir -p $out/bin $out/lib/${pname}
-    cp -a lite $out/lib/${pname}
-    cp -a data $out/lib/${pname}
-    makeWrapper $out/lib/${pname}/lite $out/bin/lite
+    mkdir -p $out/bin $out/lib/${finalAttrs.pname}
+    cp -a lite $out/lib/${finalAttrs.pname}
+    cp -a data $out/lib/${finalAttrs.pname}
+    makeWrapper $out/lib/${finalAttrs.pname}/lite $out/bin/lite
   '';
 
   meta = with lib; {
@@ -57,4 +57,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     mainProgram = "lite";
   };
-}
+})
