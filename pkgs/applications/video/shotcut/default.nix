@@ -18,14 +18,14 @@
 , cmake
 , gitUpdater
 }:
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "shotcut";
   version = "24.01.13";
 
   src = fetchFromGitHub {
     owner = "mltframework";
     repo = "shotcut";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-a/PgwxD8MXItkxT4LTdEJrrExD3r9CUkxr/uhgJicD8=";
   };
 
@@ -45,7 +45,7 @@ stdenv.mkDerivation rec {
 
   env.NIX_CFLAGS_COMPILE = "-DSHOTCUT_NOUPGRADE";
   cmakeFlags = [
-    "-DSHOTCUT_VERSION=${version}"
+    "-DSHOTCUT_VERSION=${finalAttrs.version}"
   ];
 
   patches = [
@@ -66,10 +66,10 @@ stdenv.mkDerivation rec {
     description = "A free, open source, cross-platform video editor";
     longDescription = ''
       An official binary for Shotcut, which includes all the
-      dependencies pinned to specific versions, is provided on
+      dependencies pinned to specific finalAttrs.versions, is provided on
       http://shotcut.org.
 
-      If you encounter problems with this version, please contact the
+      If you encounter problems with this finalAttrs.version, please contact the
       nixpkgs maintainer(s). If you wish to report any bugs upstream,
       please use the official build from shotcut.org instead.
     '';
@@ -79,4 +79,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     mainProgram = "shotcut";
   };
-}
+})
