@@ -5,14 +5,14 @@
 let
   qtPython = python3.withPackages (pkgs: with pkgs; [ pyqt5 ]);
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "seamly2d";
   version = "2022-08-15.0339";
 
   src = fetchFromGitHub {
     owner = "FashionFreedom";
     repo = "Seamly2D";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "13jxkg84jfz8g52zwhh5jvi23wryzkavwbsfalzr9m04blj5xnik";
   };
 
@@ -84,4 +84,4 @@ stdenv.mkDerivation rec {
     platforms = lib.platforms.linux;
     maintainers = with lib.maintainers; [ WhittlesJr ];
   };
-}
+})
