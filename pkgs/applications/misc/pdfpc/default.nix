@@ -2,14 +2,14 @@
 , poppler, libpthreadstubs, gstreamer, gst-plugins-base, gst-plugins-good, gst-libav, gobject-introspection, wrapGAppsHook
 , qrencode, webkitgtk, discount, json-glib, fetchpatch }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "pdfpc";
   version = "4.6.0";
 
   src = fetchFromGitHub {
     repo = "pdfpc";
     owner = "pdfpc";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-5HFmbVsNajMwo+lBe9kJcJyQGe61N6Oy2CI/WJwmSE4=";
   };
 
@@ -53,4 +53,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
   };
 
-}
+})
