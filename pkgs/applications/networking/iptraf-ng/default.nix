@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, ncurses }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "1.2.1";
   pname = "iptraf-ng";
 
   src = fetchFromGitHub {
-    owner = pname;
-    repo = pname;
-    rev = "v${version}";
+    owner = finalAttrs.pname;
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "1f91w1bjaayr6ld95z2q55ny983bb0m05k1jrw2bcddvcihaiqb1";
   };
 
@@ -47,4 +47,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ devhell ];
     mainProgram = "iptraf-ng";
   };
-}
+})
