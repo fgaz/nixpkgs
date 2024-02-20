@@ -7,7 +7,7 @@
 , sox
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "redoflacs";
   version = "0.30.20190903";
 
@@ -44,4 +44,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ peterhoeg ];
     platforms = platforms.all;
   };
-}
+})
