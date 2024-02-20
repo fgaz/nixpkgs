@@ -8,7 +8,7 @@
 , volk
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "sigutils";
   version = "unstable-2022-07-05";
 
@@ -37,4 +37,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.all;
     maintainers = with maintainers; [ polygon oxapentane ];
   };
-}
+})
