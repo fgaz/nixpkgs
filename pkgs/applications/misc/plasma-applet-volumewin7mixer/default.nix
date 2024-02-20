@@ -1,13 +1,13 @@
 { lib, stdenv, cmake, extra-cmake-modules, plasma-framework, kwindowsystem, plasma-pa, fetchFromGitHub }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "plasma-applet-volumewin7mixer";
   version = "26";
 
   src = fetchFromGitHub {
     owner = "Zren";
     repo = "plasma-applet-volumewin7mixer";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-VMOUNtAURTHDuJBOGz2N0+3VzxBmVNC1O8dVuyUZAa4=";
   };
 
@@ -26,4 +26,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ mdevlamynck ];
   };
-}
+})
