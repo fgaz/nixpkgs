@@ -1,10 +1,10 @@
 { stdenv, fetchurl, lib, expat, octave, libxml2, texinfo, zip }:
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gama";
   version = "2.27";
 
   src = fetchurl {
-    url = "mirror://gnu/${pname}/${pname}-${version}.tar.gz";
+    url = "mirror://gnu/${finalAttrs.pname}/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     sha256 = "sha256-k4s7TK/ym68v40KDzZoMMxDWFMRnsMuk6V/G9P/jM0E=";
   };
 
@@ -21,4 +21,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl3Plus;
     platforms = platforms.all;
   };
-}
+})
