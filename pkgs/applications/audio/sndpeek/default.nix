@@ -1,15 +1,15 @@
 { lib, stdenv, fetchurl, libsndfile, freeglut, alsa-lib, mesa, libGLU, libX11, libXmu
 , libXext, libXi }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "sndpeek";
   version = "1.4";
 
   src = fetchurl {
-    url = "https://soundlab.cs.princeton.edu/software/sndpeek/files/sndpeek-${version}.tgz";
+    url = "https://soundlab.cs.princeton.edu/software/sndpeek/files/sndpeek-${finalAttrs.version}.tgz";
     sha256 = "2d86cf74854fa00dcdc05a35dd92bc4cf6115e87102b17023be5cba9ead8eedf";
   };
-  sourceRoot = "sndpeek-${version}/src/sndpeek";
+  sourceRoot = "sndpeek-${finalAttrs.version}/src/sndpeek";
 
   # this patch adds -lpthread to the list of libraries, without it a
   # symbol-not-found-error is thrown
@@ -53,4 +53,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl2;
     maintainers = [ maintainers.laikq ];
   };
-}
+})
