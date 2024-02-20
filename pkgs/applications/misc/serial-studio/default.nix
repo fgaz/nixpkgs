@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, qmake, qtquickcontrols2, qtserialport, qtsvg, wrapQtAppsHook }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "serial-studio";
   version = "1.1.7";
 
   src = fetchFromGitHub {
     owner = "Serial-Studio";
     repo = "Serial-Studio";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-Tsd1PGB7cO8h3HDifOtB8jsnj+fS4a/o5nfLoohVLM4=";
     fetchSubmodules = true;
   };
@@ -23,4 +23,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ sikmir ];
     platforms = platforms.linux;
   };
-}
+})
