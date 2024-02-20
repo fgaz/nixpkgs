@@ -1,12 +1,12 @@
 { lib, stdenv, fetchhg, autoconf, sqlite }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "vcprompt";
   version = "1.2.1";
 
   src = fetchhg {
     url = "http://hg.gerg.ca/vcprompt/";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "03xqvp6bfl98bpacrw4n82qv9cw6a4fxci802s3vrygas989v1kj";
   };
 
@@ -20,7 +20,7 @@ stdenv.mkDerivation rec {
   meta = with lib; {
     description = ''
       A little C program that prints a short string with barebones information
-      about the current working directory for various version control systems
+      about the current working directory for various finalAttrs.version control systems
     '';
     homepage    = "http://hg.gerg.ca/vcprompt";
     maintainers = with maintainers; [ ];
@@ -28,4 +28,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl2Plus;
     mainProgram = "vcprompt";
   };
-}
+})
