@@ -1,6 +1,6 @@
 { lib, stdenv, fetchzip }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "dlx";
   version = "2012-07-08";
 
@@ -26,4 +26,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl2Only;
     platforms = platforms.linux;
   };
-}
+})
