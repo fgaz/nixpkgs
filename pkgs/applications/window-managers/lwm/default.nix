@@ -1,12 +1,12 @@
 { lib, stdenv, fetchurl
 , imake, libX11, libSM, libXext, libICE }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "lwm";
   version = "1.2.4";
 
   src = fetchurl {
-    url = "http://www.jfc.org.uk/files/lwm/${pname}-${version}.tar.gz";
+    url = "http://www.jfc.org.uk/files/lwm/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     sha256 = "1bcdr173f0gl61fyl43p3gr145angci7lvjqb8rl00y9f9amvh3y";
   };
 
@@ -43,4 +43,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     mainProgram = "lwm";
   };
-}
+})
