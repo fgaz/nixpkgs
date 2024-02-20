@@ -7,14 +7,14 @@
 , withCadFeatures ? false
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "febio-studio";
   version = "1.6.1";
 
   src = fetchFromGitHub {
     owner = "febiosoftware";
     repo = "FEBioStudio";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "0r6pg49i0q9idp7pjymj7mlxd63qjvmfvg0l7fmx87y1yd2hfw4h";
   };
 
@@ -58,4 +58,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = with maintainers; [ Scriptkiddi ];
   };
-}
+})
