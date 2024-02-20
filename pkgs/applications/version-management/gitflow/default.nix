@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, makeWrapper, getopt, git, coreutils }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gitflow";
   version = "1.12.3";
 
   src = fetchFromGitHub {
     owner = "petervanderdoes";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "sha256-kHirHG/bfsU6tKyQ0khNSTyChhzHfzib+HyA3LOtBI8=";
   };
 
@@ -37,4 +37,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.all;
     maintainers = with maintainers; [ offline ];
   };
-}
+})
