@@ -39,12 +39,12 @@
 , wrapGAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "polar-bookshelf1";
   version = "1.100.14";
 
   src = fetchurl {
-    url = "https://github.com/burtonator/polar-bookshelf/releases/download/v${version}/polar-bookshelf-${version}-amd64.deb";
+    url = "https://github.com/burtonator/polar-bookshelf/releases/download/v${finalAttrs.version}/polar-bookshelf-${finalAttrs.version}-amd64.deb";
     hash = "sha256-5xa+Nwu0p1x5DLn1GNI0HDt7GtBGoFQ/9qGTeq9uBgU=";
   };
 
@@ -100,7 +100,7 @@ stdenv.mkDerivation rec {
   '';
 
   preFixup = ''
-    gappsWrapperArgs+=(--prefix LD_LIBRARY_PATH : "${runtimeLibs}" )
+    gappsWrapperArgs+=(--prefix LD_LIBRARY_PATH : "${finalAttrs.runtimeLibs}" )
     # Correct desktop file `Exec`
     substituteInPlace $out/share/applications/polar-bookshelf.desktop \
       --replace "/opt/Polar Bookshelf/polar-bookshelf" "$out/bin/polar-bookshelf"
@@ -114,4 +114,4 @@ stdenv.mkDerivation rec {
     platforms = lib.platforms.linux;
     sourceProvenance = with lib.sourceTypes; [ binaryNativeCode ];
   };
-}
+})
