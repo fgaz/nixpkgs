@@ -1,14 +1,14 @@
 { lib, stdenv, fetchFromGitHub, makeWrapper
 , cdparanoia, cddiscid, ruby }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "0.8.0rc3";
   pname = "rubyripper";
 
   src = fetchFromGitHub {
     owner = "bleskodev";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "1qfwv8bgc9pyfh3d40bvyr9n7sjc2na61481693wwww640lm0f9f";
   };
 
@@ -39,4 +39,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl3Plus;
     homepage = "https://github.com/bleskodev/rubyripper";
   };
-}
+})
