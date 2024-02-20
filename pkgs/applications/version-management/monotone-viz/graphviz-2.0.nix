@@ -15,7 +15,7 @@
 , libwebp
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "graphviz";
   version = "2.0";
 
@@ -60,4 +60,4 @@ stdenv.mkDerivation rec {
     branch = "2.0";
     platforms = lib.platforms.unix;
   };
-}
+})
