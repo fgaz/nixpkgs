@@ -12,14 +12,14 @@
 , libxkbcommon
 , pkg-config
 }:
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "showmethekey";
   version = "1.12.0";
 
   src = fetchFromGitHub {
     owner = "AlynxZhou";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     hash = "sha256-eeObomb4Gv/vpvViHsi3+O0JR/rYamrlZNZaXKL6KJw=";
   };
 
@@ -46,4 +46,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ ocfox ];
   };
-}
+})
