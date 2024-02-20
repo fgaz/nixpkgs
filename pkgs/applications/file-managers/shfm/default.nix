@@ -3,14 +3,14 @@
 , fetchFromGitHub
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "shfm";
   version = "0.4.2";
 
   src = fetchFromGitHub {
     owner = "dylanaraps";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     hash = "sha256-ilVrUFfyzOZgjbBTqlHA9hLaTHw1xHFo1Y/tjXygNEs=";
   };
 
@@ -24,7 +24,7 @@ stdenv.mkDerivation rec {
   installPhase = ''
     runHook preInstall
     install -D shfm --target-directory $out/bin/
-    install -D README --target-directory $out/share/doc/${pname}/
+    install -D README --target-directory $out/share/doc/${finalAttrs.pname}/
     runHook postInstall
   '';
 
@@ -35,4 +35,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ AndersonTorres ];
     platforms = platforms.all;
   };
-}
+})
