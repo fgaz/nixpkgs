@@ -19,7 +19,7 @@
 , sqlite
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "valent";
   version = "unstable-2023-11-11";
 
@@ -68,4 +68,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ federicoschonborn aleksana ];
     platforms = platforms.linux;
   };
-}
+})
