@@ -1,6 +1,6 @@
 { stdenv, lib, perl, perlPackages, makeWrapper, coreutils, notmuch }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "notmuch-mutt";
   version = notmuch.version;
 
@@ -43,4 +43,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ peterhoeg ];
     platforms   = platforms.unix;
   };
-}
+})
