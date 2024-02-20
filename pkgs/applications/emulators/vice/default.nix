@@ -24,12 +24,12 @@
 , xdg-utils
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "vice";
   version = "3.8";
 
   src = fetchurl {
-    url = "mirror://sourceforge/vice-emu/vice-${version}.tar.gz";
+    url = "mirror://sourceforge/vice-emu/vice-${finalAttrs.version}.tar.gz";
     sha256 = "sha256-HX3E0PK7zCqHG7lU/0pd9jBI3qnBb18em8gmD6QaEAQ=";
   };
 
@@ -79,4 +79,4 @@ stdenv.mkDerivation rec {
     maintainers = [ lib.maintainers.sander ];
     platforms = lib.platforms.linux;
   };
-}
+})
