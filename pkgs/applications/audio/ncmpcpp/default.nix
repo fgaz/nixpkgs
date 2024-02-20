@@ -15,12 +15,12 @@
 , taglibSupport ? true, taglib # tag editor
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "ncmpcpp";
   version = "0.9.2";
 
   src = fetchurl {
-    url = "https://rybczak.net/ncmpcpp/stable/${pname}-${version}.tar.bz2";
+    url = "https://rybczak.net/ncmpcpp/stable/${finalAttrs.pname}-${finalAttrs.version}.tar.bz2";
     sha256 = "sha256-+qv2FXyMsbJKBZryduFi+p+aO5zTgQxDuRKIYMk4Ohs=";
   };
 
@@ -44,10 +44,10 @@ stdenv.mkDerivation rec {
   meta = with lib; {
     description = "A featureful ncurses based MPD client inspired by ncmpc";
     homepage    = "https://rybczak.net/ncmpcpp/";
-    changelog   = "https://github.com/ncmpcpp/ncmpcpp/blob/${version}/CHANGELOG.md";
+    changelog   = "https://github.com/ncmpcpp/ncmpcpp/blob/${finalAttrs.version}/CHANGELOG.md";
     license     = licenses.gpl2Plus;
     maintainers = with maintainers; [ koral lovek323 ];
     platforms   = platforms.all;
     mainProgram = "ncmpcpp";
   };
-}
+})
