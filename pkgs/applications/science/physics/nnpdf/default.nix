@@ -13,14 +13,14 @@
 , swig
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "nnpdf";
   version = "4.0.8";
 
   src = fetchFromGitHub {
     owner = "NNPDF";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     hash = "sha256-hGCA2K/fD6UZa9WD42IDmZV1oxNgjFaXkjOZKGgGSBg=";
   };
 
@@ -62,4 +62,4 @@ stdenv.mkDerivation rec {
     # never built on aarch64-darwin since first introduction in nixpkgs
     broken = (stdenv.isDarwin && stdenv.isAarch64) || (stdenv.isLinux && stdenv.isAarch64);
   };
-}
+})
