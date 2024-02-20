@@ -7,12 +7,12 @@
 , enableX11 ? true, libX11, libXt, libXau # GUI support
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "2.29";
   pname = "links2";
 
   src = fetchurl {
-    url = "${meta.homepage}/download/links-${version}.tar.bz2";
+    url = "${finalAttrs.meta.homepage}/download/links-${finalAttrs.version}.tar.bz2";
     sha256 = "sha256-IqqWwLOOGm+PftnXpBZ6R/w3JGCXdZ72BZ7Pj56teZg=";
   };
 
@@ -38,4 +38,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl2Plus;
     platforms = platforms.unix;
   };
-}
+})
