@@ -6,14 +6,14 @@
 , withDoc ? false, docbook_xml_dtd_45, docbook_xsl, expat, fop, libxml2, libxslt, perl
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gpsbabel";
   version = "1.8.0";
 
   src = fetchFromGitHub {
     owner = "gpsbabel";
     repo = "gpsbabel";
-    rev = "gpsbabel_${lib.replaceStrings ["."] ["_"] version}";
+    rev = "gpsbabel_${lib.replaceStrings ["."] ["_"] finalAttrs.version}";
     sha256 = "sha256-0w8LsO+HwqZF8SQmwd8bCKma9PCM0hAzXhzWR4DgAHs=";
   };
 
@@ -22,7 +22,7 @@ stdenv.mkDerivation rec {
   postPatch = ''
     patchShebangs testo
   '' + lib.optionalString withDoc ''
-    substituteInPlace gbversion.h.qmake.in \
+    substituteInPlace gbfinalAttrs.version.h.qmake.in \
       --replace /usr/share/doc $doc/share/doc
 
     substituteInPlace testo.d/serialization.test \
@@ -115,4 +115,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = with maintainers; [ sikmir ];
   };
-}
+})
