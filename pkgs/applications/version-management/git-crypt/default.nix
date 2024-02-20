@@ -9,14 +9,14 @@
 , docbook_xsl
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "git-crypt";
   version = "0.7.0";
 
   src = fetchFromGitHub {
     owner = "AGWA";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "sha256-GcGCX6hoKL+sNLAeGEzZpaM+cdFjcNlwYExfOFEPi0I=";
   };
 
@@ -68,4 +68,4 @@ stdenv.mkDerivation rec {
     mainProgram = "git-crypt";
   };
 
-}
+})
