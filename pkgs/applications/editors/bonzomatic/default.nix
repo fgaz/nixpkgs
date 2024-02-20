@@ -3,14 +3,14 @@
 , alsa-lib, fontconfig, mesa_glu, libXcursor, libXinerama, libXrandr, xorg
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "bonzomatic";
   version = "2023-06-15";
 
   src = fetchFromGitHub {
     owner = "Gargaj";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "sha256-hwK3C+p1hRwnuY2/vBrA0QsJGIcJatqq+U5/hzVCXEg=";
   };
 
@@ -32,4 +32,4 @@ stdenv.mkDerivation rec {
     platforms = [ "i686-linux" "x86_64-linux" ];
     mainProgram = "bonzomatic";
   };
-}
+})
