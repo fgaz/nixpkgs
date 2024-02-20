@@ -10,14 +10,14 @@
 , xmlRpcSupport ? true, xmlrpc_c
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "jesec-rtorrent";
   version = "0.9.8-r16";
 
   src = fetchFromGitHub {
     owner = "jesec";
     repo = "rtorrent";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-i7c1jSawHshj1kaXl8tdpelIKU24okeg9K5/+ht6t2k=";
   };
 
@@ -71,4 +71,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     mainProgram = "rtorrent";
   };
-}
+})
