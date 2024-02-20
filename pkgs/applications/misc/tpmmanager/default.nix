@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, fetchpatch, qtbase, qmake, wrapQtAppsHook, trousers }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "0.8.1";
   pname = "tpmmanager";
 
   src = fetchFromGitHub {
     owner = "Rohde-Schwarz";
     repo = "TPMManager";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-UZYn4ssbvLpdB0DssT7MXqQZCu1KkLf/Bsb45Rvgm+E=";
   };
 
@@ -50,4 +50,4 @@ stdenv.mkDerivation rec {
     maintainers = with lib.maintainers; [ ];
     platforms = with lib.platforms; linux;
   };
-}
+})
