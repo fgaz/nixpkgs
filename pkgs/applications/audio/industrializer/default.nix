@@ -13,11 +13,11 @@
 , pkg-config
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "industrializer";
   version = "0.2.7";
   src = fetchurl {
-    url = "mirror://sourceforge/project/${pname}/ps${pname}-${version}.tar.xz";
+    url = "mirror://sourceforge/project/${finalAttrs.pname}/ps${finalAttrs.pname}-${finalAttrs.version}.tar.xz";
     sha256 = "0k688k2wppam351by7cp9m7an09yligzd89padr8viqy63gkdk6v";
   };
 
@@ -47,4 +47,4 @@ stdenv.mkDerivation rec {
     maintainers = [ lib.maintainers.magnetophon ];
     platforms = lib.platforms.linux;
   };
-}
+})
