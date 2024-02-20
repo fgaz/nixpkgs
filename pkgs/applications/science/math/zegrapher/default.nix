@@ -4,14 +4,14 @@
 , wrapQtAppsHook
 , boost }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "zegrapher";
   version = "3.1.1";
 
   src = fetchFromGitHub {
     owner = "AdelKS";
     repo = "ZeGrapher";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-OSQXm0gDI1zM2MBM4iiY43dthJcAZJkprklolsNMEvk=";
   };
 
@@ -33,4 +33,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl3Plus;
     maintainers = with maintainers; [ AndersonTorres ];
   };
-}
+})
