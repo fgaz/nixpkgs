@@ -1,9 +1,9 @@
 { lib, stdenv, fetchurl, jre, unzip, runtimeShell }:
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "0.9.0";
   pname = "zgrviewer";
   src = fetchurl {
-    url = "mirror://sourceforge/zvtm/${pname}/${version}/${pname}-${version}.zip";
+    url = "mirror://sourceforge/zvtm/${finalAttrs.pname}/${finalAttrs.version}/${finalAttrs.pname}-${finalAttrs.version}.zip";
     sha256 = "1yg2rck81sqqrgfi5kn6c1bz42dr7d0zqpcsdjhicssi1y159f23";
   };
   nativeBuildInputs = [ unzip ];
@@ -17,7 +17,7 @@ stdenv.mkDerivation rec {
     cp -r target/* "$out/share/java/zvtm/"
 
     echo '#!${runtimeShell}' > "$out/bin/zgrviewer"
-    echo "${jre}/bin/java -jar '$out/share/java/zvtm/zgrviewer-${version}.jar' \"\$@\"" >> "$out/bin/zgrviewer"
+    echo "${jre}/bin/java -jar '$out/share/java/zvtm/zgrviewer-${finalAttrs.version}.jar' \"\$@\"" >> "$out/bin/zgrviewer"
     chmod a+x "$out/bin/zgrviewer"
   '';
   meta = {
@@ -29,4 +29,4 @@ stdenv.mkDerivation rec {
     description = "GraphViz graph viewer/navigator";
     platforms = with lib.platforms; unix;
   };
-}
+})
