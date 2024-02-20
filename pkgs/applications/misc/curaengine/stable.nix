@@ -1,6 +1,6 @@
 { lib, stdenv, fetchFromGitHub }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "curaengine";
   version = "15.04.6";
 
@@ -26,4 +26,4 @@ stdenv.mkDerivation rec {
     license = licenses.agpl3;
     platforms = platforms.linux;
   };
-}
+})
