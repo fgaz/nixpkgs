@@ -1,11 +1,11 @@
 { lib, stdenv, fetchzip, pkg-config, lv2, fftw, lv2-cpp-tools, gtkmm2 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "vocproc";
   version = "0.2.1";
 
   src = fetchzip {
-    url = "https://hyperglitch.com/files/vocproc/${pname}-${version}.default.tar.gz";
+    url = "https://hyperglitch.com/files/vocproc/${finalAttrs.pname}-${finalAttrs.version}.default.tar.gz";
     sha256 = "07a1scyz14mg2jdbw6fpv4qg91zsw61qqii64n9qbnny9d5pn8n2";
   };
 
@@ -24,4 +24,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.michalrus ];
     platforms = platforms.linux;
   };
-}
+})
