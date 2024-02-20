@@ -19,7 +19,7 @@
 , libadwaita
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "solanum";
   version = "5.0.0";
 
@@ -73,4 +73,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     mainProgram = "solanum";
   };
-}
+})
