@@ -15,14 +15,14 @@
 , stdenv
 , wrapGAppsHook4
 }:
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "raider";
   version = "1.3.1";
 
   src = fetchFromGitHub {
     owner = "ADBeveridge";
     repo = "raider";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-fyE0CsQp2UVh+7bAQo+GHEF0k8Gwl9j4qclh04AQiVI=";
   };
 
@@ -55,4 +55,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ benediktbroich ];
     platforms = platforms.unix;
   };
-}
+})
