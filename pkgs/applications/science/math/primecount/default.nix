@@ -5,14 +5,14 @@
 , primesieve
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "primecount";
   version = "7.10";
 
   src = fetchFromGitHub {
     owner = "kimwalisch";
     repo = "primecount";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-z7sHGR6zZSTV1PbL0WPGHf52CYQ572KC1yznCuIEJbQ=";
   };
 
@@ -34,7 +34,7 @@ stdenv.mkDerivation rec {
 
   meta = with lib; {
     homepage = "https://github.com/kimwalisch/primecount";
-    changelog = "https://github.com/kimwalisch/primecount/blob/v${version}/ChangeLog";
+    changelog = "https://github.com/kimwalisch/primecount/blob/v${finalAttrs.version}/ChangeLog";
     description = "Fast prime counting function implementations";
     longDescription = ''
       primecount is a command-line program and C/C++ library that counts the
@@ -53,4 +53,4 @@ stdenv.mkDerivation rec {
     license = licenses.bsd2;
     inherit (primesieve.meta) maintainers platforms;
   };
-}
+})
