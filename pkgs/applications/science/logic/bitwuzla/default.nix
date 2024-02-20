@@ -18,7 +18,7 @@
 , withLingeling ? !stdenv.hostPlatform.isAarch64
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "bitwuzla";
   version = "unstable-2022-10-03";
 
@@ -46,7 +46,7 @@ stdenv.mkDerivation rec {
     "-DPicoSAT_INCLUDE_DIR=${lib.getDev picosat}/include/picosat"
     "-DBtor2Tools_INCLUDE_DIR=${lib.getDev btor2tools}/include/btor2parser"
     "-DBtor2Tools_LIBRARIES=${lib.getLib btor2tools}/lib/libbtor2parser${stdenv.hostPlatform.extensions.sharedLibrary}"
-  ] ++ lib.optional doCheck "-DTESTING=YES";
+  ] ++ lib.optional finalAttrs.doCheck "-DTESTING=YES";
 
   nativeCheckInputs = [ python3 gtest ];
   # two tests fail on darwin and 3 on aarch64-linux
@@ -66,4 +66,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = with maintainers; [ symphorien ];
   };
-}
+})
