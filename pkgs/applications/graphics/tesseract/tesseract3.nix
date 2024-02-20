@@ -1,7 +1,7 @@
 { lib, stdenv, fetchFromGitHub, autoreconfHook, pkg-config
 , leptonica, libpng, libtiff, icu, pango, opencl-headers }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "tesseract";
   version = "3.05.02";
 
@@ -45,4 +45,4 @@ stdenv.mkDerivation rec {
     maintainers = with lib.maintainers; [ viric erikarvstedt ];
     platforms = with lib.platforms; linux ++ darwin;
   };
-}
+})
