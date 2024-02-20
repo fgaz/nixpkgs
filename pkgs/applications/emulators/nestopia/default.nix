@@ -3,14 +3,14 @@
 , libepoxy, gdk-pixbuf, gnome, wrapGAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "1.47";
   pname = "nestopia";
 
   src = fetchFromGitHub {
     owner = "rdanbrook";
     repo = "nestopia";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "0frr0gvjh5mxzdhj0ii3sh671slgnzlm8naqlc4h87rx4p4sz2y2";
   };
 
@@ -69,5 +69,5 @@ stdenv.mkDerivation rec {
     maintainers = with lib.maintainers; [ MP2E ];
     mainProgram = "nestopia";
   };
-}
+})
 
