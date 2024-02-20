@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, ncurses }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "bvi";
   version = "1.4.2";
 
   src = fetchurl {
-    url = "mirror://sourceforge/bvi/${pname}-${version}.src.tar.gz";
+    url = "mirror://sourceforge/bvi/${finalAttrs.pname}-${finalAttrs.version}.src.tar.gz";
     sha256 = "sha256-S7oWwrSWljqbk5M2wKvMjUiGZEkggK5DqG2hjPTOlPI=";
   };
 
@@ -18,4 +18,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ pSub ];
     platforms = with platforms; linux ++ darwin;
   };
-}
+})
