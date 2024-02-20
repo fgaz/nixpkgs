@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, zlib, gmp, ecm }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "msieve";
   version = "1.53";
 
   src = fetchurl {
-    url = "mirror://sourceforge/msieve/msieve/Msieve%20v${version}/msieve${lib.replaceStrings ["."] [""] version}_src.tar.gz";
+    url = "mirror://sourceforge/msieve/msieve/Msieve%20v${finalAttrs.version}/msieve${lib.replaceStrings ["."] [""] finalAttrs.version}_src.tar.gz";
     sha256 = "1d1vv7j4rh3nnxsmvafi73qy7lw7n3akjlm5pjl3m936yapvmz65";
   };
 
@@ -28,4 +28,4 @@ stdenv.mkDerivation rec {
     maintainers = [ lib.maintainers.roconnor ];
     platforms = [ "x86_64-linux" ] ++ lib.platforms.darwin;
   };
-}
+})
