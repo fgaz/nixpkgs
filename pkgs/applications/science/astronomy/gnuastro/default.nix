@@ -1,12 +1,12 @@
 { lib, stdenv, fetchurl, libtool
 , cfitsio, curl, ghostscript, gsl, libgit2, libjpeg, libtiff, lzlib, wcslib }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gnuastro";
   version = "0.21";
 
   src = fetchurl {
-    url = "mirror://gnu/gnuastro/gnuastro-${version}.tar.gz";
+    url = "mirror://gnu/gnuastro/gnuastro-${finalAttrs.version}.tar.gz";
     sha256 = "sha256-L7qZPYQiORUXtV9+tRF4iUbXqIaqFYSYT9Rni90nU38=";
   };
 
@@ -33,4 +33,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = with maintainers; [ sikmir ];
   };
-}
+})
