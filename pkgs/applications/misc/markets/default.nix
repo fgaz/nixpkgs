@@ -4,14 +4,14 @@
 , glib-networking, gobject-introspection, json-glib, libgee, libhandy, libsoup
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "markets";
   version = "0.5.4";
 
   src = fetchFromGitHub {
     owner = "bitstower";
     repo = "markets";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-/g/r/1i69PmPND40zIID3Nun0I4ZFT1EFoNf1qprBjI=";
   };
 
@@ -39,4 +39,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl3Plus;
     platforms = platforms.linux;
   };
-}
+})
