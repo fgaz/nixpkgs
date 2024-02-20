@@ -2,12 +2,12 @@
 , libclxclient, libX11, libXft, readline, aeolus-stops
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "aeolus";
   version = "0.10.4";
 
   src = fetchurl {
-    url = "https://kokkinizita.linuxaudio.org/linuxaudio/downloads/${pname}-${version}.tar.bz2";
+    url = "https://kokkinizita.linuxaudio.org/linuxaudio/downloads/${finalAttrs.pname}-${finalAttrs.version}.tar.bz2";
     sha256 = "sha256-J9xrd/N4LrvGgi89Yj4ob4ZPUAEchrXJJQ+YVJ29Qhk=";
   };
 
@@ -41,4 +41,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ nico202 orivej ];
   };
-}
+})
