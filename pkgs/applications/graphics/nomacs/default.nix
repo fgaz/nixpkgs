@@ -17,14 +17,14 @@
 , quazip
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "nomacs";
   version = "3.17.2287";
 
   src = fetchFromGitHub {
     owner = "nomacs";
     repo = "nomacs";
-    rev = version;
+    rev = finalAttrs.version;
     hash = "sha256-OwiMB6O4+WuAt87sRbD1Qby3U7igqgCgddiWs3a4j3k=";
   };
 
@@ -65,4 +65,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl3Plus;
     inherit (qtbase.meta) platforms;
   };
-}
+})
