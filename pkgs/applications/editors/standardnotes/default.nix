@@ -9,7 +9,7 @@ let
 
 in
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
 
   pname = "standardnotes";
 
@@ -57,4 +57,4 @@ stdenv.mkDerivation rec {
     platforms = builtins.attrNames srcjson.deb;
     mainProgram = "standardnotes";
   };
-}
+})
