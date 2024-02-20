@@ -1,12 +1,12 @@
 { lib, stdenv, fetchFromGitHub, pidgin} :
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "pidgin-msn-pecan";
   version = "0.1.4";
   src = fetchFromGitHub {
     owner = "felipec";
     repo = "msn-pecan";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "0133rpiy4ik6rx9qn8m38vp7w505hnycggr53g3a2hfpk5xj03zh";
   };
 
@@ -22,4 +22,4 @@ stdenv.mkDerivation rec {
   ];
 
   buildInputs = [pidgin];
-}
+})
