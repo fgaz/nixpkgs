@@ -1,14 +1,14 @@
 { lib, stdenv, fetchFromGitHub, pkg-config, lv2, fftw, cmake, libXpm
 , libXft, libjack2, libsamplerate, libsndfile }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "rkrlv2";
   version = "beta_3";
 
   src = fetchFromGitHub {
     owner = "ssj71";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "WjpPNUEYw4aGrh57J+7kkxKFXgCJWNaWAmueFbNUJJo=";
   };
 
@@ -23,4 +23,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     broken = stdenv.isAarch64; # g++: error: unrecognized command line option '-mfpmath=sse'
   };
-}
+})
