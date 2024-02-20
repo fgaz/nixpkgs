@@ -3,12 +3,12 @@
 , libvorbis, gdk-pixbuf
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "2.1.5";
   pname = "gtkpod";
 
   src = fetchurl {
-    url = "mirror://sourceforge/gtkpod/${pname}-${version}.tar.gz";
+    url = "mirror://sourceforge/gtkpod/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     sha256 = "0xisrpx069f7bjkyc8vqxb4k0480jmx1wscqxr6cpq1qj6pchzd5";
   };
   postPatch = ''
@@ -37,4 +37,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = [ ];
   };
-}
+})
