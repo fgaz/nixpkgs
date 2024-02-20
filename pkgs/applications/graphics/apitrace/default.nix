@@ -15,14 +15,14 @@
   brotli,
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "apitrace";
   version = "11.1";
 
   src = fetchFromGitHub {
     owner = "apitrace";
     repo = "apitrace";
-    rev = version;
+    rev = finalAttrs.version;
     hash = "sha256-rvC6iVWNNxH11hzQvRTo+SQi9jEUCPWGSdJmKJe9SQ0=";
     fetchSubmodules = true;
   };
@@ -80,4 +80,4 @@ stdenv.mkDerivation rec {
     license = licenses.mit;
     platforms = platforms.linux;
   };
-}
+})
