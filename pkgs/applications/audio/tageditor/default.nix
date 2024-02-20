@@ -15,14 +15,14 @@
 , wrapQtAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "tageditor";
   version = "3.9.0";
 
   src = fetchFromGitHub {
     owner = "martchus";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     hash = "sha256-caki8WVnu8ELE2mXwRvT9TTTXCtMZEa0E3KVpHl05jg=";
   };
 
@@ -52,4 +52,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     mainProgram = "tageditor";
   };
-}
+})
