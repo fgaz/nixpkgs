@@ -10,12 +10,12 @@ let
     groups = [ "development" "ldap" "markdown" "common_mark" "minimagick" "test" ];
   };
 in
-  stdenv.mkDerivation rec {
+  stdenv.mkDerivation (finalAttrs: {
     pname = "redmine";
     inherit version;
 
     src = fetchurl {
-      url = "https://www.redmine.org/releases/${pname}-${version}.tar.gz";
+      url = "https://www.redmine.org/releases/${finalAttrs.pname}-${version}.tar.gz";
       hash = "sha256-SI/gjzeo6xARQVkiqOp0O3842Kel+IIpUKNKN13PCO4=";
     };
 
@@ -50,4 +50,4 @@ in
       maintainers = with maintainers; [ aanderse felixsinger megheaiulian ];
       license = licenses.gpl2;
     };
-  }
+  })
