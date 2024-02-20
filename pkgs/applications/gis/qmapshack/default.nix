@@ -1,14 +1,14 @@
 { lib, stdenv, fetchFromGitHub, cmake, wrapQtAppsHook
 , qtscript, qtwebengine, gdal, proj, routino, quazip }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "qmapshack";
   version = "1.17.1";
 
   src = fetchFromGitHub {
     owner = "Maproom";
     repo = "qmapshack";
-    rev = "V_${version}";
+    rev = "V_${finalAttrs.version}";
     hash = "sha256-wqztKmaUxY3qd7IgPM7kV7x0BsrTMTX3DbcdM+lsarI=";
   };
 
@@ -27,9 +27,9 @@ stdenv.mkDerivation rec {
   meta = with lib; {
     description = "Consumer grade GIS software";
     homepage = "https://github.com/Maproom/qmapshack";
-    changelog = "https://github.com/Maproom/qmapshack/blob/V_${version}/changelog.txt";
+    changelog = "https://github.com/Maproom/qmapshack/blob/V_${finalAttrs.version}/changelog.txt";
     license = licenses.gpl3Plus;
     maintainers = with maintainers; [ dotlambda sikmir ];
     platforms = with platforms; linux;
   };
-}
+})
