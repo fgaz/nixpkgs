@@ -57,7 +57,7 @@
 , xjadeo
 , videoSupport ? true
 }:
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "ardour";
   version = "7.5";
 
@@ -209,4 +209,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ goibhniu magnetophon mitchmindtree ];
   };
-}
+})
