@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, imlib2, libX11, pkg-config }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "ssocr";
   version = "2.23.1";
 
   src = fetchFromGitHub {
     owner = "auerswal";
     repo = "ssocr";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-EfZsTrZI6vKM7tB6mKNGEkdfkNFbN5p4TmymOJGZRBk=";
   };
 
@@ -22,4 +22,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl3;
     maintainers = [ maintainers.kroell ];
   };
-}
+})
