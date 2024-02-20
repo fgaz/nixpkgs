@@ -1,11 +1,11 @@
 {lib, stdenv, fetchurl, pkg-config, gtk2, alsa-lib, SDL}:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "uae";
   version = "0.8.29";
 
   src = fetchurl {
-    url = "https://web.archive.org/web/20130905032631/http://www.amigaemulator.org/files/sources/develop/uae-${version}.tar.bz2";
+    url = "https://web.archive.org/web/20130905032631/http://www.amigaemulator.org/files/sources/develop/uae-${finalAttrs.version}.tar.bz2";
     sha256 = "05s3cd1rd5a970s938qf4c2xm3l7f54g5iaqw56v8smk355m4qr4";
   };
 
@@ -28,4 +28,4 @@ stdenv.mkDerivation rec {
     maintainers = [ lib.maintainers.sander ];
     platforms = lib.platforms.linux;
   };
-}
+})
