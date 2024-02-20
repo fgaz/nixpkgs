@@ -10,7 +10,7 @@
 , wrapGAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "rootbar";
   version = "unstable-2020-11-13";
 
@@ -43,4 +43,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     broken = stdenv.isDarwin;
   };
-}
+})
