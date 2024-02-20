@@ -3,14 +3,14 @@
 , wayland, wayland-protocols
 , wrapGAppsHook }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "mako";
   version = "1.8.0";
 
   src = fetchFromGitHub {
     owner = "emersion";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-sUFMcCrc5iNPeAmRbqDaT/n8OIlFJEwJTzY1HMx94RU=";
   };
 
@@ -37,4 +37,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     mainProgram = "mako";
   };
-}
+})
