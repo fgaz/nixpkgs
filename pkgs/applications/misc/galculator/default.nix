@@ -2,14 +2,14 @@
 , autoreconfHook, intltool
 , gtk, pkg-config, flex }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "galculator";
   version = "2.1.4";
 
   src = fetchFromGitHub {
     owner = "galculator";
     repo = "galculator";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "0q0hb62f266709ncyq96bpx4a40a1i6dc5869byvd7x285sx1c2w";
   };
 
@@ -45,4 +45,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.AndersonTorres ];
     platforms = platforms.linux;
   };
-}
+})
