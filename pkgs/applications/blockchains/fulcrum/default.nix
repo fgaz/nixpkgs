@@ -9,14 +9,14 @@
 , zeromq
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "fulcrum";
   version = "1.9.8";
 
   src = fetchFromGitHub {
     owner = "cculianu";
     repo = "Fulcrum";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-cWrhALYIjhOCKi/uPXD8Ty0wuN4WQq+8o97M6CtW+YE=";
   };
 
@@ -33,4 +33,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl3Plus;
     platforms = platforms.unix;
   };
-}
+})
