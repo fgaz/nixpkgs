@@ -1,13 +1,13 @@
 { stdenv, fetchFromGitHub, lib, installShellFiles, makeWrapper, kubectl }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "kubetail";
   version = "1.6.18";
 
   src = fetchFromGitHub {
     owner = "johanhaleby";
     repo = "kubetail";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-Gde5thEpMX3h0e1eoC8SeDdkZfa02CmQf3ELLMeEWGU=";
   };
 
@@ -32,4 +32,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ kalbasit qjoly ];
     platforms = platforms.all;
   };
-}
+})
