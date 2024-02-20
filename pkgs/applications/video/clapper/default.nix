@@ -23,14 +23,14 @@
 , libsoup
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "clapper";
   version = "0.5.2";
 
   src = fetchFromGitHub {
     owner  = "Rafostar";
-    repo   = pname;
-    rev    = version;
+    repo   = finalAttrs.pname;
+    rev    = finalAttrs.version;
     sha256 = "sha256-s+qdTq3/pHHstwr1W3Hs2Zje++iJFHM6hQTFoZD43bY=";
   };
 
@@ -68,8 +68,8 @@ stdenv.mkDerivation rec {
   '';
 
   postInstall = ''
-    cp ${src}/data/icons/*.svg $out/share/icons/hicolor/scalable/apps/
-    cp ${src}/data/icons/*.svg $out/share/icons/hicolor/symbolic/apps/
+    cp ${finalAttrs.src}/data/icons/*.svg $out/share/icons/hicolor/scalable/apps/
+    cp ${finalAttrs.src}/data/icons/*.svg $out/share/icons/hicolor/symbolic/apps/
   '';
 
   meta = with lib; {
@@ -83,4 +83,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ tomfitzhenry ];
     platforms = platforms.linux;
   };
-}
+})
