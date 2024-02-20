@@ -1,12 +1,12 @@
 { lib, stdenv, fetchFromSourcehut, meson, ninja, pkg-config, lv2 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "airwindows-lv2";
   version = "26.2";
   src = fetchFromSourcehut {
     owner = "~hannes";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-GpfglGC7zD275lm9OsBmqDC90E/vVUqslm7HjPgm74M=";
   };
 
@@ -20,4 +20,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.magnetophon ];
     platforms = platforms.unix;
   };
-}
+})
