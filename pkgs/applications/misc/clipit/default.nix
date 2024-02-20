@@ -2,7 +2,7 @@
 , autoreconfHook, intltool, pkg-config
 , gtk3, libayatana-appindicator, xdotool, which, wrapGAppsHook }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "clipit";
   version = "1.4.5";
 
@@ -32,4 +32,4 @@ stdenv.mkDerivation rec {
     platforms   = platforms.linux;
     maintainers = with maintainers; [ kamilchm ];
   };
-}
+})
