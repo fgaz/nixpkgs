@@ -36,15 +36,15 @@
 let
   inherit (darwin.apple_sdk.frameworks) CoreAudioKit ForceFeedback;
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "mame";
   version = "0.261";
-  srcVersion = builtins.replaceStrings [ "." ] [ "" ] version;
+  srcVersion = builtins.replaceStrings [ "." ] [ "" ] finalAttrs.version;
 
   src = fetchFromGitHub {
     owner = "mamedev";
     repo = "mame";
-    rev = "mame${srcVersion}";
+    rev = "mame${finalAttrs.srcVersion}";
     hash = "sha256-Tbsu4dYOBGwsPW94W0xN2+t4vqb1cWI7J1C2l6WU3qI=";
   };
 
@@ -171,7 +171,7 @@ stdenv.mkDerivation rec {
     set -eu -o pipefail
 
     latest_version=$(curl -s https://api.github.com/repos/mamedev/mame/releases/latest | jq --raw-output .tag_name)
-    update-source-version mame "''${latest_version/mame0/0.}"
+    update-source-finalAttrs.version mame "''${latest_finalAttrs.version/mame0/0.}"
   '';
 
   meta = with lib; {
@@ -191,11 +191,11 @@ stdenv.mkDerivation rec {
       calculators, in addition to the arcade video games that were its initial
       focus.
     '';
-    changelog = "https://github.com/mamedev/mame/releases/download/mame${srcVersion}/whatsnew_${srcVersion}.txt";
+    changelog = "https://github.com/mamedev/mame/releases/download/mame${finalAttrs.srcVersion}/whatsnew_${finalAttrs.srcVersion}.txt";
     license = with licenses; [ bsd3 gpl2Plus ];
     maintainers = with maintainers; [ thiagokokada ];
     platforms = platforms.unix;
     broken = stdenv.isDarwin;
     mainProgram = "mame";
   };
-}
+})
