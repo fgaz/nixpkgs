@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitLab }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "mafft";
   version = "7.520";
 
   src = fetchFromGitLab {
     owner = "sysimm";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-H+EcKahJWwidAx+IUT4uCZEty+S8hUeMSB8VbTu5SmQ=";
   };
 
@@ -26,4 +26,4 @@ stdenv.mkDerivation rec {
       maintainers = with maintainers; [ natsukium ];
       platforms = platforms.unix;
     };
-}
+})
