@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, fetchpatch }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "omping";
   version = "0.0.5";
 
   src = fetchFromGitHub {
     owner  = "troglobit";
     repo   = "omping";
-    rev    = version;
+    rev    = finalAttrs.version;
     sha256 = "1f0vsbnhxp7bbgdnfqshryx3nhz2sqdnxdj068s0nmzsh53ckbf7";
   };
 
@@ -34,4 +34,4 @@ stdenv.mkDerivation rec {
     inherit (src.meta) homepage;
     mainProgram = "omping";
   };
-}
+})
