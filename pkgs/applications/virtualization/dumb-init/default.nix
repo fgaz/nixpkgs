@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, glibc }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "dumb-init";
   version = "1.2.5";
 
   src = fetchFromGitHub {
     owner = "Yelp";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-aRh0xfmp+ToXIYjYaducTpZUHndZ5HlFZpFhzJ3yKgs=";
   };
 
@@ -33,4 +33,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     mainProgram = "dumb-init";
   };
-}
+})
