@@ -1,11 +1,11 @@
 { lib, fetchurl, stdenv, libiconv, ncurses, lua }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "dit";
   version = "0.9";
 
   src = fetchurl {
-    url = "https://hisham.hm/dit/releases/${version}/${pname}-${version}.tar.gz";
+    url = "https://hisham.hm/dit/releases/${finalAttrs.version}/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     hash = "sha256-p1uD0Q2kqB40fbAEk7/fdOVg9T7SW+2aACSn7hDAD+E=";
   };
 
@@ -26,4 +26,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ davidak ];
     mainProgram = "dit";
   };
-}
+})
