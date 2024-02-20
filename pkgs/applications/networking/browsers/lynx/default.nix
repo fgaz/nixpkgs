@@ -11,14 +11,14 @@
 , fetchpatch
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "lynx";
   version = "2.9.0dev.12";
 
   src = fetchurl {
     urls = [
-      "ftp://ftp.invisible-island.net/lynx/tarballs/lynx${version}.tar.bz2"
-      "https://invisible-mirror.net/archives/lynx/tarballs/lynx${version}.tar.bz2"
+      "ftp://ftp.invisible-island.net/lynx/tarballs/lynx${finalAttrs.version}.tar.bz2"
+      "https://invisible-mirror.net/archives/lynx/tarballs/lynx${finalAttrs.version}.tar.bz2"
     ];
     hash = "sha256-pkVbFZ0Ad22OwQUShcly3B8MVS0FcaDP8Coj7BRu6OU=";
   };
@@ -55,4 +55,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl2Plus;
     platforms = platforms.unix;
   };
-}
+})
