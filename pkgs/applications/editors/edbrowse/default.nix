@@ -13,14 +13,14 @@
 , which
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "edbrowse";
   version = "3.8.0";
 
   src = fetchFromGitHub {
     owner = "CMB";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     hash = "sha256-ZXxzQBAmu7kM3sjqg/rDLBXNucO8sFRFKXV8UxQVQZU=";
   };
 
@@ -76,5 +76,5 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     mainProgram = "edbrowse";
   };
-}
+})
 # TODO: send the patch to upstream developers
