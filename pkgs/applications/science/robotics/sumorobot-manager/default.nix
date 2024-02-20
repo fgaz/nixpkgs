@@ -1,13 +1,13 @@
 { lib, stdenv, python3, qt5, fetchFromGitHub, wrapPython, pyqt5, pyserial, dos2unix }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "sumorobot-manager";
   version = "1.0.0";
 
   src = fetchFromGitHub {
     owner = "robokoding";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "07snhwmqqp52vdgr66vx50zxx0nmpmns5cdjgh50hzlhji2z1fl9";
   };
 
@@ -41,4 +41,4 @@ stdenv.mkDerivation rec {
     license = licenses.mit;
     maintainers = with maintainers; [ abbradar ];
   };
-}
+})
