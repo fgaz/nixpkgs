@@ -10,14 +10,14 @@
 , gtk-doc
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "telepathy-mission-control";
   version = "5.16.6";
 
   outputs = [ "out" "lib" "dev" ];
 
   src = fetchurl {
-    url = "https://telepathy.freedesktop.org/releases/${pname}/${pname}-${version}.tar.gz";
+    url = "https://telepathy.freedesktop.org/releases/${finalAttrs.pname}/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     sha256 = "0ibs575pfr0wmhfcw6ln6iz7gw2y45l3bah11rksf6g9jlwsxy1d";
   };
 
@@ -55,4 +55,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ ];
     platforms = platforms.unix;
   };
-}
+})
