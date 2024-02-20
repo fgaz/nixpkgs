@@ -6,12 +6,12 @@
 , wrapGAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "quickgui";
   version = "1.2.8";
 
   src = fetchurl {
-    url = "https://github.com/quickemu-project/quickgui/releases/download/v${version}/quickgui_${version}-1_lunar1.0_amd64.deb";
+    url = "https://github.com/quickemu-project/quickgui/releases/download/v${finalAttrs.version}/quickgui_${finalAttrs.version}-1_lunar1.0_amd64.deb";
     sha256 = "sha256-crnV7OWH5UbkMM/TxTIOlXmvqBgjFmQG7RxameMOjH0=";
   };
 
@@ -39,10 +39,10 @@ stdenv.mkDerivation rec {
   meta = {
     description = "A Flutter frontend for quickemu";
     homepage = "https://github.com/quickemu-project/quickgui";
-    changelog = "https://github.com/quickemu-project/quickgui/releases/tag/v${version}";
+    changelog = "https://github.com/quickemu-project/quickgui/releases/tag/v${finalAttrs.version}";
     maintainers = [ lib.maintainers.heyimnova ];
     platforms = lib.platforms.linux;
     sourceProvenance = [ lib.sourceTypes.binaryNativeCode ];
     mainProgram = "quickgui";
   };
-}
+})
