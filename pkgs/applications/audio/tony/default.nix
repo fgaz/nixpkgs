@@ -4,12 +4,12 @@
 , libsndfile, lrdf, opusfile, qtbase, qtsvg, rubberband, serd, sord
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "tony";
   version = "2.1.1";
 
   src = fetchurl {
-    url = "https://code.soundsoftware.ac.uk/attachments/download/2616/${pname}-${version}.tar.gz";
+    url = "https://code.soundsoftware.ac.uk/attachments/download/2616/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     sha256 = "03g2bmlj08lmgvh54dyd635xccjn730g4wwlhpvsw04bffz8b7fp";
   };
 
@@ -51,4 +51,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ orivej ];
     platforms = platforms.linux;
   };
-}
+})
