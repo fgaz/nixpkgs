@@ -3,7 +3,7 @@
 , fetchpatch
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "dmenu-wayland";
   version = "unstable-2023-05-18";
 
@@ -41,4 +41,4 @@ stdenv.mkDerivation rec {
     homepage = "https://github.com/nyyManni/dmenu-wayland";
     maintainers = with maintainers; [ rewine ];
   };
-}
+})
