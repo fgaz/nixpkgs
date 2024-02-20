@@ -2,14 +2,14 @@
 , fftw, fftwSinglePrec, alsa-lib, libsndfile, libpulseaudio
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "0.24-1";
   pname = "minimodem";
 
   src = fetchFromGitHub {
     owner = "kamalmostafa";
     repo = "minimodem";
-    rev = "${pname}-${version}";
+    rev = "${finalAttrs.pname}-${finalAttrs.version}";
     sha256 = "1b5xy36fjcp7vkp115dpx4mlmqg2fc7xvxdy648fb8im953bw7ql";
   };
 
@@ -37,5 +37,5 @@ stdenv.mkDerivation rec {
     platforms = with lib.platforms; linux;
     maintainers = with lib.maintainers; [ relrod ];
   };
-}
+})
 
