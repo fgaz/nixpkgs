@@ -38,7 +38,7 @@ let
     mainProgram = "scilab";
   };
 
-  darwin = stdenv.mkDerivation rec {
+  darwin = stdenv.mkDerivation (finalAttrs: {
     inherit pname version src meta;
 
     nativeBuildInputs = [
@@ -57,7 +57,7 @@ let
 
       runHook postInstall
     '';
-  };
+  });
 
   linux = stdenv.mkDerivation rec {
     inherit pname version src meta;
