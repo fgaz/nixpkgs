@@ -32,19 +32,19 @@
 , libnice
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "nheko";
   version = "0.11.3";
 
   src = fetchFromGitHub {
     owner = "Nheko-Reborn";
     repo = "nheko";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-2daXxTbpSUlig47y901JOkWRxbZGH4qrvNMepJbvS3o=";
   };
 
   patches = [
-    # The 2 following patches can be removed with the next version bump.
+    # The 2 following patches can be removed with the next finalAttrs.version bump.
     # Backport of https://github.com/Nheko-Reborn/nheko/commit/e89e65dc17020772eb057414b4f0c5d6f4ad98d0.
     (fetchpatch {
       name = "nheko-fmt10.patch";
@@ -112,8 +112,8 @@ stdenv.mkDerivation rec {
     mainProgram = "nheko";
     maintainers = with maintainers; [ ekleog fpletz ];
     platforms = platforms.all;
-    # Should be fixable if a higher clang version is used, see:
+    # Should be fixable if a higher clang finalAttrs.version is used, see:
     # https://github.com/NixOS/nixpkgs/pull/85922#issuecomment-619287177
     broken = stdenv.hostPlatform.isDarwin;
   };
-}
+})
