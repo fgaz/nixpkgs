@@ -19,14 +19,14 @@
 , gettext
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "done";
   version = "0.2.0";
 
   src = fetchFromGitHub {
     owner = "done-devs";
     repo = "done";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-97bWBayEyhCMjTxxxFVdO8V2pBZuVzss1Tp9/TnfDB0=";
   };
 
@@ -73,4 +73,4 @@ stdenv.mkDerivation rec {
     license = licenses.mpl20;
     maintainers = with maintainers; [ figsoda ];
   };
-}
+})
