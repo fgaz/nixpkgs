@@ -5,13 +5,13 @@
 , unstableGitUpdater
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "eigenmath";
   version = "unstable-2024-01-23";
 
   src = fetchFromGitHub {
     owner = "georgeweigt";
-    repo = pname;
+    repo = finalAttrs.pname;
     rev = "1d55696b742fee0b4ef8e39b7a420c00c2f1e329";
     hash = "sha256-AQdCFKDUWfNKxZoWp82DdxUA2GiMGWyuyh7Fkofm9kc=";
   };
@@ -45,4 +45,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ nickcao ];
     platforms = platforms.unix;
   };
-}
+})
