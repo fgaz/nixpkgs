@@ -2,12 +2,12 @@
 , AppKit, Carbon, CoreAudio, CoreMIDI, CoreServices, Kernel, MultitouchSupport
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "1.4.2.0";
   pname = "chuck";
 
   src = fetchurl {
-    url = "http://chuck.cs.princeton.edu/release/files/chuck-${version}.tgz";
+    url = "http://chuck.cs.princeton.edu/release/files/chuck-${finalAttrs.version}.tgz";
     sha256 = "sha256-hIwsC9rYgXWSTFqUufKGqoT0Gnsf4nR4KQ0iSVbj8xg=";
   };
 
@@ -30,4 +30,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = with maintainers; [ ftrvxmtrx ];
   };
-}
+})
