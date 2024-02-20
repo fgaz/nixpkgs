@@ -1,14 +1,14 @@
 { lib, stdenv , fetchFromGitHub , python3 , makeWrapper }:
 
 let pythonEnv = python3.withPackages(ps: [ ps.tkinter ps.pyusb ]);
-in stdenv.mkDerivation rec {
+in stdenv.mkDerivation (finalAttrs: {
   pname = "fusee-interfacee-tk";
   version = "1.0.1";
 
   src = fetchFromGitHub {
     owner = "nh-server";
-    repo = pname;
-    rev = "V${version}";
+    repo = finalAttrs.pname;
+    rev = "V${finalAttrs.version}";
     sha256 = "0ngwbwsj999flprv14xvhk7lp51nprrvcnlbnbk6y4qx5casm5md";
   };
 
@@ -37,4 +37,4 @@ in stdenv.mkDerivation rec {
     maintainers = with maintainers; [ kristian-brucaj ];
     license = licenses.gpl2;
   };
-}
+})
