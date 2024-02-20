@@ -11,19 +11,19 @@
 , pkg-config
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gerbv";
   version = "2.10.0";
 
   src = fetchFromGitHub {
     owner = "gerbv";
-    repo = pname;
-    rev = "refs/tags/v${version}";
+    repo = finalAttrs.pname;
+    rev = "refs/tags/v${finalAttrs.version}";
     hash = "sha256-sr48RGLYcMKuyH9p+5BhnR6QpKBvNOqqtRryw3+pbBk=";
   };
 
   postPatch = ''
-    sed -i '/AC_INIT/s/m4_esyscmd.*/${version}])/' configure.ac
+    sed -i '/AC_INIT/s/m4_esyscmd.*/${finalAttrs.version}])/' configure.ac
   '';
 
   nativeBuildInputs = [
@@ -47,9 +47,9 @@ stdenv.mkDerivation rec {
   meta = with lib; {
     description = "A Gerber (RS-274X) viewer";
     homepage = "https://gerbv.github.io/";
-    changelog = "https://github.com/gerbv/gerbv/releases/tag/v${version}";
+    changelog = "https://github.com/gerbv/gerbv/releases/tag/v${finalAttrs.version}";
     license = licenses.gpl2Plus;
     maintainers = with maintainers; [ mog ];
     platforms = platforms.unix;
   };
-}
+})
