@@ -11,12 +11,12 @@
 , libnotify
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "appflowy";
   version = "0.4.3";
 
   src = fetchzip {
-    url = "https://github.com/AppFlowy-IO/appflowy/releases/download/${version}/AppFlowy-${version}-linux-x86_64.tar.gz";
+    url = "https://github.com/AppFlowy-IO/appflowy/releases/download/${finalAttrs.version}/AppFlowy-${finalAttrs.version}-linux-x86_64.tar.gz";
     hash = "sha256-JrcqVPlFr8zD9ZSBxk9WqN7KCLKq+yCjMfA4QbIfDZE=";
     stripRoot = false;
   };
@@ -62,9 +62,9 @@ stdenv.mkDerivation rec {
 
   desktopItems = [
     (makeDesktopItem {
-      name = pname;
+      name = finalAttrs.pname;
       desktopName = "AppFlowy";
-      comment = meta.description;
+      comment = finalAttrs.meta.description;
       exec = "appflowy";
       icon = "appflowy";
       categories = [ "Office" ];
@@ -76,8 +76,8 @@ stdenv.mkDerivation rec {
     homepage = "https://www.appflowy.io/";
     sourceProvenance = with sourceTypes; [ binaryNativeCode ];
     license = licenses.agpl3Only;
-    changelog = "https://github.com/AppFlowy-IO/appflowy/releases/tag/${version}";
+    changelog = "https://github.com/AppFlowy-IO/appflowy/releases/tag/${finalAttrs.version}";
     maintainers = with maintainers; [ darkonion0 ];
     platforms = [ "x86_64-linux" ];
   };
-}
+})
