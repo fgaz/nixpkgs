@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, fetchpatch, zlib, htslib, perl, ncurses ? null }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "samtools";
   version = "1.19.2";
 
   src = fetchurl {
-    url = "https://github.com/samtools/samtools/releases/download/${version}/${pname}-${version}.tar.bz2";
+    url = "https://github.com/samtools/samtools/releases/download/${finalAttrs.version}/${finalAttrs.pname}-${finalAttrs.version}.tar.bz2";
     hash = "sha256-cfYEmWaOTAjn10X7/yTBXMigl3q6sazV0rtBm9sGXpY=";
   };
 
@@ -41,4 +41,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = with maintainers; [ mimame unode ];
   };
-}
+})
