@@ -1,14 +1,14 @@
 {lib, stdenv, fetchFromGitHub
 , autoconf, automake, mandoc }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "owamp";
   version = "4.4.6";
 
   src = fetchFromGitHub {
     owner = "perfsonar";
     repo = "owamp";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256= "5o85XSn84nOvNjIzlaZ2R6/TSHpKbWLXTO0FmqWsNMU=";
     fetchSubmodules = true;
   };
@@ -28,4 +28,4 @@ stdenv.mkDerivation rec {
     maintainers = [maintainers.teto];
     license = licenses.asl20;
   };
-}
+})
