@@ -2,14 +2,14 @@
 , file, lessc, sass, multimarkdown, linkchecker
 , perlPackages, python3Packages }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "styx";
   version = "0.7.5";
 
   src = fetchFromGitHub {
     owner  = "styx-static";
     repo   = "styx";
-    rev    = "v${version}";
+    rev    = "v${finalAttrs.version}";
     hash = "sha256-f6iA/nHpKnm3BALoQq8SzdcSzJLCFSferEf69SpgD2Y=";
   };
 
@@ -68,4 +68,4 @@ stdenv.mkDerivation rec {
     platforms    = platforms.all;
     license      = licenses.mit;
   };
-}
+})
