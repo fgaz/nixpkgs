@@ -158,7 +158,7 @@ let
 
 in
 let
-  self = stdenv.mkDerivation rec {
+  self = stdenv.mkDerivation (finalAttrs: {
     pname = "handbrake";
     inherit version src;
 
@@ -275,7 +275,7 @@ let
             sha256 = "1hfxbbgxwfkzv85pvpvx55a72qsd0hxjbm9hkl5r3590zw4s75h9";
           };
         in
-        runCommand "${pname}-${version}-basic-conversion" { nativeBuildInputs = [ self ]; } ''
+        runCommand "${finalAttrs.pname}-${version}-basic-conversion" { nativeBuildInputs = [ self ]; } ''
           mkdir -p $out
           cd $out
           HandBrakeCLI -i ${testMkv} -o test.mp4 -e x264 -q 20 -B 160
@@ -302,6 +302,6 @@ let
       platforms = with platforms; unix;
       broken = stdenv.isDarwin && lib.versionOlder stdenv.hostPlatform.darwinMinVersion "10.13";
     };
-  };
+  });
 in
 self
