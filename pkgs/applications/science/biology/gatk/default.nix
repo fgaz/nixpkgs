@@ -1,10 +1,10 @@
 { lib, stdenv, fetchzip, jre, makeWrapper, python3 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gatk";
   version = "4.5.0.0";
   src = fetchzip {
-    url = "https://github.com/broadinstitute/gatk/releases/download/${version}/gatk-${version}.zip";
+    url = "https://github.com/broadinstitute/gatk/releases/download/${finalAttrs.version}/gatk-${finalAttrs.version}.zip";
     sha256 = "sha256-c3YZsSCjZY75jooiqtc8x/xsWTvYm9labUcOydDlSRQ=";
   };
 
@@ -15,8 +15,8 @@ stdenv.mkDerivation rec {
 
   installPhase = ''
     mkdir -p $out/bin
-    install -m755 -D $src/gatk-package-${version}-local.jar $out/bin/
-    install -m755 -D $src/gatk-package-${version}-spark.jar $out/bin/
+    install -m755 -D $src/gatk-package-${finalAttrs.version}-local.jar $out/bin/
+    install -m755 -D $src/gatk-package-${finalAttrs.version}-spark.jar $out/bin/
     install -m755 -D $src/gatk $out/bin/
   '';
   postFixup = ''
@@ -44,4 +44,4 @@ stdenv.mkDerivation rec {
       genome data from any organism, with any level of ploidy.
     '';
   };
-}
+})
