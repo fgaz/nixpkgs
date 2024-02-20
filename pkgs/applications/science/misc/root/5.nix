@@ -24,7 +24,7 @@
 , noSplash ? false
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "root";
   version = "5.34.38";
 
@@ -159,4 +159,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ veprbl ];
     license = licenses.lgpl21;
   };
-}
+})
