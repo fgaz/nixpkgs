@@ -23,12 +23,12 @@ let
     zlib
   ];
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "wasabiwallet";
   version = "2.0.5";
 
   src = fetchurl {
-    url = "https://github.com/zkSNACKs/WalletWasabi/releases/download/v${version}/Wasabi-${version}.tar.gz";
+    url = "https://github.com/zkSNACKs/WalletWasabi/releases/download/v${finalAttrs.version}/Wasabi-${finalAttrs.version}.tar.gz";
     sha256 = "sha256-1AgX+Klw/IsRRBV2M1OkLGE4DPqq6hX2h72RNzad2DM=";
   };
 
@@ -39,7 +39,7 @@ stdenv.mkDerivation rec {
     exec = "wasabiwallet";
     desktopName = "Wasabi";
     genericName = "Bitcoin wallet";
-    comment = meta.description;
+    comment = finalAttrs.meta.description;
     categories = [ "Network" "Utility" ];
   };
 
@@ -49,13 +49,13 @@ stdenv.mkDerivation rec {
   ];
 
   installPhase = ''
-    mkdir -p $out/opt/${pname} $out/bin $out/share/applications
-    cp -Rv . $out/opt/${pname}
+    mkdir -p $out/opt/${finalAttrs.pname} $out/bin $out/share/applications
+    cp -Rv . $out/opt/${finalAttrs.pname}
 
-    makeWrapper "$out/opt/${pname}/wassabee" "$out/bin/${pname}" \
+    makeWrapper "$out/opt/${finalAttrs.pname}/wassabee" "$out/bin/${finalAttrs.pname}" \
       --suffix "LD_LIBRARY_PATH" : "${lib.makeLibraryPath runtimeLibs}"
 
-    makeWrapper "$out/opt/${pname}/wassabeed" "$out/bin/${pname}d" \
+    makeWrapper "$out/opt/${finalAttrs.pname}/wassabeed" "$out/bin/${finalAttrs.pname}d" \
       --suffix "LD_LIBRARY_PATH" : "${lib.makeLibraryPath runtimeLibs}"
 
     cp -v $desktopItem/share/applications/* $out/share/applications
@@ -69,4 +69,4 @@ stdenv.mkDerivation rec {
     platforms = [ "x86_64-linux" ];
     maintainers = with maintainers; [ mmahut ];
   };
-}
+})
