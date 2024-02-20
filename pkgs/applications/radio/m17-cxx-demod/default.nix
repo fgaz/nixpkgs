@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, fetchpatch, cmake, pkg-config, boost, codec2 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "m17-cxx-demod";
   version = "2.3";
 
   src = fetchFromGitHub {
     owner = "mobilinkd";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     hash = "sha256-mvppkFBmmPVqvlqIqrbwGrOBih5zS5sZrV/usEhHiws=";
   };
 
@@ -33,4 +33,4 @@ stdenv.mkDerivation rec {
     # never built on aarch64-darwin, x86_64-darwin since first introduction in nixpkgs
     broken = stdenv.isDarwin;
   };
-}
+})
