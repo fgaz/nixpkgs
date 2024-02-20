@@ -8,13 +8,13 @@
 , libogg
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "flac";
   version = "1.4.3";
 
   src = fetchurl {
-    url = "http://downloads.xiph.org/releases/flac/${pname}-${version}.tar.xz";
-    # Official checksum is published at https://github.com/xiph/flac/releases/tag/${version}
+    url = "http://downloads.xiph.org/releases/flac/${finalAttrs.pname}-${finalAttrs.version}.tar.xz";
+    # Official checksum is published at https://github.com/xiph/flac/releases/tag/${finalAttrs.version}
     hash = "sha256-bFjmnNIjSPRBuGEJK4JeWR0Lgi4QbebrDuTQXScgW3A=";
   };
 
@@ -48,4 +48,4 @@ stdenv.mkDerivation rec {
     license = licenses.bsd3;
     maintainers = with maintainers; [ ruuda ];
   };
-}
+})
