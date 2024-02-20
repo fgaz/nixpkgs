@@ -19,12 +19,12 @@
 
 let
   isCross = stdenv.hostPlatform != stdenv.buildPlatform;
-in stdenv.mkDerivation rec {
+in stdenv.mkDerivation (finalAttrs: {
   pname = "poke";
   version = "3.2";
 
   src = fetchurl {
-    url = "mirror://gnu/${pname}/${pname}-${version}.tar.gz";
+    url = "mirror://gnu/${finalAttrs.pname}/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     hash = "sha256-dY5VHdU6bM5U7JTY/CH6TWtSon0cJmcgbVmezcdPDZc=";
   };
 
@@ -97,18 +97,18 @@ in stdenv.mkDerivation rec {
       # Expect the text in format of '<a href="...">poke 2.0</a>'
       new_version="$(curl -s https://www.jemarch.net/poke |
           pcregrep -o1 '>poke ([0-9.]+)</a>')"
-      update-source-version ${pname} "$new_version"
+      update-source-finalAttrs.version ${finalAttrs.pname} "$new_finalAttrs.version"
     '';
   };
 
   meta = with lib; {
     description = "Interactive, extensible editor for binary data";
     homepage = "http://www.jemarch.net/poke";
-    changelog = "https://git.savannah.gnu.org/cgit/poke.git/plain/ChangeLog?h=releases/poke-${version}";
+    changelog = "https://git.savannah.gnu.org/cgit/poke.git/plain/ChangeLog?h=releases/poke-${finalAttrs.version}";
     license = licenses.gpl3Plus;
     maintainers = with maintainers; [ AndersonTorres kira-bruneau ];
     platforms = platforms.unix;
   };
-}
+})
 
 # TODO: Enable guiSupport by default once it's more than just a stub
