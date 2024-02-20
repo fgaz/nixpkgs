@@ -10,14 +10,14 @@ let
     hash = "sha256-AR/y70zeYR9xBzWDB5JXjJdDM+NLOX6yxCQte2lYN/U=";
   };
 
-in stdenv.mkDerivation rec {
+in stdenv.mkDerivation (finalAttrs: {
   pname = "avogadro2";
   version = "1.98.1";
 
   src = fetchFromGitHub {
     owner = "OpenChemistry";
     repo = "avogadroapp";
-    rev = version;
+    rev = finalAttrs.version;
     hash = "sha256-N35WGYZbgfjKnorzGKCnbBvlrlt9Vr04YIG2R3k+b8A=";
   };
 
@@ -46,4 +46,4 @@ in stdenv.mkDerivation rec {
     platforms = platforms.mesaPlatforms;
     license = licenses.bsd3;
   };
-}
+})
