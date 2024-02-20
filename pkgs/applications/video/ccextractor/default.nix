@@ -12,14 +12,14 @@
 , ffmpeg_4
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "ccextractor";
   version = "0.93";
 
   src = fetchFromGitHub {
     owner = "CCExtractor";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-usVAKBkdd8uz9cD5eLd0hnwGonOJLscRdc+iWDlNXVc=";
   };
 
@@ -68,4 +68,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ titanous ];
     mainProgram = "ccextractor";
   };
-}
+})
