@@ -6,12 +6,12 @@
 , pkg-config
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "1.3.6";
   pname = "flwrap";
 
   src = fetchurl {
-    url = "mirror://sourceforge/fldigi/${pname}-${version}.tar.gz";
+    url = "mirror://sourceforge/fldigi/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     sha256 = "sha256-g1V7bOcgVHpD+Ndn02Nj4I3rGItuQ2qLGlrZZshfGP8=";
   };
 
@@ -31,4 +31,4 @@ stdenv.mkDerivation rec {
     maintainers = with lib.maintainers; [ dysinger ];
     platforms = lib.platforms.linux;
   };
-}
+})
