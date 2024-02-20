@@ -6,14 +6,14 @@
 , wrapQtAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "linvstmanager";
   version = "1.1.1";
 
   src = fetchFromGitHub {
     owner = "Goli4thus";
     repo = "linvstmanager";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-K6eugimMy/MZgHYkg+zfF8DDqUuqqoeymxHtcFGu2Uk=";
   };
 
@@ -33,4 +33,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = [ maintainers.GabrielDougherty ];
   };
-}
+})
