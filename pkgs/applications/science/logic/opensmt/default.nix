@@ -4,14 +4,14 @@
 , gtest
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "opensmt";
   version = "2.5.2";
 
   src = fetchFromGitHub {
     owner = "usi-verification-and-security";
     repo = "opensmt";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-gP2oaTEBVk54oK4Le5VudF7+HM8JXCzVqv8UXc08RFQ=";
   };
 
@@ -36,4 +36,4 @@ stdenv.mkDerivation rec {
     license = if enableReadline then licenses.gpl2Plus else licenses.mit;
     homepage = "https://github.com/usi-verification-and-security/opensmt";
   };
-}
+})
