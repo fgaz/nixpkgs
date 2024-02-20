@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, jre, makeWrapper, substituteAll, coreutils }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "cytoscape";
   version = "3.10.1";
 
   src = fetchurl {
-    url = "https://github.com/cytoscape/cytoscape/releases/download/${version}/${pname}-unix-${version}.tar.gz";
+    url = "https://github.com/cytoscape/cytoscape/releases/download/${finalAttrs.version}/${finalAttrs.pname}-unix-${finalAttrs.version}.tar.gz";
     sha256 = "sha256-fqxAsnpMYCYj0hW2oxu/NH4PqesRlWPs5eDSeSjy1aU=";
   };
 
@@ -41,4 +41,4 @@ stdenv.mkDerivation rec {
     maintainers = [lib.maintainers.mimame];
     platforms = lib.platforms.unix;
   };
-}
+})
