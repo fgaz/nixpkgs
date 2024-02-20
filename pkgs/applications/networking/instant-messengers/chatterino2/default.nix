@@ -1,12 +1,12 @@
 { stdenv, lib, cmake, pkg-config, fetchFromGitHub, qtbase, qtsvg, qtmultimedia, qtimageformats, qttools, boost, openssl, wrapQtAppsHook, libsecret }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "chatterino2";
   version = "2.4.6";
   src = fetchFromGitHub {
     owner = "Chatterino";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-CQviw5Fw6v5EwjCldAQoJfAIZMWKBfBzUIQZEgW34k0=";
     fetchSubmodules = true;
   };
@@ -23,7 +23,7 @@ stdenv.mkDerivation rec {
     description = "A chat client for Twitch chat";
     longDescription = ''
       Chatterino is a chat client for Twitch chat. It aims to be an
-      improved/extended version of the Twitch web chat. Chatterino 2 is
+      improved/extended finalAttrs.version of the Twitch web chat. Chatterino 2 is
       the second installment of the Twitch chat client series
       "Chatterino".
     '';
@@ -33,4 +33,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = with maintainers; [ rexim ];
   };
-}
+})
