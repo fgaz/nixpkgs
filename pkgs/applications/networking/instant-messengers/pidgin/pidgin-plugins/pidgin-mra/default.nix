@@ -1,6 +1,6 @@
 { lib, stdenv, fetchFromGitHub, pkg-config, pidgin } :
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "pidgin-mra";
   version = "unstable-2014-07-08";
 
@@ -30,4 +30,4 @@ stdenv.mkDerivation rec {
     license = lib.licenses.gpl2;
     platforms = lib.platforms.linux;
   };
-}
+})
