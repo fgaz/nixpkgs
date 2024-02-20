@@ -1,10 +1,10 @@
 { lib, stdenv, fetchurl, libtool, pkg-config, libgphoto2, fuse, glib }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gphoto2fs";
   version = "0.5.0";
   src = fetchurl {
-    url="mirror://sourceforge/gphoto/gphotofs/${version}/gphotofs-0.5.tar.bz2";
+    url="mirror://sourceforge/gphoto/gphotofs/${finalAttrs.version}/gphotofs-0.5.tar.bz2";
     sha256 = "1k23ncbsbh64r7kz050bg31jqamchyswgg9izhzij758d7gc8vk7";
   };
 
@@ -20,4 +20,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     license = with licenses; [ lgpl2 gpl2 ];
   };
-}
+})
