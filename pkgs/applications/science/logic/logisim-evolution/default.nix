@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, jre, makeWrapper, copyDesktopItems, makeDesktopItem, unzip }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "logisim-evolution";
   version = "3.8.0";
 
   src = fetchurl {
-    url = "https://github.com/logisim-evolution/logisim-evolution/releases/download/v${version}/logisim-evolution-${version}-all.jar";
+    url = "https://github.com/logisim-evolution/logisim-evolution/releases/download/v${finalAttrs.version}/logisim-evolution-${finalAttrs.version}-all.jar";
     sha256 = "sha256-TFm+fa3CMp0OMhnKBc6cLIWGQbIG/OpOOCG7ea7wbCw=";
   };
 
@@ -15,11 +15,11 @@ stdenv.mkDerivation rec {
 
   desktopItems = [
     (makeDesktopItem {
-      name = pname;
+      name = finalAttrs.pname;
       desktopName = "Logisim-evolution";
       exec = "logisim-evolution";
       icon = "logisim-evolution";
-      comment = meta.description;
+      comment = finalAttrs.meta.description;
       categories = [ "Education" ];
     })
   ];
@@ -47,4 +47,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl2Plus;
     platforms = platforms.unix;
   };
-}
+})
