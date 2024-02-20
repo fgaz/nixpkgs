@@ -69,7 +69,7 @@ let
     hydraPlatforms = [];
   };
 
-  linux = stdenv.mkDerivation rec {
+  linux = stdenv.mkDerivation (finalAttrs: {
     inherit pname version meta;
 
     src = fetchurl {
@@ -127,7 +127,7 @@ let
 
       # Desktop file
       mkdir -p "$out/share/applications"
-      cp "${desktopItem}/share/applications/"* "$out/share/applications"
+      cp "${finalAttrs.desktopItem}/share/applications/"* "$out/share/applications"
 
       runHook postInstall
     '';
@@ -141,7 +141,7 @@ let
       makeWrapper $out/opt/Wire/wire-desktop $out/bin/wire-desktop \
         "''${gappsWrapperArgs[@]}"
     '';
-  };
+  });
 
   darwin = stdenv.mkDerivation {
     inherit pname version meta;
