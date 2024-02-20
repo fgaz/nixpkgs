@@ -25,14 +25,14 @@
 , xorg
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "rtabmap";
   version = "0.21.0";
 
   src = fetchFromGitHub {
     owner = "introlab";
     repo = "rtabmap";
-    rev = "refs/tags/${version}";
+    rev = "refs/tags/${finalAttrs.version}";
     hash = "sha256-1xb8O3VrErldid2OgAUMG28mSUO7QBUsPuSz8p03tSI";
   };
 
@@ -84,4 +84,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ ckie ];
     platforms = with platforms; linux;
   };
-}
+})
