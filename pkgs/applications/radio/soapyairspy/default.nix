@@ -3,14 +3,14 @@
 , libobjc, IOKit, Security
 } :
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "soapyairspy";
   version = "0.2.0";
 
   src = fetchFromGitHub {
     owner = "pothosware";
     repo = "SoapyAirspy";
-    rev = "soapy-airspy-${version}";
+    rev = "soapy-airspy-${finalAttrs.version}";
     sha256 = "0g23yybnmq0pg2m8m7dbhif8lw0hdsmnnjym93fdyxfk5iln7fsc";
   };
 
@@ -27,4 +27,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ markuskowa ];
     platforms = platforms.unix;
   };
-}
+})
