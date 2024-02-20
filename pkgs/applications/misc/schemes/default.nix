@@ -15,7 +15,7 @@
 , wrapGAppsHook4
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "schemes";
   version = "0.2.0";
 
@@ -23,7 +23,7 @@ stdenv.mkDerivation rec {
     domain = "gitlab.gnome.org";
     owner = "chergert";
     repo = "schemes";
-    rev = version;
+    rev = finalAttrs.version;
     hash = "sha256-XUC24KzZSU4+F2JZMsydukvAwEGdMxCnkPG6QHnCw6w=";
   };
 
@@ -51,4 +51,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ _0xMRTT ];
     platforms = platforms.linux;
   };
-}
+})
