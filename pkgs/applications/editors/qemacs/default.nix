@@ -8,7 +8,7 @@
 , libX11, libXext, libXv, libpng
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "qemacs";
   version = "5.4.1c";
 
@@ -52,4 +52,4 @@ stdenv.mkDerivation rec {
     license = licenses.lgpl2Only;
     maintainers = with maintainers; [ iblech ];
   };
-}
+})
