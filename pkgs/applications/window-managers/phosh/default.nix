@@ -34,7 +34,7 @@
 , nixosTests
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "phosh";
   version = "0.33.0";
 
@@ -42,8 +42,8 @@ stdenv.mkDerivation rec {
     domain = "gitlab.gnome.org";
     group = "World";
     owner = "Phosh";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     fetchSubmodules = true; # including gvc and libcall-ui which are designated as subprojects
     sha256 = "sha256-t+1MYfsz7KqsMvN8TyLIUrTLTQPWQQpOSk/ysxgE7kg=";
   };
@@ -134,10 +134,10 @@ stdenv.mkDerivation rec {
   meta = with lib; {
     description = "A pure Wayland shell prototype for GNOME on mobile devices";
     homepage = "https://gitlab.gnome.org/World/Phosh/phosh";
-    changelog = "https://gitlab.gnome.org/World/Phosh/phosh/-/blob/v${version}/debian/changelog";
+    changelog = "https://gitlab.gnome.org/World/Phosh/phosh/-/blob/v${finalAttrs.version}/debian/changelog";
     license = licenses.gpl3Plus;
     maintainers = with maintainers; [ masipcat tomfitzhenry zhaofengli ];
     platforms = platforms.linux;
     mainProgram = "phosh-session";
   };
-}
+})
