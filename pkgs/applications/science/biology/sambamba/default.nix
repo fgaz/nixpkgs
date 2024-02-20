@@ -8,14 +8,14 @@
 , lz4
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "sambamba";
   version = "1.0.1";
 
   src = fetchFromGitHub {
     owner = "biod";
     repo = "sambamba";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-3O9bHGpMuCgdR2Wm7Dv1VUjMT1QTn8K1hdwgjvwhFDw=";
     fetchSubmodules = true;
   };
@@ -31,7 +31,7 @@ stdenv.mkDerivation rec {
   installPhase = ''
     runHook preInstall
 
-    install -Dm755 bin/sambamba-${version} $out/bin/sambamba
+    install -Dm755 bin/sambamba-${finalAttrs.version} $out/bin/sambamba
 
     runHook postInstall
   '';
@@ -43,4 +43,4 @@ stdenv.mkDerivation rec {
     license = with licenses; gpl2;
     platforms = platforms.x86_64;
   };
-}
+})
