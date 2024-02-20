@@ -25,12 +25,12 @@
 , libglvnd
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "cardinal";
   version = "23.10";
 
   src = fetchurl {
-    url = "https://github.com/DISTRHO/Cardinal/releases/download/${version}/cardinal+deps-${version}.tar.xz";
+    url = "https://github.com/DISTRHO/Cardinal/releases/download/${finalAttrs.version}/cardinal+deps-${finalAttrs.version}.tar.xz";
     hash = "sha256-6Wt2sC7vdrz2Fkl08bNLfnGu+pAV7b5lZUmsx1wtJRE=";
   };
 
@@ -92,4 +92,4 @@ stdenv.mkDerivation rec {
     # never built on aarch64-darwin, x86_64-darwin since first introduction in nixpkgs
     broken = stdenv.isDarwin;
   };
-}
+})
