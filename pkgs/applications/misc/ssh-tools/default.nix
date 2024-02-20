@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "ssh-tools";
   version = "1.7";
 
   src = fetchFromGitHub {
     owner = "vaporup";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-PDoljR/e/qraPhG9RRjHx1gBIMtTJ815TZDJws8Qg6o=";
   };
 
@@ -22,4 +22,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl3Only;
     maintainers = with maintainers; [ SuperSandro2000 ];
   };
-}
+})
