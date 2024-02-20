@@ -7,7 +7,7 @@ let
      gst-plugins-bad
      gst-plugins-ugly
  ];
-in stdenv.mkDerivation rec {
+in stdenv.mkDerivation (finalAttrs: {
   pname = "qt-video-wlr";
   version = "2023-07-22";
 
@@ -44,4 +44,4 @@ in stdenv.mkDerivation rec {
     maintainers = with maintainers; [ fionera rewine ];
     platforms = with platforms; linux;
   };
-}
+})
