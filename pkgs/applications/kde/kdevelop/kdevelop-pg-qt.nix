@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, cmake, pkg-config, extra-cmake-modules, qtbase }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "kdevelop-pg-qt";
   version = "2.2.2";
 
   src = fetchurl {
-    url = "mirror://kde/stable/${pname}/${version}/src/${pname}-${version}.tar.xz";
+    url = "mirror://kde/stable/${finalAttrs.pname}/${finalAttrs.version}/src/${finalAttrs.pname}-${finalAttrs.version}.tar.xz";
     sha256 = "sha256-PVZgTEefjwSuMqUj7pHzB4xxcRfQ3rOelz4iSUy7ZfE=";
   };
 
@@ -26,4 +26,4 @@ stdenv.mkDerivation rec {
     homepage = "https://www.kdevelop.org";
     license = with lib.licenses; [ lgpl2Plus ];
   };
-}
+})
