@@ -20,7 +20,7 @@
 , gitUpdater
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "endeavour";
   version = "43.0";
 
@@ -28,7 +28,7 @@ stdenv.mkDerivation rec {
     domain = "gitlab.gnome.org";
     owner = "World";
     repo = "Endeavour";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-1mCTw+nJ1w7RdCXfPCO31t1aYOq9Bki3EaXsHiiveD0=";
   };
 
@@ -67,4 +67,4 @@ stdenv.mkDerivation rec {
     maintainers = teams.gnome.members;
     platforms = platforms.linux;
   };
-}
+})
