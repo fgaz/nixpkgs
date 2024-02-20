@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, mercury, pandoc, ncurses, gpgme, coreutils, file }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "notmuch-bower";
   version = "1.0";
 
   src = fetchFromGitHub {
     owner = "wangp";
     repo = "bower";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-BNuJEVuzreI2AK/fqVMRHq8ZhPQjO33Y2FzkrWlfmm0=";
   };
 
@@ -39,4 +39,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl3Plus;
     platforms = platforms.linux;
   };
-}
+})
