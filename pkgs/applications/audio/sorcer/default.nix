@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub , boost, cairomm, cmake, libsndfile, lv2, ntk, pkg-config }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "sorcer";
   version = "1.1.3";
 
   src = fetchFromGitHub {
     owner = "openAVproductions";
     repo = "openAV-Sorcer";
-    rev = "release-${version}";
+    rev = "release-${finalAttrs.version}";
     sha256 = "1x7pi77nal10717l02qpnhrx6d7w5nqrljkn9zx5w7gpb8fpb3vp";
   };
 
@@ -33,4 +33,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.magnetophon ];
     platforms = platforms.linux;
   };
-}
+})
