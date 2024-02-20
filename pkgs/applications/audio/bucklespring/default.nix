@@ -17,14 +17,14 @@
 let
   inherit (lib) optionals;
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "bucklespring";
   version = "1.5.1";
 
   src = fetchFromGitHub {
     owner = "zevv";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "0prhqibivxzmz90k79zpwx3c97h8wa61rk5ihi9a5651mnc46mna";
   };
 
@@ -60,4 +60,4 @@ stdenv.mkDerivation rec {
     platforms  = platforms.unix;
     maintainers = [ maintainers.evils ];
   };
-}
+})
