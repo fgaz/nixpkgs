@@ -25,13 +25,13 @@
 , nix-update-script
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "tuba";
   version = "0.6.2";
   src = fetchFromGitHub {
     owner = "GeopJr";
     repo = "Tuba";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-SRK3I4sKJEaWBNs9VOs7Bhth/7gxybWpXJTn4DiQi6U=";
   };
 
@@ -67,7 +67,7 @@ stdenv.mkDerivation rec {
     gst-plugins-bad
   ]);
 
-  env.NIX_CFLAGS_COMPILE = lib.optionalString stdenv.cc.isClang "-Wno-error=int-conversion";
+  env.NIX_CFLAGS_COMPILE = lib.optionalString stdenv.cc.isClang "-Wno-error=int-confinalAttrs.version";
 
   passthru = {
     updateScript = nix-update-script { };
@@ -78,7 +78,7 @@ stdenv.mkDerivation rec {
     homepage = "https://tuba.geopjr.dev/";
     mainProgram = "dev.geopjr.Tuba";
     license = licenses.gpl3Only;
-    changelog = "https://github.com/GeopJr/Tuba/releases/tag/v${version}";
+    changelog = "https://github.com/GeopJr/Tuba/releases/tag/v${finalAttrs.version}";
     maintainers = with maintainers; [ chuangzhu aleksana ];
   };
-}
+})
