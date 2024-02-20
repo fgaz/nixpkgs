@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, autoreconfHook, ncurses }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "cmatrix";
   version = "2.0";
 
   src = fetchFromGitHub {
     owner = "abishekvashok";
     repo = "cmatrix";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "1h9jz4m4s5l8c3figaq46ja0km1gimrkfxm4dg7mf4s84icmasbm";
   };
 
@@ -25,4 +25,4 @@ stdenv.mkDerivation rec {
     platforms = ncurses.meta.platforms;
     maintainers = [ maintainers.AndersonTorres ];
   };
-}
+})
