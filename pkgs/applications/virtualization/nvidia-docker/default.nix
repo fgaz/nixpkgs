@@ -1,12 +1,12 @@
 { stdenv, lib, fetchFromGitHub, callPackage }:
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "nvidia-docker";
   version = "2.5.0";
 
   src = fetchFromGitHub {
     owner = "NVIDIA";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "1n1k7fnimky67s12p2ycaq9mgk245fchq62vgd7bl3bzfcbg0z4h";
   };
 
@@ -14,7 +14,7 @@ stdenv.mkDerivation rec {
     mkdir bin
 
     cp nvidia-docker bin
-    substituteInPlace bin/nvidia-docker --subst-var-by VERSION ${version}
+    substituteInPlace bin/nvidia-docker --subst-var-by VERSION ${finalAttrs.version}
   '';
 
   installPhase = ''
@@ -29,4 +29,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ cpcloud ];
   };
-}
+})
