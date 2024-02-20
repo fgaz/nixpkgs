@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, ocamlPackages }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "proverif";
   version = "2.05";
 
   src = fetchurl {
-    url    = "https://bblanche.gitlabpages.inria.fr/proverif/proverif${version}.tar.gz";
+    url    = "https://bblanche.gitlabpages.inria.fr/proverif/proverif${finalAttrs.version}.tar.gz";
     hash = "sha256-SHH1PDKrSgRmmgYMSIa6XZCASWlj+5gKmmLSxCnOq8Q=";
   };
 
@@ -28,4 +28,4 @@ stdenv.mkDerivation rec {
     platforms   = lib.platforms.unix;
     maintainers = with lib.maintainers; [ thoughtpolice vbgl ];
   };
-}
+})
