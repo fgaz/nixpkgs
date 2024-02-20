@@ -26,12 +26,12 @@
 , zlib
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "kismet";
   version = "2023-07-R1";
 
   src = fetchurl {
-    url = "https://www.kismetwireless.net/code/${pname}-${version}.tar.xz";
+    url = "https://www.kismetwireless.net/code/${finalAttrs.pname}-${finalAttrs.version}.tar.xz";
     hash = "sha256-8IVI4mymX6HlZ7Heu+ocpNDnIGvduWpPY5yQFxhz6Pc=";
   };
 
@@ -107,4 +107,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl3Plus;
     platforms = platforms.linux;
   };
-}
+})
