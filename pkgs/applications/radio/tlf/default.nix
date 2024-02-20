@@ -1,14 +1,14 @@
 { lib, stdenv, fetchFromGitHub, fetchpatch, autoreconfHook, autoconf, automake, pkg-config, glib
 , perl, ncurses5, hamlib, xmlrpc_c }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "tlf";
   version = "1.4.1";
 
   src = fetchFromGitHub {
-    owner = pname;
-    repo = pname;
-    rev = "${pname}-${version}";
+    owner = finalAttrs.pname;
+    repo = finalAttrs.pname;
+    rev = "${finalAttrs.pname}-${finalAttrs.version}";
     sha256 = "1xpgs4k27pjd9mianfknknp6mf34365bcp96wrv5xh4dhph573rj";
   };
 
@@ -49,4 +49,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ ];
     platforms = platforms.linux;
   };
-}
+})
