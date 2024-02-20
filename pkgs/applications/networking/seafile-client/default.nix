@@ -14,14 +14,14 @@
 , wrapQtAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "seafile-client";
   version = "9.0.4";
 
   src = fetchFromGitHub {
     owner = "haiwen";
     repo = "seafile-client";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-Qt4Y7s2BMwuKXTYjHAzK40HgAsxlk98af3irOXT4/Vs=";
   };
 
@@ -53,4 +53,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ schmittlauch greizgh ];
     mainProgram = "seafile-applet";
   };
-}
+})
