@@ -25,14 +25,14 @@
 , wrapGAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "swaysettings";
   version = "0.4.0";
 
   src = fetchFromGitHub {
     owner = "ErikReider";
     repo = "SwaySettings";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-dn3n5DOAsw0FeXBkh19A2qB/5O+RyA2/Fj5PVtMOyL0=";
   };
 
@@ -79,4 +79,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = [ maintainers.aacebedo ];
   };
-}
+})
