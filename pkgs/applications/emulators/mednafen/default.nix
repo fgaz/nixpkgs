@@ -18,12 +18,12 @@
 , libiconv
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "mednafen";
   version = "1.29.0";
 
   src = fetchurl {
-    url = "https://mednafen.github.io/releases/files/${pname}-${version}.tar.xz";
+    url = "https://mednafen.github.io/releases/files/${finalAttrs.pname}-${finalAttrs.version}.tar.xz";
     hash = "sha256-2j+88Ch3+b4PAov6XRy1npU6QEm5D+fjk4ijOG2fNi4=";
   };
 
@@ -95,4 +95,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ AndersonTorres ];
     platforms = platforms.unix;
   };
-}
+})
