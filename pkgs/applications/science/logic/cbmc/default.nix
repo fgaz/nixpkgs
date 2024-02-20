@@ -11,14 +11,14 @@
 , perl
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "cbmc";
   version = "5.91.0";
 
   src = fetchFromGitHub {
     owner = "diffblue";
-    repo = pname;
-    rev = "${pname}-${version}";
+    repo = finalAttrs.pname;
+    rev = "${finalAttrs.pname}-${finalAttrs.version}";
     sha256 = "sha256-7DzhGEDS9T6WIjGoxOw9Gf/q+tYNFJDPbQUBV3tbn/I=";
   };
 
@@ -73,7 +73,7 @@ stdenv.mkDerivation rec {
 
   passthru.tests.version = testers.testVersion {
     package = cbmc;
-    command = "cbmc --version";
+    command = "cbmc --finalAttrs.version";
   };
 
   meta = with lib; {
@@ -85,4 +85,4 @@ stdenv.mkDerivation rec {
     # https://github.com/diffblue/cbmc/issues/7423
     broken = stdenv.isLinux && stdenv.isAarch64;
   };
-}
+})
