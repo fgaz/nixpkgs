@@ -9,13 +9,13 @@
 , xkbutils
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "bicon";
   version = "unstable-2020-06-04";
 
   src = fetchFromGitHub {
     owner = "behdad";
-    repo = pname;
+    repo = finalAttrs.pname;
     rev = "64ae10c94b94a573735a2c2b1502334b86d3b1f7";
     sha256 = "0ixsf65j4dbdl2aazjc2j0hiagbp6svvfwfmyivha0i1k5yx12v1";
   };
@@ -44,4 +44,4 @@ stdenv.mkDerivation rec {
     maintainers = [ ];
     platforms = platforms.linux;
   };
-}
+})
