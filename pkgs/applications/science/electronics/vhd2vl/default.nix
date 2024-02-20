@@ -8,13 +8,13 @@
 , which
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "vhd2vl";
   version = "unstable-2022-12-26";
 
   src = fetchFromGitHub {
     owner = "ldoolitt";
-    repo = pname;
+    repo = finalAttrs.pname;
     rev = "869d442987dff6b9730bc90563ede89c1abfd28f";
     sha256 = "sha256-Hz2XkT5m4ri5wVR2ciL9Gx73zr+RdW5snjWnUg300c8=";
   };
@@ -48,4 +48,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl2Plus;
     maintainers = with maintainers; [ matthuszagh ];
   };
-}
+})
