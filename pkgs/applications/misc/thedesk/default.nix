@@ -1,12 +1,12 @@
 { lib, stdenv, fetchurl, dpkg, autoPatchelfHook, makeWrapper, electron
 , alsa-lib, gtk3, libxshmfence, mesa, nss }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "thedesk";
   version = "24.1.3";
 
   src = fetchurl {
-    url = "https://github.com/cutls/TheDesk/releases/download/v${version}/${pname}_${version}_amd64.deb";
+    url = "https://github.com/cutls/TheDesk/releases/download/v${finalAttrs.version}/${finalAttrs.pname}_${finalAttrs.version}_amd64.deb";
     sha256 = "sha256-Fq+kDdNR7G0Fbi++OFGxYbgFFOnpdzxy0JVh5t/i8hs=";
   };
 
@@ -22,7 +22,7 @@ stdenv.mkDerivation rec {
   dontConfigure = true;
 
   unpackPhase = ''
-    dpkg-deb -x ${src} ./
+    dpkg-deb -x ${finalAttrs.src} ./
   '';
 
   installPhase = ''
@@ -51,4 +51,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ wolfangaukang ];
     platforms = [ "x86_64-linux" ];
   };
-}
+})
