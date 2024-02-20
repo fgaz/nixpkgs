@@ -4,12 +4,12 @@
 , conf ? "unknown"
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gmu";
   version = "0.10.1";
 
   src = fetchurl {
-    url = "https://wej.k.vu/files/${pname}-${version}.tar.gz";
+    url = "https://wej.k.vu/files/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     sha256 = "03x0mc0xw2if0bpf0a15yprcyx1xccki039zvl2099dagwk6xskv";
   };
 
@@ -47,4 +47,4 @@ stdenv.mkDerivation rec {
     description = "Open source music player for portable gaming consoles and handhelds";
     license = lib.licenses.gpl2;
   };
-}
+})
