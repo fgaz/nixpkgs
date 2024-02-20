@@ -1,13 +1,13 @@
 { callPackage, lib, stdenv, fetchFromGitHub, git, zsh }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gitstatus";
   version = "1.5.4";
 
   src = fetchFromGitHub {
     owner = "romkatv";
     repo = "gitstatus";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-mVfB3HWjvk4X8bmLEC/U8SKBRytTh/gjjuReqzN5qTk=";
   };
 
@@ -89,4 +89,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.all;
     mainProgram = "gitstatusd";
   };
-}
+})
