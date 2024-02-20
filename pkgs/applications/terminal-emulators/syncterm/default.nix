@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, fetchpatch, pkg-config, perl, unzip, autoPatchelfHook, ncurses, SDL2, alsa-lib }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "syncterm";
   version = "1.1";
 
   src = fetchurl {
-    url = "mirror://sourceforge/${pname}/${pname}-${version}-src.tgz";
+    url = "mirror://sourceforge/${finalAttrs.pname}/${finalAttrs.pname}-${finalAttrs.version}-src.tgz";
     sha256 = "19m76bisipp1h3bc8mbq83b851rx3lbysxb0azpbr5nbqr2f8xyi";
   };
 
@@ -50,4 +50,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     license = licenses.gpl2Plus;
   };
-}
+})
