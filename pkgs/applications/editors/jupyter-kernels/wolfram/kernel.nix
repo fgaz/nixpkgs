@@ -1,6 +1,6 @@
 { stdenv, lib, fetchFromGitHub }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "wolfram-for-jupyter-kernel";
   version = "0.9.2";
 
@@ -29,4 +29,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ fbeffa ];
     platforms = platforms.all;
   };
-}
+})
