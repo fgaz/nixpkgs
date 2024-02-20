@@ -29,14 +29,14 @@ let
     pyqt5-sip
   ]);
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "firewalld";
   version = "2.1.1";
 
   src = fetchFromGitHub {
     owner = "firewalld";
     repo = "firewalld";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-+EDJrHryO1pXkuKnQdh8hGyi8/TOkb3ZLulQkiaOOqs=";
   };
 
@@ -101,4 +101,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl2Plus;
     maintainers = with maintainers; [ ];
   };
-}
+})
