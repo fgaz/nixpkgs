@@ -5,14 +5,14 @@
 , fetchFromGitLab
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "4.1.5";
   pname = "siesta";
 
   src = fetchFromGitLab {
     owner = "siesta-project";
     repo = "siesta";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "0lz8rfl5xwdj17zn7a30ipi7cgjwqki21a7wg9rdg7iwx27bpnmg";
   };
 
@@ -82,4 +82,4 @@ stdenv.mkDerivation rec {
     platforms = [ "x86_64-linux" ];
     maintainers = [ maintainers.costrouc ];
   };
-}
+})
