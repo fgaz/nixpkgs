@@ -1,14 +1,14 @@
 { lib, stdenv, fetchFromGitLab, cmake, pkg-config, libsndfile, rapidjson
 , libjack2, lv2, libX11, cairo }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "geonkick";
   version = "2.9.1";
 
   src = fetchFromGitLab {
     owner = "iurie-sw";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-XSqcj8+X6QMBnIusPB9VNrgcbdiWhNMOYeFyKklGmO8=";
   };
 
@@ -28,4 +28,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = [ maintainers.magnetophon ];
   };
-}
+})
