@@ -1,11 +1,11 @@
 { lib, fetchFromGitHub, stdenv, bitlbee, autoreconfHook, pkg-config, glib }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "bitlbee-discord";
   version = "0.4.3";
 
   src = fetchFromGitHub {
-    rev = version;
+    rev = finalAttrs.version;
     owner = "sm00th";
     repo = "bitlbee-discord";
     sha256 = "00qgdvrp7hv02n0ns685igp810zxmv3adsama8601122al6x041n";
@@ -28,4 +28,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ lassulus ];
     platforms = lib.platforms.linux;
   };
-}
+})
