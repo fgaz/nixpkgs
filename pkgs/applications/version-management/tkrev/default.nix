@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, tcl, tk }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "tkrev";
   version = "9.4.1";
 
   src = fetchurl {
-    url = "mirror://sourceforge/tkcvs/tkrev_${version}.tar.gz";
+    url = "mirror://sourceforge/tkcvs/tkrev_${finalAttrs.version}.tar.gz";
     sha256 = "sha256-WHDZPShEB9Q+Bjbb37mogJLUZk2GuWoO8bz+Zydc7i4=";
   };
 
@@ -24,8 +24,8 @@ stdenv.mkDerivation rec {
 
   meta = {
     homepage = "https://tkcvs.sourceforge.io";
-    description = "TCL/TK GUI for cvs and subversion";
+    description = "TCL/TK GUI for cvs and subfinalAttrs.version";
     license = lib.licenses.gpl2Plus;
     platforms = lib.platforms.unix;
   };
-}
+})
