@@ -23,14 +23,14 @@ let
   inherit (darwin.apple_sdk_11_0.frameworks) AVFoundation AppKit AudioUnit VideoToolbox;
 in
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "moonlight-qt";
   version = "5.0.1";
 
   src = fetchFromGitHub {
     owner = "moonlight-stream";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-0ONjUqpM1tUnyaEnMgVl7ff6pND7kyqouv2mpgteZP0=";
     fetchSubmodules = true;
   };
@@ -79,4 +79,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.all;
     mainProgram = "moonlight";
   };
-}
+})
