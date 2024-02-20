@@ -23,12 +23,12 @@
 , gitUpdater
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "liferea";
   version = "1.15.5";
 
   src = fetchurl {
-    url = "https://github.com/lwindolf/${pname}/releases/download/v${version}/${pname}-${version}.tar.bz2";
+    url = "https://github.com/lwindolf/${finalAttrs.pname}/releases/download/v${finalAttrs.version}/${finalAttrs.pname}-${finalAttrs.version}.tar.bz2";
     hash = "sha256-7lanrs63N6ZnqxvjcW/+cUZVDqUbML2gftQUc/sLr3Q=";
   };
 
@@ -79,7 +79,7 @@ stdenv.mkDerivation rec {
   '';
 
   passthru.updateScript = gitUpdater {
-    url = "https://github.com/lwindolf/${pname}";
+    url = "https://github.com/lwindolf/${finalAttrs.pname}";
     rev-prefix = "v";
   };
 
@@ -97,4 +97,4 @@ stdenv.mkDerivation rec {
       browse through their items, and show their contents.
     '';
   };
-}
+})
