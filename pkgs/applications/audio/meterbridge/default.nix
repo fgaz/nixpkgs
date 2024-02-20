@@ -1,12 +1,12 @@
 { lib, stdenv, fetchurl, pkg-config, SDL, SDL_image, libjack2
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "0.9.3";
   pname = "meterbridge";
 
   src = fetchurl {
-    url = "http://plugin.org.uk/meterbridge/${pname}-${version}.tar.gz";
+    url = "http://plugin.org.uk/meterbridge/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     sha256 = "0s7n3czfpil94vsd7iblv4xrck9c7zvsz4r3yfbkqcv85pjz1viz";
   };
 
@@ -24,4 +24,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = [ maintainers.nico202 ];
   };
-}
+})
