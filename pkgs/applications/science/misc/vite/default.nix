@@ -1,13 +1,13 @@
 { stdenv, fetchFromGitLab, lib, cmake, qtbase, qttools, qtcharts, libGLU, libGL, glm, glew, wrapQtAppsHook }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "vite";
   version = "unstable-2022-05-17";
 
   src = fetchFromGitLab {
     domain = "gitlab.inria.fr";
     owner = "solverstack";
-    repo = pname;
+    repo = finalAttrs.pname;
     rev = "6d497cc519fac623e595bd174e392939c4de845c";
     hash = "sha256-Yf2jYALZplIXzVtd/sg6gzEYrZ+oU0zLG1ETd/hiTi0=";
   };
@@ -29,4 +29,4 @@ stdenv.mkDerivation rec {
     maintainers = with lib.maintainers; [ ];
     platforms = lib.platforms.linux;
   };
-}
+})
