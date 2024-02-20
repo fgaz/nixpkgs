@@ -14,14 +14,14 @@
 
 assert pcreSupport -> pcre != null;
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "ncmpc";
   version = "0.49";
 
   src = fetchFromGitHub {
     owner  = "MusicPlayerDaemon";
     repo   = "ncmpc";
-    rev    = "v${version}";
+    rev    = "v${finalAttrs.version}";
     sha256 = "sha256-rqIlQQ9RhFrhPwUd9dZmMZiqwFinNoV46VaJ3pbyUI8=";
   };
 
@@ -41,4 +41,4 @@ stdenv.mkDerivation rec {
     platforms   = platforms.all;
     maintainers = with maintainers; [ fpletz ];
   };
-}
+})
