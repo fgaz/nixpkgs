@@ -5,12 +5,12 @@
 , wrapGAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "why3";
   inherit version;
 
   src = fetchurl {
-    url = "https://why3.gitlabpages.inria.fr/releases/${pname}-${version}.tar.gz";
+    url = "https://why3.gitlabpages.inria.fr/releases/${finalAttrs.pname}-${version}.tar.gz";
     hash = {
       "1.7.1" = "sha256-rG1hcxFhQ2PlE9RTz9ELliDjCuSzLnJ1togRY637cU4=";
       "1.6.0" = "sha256-hFvM6kHScaCtcHCc6Vezl9CR7BFbiKPoTEh7kj0ZJxw=";
@@ -73,4 +73,4 @@ stdenv.mkDerivation rec {
     platforms   = platforms.unix;
     maintainers = with maintainers; [ thoughtpolice vbgl ];
   };
-}
+})
