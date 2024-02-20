@@ -13,7 +13,7 @@
 , scdoc
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "wmenu";
   version = "0.1.6";
 
@@ -22,7 +22,7 @@ stdenv.mkDerivation rec {
   src = fetchFromSourcehut {
     owner = "~adnano";
     repo = "wmenu";
-    rev = version;
+    rev = finalAttrs.version;
     hash = "sha256-Xsnf7T39up6E5kzV37sM9j3PpA2eqxItbGt+tOfjsjE=";
   };
 
@@ -36,5 +36,5 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ eken ];
   };
-}
+})
 
