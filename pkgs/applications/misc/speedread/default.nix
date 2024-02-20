@@ -1,6 +1,6 @@
 { lib, stdenv, fetchFromGitHub, perl }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "speedread";
   version = "unstable-2016-09-21";
 
@@ -30,4 +30,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = [ maintainers.oxij ];
   };
-}
+})
