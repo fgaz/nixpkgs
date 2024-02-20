@@ -2,7 +2,7 @@
 , withQt ? true, qtbase, wrapQtAppsHook
 , withCurses ? false, ncurses
 }:
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "12.1";
   pname = "textadept";
 
@@ -10,7 +10,7 @@ stdenv.mkDerivation rec {
     name = "textadept11";
     owner = "orbitalquark";
     repo = "textadept";
-    rev = "textadept_${version}";
+    rev = "textadept_${finalAttrs.version}";
     sha256 = "sha256-ce7U/GR/4zkjnRN3fx3FLecc9vuvFqCONy275SWnpNc=";
   };
 
@@ -41,4 +41,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     mainProgram = "textadept";
   };
-}
+})
