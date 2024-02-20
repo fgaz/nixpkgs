@@ -1,6 +1,6 @@
 { stdenv, lib, fetchFromGitHub, cmake, unstableGitUpdater }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "libutp";
   version = "unstable-2023-11-14";
 
@@ -27,4 +27,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ emilytrau ];
     platforms = platforms.unix;
   };
-}
+})
