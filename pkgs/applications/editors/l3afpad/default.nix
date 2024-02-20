@@ -1,13 +1,13 @@
 { lib, stdenv, fetchurl, intltool, pkg-config, gtk3, fetchFromGitHub
 , autoreconfHook, wrapGAppsHook }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "unstable-2022-02-14";
   pname = "l3afpad";
 
   src = fetchFromGitHub {
     owner = "stevenhoneyman";
-    repo = pname;
+    repo = finalAttrs.pname;
     rev = "16f22222116b78b7f6a6fd83289937cdaabed624";
     sha256 = "sha256-ly2w9jmRlprm/PnyC0LYjrxBVK+J0DLiSpzuTUMZpWA=";
   };
@@ -23,4 +23,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl2;
     mainProgram = "l3afpad";
   };
-}
+})
