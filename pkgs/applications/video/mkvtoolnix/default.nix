@@ -47,14 +47,14 @@ let
     '';
 
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "mkvtoolnix";
   version = "82.0";
 
   src = fetchFromGitLab {
     owner = "mbunkus";
     repo = "mkvtoolnix";
-    rev = "release-${version}";
+    rev = "release-${finalAttrs.version}";
     hash = "sha256-3WULzEkjMH4PUETJeKmDKn9PdanWf581O2mI/IqN8YM=";
   };
 
@@ -137,4 +137,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ codyopel rnhmjoj ];
     platforms = platforms.unix;
   };
-}
+})
