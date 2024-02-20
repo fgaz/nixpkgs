@@ -1,14 +1,14 @@
 { lib, stdenv, fetchFromGitHub, fetchpatch, cmake, lua, pkg-config, rsync,
   asciidoc, libxml2, docbook_xml_dtd_45, docbook_xsl, libxslt, xnu }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "lsyncd";
   version = "2.3.1";
 
   src = fetchFromGitHub {
     owner = "axkibe";
     repo = "lsyncd";
-    rev = "release-${version}";
+    rev = "release-${finalAttrs.version}";
     hash = "sha256-QBmvS1HGF3VWS+5aLgDr9AmUfEsuSz+DTFIeql2XHH4=";
   };
 
@@ -37,4 +37,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.all;
     maintainers = with maintainers; [ bobvanderlinden ];
   };
-}
+})
