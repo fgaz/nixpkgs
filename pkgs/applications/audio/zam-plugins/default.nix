@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, boost, libX11, libGL, liblo, libjack2, ladspaH, lv2, pkg-config, rubberband, libsndfile, fftwFloat, libsamplerate }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "zam-plugins";
   version = "4.2";
 
   src = fetchFromGitHub {
     owner = "zamaudio";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "sha256-6TPZMDhGHqXjY8UYEqlr4hweF+W19IpIfSa9Bo9Ta1A=";
     fetchSubmodules = true;
   };
@@ -32,4 +32,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.magnetophon ];
     platforms = platforms.linux;
   };
-}
+})
