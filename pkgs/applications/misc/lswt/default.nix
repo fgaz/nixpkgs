@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromSourcehut, wayland-scanner, wayland }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "lswt";
   version = "1.0.4";
 
   src = fetchFromSourcehut {
     owner = "~leon_plickat";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     hash = "sha256-Orwa7sV56AeznEcq/Xj5qj4PALMxq0CI+ZnXuY4JYE0=";
   };
 
@@ -26,4 +26,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ edrex ];
     platforms = platforms.linux;
   };
-}
+})
