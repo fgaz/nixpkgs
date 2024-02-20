@@ -1,6 +1,6 @@
 { lib, stdenv, fetchFromGitHub, lv2  }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "1.1.3";
   pname = "plujain-ramp";
 
@@ -24,4 +24,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = [ maintainers.hirenashah ];
   };
-}
+})
