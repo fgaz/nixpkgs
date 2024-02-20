@@ -15,7 +15,7 @@
 , glib
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "xrgears";
   version = "unstable-2021-06-19";
 
@@ -56,4 +56,4 @@ stdenv.mkDerivation rec {
     license = licenses.mit;
     maintainers = with maintainers; [ expipiplus1 ];
   };
-}
+})
