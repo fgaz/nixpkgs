@@ -21,7 +21,7 @@
 , pkg-config
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "neocomp";
   version = "unstable-2021-04-06";
 
@@ -61,7 +61,7 @@ stdenv.mkDerivation rec {
     "PREFIX=${placeholder "out"}"
     "CFGDIR=${placeholder "out"}/etc/xdg/neocomp"
     "ASTDIR=${placeholder "out"}/share/neocomp/assets"
-    "COMPTON_VERSION=${version}"
+    "COMPTON_VERSION=${finalAttrs.version}"
   ];
 
   postPatch = ''
@@ -86,4 +86,4 @@ stdenv.mkDerivation rec {
     '';
     mainProgram = "neocomp";
   };
-}
+})
