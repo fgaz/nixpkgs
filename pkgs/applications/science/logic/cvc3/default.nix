@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, flex, bison, gmp, perl }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
     pname = "cvc3";
     version = "2.4.1";
 
     src = fetchurl {
-      url = "https://cs.nyu.edu/acsys/cvc3/releases/${version}/${pname}-${version}.tar.gz";
+      url = "https://cs.nyu.edu/acsys/cvc3/releases/${finalAttrs.version}/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
       sha256 = "1xxcwhz3y6djrycw8sm6xz83wb4hb12rd1n0skvc7fng0rh1snym";
     };
 
@@ -39,4 +39,4 @@ stdenv.mkDerivation rec {
       downloadPage = "https://cs.nyu.edu/acsys/cvc3/download.html";
     };
   };
-}
+})
