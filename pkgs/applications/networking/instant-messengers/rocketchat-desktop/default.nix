@@ -2,12 +2,12 @@
 let
   libPathNative = { packages }: lib.makeLibraryPath packages;
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "rocketchat-desktop";
   version = "3.9.11";
 
   src = fetchurl {
-    url = "https://github.com/RocketChat/Rocket.Chat.Electron/releases/download/${version}/rocketchat-${version}-linux-amd64.deb";
+    url = "https://github.com/RocketChat/Rocket.Chat.Electron/releases/download/${finalAttrs.version}/rocketchat-${finalAttrs.version}-linux-amd64.deb";
     hash = "sha256-jyBHXzzFkCHGy8tdnE/daNbADYYAINBlC5td+wHOl4k=";
   };
 
@@ -76,7 +76,7 @@ stdenv.mkDerivation rec {
 
   postFixup =
     let
-      libpath = libPathNative { packages = buildInputs; };
+      libpath = libPathNative { packages = finalAttrs.buildInputs; };
     in
     ''
       app=$out/opt/Rocket.Chat
@@ -94,4 +94,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ gbtb ];
     platforms = [ "x86_64-linux" ];
   };
-}
+})
