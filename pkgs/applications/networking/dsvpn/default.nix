@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "dsvpn";
   version = "0.1.4";
 
   src = fetchFromGitHub {
     owner = "jedisct1";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "1gbj3slwmq990qxsbsaxasi98alnnzv3adp6f8w8sxd4gi6qxhdh";
   };
 
@@ -27,4 +27,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     mainProgram = "dsvpn";
   };
-}
+})
