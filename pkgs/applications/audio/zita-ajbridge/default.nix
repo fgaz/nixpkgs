@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, alsa-lib, libjack2, zita-alsa-pcmi, zita-resampler }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "zita-ajbridge";
   version = "0.8.4";
 
   src = fetchurl {
-    url = "https://kokkinizita.linuxaudio.org/linuxaudio/downloads/${pname}-${version}.tar.bz2";
+    url = "https://kokkinizita.linuxaudio.org/linuxaudio/downloads/${finalAttrs.pname}-${finalAttrs.version}.tar.bz2";
     sha256 = "0g5v0l0zmqh049mhv62n8s5bpm0yrlby7mkxxhs5qwadp8v4w9mw";
   };
 
@@ -29,4 +29,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ orivej ];
     platforms = platforms.linux;
   };
-}
+})
