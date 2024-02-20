@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, autoreconfHook, SDL, SDL_image }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "vp";
   version = "1.8";
 
   src = fetchFromGitHub {
     owner = "erikg";
     repo = "vp";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "08q6xrxsyj6vj0sz59nix9isqz84gw3x9hym63lz6v8fpacvykdq";
   };
 
@@ -24,4 +24,4 @@ stdenv.mkDerivation rec {
     license  = licenses.gpl3;
     maintainers = [ maintainers.vrthra ];
   };
-}
+})
