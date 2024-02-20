@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, pkg-config, cairo, libX11, lv2 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "bchoppr";
   version = "1.12.6";
 
   src = fetchFromGitHub {
     owner = "sjaehn";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "sha256-/aLoLUpWu66VKd9lwjli+FZZctblrZUPSEsdYH85HwQ=";
     fetchSubmodules = true;
   };
@@ -26,4 +26,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     license = licenses.gpl3Plus;
   };
-}
+})
