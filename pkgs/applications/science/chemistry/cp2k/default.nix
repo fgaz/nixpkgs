@@ -52,14 +52,14 @@ let
   arch = "Linux-x86-64-gfortran";
 
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "cp2k";
   version = "2024.1";
 
   src = fetchFromGitHub {
     owner = "cp2k";
     repo = "cp2k";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-6PB6wjdTOa55dXV7QIsjxI77hhc95WFEjNePfupBUJQ=";
     fetchSubmodules = true;
   };
@@ -219,4 +219,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.sheepforce ];
     platforms = [ "x86_64-linux" ];
   };
-}
+})
