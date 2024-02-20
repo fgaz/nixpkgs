@@ -11,14 +11,14 @@
 , memstreamHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "telescope";
   version = "0.8.1";
 
   src = fetchFromGitHub {
     owner = "omar-polo";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "sha256-9gZeBAC7AGU5vb+692npjKbbqFEAr9iGLu1u68EJ0W8=";
   };
 
@@ -45,4 +45,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ heph2 ];
     platforms = platforms.unix;
   };
-}
+})
