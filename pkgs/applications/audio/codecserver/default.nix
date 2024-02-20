@@ -2,14 +2,14 @@
 , cmake, pkg-config, udev, protobuf
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "codecserver";
   version = "0.2.0";
 
   src = fetchFromGitHub {
     owner = "jketterl";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "sha256-JzaVBFl3JsFNDm4gy1qOKA9uAjUjNeMiI39l5gfH0aE=";
   };
 
@@ -37,4 +37,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = teams.c3d2.members;
   };
-}
+})
