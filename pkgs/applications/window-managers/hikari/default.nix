@@ -10,12 +10,12 @@
   }
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "hikari";
   version = "2.3.3";
 
   src = fetchzip {
-    url = "https://hikari.acmelabs.space/releases/${pname}-${version}.tar.gz";
+    url = "https://hikari.acmelabs.space/releases/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     sha256 = "sha256-5Ug0U3ESC5F/gj7bahnLYkeY/weSCj0QASwdFuWwdMI=";
   };
 
@@ -61,4 +61,4 @@ stdenv.mkDerivation rec {
     platforms   = platforms.linux ++ platforms.freebsd;
     maintainers = with maintainers; [ jpotier ];
   };
-}
+})
