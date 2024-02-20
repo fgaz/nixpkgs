@@ -10,12 +10,12 @@
 , gnome
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "grisbi";
   version = "2.0.5";
 
   src = fetchurl {
-    url = "mirror://sourceforge/grisbi/${pname}-${version}.tar.bz2";
+    url = "mirror://sourceforge/grisbi/${finalAttrs.pname}-${finalAttrs.version}.tar.bz2";
     sha256 = "sha256-vTrbq/xLTfwF7/YtKzZFiiSw8A0HzzWin2ry8gPHej8=";
   };
 
@@ -43,4 +43,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ layus ];
     platforms = platforms.linux;
   };
-}
+})
