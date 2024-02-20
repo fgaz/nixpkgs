@@ -4,14 +4,14 @@
 , cbor-diag, cddl, diffutils, file, mktemp, netcat, tcpdump, wireshark-cli
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "compactor";
   version = "1.2.3";
 
   src = fetchFromGitHub {
     owner = "dns-stats";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     fetchSubmodules = true;
     hash = "sha256-5Z14suhO5ghhmZsSj4DsSoKm+ct2gQFO6qxhjmx4Xm4=";
   };
@@ -68,9 +68,9 @@ stdenv.mkDerivation rec {
   meta = with lib; {
     description = "Tools to capture DNS traffic and record it in C-DNS files";
     homepage    = "https://dns-stats.org/";
-    changelog   = "https://github.com/dns-stats/${pname}/raw/${version}/ChangeLog.txt";
+    changelog   = "https://github.com/dns-stats/${finalAttrs.pname}/raw/${finalAttrs.version}/ChangeLog.txt";
     license     = licenses.mpl20;
     maintainers = with maintainers; [ fdns ];
     platforms   = platforms.unix;
   };
-}
+})
