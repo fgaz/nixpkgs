@@ -1,13 +1,13 @@
 { stdenv, lib, fetchgit, pkg-config, meson, ninja, wrapGAppsHook
 , enchant, gtkmm3, libchamplain, libgcrypt, shared-mime-info }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "lifeograph";
   version = "2.0.3";
 
   src = fetchgit {
     url = "https://git.launchpad.net/lifeograph";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-RotbTdTtpwXmo+UKOyp93IAC6CCstv++KtnX2doN+nM=";
   };
 
@@ -39,4 +39,4 @@ stdenv.mkDerivation rec {
     mainProgram = "lifeograph";
     platforms = platforms.linux;
   };
-}
+})
