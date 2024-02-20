@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, pkg-config, ocamlPackages, opaline }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "ott";
   version = "0.33";
 
   src = fetchFromGitHub {
     owner = "ott-lang";
     repo = "ott";
-    rev = version;
+    rev = finalAttrs.version;
     hash = "sha256-GzeEiok5kigcmfqf/K/UxvlKkl55zy0vOyiRZ2HyMiE=";
   };
 
@@ -34,8 +34,8 @@ stdenv.mkDerivation rec {
       calculi. It takes as input a definition of a language syntax and
       semantics, in a concise and readable ASCII notation that is close to
       what one would write in informal mathematics. It generates LaTeX to
-      build a typeset version of the definition, and Coq, HOL, and Isabelle
-      versions of the definition. Additionally, it can be run as a filter,
+      build a typeset finalAttrs.version of the definition, and Coq, HOL, and Isabelle
+      finalAttrs.versions of the definition. Additionally, it can be run as a filter,
       taking a LaTeX/Coq/Isabelle/HOL source file with embedded (symbolic)
       terms of the defined language, parsing them and replacing them by
       target-system terms.
@@ -45,4 +45,4 @@ stdenv.mkDerivation rec {
     maintainers = with lib.maintainers; [ jwiegley ];
     platforms = lib.platforms.unix;
   };
-}
+})
