@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, lv2, pkg-config, python3, wafHook }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "fomp";
   version = "1.2.2";
 
   src = fetchurl {
-    url = "https://download.drobilla.net/${pname}-${version}.tar.bz2";
+    url = "https://download.drobilla.net/${finalAttrs.pname}-${finalAttrs.version}.tar.bz2";
     sha256 = "sha256-xnGijydiO3B7BjSlryFuH1j/OPio9hCYbniq2IXp2W8=";
   };
 
@@ -19,4 +19,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.magnetophon ];
     platforms = platforms.linux;
   };
-}
+})
