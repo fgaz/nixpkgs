@@ -14,12 +14,12 @@
 , xz
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gtkwave";
   version = "3.3.118";
 
   src = fetchurl {
-    url = "mirror://sourceforge/gtkwave/${pname}-gtk3-${version}.tar.gz";
+    url = "mirror://sourceforge/gtkwave/${finalAttrs.pname}-gtk3-${finalAttrs.version}.tar.gz";
     sha256 = "sha256-D0MwwCiiqz0vTUzur222kl2wEMS2/VLRECLQ5d6gSGo=";
   };
 
@@ -49,4 +49,4 @@ stdenv.mkDerivation rec {
     maintainers = with lib.maintainers; [ thoughtpolice jiegec jleightcap ];
     platforms = lib.platforms.linux ++ lib.platforms.darwin;
   };
-}
+})
