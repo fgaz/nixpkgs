@@ -2,12 +2,12 @@
 , SDL2_image, freetype, glew, libGLU, libGL, boost, glm, tinyxml
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gource";
   version = "0.54";
 
   src = fetchurl {
-    url = "https://github.com/acaudwell/Gource/releases/download/${pname}-${version}/${pname}-${version}.tar.gz";
+    url = "https://github.com/acaudwell/Gource/releases/download/${finalAttrs.pname}-${finalAttrs.version}/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     hash = "sha256-HcvO32XSz01p/gtjPlTCApJsCLgpvK0Lc+r54pzW+uU=";
   };
 
@@ -31,7 +31,7 @@ stdenv.mkDerivation rec {
 
   meta = with lib; {
     homepage = "https://gource.io/";
-    description = "A Software version control visualization tool";
+    description = "A Software finalAttrs.version control visualization tool";
     license = licenses.gpl3Plus;
     longDescription = ''
       Software projects are displayed by Gource as an animated tree with
@@ -47,4 +47,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ pSub ];
     mainProgram = "gource";
   };
-}
+})
