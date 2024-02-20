@@ -2,14 +2,14 @@
 , qtbase, qttools, qtquickcontrols2, opencascade-occt, libGLU, libSM, freeimage, cmake, wrapQtAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "librepcb";
   version = "1.0.0";
 
   src = fetchFromGitHub {
-    owner  = pname;
-    repo   = pname;
-    rev    = version;
+    owner  = finalAttrs.pname;
+    repo   = finalAttrs.pname;
+    rev    = finalAttrs.version;
     sha256 = "sha256-2o2Gue/RnDWxe8jk/Ehx9CM+B3ac5rEQn0H7yodUEZ8=";
     fetchSubmodules = true;
   };
@@ -25,4 +25,4 @@ stdenv.mkDerivation rec {
     license     = licenses.gpl3Plus;
     platforms   = platforms.linux;
   };
-}
+})
