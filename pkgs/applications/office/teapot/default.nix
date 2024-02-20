@@ -6,15 +6,15 @@
 , ncurses
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "teapot";
   version = "2.3.0";
 
   src = fetchFromGitHub {
-    name = "${pname}-${version}";
+    name = "${finalAttrs.pname}-${finalAttrs.version}";
     owner = "museoa";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     hash = "sha256-38XFjRzOGasr030f+mRYT+ptlabpnVJfa+1s7ZAjS+k=";
   };
 
@@ -74,6 +74,6 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ AndersonTorres ];
     platforms = platforms.unix;
   };
-}
+})
 # TODO: patch/fix FLTK building
 # TODO: add documentation
