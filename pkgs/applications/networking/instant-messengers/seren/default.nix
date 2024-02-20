@@ -8,14 +8,14 @@
 , ncurses
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "seren";
   version = "0.0.21";
 
   buildInputs = [ alsa-lib libopus libogg gmp ncurses ];
 
   src = fetchurl {
-    url = "http://holdenc.altervista.org/seren/downloads/${pname}-${version}.tar.gz";
+    url = "http://holdenc.altervista.org/seren/downloads/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     sha256 = "sha256-adI365McrJkvTexvnWjMzpHcJkLY3S/uWfE8u4yuqho=";
   };
 
@@ -34,4 +34,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ matthewcroughan nixinator ];
     platforms = platforms.linux;
   };
-}
+})
