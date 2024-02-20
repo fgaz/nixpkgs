@@ -17,14 +17,14 @@
 , IOKit
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "rehex";
   version = "0.60.1";
 
   src = fetchFromGitHub {
     owner = "solemnwarning";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     hash = "sha256-oF8XtxKqyo6c2lNH6WDq6aEPeZw8RqBinDVhPpaDAWg=";
   };
 
@@ -49,10 +49,10 @@ stdenv.mkDerivation rec {
       engineering, and everything else.
     '';
     homepage = "https://github.com/solemnwarning/rehex";
-    changelog = "https://github.com/solemnwarning/rehex/raw/${version}/CHANGES.txt";
+    changelog = "https://github.com/solemnwarning/rehex/raw/${finalAttrs.version}/CHANGES.txt";
     license = licenses.gpl2Only;
     maintainers = with maintainers; [ markus1189 wegank ];
     platforms = platforms.all;
     mainProgram = "rehex";
   };
-}
+})
