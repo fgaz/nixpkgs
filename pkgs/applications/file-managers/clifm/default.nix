@@ -1,13 +1,13 @@
 { stdenv, lib, fetchFromGitHub, libcap, acl, file, readline, python3 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "clifm";
   version = "1.16";
 
   src = fetchFromGitHub {
     owner = "leo-arch";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-tjxsJv5w0Rvk2XYisncytcRdZLRnOSDJmNJN4kkzr7U=";
   };
 
@@ -28,4 +28,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ nadir-ishiguro ];
     platforms = platforms.unix;
   };
-}
+})
