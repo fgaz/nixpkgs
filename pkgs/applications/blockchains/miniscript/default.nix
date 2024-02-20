@@ -1,12 +1,12 @@
 { stdenv, lib, fetchFromGitHub }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "miniscript";
   version = "unstable-2022-07-19";
 
   src = fetchFromGitHub {
     owner = "sipa";
-    repo = pname;
+    repo = finalAttrs.pname;
     rev = "ca675488c4aa9605f6ae70c0e68a148a6fb277b4";
     sha256 = "sha256-kzLIJ0os6UnC0RPEybfw6wGrZpgmRCgj3zifmZjieoU=";
   };
@@ -27,4 +27,4 @@ stdenv.mkDerivation rec {
     maintainers     = with maintainers; [ RaghavSood jb55 ];
     mainProgram = "miniscript";
   };
-}
+})
