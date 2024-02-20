@@ -10,7 +10,7 @@
 , autoreconfHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "ams";
   version = "unstable-2019-04-27";
 
@@ -44,4 +44,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ sjfloat ];
   };
-}
+})
