@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, imlib2, libX11, libXft, libXinerama }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "xmenu";
   version = "4.5.5";
 
   src = fetchFromGitHub {
     owner = "phillbush";
     repo = "xmenu";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-Gg4hSBBVBOB/wlY44C5bJOuOnLoA/tPvcNZamXae/WE=";
   };
 
@@ -22,4 +22,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ neonfuz ];
     platforms = platforms.all;
   };
-}
+})
