@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, fetchpatch, z3, zlib }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "vampire";
   version = "4.6.1";
 
   src = fetchFromGitHub {
     owner = "vprover";
     repo = "vampire";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "0z71nxjak3ibp842r8iv37w1x3cbkrmjs88lpvxqb4sgrbyk38zd";
   };
 
@@ -51,4 +51,4 @@ stdenv.mkDerivation rec {
     license = licenses.bsd3;
     maintainers = with maintainers; [ gebner ];
   };
-}
+})
