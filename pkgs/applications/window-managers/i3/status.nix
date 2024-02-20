@@ -1,11 +1,11 @@
 { fetchurl, lib, stdenv, libconfuse, yajl, alsa-lib, libpulseaudio, libnl, meson, ninja, perl, pkg-config, asciidoc, xmlto, docbook_xml_dtd_45, docbook_xsl }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "i3status";
   version = "2.14";
 
   src = fetchurl {
-    url = "https://i3wm.org/i3status/i3status-${version}.tar.xz";
+    url = "https://i3wm.org/i3status/i3status-${finalAttrs.version}.tar.xz";
     sha256 = "0929chhvyq9hg4scpcz8r9zn3s9jvbg6a86k3wqa77qg85rh4kaw";
   };
 
@@ -21,4 +21,4 @@ stdenv.mkDerivation rec {
     mainProgram = "i3status";
   };
 
-}
+})
