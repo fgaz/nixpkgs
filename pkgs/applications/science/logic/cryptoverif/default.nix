@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, ocaml }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "cryptoverif";
   version = "2.07";
 
   src = fetchurl {
-    url    = "http://prosecco.gforge.inria.fr/personal/bblanche/cryptoverif/cryptoverif${version}.tar.gz";
+    url    = "http://prosecco.gforge.inria.fr/personal/bblanche/cryptoverif/cryptoverif${finalAttrs.version}.tar.gz";
     hash   = "sha256-GXXql4+JZ396BM6W2I3kN0u59xos7UCAtzR0IjMIETY=";
   };
 
@@ -47,4 +47,4 @@ stdenv.mkDerivation rec {
     platforms   = lib.platforms.unix;
     maintainers = [ lib.maintainers.thoughtpolice ];
   };
-}
+})
