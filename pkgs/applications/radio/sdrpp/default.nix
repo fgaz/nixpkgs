@@ -37,7 +37,7 @@
 , scanner ? true
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "sdrpp";
 
   # SDR++ uses a rolling release model.
@@ -45,12 +45,12 @@ stdenv.mkDerivation rec {
   # version qualifier
   git_hash = "27ab5bf3c194169ddf60ca312723fce96149cc8e";
   git_date = "2024-01-22";
-  version = "1.1.0-unstable-" + git_date;
+  version = "1.1.0-unstable-" + finalAttrs.git_date;
 
   src = fetchFromGitHub {
     owner = "AlexandreRouma";
     repo = "SDRPlusPlus";
-    rev = git_hash;
+    rev = finalAttrs.git_hash;
     hash = "sha256-R4xWeqdHEAaje37VQaGlg+L2iYIOH4tXMHvZkZq4SDU=";
   };
 
@@ -135,4 +135,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = with maintainers; [ sikmir ];
   };
-}
+})
