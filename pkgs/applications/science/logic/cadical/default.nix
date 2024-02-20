@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "cadical";
   version = "1.9.4";
 
   src = fetchFromGitHub {
     owner = "arminbiere";
     repo = "cadical";
-    rev = "rel-${version}";
+    rev = "rel-${finalAttrs.version}";
     sha256 = "sha256-cSuvvd7ci8jXzFowS7+V3bor7bXCxaKcGdDU91nIo+k=";
   };
 
@@ -32,8 +32,8 @@ stdenv.mkDerivation rec {
     install -Dm0644 src/ccadical.h "$dev/include/ccadical.h"
     install -Dm0644 src/cadical.hpp "$dev/include/cadical.hpp"
     install -Dm0644 build/libcadical.a "$lib/lib/libcadical.a"
-    mkdir -p "$out/share/doc/${pname}/"
-    install -Dm0755 {LICEN?E,README*,VERSION} "$out/share/doc/${pname}/"
+    mkdir -p "$out/share/doc/${finalAttrs.pname}/"
+    install -Dm0755 {LICEN?E,README*,VERSION} "$out/share/doc/${finalAttrs.pname}/"
 
     runHook postInstall
   '';
@@ -45,4 +45,4 @@ stdenv.mkDerivation rec {
     license = licenses.mit;
     homepage = "https://fmv.jku.at/cadical/";
   };
-}
+})
