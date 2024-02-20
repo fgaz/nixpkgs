@@ -4,12 +4,12 @@
 , defaultAudio ? null
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "mpg321";
   version = "0.3.2";
 
   src = fetchurl {
-    url = "mirror://sourceforge/mpg321/${version}/mpg321_${version}.orig.tar.gz";
+    url = "mirror://sourceforge/mpg321/${finalAttrs.version}/mpg321_${finalAttrs.version}.orig.tar.gz";
     sha256 = "0ki8mh76bbmdh77qsiw682dvi8y468yhbdabqwg05igmwc1wqvq5";
   };
 
@@ -50,4 +50,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl2;
     platforms = platforms.unix;
   };
-}
+})
