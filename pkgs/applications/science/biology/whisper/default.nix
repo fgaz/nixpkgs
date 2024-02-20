@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, fetchpatch, fetchurl }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "whisper";
   version = "2.0.1";
 
   src = fetchFromGitHub {
     owner = "refresh-bio";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "0wpx1w1mar2d6zq2v14vy6nn896ds1n3zshxhhrrj5d528504iyw";
   };
 
@@ -44,4 +44,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ jbedo ];
     platforms = platforms.x86_64;
   };
-}
+})
