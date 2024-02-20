@@ -23,12 +23,12 @@ assert withQT -> qttools != null && qtbase != null;
 assert default != "qt5" -> default == "cli";
 assert !withQT -> default != "qt5";
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "avidemux";
   version = "2.8.1";
 
   src = fetchurl {
-    url = "mirror://sourceforge/avidemux/avidemux/${version}/avidemux_${version}.tar.gz";
+    url = "mirror://sourceforge/avidemux/avidemux/${finalAttrs.version}/avidemux_${finalAttrs.version}.tar.gz";
     sha256 = "sha256-d9m9yoaDzlfBkradIHz6t8+Sp3Wc4PY/o3tcjkKtPaI=";
   };
 
@@ -101,4 +101,4 @@ stdenv.mkDerivation rec {
     platforms = [ "i686-linux" "x86_64-linux" ];
     license = licenses.gpl2;
   };
-}
+})
