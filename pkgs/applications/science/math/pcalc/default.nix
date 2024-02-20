@@ -1,6 +1,6 @@
 { lib, stdenv, fetchFromGitHub, bison, flex }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "pcalc";
   version = "20181202";
 
@@ -23,4 +23,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ ftrvxmtrx ];
     platforms = platforms.unix;
   };
-}
+})
