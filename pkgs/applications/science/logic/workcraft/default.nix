@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, jre, makeWrapper }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "workcraft";
   version = "3.4.1";
 
   src = fetchurl {
-    url = "https://github.com/workcraft/workcraft/releases/download/v${version}/workcraft-v${version}-linux.tar.gz";
+    url = "https://github.com/workcraft/workcraft/releases/download/v${finalAttrs.version}/workcraft-v${finalAttrs.version}-linux.tar.gz";
     sha256 = "sha256-/mh8IN3rGUZIYvyrqnhl0mgnizPZzDduXjQHIDouI38=";
   };
 
@@ -29,4 +29,4 @@ stdenv.mkDerivation rec {
     license = lib.licenses.mit;
     maintainers = with lib.maintainers; [ timor ];
   };
-}
+})
