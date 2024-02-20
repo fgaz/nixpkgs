@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, lv2, libX11, libGL, libGLU, mesa, cmake }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "aether-lv2";
   version = "1.2.1";
 
   src = fetchFromGitHub {
     owner = "Dougal-s";
     repo = "aether";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "0xhih4smjxn87s0f4gaab51d8594qlp0lyypzxl5lm37j1i9zigs";
     fetchSubmodules = true;
   };
@@ -36,4 +36,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     license = licenses.mit;
   };
-}
+})
