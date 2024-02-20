@@ -30,7 +30,7 @@ let
     categories = [ "Development" "Electronics" ];
   };
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   inherit pname version;
 
   dontUnpack = true;
@@ -74,4 +74,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ ];
   };
-}
+})
