@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, pkg-config, libsndfile, portaudio, gtk2 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gnaural";
   version = "20110606";
 
   src = fetchurl {
-    url = "mirror://sourceforge/${pname}/${pname}_${version}.tar.xz";
+    url = "mirror://sourceforge/${finalAttrs.pname}/${finalAttrs.pname}_${finalAttrs.version}.tar.xz";
     hash = "sha256-0a09DUMfHEIGYuIYSBGJalBiIHIgejr/KVDXCFgKBb8=";
   };
 
@@ -35,4 +35,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ ehmry ];
     license = with licenses; [ gpl2Only ];
   };
-}
+})
