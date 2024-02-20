@@ -3,7 +3,7 @@
 , fetchFromGitHub
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "emu2";
   version = "0.pre+unstable=2021-09-22";
 
@@ -23,4 +23,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ AndersonTorres ];
     license = licenses.gpl2Plus;
   };
-}
+})
