@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, pkg-config, gtk3 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "ssw";
   version = "0.8";
 
   src = fetchurl {
-    url = "https://alpha.gnu.org/gnu/ssw/spread-sheet-widget-${version}.tar.gz";
+    url = "https://alpha.gnu.org/gnu/ssw/spread-sheet-widget-${finalAttrs.version}.tar.gz";
     sha256 = "sha256-hYnYKY/PO1hQ0JaLBIAaT0D68FVVRPbMnZVLAWLplUs=";
   };
 
@@ -18,4 +18,4 @@ stdenv.mkDerivation rec {
     description = "GNU Spread Sheet Widget";
     platforms = platforms.linux;
   };
-}
+})
