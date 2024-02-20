@@ -32,7 +32,7 @@
 }:
 
 let
-  # The pre-zipped files in releases don't have a versioned link, we need to zip them ourselves
+  # The pre-zipped files in releases don't have a finalAttrs.versioned link, we need to zip them ourselves
   pcsx2_patches = fetchFromGitHub {
     owner = "PCSX2";
     repo = "pcsx2_patches";
@@ -40,7 +40,7 @@ let
     sha256 = "sha256-gxwAxR7N7QU4sTGHTdd656dmsW8MrcfroYPvv2UoeRc=";
   };
 in
-llvmPackages_17.stdenv.mkDerivation rec {
+llvmPackages_17.stdenv.mkDerivation (finalAttrs: {
   pname = "pcsx2";
   version = "1.7.5497";
 
@@ -48,7 +48,7 @@ llvmPackages_17.stdenv.mkDerivation rec {
     owner = "PCSX2";
     repo = "pcsx2";
     fetchSubmodules = true;
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-gbJkeelSyEHwD4DH/hbzPNNv47hmdgc4kyvX38txYhc=";
   };
 
@@ -59,7 +59,7 @@ llvmPackages_17.stdenv.mkDerivation rec {
   cmakeFlags = [
     "-DDISABLE_ADVANCE_SIMD=ON"
     "-DUSE_LINKED_FFMPEG=ON"
-    "-DPCSX2_GIT_REV=v${version}"
+    "-DPCSX2_GIT_REV=v${finalAttrs.version}"
   ];
 
   nativeBuildInputs = [
@@ -137,4 +137,4 @@ llvmPackages_17.stdenv.mkDerivation rec {
     mainProgram = "pcsx2-qt";
     platforms = platforms.x86_64;
   };
-}
+})
