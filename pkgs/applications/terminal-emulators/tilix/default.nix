@@ -19,14 +19,14 @@
 , fetchpatch
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "tilix";
   version = "1.9.5";
 
   src = fetchFromGitHub {
     owner = "gnunn1";
     repo = "tilix";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-sPVL5oYDOmloRVm/nONKkC20vZc907c7ixBF6E2PQ8Y=";
   };
 
@@ -85,4 +85,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     mainProgram = "tilix";
   };
-}
+})
