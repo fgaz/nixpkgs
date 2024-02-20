@@ -1,11 +1,11 @@
 { lib, fetchFromGitHub, stdenv, bitlbee, autoconf, automake, libtool, pkg-config, json-glib }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "bitlbee-facebook";
   version = "1.2.2";
 
   src = fetchFromGitHub {
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     owner = "bitlbee";
     repo = "bitlbee-facebook";
     sha256 = "1qiiiq17ybylbhwgbwsvmshb517589r8yy5rsh1rfaylmlcxyy7z";
@@ -27,4 +27,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ toonn ];
     platforms = platforms.linux;
   };
-}
+})
