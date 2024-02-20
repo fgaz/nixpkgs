@@ -1,6 +1,6 @@
 { stdenv, lib, fetchurl, perl }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "vcal";
   version = "2.8";
 
@@ -17,10 +17,10 @@ stdenv.mkDerivation rec {
     runHook preInstall
 
     mkdir -p $out/{bin,share/man/man1}
-    substitute ${src} $out/bin/vcal \
+    substitute ${finalAttrs.src} $out/bin/vcal \
       --replace /usr/bin/perl ${perl}/bin/perl
     chmod 0755 $out/bin/*
-    pod2man --name=vcal --release=${version} ${src} > $out/share/man/man1/vcal.1
+    pod2man --name=vcal --release=${finalAttrs.version} ${finalAttrs.src} > $out/share/man/man1/vcal.1
 
     runHook postInstall
   '';
@@ -34,4 +34,4 @@ stdenv.mkDerivation rec {
     license = licenses.asl20;
     maintainers = with maintainers; [ peterhoeg ];
   };
-}
+})
