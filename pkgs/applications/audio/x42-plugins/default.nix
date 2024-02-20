@@ -2,12 +2,12 @@
 , libltc, libsndfile, libsamplerate, ftgl, freefont_ttf, libjack2
 , libGLU, lv2, gtk2, cairo, pango, fftwFloat, zita-convolver }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "x42-plugins";
   version = "20230315";
 
   src = fetchurl {
-    url = "https://gareus.org/misc/x42-plugins/${pname}-${version}.tar.xz";
+    url = "https://gareus.org/misc/x42-plugins/${finalAttrs.pname}-${finalAttrs.version}.tar.xz";
     hash = "sha256-l7Wg+G795i4QFI94NHcPDnvJMYcfQONUkIJeyX2bZos=";
   };
 
@@ -40,4 +40,4 @@ stdenv.mkDerivation rec {
       license = licenses.gpl2;
       platforms = [ "i686-linux" "x86_64-linux" ];
     };
-}
+})
