@@ -21,13 +21,13 @@
 assert smimeSupport -> sslSupport;
 assert gpgmeSupport -> sslSupport;
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "mutt";
   version = "2.2.12";
   outputs = [ "out" "doc" "info" ];
 
   src = fetchurl {
-    url = "http://ftp.mutt.org/pub/mutt/${pname}-${version}.tar.gz";
+    url = "http://ftp.mutt.org/pub/mutt/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     hash = "sha256-BDrzEvZLjlb3/Qv3f4SiBdTEmAML2VhkV2ZcR7sYzjg=";
   };
 
@@ -93,10 +93,10 @@ stdenv.mkDerivation rec {
 
       set -euo pipefail
 
-      # Expect the text in format of "The current stable public release version is 2.2.6."
+      # Expect the text in format of "The current stable public release finalAttrs.version is 2.2.6."
       new_version="$(curl -s http://www.mutt.org/download.html |
-          pcregrep -o1 'The current stable public release version is ([0-9.]+).')"
-      update-source-version ${pname} "$new_version"
+          pcregrep -o1 'The current stable public release finalAttrs.version is ([0-9.]+).')"
+      update-source-finalAttrs.version ${finalAttrs.pname} "$new_finalAttrs.version"
     '';
   };
 
@@ -108,4 +108,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = with maintainers; [ rnhmjoj ];
   };
-}
+})
