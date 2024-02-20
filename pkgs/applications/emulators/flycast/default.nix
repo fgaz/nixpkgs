@@ -15,14 +15,14 @@
 , vulkan-loader
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "flycast";
   version = "2.2";
 
   src = fetchFromGitHub {
     owner = "flyinghead";
     repo = "flycast";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-eQMKaUaZ1b0oXre4Ouli4qIyNaG64KntyRGk3/YIopc=";
     fetchSubmodules = true;
   };
@@ -54,10 +54,10 @@ stdenv.mkDerivation rec {
 
   meta = with lib; {
     homepage = "https://github.com/flyinghead/flycast";
-    changelog = "https://github.com/flyinghead/flycast/releases/tag/v${version}";
+    changelog = "https://github.com/flyinghead/flycast/releases/tag/v${finalAttrs.version}";
     description = "A multi-platform Sega Dreamcast, Naomi and Atomiswave emulator";
     license = licenses.gpl2Only;
     platforms = platforms.unix;
     maintainers = [ maintainers.ivar ];
   };
-}
+})
