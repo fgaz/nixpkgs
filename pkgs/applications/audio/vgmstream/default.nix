@@ -3,20 +3,20 @@
 , nix-update-script
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "vgmstream";
   version = "1896";
 
   src = fetchFromGitHub {
     owner = "vgmstream";
     repo = "vgmstream";
-    rev = "refs/tags/r${version}";
+    rev = "refs/tags/r${finalAttrs.version}";
     sha256 = "sha256-1BWJgV631MxxzdUtK8f+XRb9cqfhjlwN2LgWI0VmIHE=";
   };
 
   passthru.updateScript = nix-update-script {
     attrPath = "vgmstream";
-    extraArgs = [ "--version-regex" "r(.*)" ];
+    extraArgs = [ "--finalAttrs.version-regex" "r(.*)" ];
   };
 
   nativeBuildInputs = [ cmake pkg-config ];
@@ -37,4 +37,4 @@ stdenv.mkDerivation rec {
     license     = with licenses; isc;
     platforms   = with platforms; unix;
   };
-}
+})
