@@ -14,14 +14,14 @@
 , zstd
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "nvc";
   version = "1.11.2";
 
   src = fetchFromGitHub {
     owner = "nickg";
     repo = "nvc";
-    rev = "r${version}";
+    rev = "r${finalAttrs.version}";
     hash = "sha256-qNnai2THSUyvtcnU5+Rdq+/EJe4HXw05bGTRz+wyXM8=";
   };
 
@@ -65,4 +65,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ wegank ];
     platforms = platforms.unix;
   };
-}
+})
