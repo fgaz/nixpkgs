@@ -30,7 +30,7 @@
 , yelp-tools
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "lightdm";
   version = "1.32.0";
 
@@ -38,8 +38,8 @@ stdenv.mkDerivation rec {
 
   src = fetchFromGitHub {
     owner = "canonical";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "sha256-ttNlhWD0Ran4d3QvZ+PxbFbSUGMkfrRm+hJdQxIDJvM=";
   };
 
@@ -125,4 +125,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl3;
     maintainers = with maintainers; [ ] ++ teams.pantheon.members;
   };
-}
+})
