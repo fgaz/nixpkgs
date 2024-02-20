@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, autoreconfHook, ncurses }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "hexedit";
   version = "1.6";
 
   src = fetchFromGitHub {
     owner = "pixel";
     repo = "hexedit";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-fIgPbr7qmxyEga2YaAD0+NBM8LeDm/tVAq99ub7aiAI=";
   };
 
@@ -22,4 +22,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ delroth ];
     mainProgram = "hexedit";
   };
-}
+})
