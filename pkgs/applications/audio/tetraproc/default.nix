@@ -3,12 +3,12 @@
 , libsndfile, libxcb, xorg
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "tetraproc";
   version = "0.9.2";
 
   src = fetchurl {
-    url = "https://kokkinizita.linuxaudio.org/linuxaudio/downloads/${pname}-${version}.tar.bz2";
+    url = "https://kokkinizita.linuxaudio.org/linuxaudio/downloads/${finalAttrs.pname}-${finalAttrs.version}.tar.bz2";
     sha256 = "sha256-kRak33RuYusG6U5FOf9b9vOJUjNK3zqoLL0V/bWBJqs=";
   };
 
@@ -40,4 +40,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ magnetophon ];
     platforms = platforms.linux;
   };
-}
+})
