@@ -30,14 +30,14 @@
 , coreaudioSupport ? stdenv.hostPlatform.isDarwin, CoreAudio
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "musikcube";
   version = "3.0.2";
 
   src = fetchFromGitHub {
     owner = "clangen";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     hash = "sha512-IakZy6XsAE39awjzQI+R11JCPeQSaibx6+uX8Iea5WdlCundeovnPwSAi6RzzZl9dr2UftzzEiF4Aun8VMtqVA==";
   };
 
@@ -81,8 +81,8 @@ stdenv.mkDerivation rec {
   ];
 
   postFixup = lib.optionalString stdenv.isDarwin ''
-    install_name_tool -add_rpath $out/share/${pname} $out/share/${pname}/${pname}
-    install_name_tool -add_rpath $out/share/${pname} $out/share/${pname}/${pname}d
+    install_name_tool -add_rpath $out/share/${finalAttrs.pname} $out/share/${finalAttrs.pname}/${finalAttrs.pname}
+    install_name_tool -add_rpath $out/share/${finalAttrs.pname} $out/share/${finalAttrs.pname}/${finalAttrs.pname}d
   '';
 
   meta = {
@@ -92,4 +92,4 @@ stdenv.mkDerivation rec {
     license = lib.licenses.bsd3;
     platforms = lib.platforms.all;
   };
-}
+})
