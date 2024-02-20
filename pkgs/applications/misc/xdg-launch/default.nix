@@ -10,7 +10,7 @@
 , glib
 , xorg
 }:
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "xdg-launch";
   version = "1.12";
 
@@ -25,8 +25,8 @@ stdenv.mkDerivation rec {
 
   src = fetchFromGitHub {
     owner = "bbidulock";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "sha256-S/0Wn1T5MSOPN6QXkzfmygHL6XTAnnMJr5Z3fBzsHEw=";
   };
 
@@ -54,4 +54,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = [ maintainers.ck3d ];
   };
-}
+})
