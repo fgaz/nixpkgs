@@ -3,7 +3,7 @@
   libsigcxx, libxmlxx, xdg-utils, isocodes, wrapGAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "subtitleeditor";
   version = "unstable-2019-11-30";
 
@@ -61,4 +61,4 @@ stdenv.mkDerivation rec {
     maintainers = [ lib.maintainers.plcplc ];
     mainProgram = "subtitleeditor";
   };
-}
+})
