@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, fetchpatch, libdvdread, libdvdcss, dvdauthor }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "0.4.2";
   pname = "dvdbackup";
 
   src = fetchurl {
-    url = "mirror://sourceforge/dvdbackup/${pname}-${version}.tar.xz";
+    url = "mirror://sourceforge/dvdbackup/${finalAttrs.pname}-${finalAttrs.version}.tar.xz";
     sha256 = "1rl3h7waqja8blmbpmwy01q9fgr5r0c32b8dy3pbf59bp3xmd37g";
   };
 
@@ -26,4 +26,4 @@ stdenv.mkDerivation rec {
     platforms = lib.platforms.linux;
     mainProgram = "dvdbackup";
   };
-}
+})
