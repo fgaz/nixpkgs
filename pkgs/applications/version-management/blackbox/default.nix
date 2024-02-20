@@ -11,14 +11,14 @@
 , procps
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "blackbox";
   version = "1.20220610";
 
   src = fetchFromGitHub {
     owner = "stackexchange";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     hash = "sha256-g0oNV7Nj7ZMmsVQFVTDwbKtF4a/Fb3WDB+NRx9IGSWA=";
   };
 
@@ -60,4 +60,4 @@ stdenv.mkDerivation rec {
     license = licenses.mit;
     platforms = platforms.all;
   };
-}
+})
