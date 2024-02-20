@@ -26,14 +26,14 @@
 , traySupport ? true,           gtk3
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "profanity";
   version = "0.14.0";
 
   src = fetchFromGitHub {
     owner = "profanity-im";
     repo = "profanity";
-    rev = version;
+    rev = finalAttrs.version;
     hash = "sha256-u/mp+vtMj602LfrulA+nhLNH8K6sqKIOuPJzhZusVmE=";
   };
 
@@ -100,4 +100,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.devhell ];
     platforms = platforms.unix;
   };
-}
+})
