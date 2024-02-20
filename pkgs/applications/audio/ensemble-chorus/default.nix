@@ -1,12 +1,12 @@
 { lib, stdenv, fetchFromGitHub, fltk, alsa-lib, freetype, libXrandr, libXinerama, libXcursor, lv2, libjack2, cmake, pkg-config }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "ensemble-chorus";
   version = "0-unstable-2019-02-15";
 
   src = fetchFromGitHub {
     owner = "jpcima";
-    repo = pname;
+    repo = finalAttrs.pname;
     rev = "59baeb86b8851f521bc8162e22e3f15061662cc3";
     sha256 = "0c1y10vyhrihcjvxqpqf6b52yk5yhwh813cfp6nla5ax2w88dbhr";
     fetchSubmodules = true;
@@ -25,4 +25,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     license = licenses.boost;
   };
-}
+})
