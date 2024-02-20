@@ -13,12 +13,12 @@
 , patches ? [ ]
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "svkbd";
   version = "0.4.1";
 
   src = fetchurl {
-    url = "https://dl.suckless.org/tools/svkbd-${version}.tar.gz";
+    url = "https://dl.suckless.org/tools/svkbd-${finalAttrs.version}.tar.gz";
     sha256 = "sha256-+8Jh/D4dgULhRXtC1tZQg6AK4POh9czyRyrMi0auD1o=";
   };
 
@@ -57,4 +57,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ dotlambda ];
     mainProgram = "svkbd-mobile-intl";
   };
-}
+})
