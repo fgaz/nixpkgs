@@ -10,14 +10,14 @@
 , ncurses
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "0.7.29";
   pname = "pynac";
 
   src = fetchFromGitHub {
     owner = "pynac";
     repo = "pynac";
-    rev = "pynac-${version}";
+    rev = "pynac-${finalAttrs.version}";
     sha256 = "sha256-ocR7emXtKs+Xe2f6dh4xEDAacgiolY8mtlLnWnNBS8A=";
   };
 
@@ -45,11 +45,11 @@ stdenv.mkDerivation rec {
   ];
 
   meta = with lib; {
-    description = "Python is Not a CAS -- modified version of Ginac";
+    description = "Python is Not a CAS -- modified finalAttrs.version of Ginac";
     longDescription = ''
-      Pynac -- "Python is Not a CAS" is a modified version of Ginac that
+      Pynac -- "Python is Not a CAS" is a modified finalAttrs.version of Ginac that
       replaces the depency of GiNaC on CLN by a dependency instead of Python.
-      It is a lite version of GiNaC as well, not implementing all the features
+      It is a lite finalAttrs.version of GiNaC as well, not implementing all the features
       of the full GiNaC, and it is *only* meant to be used as a Python library.
     '';
     homepage    = "http://pynac.org";
@@ -57,4 +57,4 @@ stdenv.mkDerivation rec {
     maintainers = teams.sage.members;
     platforms   = platforms.unix;
   };
-}
+})
