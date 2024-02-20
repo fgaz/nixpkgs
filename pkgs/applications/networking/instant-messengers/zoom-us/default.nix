@@ -113,7 +113,7 @@ let
   ] ++ lib.optional (pulseaudioSupport) libpulseaudio);
 
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "zoom";
   version = versions.${system} or throwSystem;
 
@@ -197,4 +197,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ danbst tadfisher ];
     mainProgram = "zoom";
   };
-}
+})
