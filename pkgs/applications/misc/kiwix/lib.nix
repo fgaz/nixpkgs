@@ -11,14 +11,14 @@
 , gtest
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "libkiwix";
   version = "12.1.1";
 
   src = fetchFromGitHub {
     owner = "kiwix";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "sha256-hcwLxfn1fiUAiwsnIddv4HukvVrFePtx7sDQUD1lGUA=";
   };
 
@@ -59,4 +59,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ colinsane ];
   };
-}
+})
