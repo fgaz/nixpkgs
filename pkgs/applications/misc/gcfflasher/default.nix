@@ -6,14 +6,14 @@
 , cmake
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gcfflasher";
   version = "4.3.0-beta";
 
   src = fetchFromGitHub {
     owner = "dresden-elektronik";
-    repo = pname;
-    rev = "refs/tags/v${version}";
+    repo = finalAttrs.pname;
+    rev = "refs/tags/v${finalAttrs.version}";
     hash = "sha256-H1CZ7rAM1QpdmSnUpvg6ytln/0MQKju/C4aIk3xl0PA=";
   };
 
@@ -39,4 +39,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ fleaz ];
     platforms = platforms.all;
   };
-}
+})
