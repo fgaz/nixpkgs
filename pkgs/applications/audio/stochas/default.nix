@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, cmake, pkg-config, libX11, libXrandr, libXinerama, libXext, libXcursor, freetype, alsa-lib, libjack2 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "stochas";
   version = "1.3.9";
 
   src = fetchFromGitHub {
     owner = "surge-synthesizer";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-AnYViWterLBsTtd0wohff1CEwrSYA4CvOLGhJnPFUt8=";
     fetchSubmodules = true;
   };
@@ -35,4 +35,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ magnetophon ];
     platforms = platforms.unix;
   };
-}
+})
