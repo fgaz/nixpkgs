@@ -16,11 +16,11 @@
 , which
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "crip";
   version = "3.9";
   src = fetchurl {
-    url = "http://bach.dynet.com/${pname}/src/${pname}-${version}.tar.gz";
+    url = "http://bach.dynet.com/${finalAttrs.pname}/src/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     sha256 = "0pk9152wll6fmkj1pki3fz3ijlf06jyk32v31yarwvdkwrk7s9xz";
   };
 
@@ -44,7 +44,7 @@ stdenv.mkDerivation rec {
   installPhase = ''
     mkdir -p $out/bin/
 
-    for script in ${lib.escapeShellArgs scripts}; do
+    for script in ${lib.escapeShellArgs finalAttrs.scripts}; do
       cp $script $out/bin/
 
       substituteInPlace $out/bin/$script \
@@ -52,7 +52,7 @@ stdenv.mkDerivation rec {
 
       wrapProgram $out/bin/$script \
         --set PERL5LIB "${perlPackages.makePerlPath [ perlPackages.CDDB_get ]}" \
-        --set PATH "${toolDeps}"
+        --set PATH "${finalAttrs.toolDeps}"
     done
   '';
 
@@ -63,4 +63,4 @@ stdenv.mkDerivation rec {
     platforms = lib.platforms.linux;
     maintainers = [ lib.maintainers.endgame ];
   };
-}
+})
