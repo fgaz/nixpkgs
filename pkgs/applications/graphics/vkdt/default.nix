@@ -23,12 +23,12 @@
 , vkdt
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "vkdt";
   version = "0.7.0";
 
   src = fetchurl {
-    url = "https://github.com/hanatos/${pname}/releases/download/${version}/${pname}-${version}.tar.xz";
+    url = "https://github.com/hanatos/${finalAttrs.pname}/releases/download/${finalAttrs.version}/${finalAttrs.pname}-${finalAttrs.version}.tar.xz";
     hash = "sha256-Sk/K+EWvJBkwwD5R1gH9ZQHetojrJTTJrKW9Dvr+lHA=";
   };
 
@@ -74,4 +74,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ paperdigits ];
     platforms = platforms.linux;
   };
-}
+})
