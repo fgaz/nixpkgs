@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, dtc, pkgsCross }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "spike";
   version = "1.1.0";
 
   src = fetchFromGitHub {
     owner = "riscv";
     repo = "riscv-isa-sim";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-4D2Fezej0ioOOupw3kgMT5VLs+/jXQjwvek6v0AVMzI=";
   };
 
@@ -45,4 +45,4 @@ stdenv.mkDerivation rec {
     platforms = [ "x86_64-linux" "aarch64-linux" ];
     maintainers = with maintainers; [ blitz ];
   };
-}
+})
