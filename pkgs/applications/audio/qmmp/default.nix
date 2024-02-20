@@ -24,12 +24,12 @@
 # Qmmp installs working .desktop file(s) all by itself, so we don't need to
 # handle that.
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "qmmp";
   version = "2.1.5";
 
   src = fetchurl {
-    url = "https://qmmp.ylsoftware.com/files/qmmp/2.1/${pname}-${version}.tar.bz2";
+    url = "https://qmmp.ylsoftware.com/files/qmmp/2.1/${finalAttrs.pname}-${finalAttrs.version}.tar.bz2";
     hash = "sha256-Jb4/KxnY1wtrUTbD+X04Wl7b9A2sZ92E/N1K+dVU95U=";
   };
 
@@ -57,4 +57,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = [ maintainers.bjornfor ];
   };
-}
+})
