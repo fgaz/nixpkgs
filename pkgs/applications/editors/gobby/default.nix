@@ -4,14 +4,14 @@
 
 let
   libinf = libinfinity.override { gtkWidgets = true; inherit avahiSupport; };
-in stdenv.mkDerivation rec {
+in stdenv.mkDerivation (finalAttrs: {
   pname = "gobby";
   version = "0.6.0";
 
   src = fetchFromGitHub {
     owner = "gobby";
     repo = "gobby";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "06cbc2y4xkw89jaa0ayhgh7fxr5p2nv3jjs8h2xcbbbgwaw08lk0";
   };
 
@@ -27,4 +27,4 @@ in stdenv.mkDerivation rec {
     maintainers = [ ];
     platforms = platforms.all;
   };
-}
+})
