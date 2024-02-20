@@ -40,14 +40,14 @@ let
   # For the rt2rtng utility for converting bookmark file to -ng format
   pythonInputs = with python3.pkgs; [ python lxml ];
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "radiotray-ng";
   version = "0.2.8";
 
   src = fetchFromGitHub {
     owner = "ebruck";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-/0GlQdSsIPKGrDT9CgxvaH8TpAbqxFduwL2A2+BSrEI=";
   };
 
@@ -88,7 +88,7 @@ stdenv.mkDerivation rec {
   '';
 
   cmakeFlags = [
-    "-DBUILD_TESTS=${if doCheck then "ON" else "OFF"}"
+    "-DBUILD_TESTS=${if finalAttrs.doCheck then "ON" else "OFF"}"
   ];
 
   # 'wxFont::wxFont(int, int, int, int, bool, const wxString&, wxFontEncoding)' is deprecated
@@ -111,4 +111,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ dtzWill ];
     platforms = platforms.linux;
   };
-}
+})
