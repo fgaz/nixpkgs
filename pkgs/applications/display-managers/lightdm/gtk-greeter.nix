@@ -14,13 +14,13 @@
 , hicolor-icon-theme
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "lightdm-gtk-greeter";
   version = "2.0.8";
 
   src = fetchurl {
     # Release tarball differs from source tarball.
-    url = "https://github.com/Xubuntu/lightdm-gtk-greeter/releases/download/lightdm-gtk-greeter-${version}/lightdm-gtk-greeter-${version}.tar.gz";
+    url = "https://github.com/Xubuntu/lightdm-gtk-greeter/releases/download/lightdm-gtk-greeter-${finalAttrs.version}/lightdm-gtk-greeter-${finalAttrs.version}.tar.gz";
     sha256 = "vvuzAMezT/IYZf28iBIB9zD8fFYOngHRfomelHcVBhM=";
   };
 
@@ -71,4 +71,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl3Plus;
     maintainers = with maintainers; [ bobby285271 ];
   };
-}
+})
