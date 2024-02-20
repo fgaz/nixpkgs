@@ -14,15 +14,15 @@
 , qtx11extras
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "kaffeine";
   version = "2.0.18";
 
   src = fetchFromGitLab {
     domain = "invent.kde.org";
-    repo = pname;
+    repo = finalAttrs.pname;
     owner = "Multimedia";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-FOaS9gkzkHglbsNBNMwjzbHCNQg3Mbf+9so/Vfbaquc=";
   };
 
@@ -50,4 +50,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.all;
     mainProgram = "kaffeine";
   };
-}
+})
