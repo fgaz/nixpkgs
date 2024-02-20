@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "3.4";
   pname = "hmmer";
 
   src = fetchurl {
-    url = "http://eddylab.org/software/hmmer/${pname}-${version}.tar.gz";
+    url = "http://eddylab.org/software/hmmer/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     sha256 = "sha256-ynDZT9DPJxvXBjQjqrsRbULeUzEXNDqbJ6ZcF/8G+/M=";
   };
 
@@ -18,10 +18,10 @@ stdenv.mkDerivation rec {
       HMMER can be downloaded and installed as a command line tool on your own hardware, and now it is also more widely accessible to the scientific community via new search servers at the European Bioinformatics Institute.
     '';
     homepage = "http://hmmer.org/";
-    changelog = "https://github.com/EddyRivasLab/hmmer/blob/hmmer-${version}/release-notes/RELEASE-${version}.md";
+    changelog = "https://github.com/EddyRivasLab/hmmer/blob/hmmer-${finalAttrs.version}/release-notes/RELEASE-${finalAttrs.version}.md";
     license = licenses.gpl3;
     maintainers = [ maintainers.iimog ];
     # at least SSE is *required*
     platforms = platforms.x86_64;
   };
-}
+})
