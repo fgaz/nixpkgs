@@ -4,14 +4,14 @@
 , libraw, libtiff, libpng, libjpeg, libheif, ffms, wrapGAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "siril";
   version = "1.2.0";
 
   src = fetchFromGitLab {
     owner = "free-astro";
     repo = "siril";
-    rev = version;
+    rev = finalAttrs.version;
     hash = "sha256-lCoFQ7z6cZbyNPEm5s40DNdvTwFonHK3KCd8RniqQWs=";
   };
 
@@ -52,4 +52,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ hjones2199 ];
     platforms = platforms.linux;
   };
-}
+})
