@@ -2,14 +2,14 @@
 , cmake, pkg-config, fftwFloat, libsamplerate
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "csdr";
   version = "0.18.2";
 
   src = fetchFromGitHub {
     owner = "jketterl";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "sha256-LdVzeTTIvDQIXRdcz/vpQu/fUgtE8nx1kIEfoiwxrUg=";
   };
 
@@ -39,4 +39,4 @@ stdenv.mkDerivation rec {
     broken = stdenv.isDarwin;
     maintainers = teams.c3d2.members;
   };
-}
+})
