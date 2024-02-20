@@ -2,14 +2,14 @@
 , makeDesktopItem, which, perlPackages, boost, wrapGAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "1.3.0";
   pname = "slic3r";
 
   src = fetchFromGitHub {
     owner = "alexrj";
     repo = "Slic3r";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-cf0QTOzhLyTcbJryCQoTVzU8kfrPV6SLpqi4s36X5N0=";
   };
 
@@ -99,4 +99,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ bjornfor ];
   };
-}
+})
