@@ -7,12 +7,12 @@
 , menu-cache
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "openbox-menu";
   version = "0.8.0";
 
   src = fetchurl {
-    url = "https://bitbucket.org/fabriceT/openbox-menu/downloads/${pname}-${version}.tar.bz2";
+    url = "https://bitbucket.org/fabriceT/openbox-menu/downloads/${finalAttrs.pname}-${finalAttrs.version}.tar.bz2";
     sha256 = "1hi4b6mq97y6ajq4hhsikbkk23aha7ikaahm92djw48mgj2f1w8l";
   };
 
@@ -43,4 +43,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.romildo ];
     platforms   = platforms.unix;
   };
-}
+})
