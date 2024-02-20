@@ -4,14 +4,14 @@
 , libusb1, rtl-sdr, airspy, soapysdr-with-plugins
 } :
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "abracadabra";
   version = "2.3.5";
 
   src = fetchFromGitHub {
     owner = "KejPi";
     repo = "AbracaDABra";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-iWXQ4Tjqz9Y+pihuMDBKi3iwuo5eAyyAMNtRBxojOhs=";
   };
 
@@ -46,5 +46,5 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.markuskowa ];
     mainProgram = "AbracaDABra";
   };
-}
+})
 
