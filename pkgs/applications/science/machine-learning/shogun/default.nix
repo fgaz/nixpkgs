@@ -69,7 +69,7 @@ let
   };
 in
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   inherit pname version;
 
   outputs = [ "out" "dev" "doc" ];
@@ -152,7 +152,7 @@ stdenv.mkDerivation rec {
     "-DCMAKE_DISABLE_FIND_PACKAGE_TFLogger=ON"
     "-DCMAKE_DISABLE_FIND_PACKAGE_ViennaCL=ON"
     "-DCMAKE_CTEST_ARGUMENTS=--exclude-regex;'${excludeTestsRegex}'"
-    "-DENABLE_TESTING=${enableIf doCheck}"
+    "-DENABLE_TESTING=${enableIf finalAttrs.doCheck}"
     "-DDISABLE_META_INTEGRATION_TESTS=ON"
     "-DTRAVIS_DISABLE_META_CPP=ON"
     "-DINTERFACE_PYTHON=${enableIf pythonSupport}"
@@ -205,4 +205,4 @@ stdenv.mkDerivation rec {
     license = if withSvmLight then licenses.unfree else licenses.gpl3Plus;
     maintainers = with maintainers; [ edwtjo smancill ];
   };
-}
+})
