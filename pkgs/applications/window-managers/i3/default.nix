@@ -5,12 +5,12 @@
 , asciidoc, xmlto, docbook_xml_dtd_45, docbook_xsl, findXMLCatalogs
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "i3";
   version = "4.23";
 
   src = fetchurl {
-    url = "https://i3wm.org/downloads/${pname}-${version}.tar.xz";
+    url = "https://i3wm.org/downloads/${finalAttrs.pname}-${finalAttrs.version}.tar.xz";
     sha256 = "sha256-YQJqcZbJE50POq3ScZfosyDFduOkUOAddMGspIQETEY=";
   };
 
@@ -79,4 +79,4 @@ stdenv.mkDerivation rec {
     '';
   };
 
-}
+})
