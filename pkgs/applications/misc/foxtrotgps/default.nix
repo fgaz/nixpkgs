@@ -15,7 +15,7 @@ let
       sha256 = "1sgysn3dhfhrv7rj7wf8f2119vmhc1s1zzsp4r3nlrr45d20wmsv";
     };
   };
-in stdenv.mkDerivation rec {
+in stdenv.mkDerivation (finalAttrs: {
   pname = "foxtrotgps";
   version = "1.2.2+331";
 
@@ -68,4 +68,4 @@ in stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = with maintainers; [ wucke13 ];
   };
-}
+})
