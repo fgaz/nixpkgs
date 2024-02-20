@@ -7,14 +7,14 @@
 , nix-update-script
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "dynamips";
   version = "0.2.23";
 
   src = fetchFromGitHub {
     owner = "GNS3";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     hash = "sha256-+h+WsZ/QrDd+dNrR6CJb2uMG+vbUvK8GTxFJZOxknL0=";
   };
 
@@ -39,4 +39,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ primeos ];
     platforms = platforms.linux ++ platforms.darwin;
   };
-}
+})
