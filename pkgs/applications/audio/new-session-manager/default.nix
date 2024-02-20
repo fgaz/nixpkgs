@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, meson, pkg-config, ninja, liblo, libjack2, fltk }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "new-session-manager";
   version = "1.6.1";
 
   src = fetchFromGitHub {
     owner = "linuxaudio";
     repo = "new-session-manager";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-5G2GlBuKjC/r1SMm78JKia7bMA97YcvUR5l6zBucemw=";
   };
 
@@ -24,4 +24,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl3Plus;
     platforms = ["x86_64-linux"];
   };
-}
+})
