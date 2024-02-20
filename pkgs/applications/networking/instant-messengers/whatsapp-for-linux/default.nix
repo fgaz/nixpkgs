@@ -25,14 +25,14 @@
 , xorg
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "whatsapp-for-linux";
   version = "1.6.4";
 
   src = fetchFromGitHub {
     owner = "eneshecan";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-DU9tvIvDfOtBydR68yeRMFYdMjiBrOobCDXIZMmm7pQ=";
   };
 
@@ -75,4 +75,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ bartuka ];
     platforms = [ "x86_64-linux" ];
   };
-}
+})
