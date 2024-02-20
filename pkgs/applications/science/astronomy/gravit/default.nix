@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, fetchpatch, SDL, SDL_ttf, SDL_image, libSM, libICE, libGLU, libGL, libpng, lua5, autoconf, automake }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gravit";
   version = "0.5.1";
 
   src = fetchFromGitHub {
     owner = "gak";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     hash = "sha256-JuqnLLD5+Ec8kQI0SK98V1O6TTbGM6+yKn5KCHe85eM=";
   };
 
@@ -53,4 +53,4 @@ stdenv.mkDerivation rec {
     platforms = lib.platforms.mesaPlatforms;
     hydraPlatforms = lib.platforms.linux; # darwin times out
   };
-}
+})
