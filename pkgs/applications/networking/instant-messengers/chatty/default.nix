@@ -27,7 +27,7 @@
 , plugins ? [ ]
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "chatty";
   version = "0.8.1";
 
@@ -35,7 +35,7 @@ stdenv.mkDerivation rec {
     domain = "gitlab.gnome.org";
     owner = "World";
     repo = "Chatty";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     fetchSubmodules = true;
     hash = "sha256-5IkQnXAKl0duy/B6+z7PXYv5zxakxJCgQhWBw5wioWg=";
   };
@@ -84,4 +84,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ dotlambda tomfitzhenry ];
     platforms = platforms.linux;
   };
-}
+})
