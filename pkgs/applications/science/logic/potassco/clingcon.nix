@@ -5,14 +5,14 @@
 , catch2
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "clingcon";
   version = "5.2.0";
 
   src = fetchFromGitHub {
     owner = "potassco";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-wZfTneoQSqEnLAVE8WyPh9EABmOEhDgRm6yWAF1T7Nk=";
    };
 
@@ -36,6 +36,6 @@ stdenv.mkDerivation rec {
     platforms = lib.platforms.unix;
     homepage = "https://potassco.org/";
     downloadPage = "https://github.com/potassco/clingcon/releases/";
-    changelog = "https://github.com/potassco/clingcon/releases/tag/v${version}";
+    changelog = "https://github.com/potassco/clingcon/releases/tag/v${finalAttrs.version}";
   };
-}
+})
