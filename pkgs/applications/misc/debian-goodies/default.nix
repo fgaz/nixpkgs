@@ -8,7 +8,7 @@
 , python3
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "debian-goodies";
   version = "0.88.1";
 
@@ -16,7 +16,7 @@ stdenv.mkDerivation rec {
     domain = "salsa.debian.org";
     owner = "debian";
     repo = "debian-goodies";
-    rev = "debian/${version}";
+    rev = "debian/${finalAttrs.version}";
     sha256 = "sha256-g1xeWhCkC7HEHHOJpcZ6JFA9jmavJE0lUX1Cmp5A0QQ=";
   };
 
@@ -67,4 +67,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = with maintainers; [ SuperSandro2000 ];
   };
-}
+})
