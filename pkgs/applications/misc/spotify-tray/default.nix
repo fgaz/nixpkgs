@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, fetchpatch, autoreconfHook, pkg-config, gtk3 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "spotify-tray";
   version = "1.3.2";
 
   src = fetchFromGitHub {
     owner = "tsmetana";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-E86rA8cBjy/bI7sZHlT40o7i23PcONXT5GTHEfcaDf0=";
   };
 
@@ -30,4 +30,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ Enzime ];
   };
-}
+})
