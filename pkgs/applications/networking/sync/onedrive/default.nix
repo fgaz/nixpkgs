@@ -12,14 +12,14 @@
 , systemd
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "onedrive";
   version = "2.4.25";
 
   src = fetchFromGitHub {
     owner = "abraunegg";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     hash = "sha256-M6EOJiykmAKWIuAXdm9ebTSX1eVoO+1axgzxlAmuI8U=";
   };
 
@@ -41,9 +41,9 @@ stdenv.mkDerivation rec {
   # we could also pass --enable-completions to configure but we would then have to
   # figure out the paths manually and pass those along.
   postInstall = ''
-    installShellCompletion --bash --name ${pname}  contrib/completions/complete.bash
-    installShellCompletion --zsh  --name _${pname} contrib/completions/complete.zsh
-    installShellCompletion --fish --name ${pname}  contrib/completions/complete.fish
+    installShellCompletion --bash --name ${finalAttrs.pname}  contrib/completions/complete.bash
+    installShellCompletion --zsh  --name _${finalAttrs.pname} contrib/completions/complete.zsh
+    installShellCompletion --fish --name ${finalAttrs.pname}  contrib/completions/complete.fish
   '';
 
   meta = with lib; {
@@ -53,4 +53,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ srgom peterhoeg bertof ];
     platforms = platforms.linux;
   };
-}
+})
