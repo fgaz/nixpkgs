@@ -4,13 +4,13 @@ let
   path = lib.makeBinPath [ vim jq rofi xrandr xdotool i3 gawk libnotify ];
 in
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "i3-layout-manager";
   version = "unstable-2020-05-04";
 
   src = fetchFromGitHub {
     owner = "klaxalk";
-    repo = pname;
+    repo = finalAttrs.pname;
     rev = "df54826bba351d8bcd7ebeaf26c07c713af7912c";
     sha256 = "0ccvr43yp26fnh5d82cw7jcfq2sbxzzmdx2cp15bmxr8ixr8knc3";
   };
@@ -36,4 +36,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ ];
   };
-}
+})
