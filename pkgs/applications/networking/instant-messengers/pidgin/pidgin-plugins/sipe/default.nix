@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, fetchpatch, pidgin, intltool, libxml2, gmime, nss }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "pidgin-sipe";
   version = "1.25.0";
 
   src = fetchurl {
-    url = "mirror://sourceforge/sipe/${pname}-${version}.tar.gz";
+    url = "mirror://sourceforge/sipe/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     sha256 = "0262sz00iqxylx0xfyr48xikhiqzr8pg7b4b7vwj5iv4qxpxv939";
   };
 
@@ -40,4 +40,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl2;
     platforms = platforms.linux;
   };
-}
+})
