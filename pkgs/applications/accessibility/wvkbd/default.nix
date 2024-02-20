@@ -11,14 +11,14 @@
 , libxkbcommon
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "wvkbd";
   version = "0.14.3";
 
   src = fetchFromGitHub {
     owner = "jjsullivan5196";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-U4xq9FY2uZlnBwm8Se1wReU1c1RAJMx6FIoD0D2BlM4=";
   };
 
@@ -49,4 +49,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl3Plus;
     mainProgram = "wvkbd-mobintl";
   };
-}
+})
