@@ -20,14 +20,14 @@
 , webkitgtk
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "notes-up";
   version = "2.0.6";
 
   src = fetchFromGitHub {
     owner = "Philip-Scott";
     repo = "Notes-up";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-t9BCtdWd2JLrKTcmri1Lgl5RLBYD2xWCtMxoVXz0XPk=";
   };
 
@@ -70,4 +70,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     mainProgram = "com.github.philip_scott.notes-up";
   };
-}
+})
