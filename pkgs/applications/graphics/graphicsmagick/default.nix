@@ -5,12 +5,12 @@
 , graphicsmagick  # for passthru.tests
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "graphicsmagick";
   version = "1.3.42";
 
   src = fetchurl {
-    url = "mirror://sourceforge/graphicsmagick/GraphicsMagick-${version}.tar.xz";
+    url = "mirror://sourceforge/graphicsmagick/GraphicsMagick-${finalAttrs.version}.tar.xz";
     sha256 = "sha256-SE/M/Ssvr2wrqRUUaezlByvLkbpO1z517T2ORsdZ1Vc=";
   };
 
@@ -60,4 +60,4 @@ stdenv.mkDerivation rec {
     platforms = lib.platforms.all;
     mainProgram = "gm";
   };
-}
+})
