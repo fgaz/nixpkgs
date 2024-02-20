@@ -1,16 +1,16 @@
 { lib, stdenv, makeDesktopItem, fetchurl, jdk21, wrapGAppsHook, glib }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "pdfsam-basic";
   version = "5.2.0";
 
   src = fetchurl {
-    url = "https://github.com/torakiki/pdfsam/releases/download/v${version}/pdfsam_${version}-1_amd64.deb";
+    url = "https://github.com/torakiki/pdfsam/releases/download/v${finalAttrs.version}/pdfsam_${finalAttrs.version}-1_amd64.deb";
     hash = "sha256-Q1387Su6bmBkXvcrTgWtYZb9z/pKHiOTfUkUNHN8ItY=";
   };
 
   unpackPhase = ''
-    ar vx ${src}
+    ar vx ${finalAttrs.src}
     tar xvf data.tar.gz
   '';
 
@@ -24,15 +24,15 @@ stdenv.mkDerivation rec {
   installPhase = ''
     cp -R opt/pdfsam-basic/ $out/
     mkdir -p "$out"/share/icons
-    cp --recursive ${desktopItem}/share/applications $out/share
+    cp --recursive ${finalAttrs.desktopItem}/share/applications $out/share
     cp $out/icon.svg "$out"/share/icons/pdfsam-basic.svg
   '';
 
   desktopItem = makeDesktopItem {
-    name = pname;
-    exec = pname;
-    icon = pname;
-    comment = meta.description;
+    name = finalAttrs.pname;
+    exec = finalAttrs.pname;
+    icon = finalAttrs.pname;
+    comment = finalAttrs.meta.description;
     desktopName = "PDFsam Basic";
     genericName = "PDF Split and Merge";
     mimeTypes = [ "application/pdf" ];
@@ -50,4 +50,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ _1000101 ];
   };
-}
+})
