@@ -32,15 +32,15 @@
 , sofia_sip
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "calls";
   version = "45.0";
 
   src = fetchFromGitLab {
     domain = "gitlab.gnome.org";
     owner = "GNOME";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     fetchSubmodules = true;
     hash = "sha256-NIQFKVpZSxY2QOb73WfYsCzMQwB9XySoADCL7IlmGe8=";
   };
@@ -114,4 +114,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     mainProgram = "gnome-calls";
   };
-}
+})
