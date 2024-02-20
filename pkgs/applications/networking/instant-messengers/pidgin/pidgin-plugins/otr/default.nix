@@ -1,10 +1,10 @@
 { lib, stdenv, fetchurl, libotr, pidgin, intltool } :
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "pidgin-otr";
   version = "4.0.2";
   src = fetchurl {
-    url = "https://otr.cypherpunks.ca/pidgin-otr-${version}.tar.gz";
+    url = "https://otr.cypherpunks.ca/pidgin-otr-${finalAttrs.version}.tar.gz";
     sha256 = "1i5s9rrgbyss9rszq6c6y53hwqyw1k86s40cpsfx5ccl9bprxdgl";
   };
 
@@ -20,4 +20,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ abbradar ];
   };
-}
+})
