@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, makeWrapper, git }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "git-standup";
   version = "2.3.2";
 
   src = fetchFromGitHub {
     owner = "kamranahmedse";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "1xnn0jjha56v7l2vj45zzxncl6m5x2hq6nkffgc1bcikhp1pidn7";
   };
 
@@ -30,4 +30,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.all;
     mainProgram = "git-standup";
   };
-}
+})
