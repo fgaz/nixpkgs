@@ -18,14 +18,14 @@
 , wrapGAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "parlatype";
   version = "4.0";
 
   src = fetchFromGitHub {
     owner = "gkarsay";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "1iyjxss6sgc9gx6ij30zz97bl31qix8pxklzn4kknh1b0j7hhbwq";
   };
 
@@ -76,4 +76,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ alexshpilkin melchips ];
     platforms = platforms.linux;
   };
-}
+})
