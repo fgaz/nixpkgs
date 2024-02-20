@@ -16,14 +16,14 @@
 , itstool
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "bless";
   version = "0.6.3";
 
   src = fetchFromGitHub {
     owner = "afrantzis";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     hash = "sha256-rS+vJX0y9v1TiPsRfABroHiTuENQKEOxNsyKwagRuHM=";
   };
 
@@ -68,4 +68,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     mainProgram = "bless";
   };
-}
+})
