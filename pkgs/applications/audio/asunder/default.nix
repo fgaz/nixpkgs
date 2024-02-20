@@ -9,11 +9,11 @@
 #, aacSupport ? false, TODO: neroAacEnc
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "3.0.1";
   pname = "asunder";
   src = fetchurl {
-    url = "http://littlesvr.ca/asunder/releases/${pname}-${version}.tar.bz2";
+    url = "http://littlesvr.ca/asunder/releases/${finalAttrs.pname}-${finalAttrs.version}.tar.bz2";
     sha256 = "sha256-iGji4bl7ZofIAOf2EiYqMWu4V+3TmIN2jOYottJTN2s=";
   };
 
@@ -31,7 +31,7 @@ stdenv.mkDerivation rec {
 
   postInstall = ''
     wrapProgram "$out/bin/asunder" \
-      --prefix PATH : "${lib.makeBinPath runtimeDeps}"
+      --prefix PATH : "${lib.makeBinPath finalAttrs.runtimeDeps}"
   '';
 
   meta = with lib; {
@@ -47,4 +47,4 @@ stdenv.mkDerivation rec {
       WavPack, Musepack, AAC, and Monkey's Audio files.
     '';
   };
-}
+})
