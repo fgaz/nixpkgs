@@ -1,13 +1,13 @@
 { lib, stdenv, fetchurl, libextractor, gettext }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "doodle";
   version = "0.7.2";
 
   buildInputs = [ libextractor gettext ];
 
   src = fetchurl {
-    url = "https://grothoff.org/christian/doodle/download/doodle-${version}.tar.gz";
+    url = "https://grothoff.org/christian/doodle/download/doodle-${finalAttrs.version}.tar.gz";
     sha256 = "sha256-dtRPfUjhBNgN+5zHMYmszISmBv1+K6yjKsbQBiAXWRA=";
   };
 
@@ -18,4 +18,4 @@ stdenv.mkDerivation rec {
     maintainers = with lib.maintainers; [ viric ];
     platforms = with lib.platforms; linux;
   };
-}
+})
