@@ -3,7 +3,7 @@
 , mesa, lz4, zstd, ffmpeg, libva
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "waypipe";
   version = "0.8.6";
 
@@ -11,7 +11,7 @@ stdenv.mkDerivation rec {
     domain = "gitlab.freedesktop.org";
     owner = "mstoeckl";
     repo = "waypipe";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-1VLPnP4BmF9Zha0uVsPjA/WbF/oLfZmdDX57SzqrV5A=";
   };
 
@@ -31,9 +31,9 @@ stdenv.mkDerivation rec {
       makes application forwarding similar to ssh -X feasible.
     '';
     homepage = "https://mstoeckl.com/notes/gsoc/blog.html";
-    changelog = "https://gitlab.freedesktop.org/mstoeckl/waypipe/-/releases#v${version}";
+    changelog = "https://gitlab.freedesktop.org/mstoeckl/waypipe/-/releases#v${finalAttrs.version}";
     license = licenses.mit;
     platforms = platforms.linux;
     maintainers = with maintainers; [ primeos ];
   };
-}
+})
