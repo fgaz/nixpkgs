@@ -7,14 +7,14 @@
 , pcre
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "simh";
   version = "3.11-1";
 
   src = fetchFromGitHub {
     owner = "simh";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-65+YfOWpVXPeT64TZcSaWJY+ODQ0q/pwF9jb8xGdpIs=";
   };
 
@@ -63,5 +63,5 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ AndersonTorres ];
     platforms = with platforms; unix;
   };
-}
+})
 # TODO: install documentation
