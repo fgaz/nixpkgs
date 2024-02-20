@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, git, makeWrapper, openssl, coreutils, util-linux, gnugrep, gnused, gawk, testers, transcrypt }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "transcrypt";
   version = "2.2.3";
 
   src = fetchFromGitHub {
     owner = "elasticdog";
     repo = "transcrypt";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "+B8CYHDneDd0GwiTwQK6YVScDMKao2JXFpGk9PY6/EE=";
   };
 
@@ -32,8 +32,8 @@ stdenv.mkDerivation rec {
 
   passthru.tests.version = testers.testVersion {
     package = transcrypt;
-    command = "transcrypt --version";
-    version = "transcrypt ${version}";
+    command = "transcrypt --finalAttrs.version";
+    version = "transcrypt ${finalAttrs.version}";
   };
 
   meta = with lib; {
@@ -51,4 +51,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.elasticdog ];
     platforms = platforms.all;
   };
-}
+})
