@@ -1,6 +1,6 @@
 {lib, stdenv, fetchFromGitHub, gmp, cmake, python3}:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "libpoly";
   version = "0.1.13";
 
@@ -8,7 +8,7 @@ stdenv.mkDerivation rec {
     owner = "SRI-CSL";
     repo = "libpoly";
     # they've pushed to the release branch, use explicit tag
-    rev = "refs/tags/v${version}";
+    rev = "refs/tags/v${finalAttrs.version}";
     sha256 = "sha256-7aFz+6XJOVEA/Fmi0ywd6rZdTW8sHq8MoHqXR0Hc2o4=";
   };
 
@@ -24,4 +24,4 @@ stdenv.mkDerivation rec {
     license = licenses.lgpl3;
     platforms = platforms.all;
   };
-}
+})
