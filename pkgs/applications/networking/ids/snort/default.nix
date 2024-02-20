@@ -2,13 +2,13 @@
 , libtirpc
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "2.9.20";
   pname = "snort";
 
   src = fetchurl {
-    name = "${pname}-${version}.tar.gz";
-    url = "https://snort.org/downloads/archive/snort/${pname}-${version}.tar.gz";
+    name = "${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
+    url = "https://snort.org/downloads/archive/snort/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     sha256 = "sha256-KUAOE/U7GDHguLEOwSJKHLqm3BUzpTIqIN2Au4S0mBw=";
   };
 
@@ -37,4 +37,4 @@ stdenv.mkDerivation rec {
     license = lib.licenses.gpl2;
     platforms = with lib.platforms; linux;
   };
-}
+})
