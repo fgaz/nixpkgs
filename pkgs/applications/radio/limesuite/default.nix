@@ -5,14 +5,14 @@
 , withGui ? !stdenv.isDarwin # withGui transitively depends on mesa, which is broken on darwin
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "limesuite";
   version = "23.11.0";
 
   src = fetchFromGitHub {
     owner = "myriadrf";
     repo = "LimeSuite";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-f1cXrkVCIc1MqTvlCUBFqzHLhIVueybVxipNZRlF2gE=";
   };
 
@@ -49,5 +49,5 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ markuskowa ];
     platforms = platforms.unix;
   };
-}
+})
 
