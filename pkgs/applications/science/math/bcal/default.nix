@@ -6,14 +6,14 @@
 , python3Packages
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "bcal";
   version = "2.4";
 
   src = fetchFromGitHub {
     owner = "jarun";
     repo = "bcal";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-PleWU2yyJzkUAZEvEYoCGdpEXqOgRvZK9zXTYrxRtQU=";
   };
 
@@ -28,10 +28,10 @@ stdenv.mkDerivation rec {
   pytestFlagsArray = [ "test.py" ];
 
   meta = with lib; {
-    description = "Storage conversion and expression calculator";
+    description = "Storage confinalAttrs.version and expression calculator";
     homepage = "https://github.com/jarun/bcal";
     license = licenses.gpl3Only;
     platforms = platforms.unix;
     maintainers = with maintainers; [ ];
   };
-}
+})
