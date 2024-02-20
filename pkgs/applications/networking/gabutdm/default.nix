@@ -17,14 +17,14 @@
 , curl
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gabutdm";
   version = "2.1.6";
 
   src = fetchFromGitHub {
     owner = "gabutakut";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     hash = "sha256-ai5LsoK21XwXqL4LRuKsOR1/JV6LnP+1ZJ9fMHpj178=";
   };
 
@@ -61,4 +61,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ aleksana ];
     platforms = platforms.unix;
   };
-}
+})
