@@ -4,13 +4,13 @@
 , librsvg, wrapGAppsHook
 , pulseaudioSupport ? true, libpulseaudio }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "audio-recorder";
   version = "2.1.3";
 
   src = fetchurl {
-    name = "${pname}-${version}.tar.gz";
-    url = "${meta.homepage}/+archive/ubuntu/ppa/+files/audio-recorder_${version}%7Ebionic.tar.gz";
+    name = "${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
+    url = "${finalAttrs.meta.homepage}/+archive/ubuntu/ppa/+files/audio-recorder_${finalAttrs.version}%7Ebionic.tar.gz";
     sha256 = "160pnmnmc9zwzyclsci3w1qwlgxkfx1y3x5ck6i587w78570an1r";
   };
 
@@ -41,4 +41,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = [ maintainers.msteen ];
   };
-}
+})
