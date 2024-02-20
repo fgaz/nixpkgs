@@ -31,12 +31,12 @@
   libmagic = file;
   hyperscanSupport = stdenv.system == "x86_64-linux" || stdenv.system == "i686-linux";
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "suricata";
   version = "7.0.2";
 
   src = fetchurl {
-    url = "https://www.openinfosecfoundation.org/download/${pname}-${version}.tar.gz";
+    url = "https://www.openinfosecfoundation.org/download/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     hash = "sha256-tOtgSDjvmag5a8i3u1TK0R8kQsvXy7MA5/WqsZCXvE0=";
   };
 
@@ -153,4 +153,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ magenbluten ];
   };
-}
+})
