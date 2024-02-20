@@ -3,14 +3,14 @@
 , pango, pkg-config, catch2
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "sfizz";
   version = "1.2.1";
 
   src = fetchFromGitHub {
     owner = "sfztools";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "sha256-/G9tvJ4AcBSTmo44xDDKf6et1nSn/FV5m27ztDu10kI=";
     fetchSubmodules = true;
   };
@@ -64,4 +64,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.all;
     badPlatforms = platforms.darwin;
   };
-}
+})
