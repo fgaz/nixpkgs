@@ -1,6 +1,6 @@
 { lib, stdenv, fetchurl, zlib }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "samtools";
   version = "0.1.19";
 
@@ -30,4 +30,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = [ maintainers.unode ];
   };
-}
+})
