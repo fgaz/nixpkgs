@@ -28,14 +28,14 @@
 , tkimg
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "therion";
   version = "6.1.8";
 
   src = fetchFromGitHub {
     owner = "therion";
     repo = "therion";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-bmp0IZ4uAqDpe2e8UeIDUdFaaocx4OBIYuhnaHirqGc=";
   };
 
@@ -94,4 +94,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl2Only;
     maintainers = with maintainers; [ matthewcroughan ];
   };
-}
+})
