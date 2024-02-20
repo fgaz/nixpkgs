@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "git-my";
   version = "1.1.2";
 
   src = fetchFromGitHub {
     owner = "davidosomething";
     repo = "git-my";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "0jji5zw25jygj7g4f6f3k0p0s9g37r8iad8pa0s67cxbq2v4sc0v";
   };
 
@@ -26,5 +26,5 @@ stdenv.mkDerivation rec {
     platforms = platforms.all;
     mainProgram = "git-my";
   };
-}
+})
 
