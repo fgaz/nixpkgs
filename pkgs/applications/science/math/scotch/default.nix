@@ -1,18 +1,18 @@
 { lib, stdenv, fetchurl, bison, mpi, flex, zlib}:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "6.1.1";
   pname = "scotch";
-  src_name = "scotch_${version}";
+  src_name = "scotch_${finalAttrs.version}";
 
   buildInputs = [ bison mpi flex zlib ];
 
   src = fetchurl {
-    url = "https://gforge.inria.fr/frs/download.php/file/34618/${src_name}.tar.gz";
+    url = "https://gforge.inria.fr/frs/download.php/file/34618/${finalAttrs.src_name}.tar.gz";
     sha256 = "sha256-OQUvWf9HSkppzvwlzzyvhClACIneugEO5kA8oYj4sxE=";
   };
 
-  sourceRoot = "${src_name}/src";
+  sourceRoot = "${finalAttrs.src_name}/src";
 
   preConfigure = ''
     ln -s Make.inc/Makefile.inc.x86-64_pc_linux2 Makefile.inc
@@ -32,5 +32,5 @@ stdenv.mkDerivation rec {
     maintainers = [ lib.maintainers.bzizou ];
     platforms = lib.platforms.linux;
   };
-}
+})
 
