@@ -47,16 +47,16 @@
 , util-linux
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "tenacity";
   version = "1.3.3";
 
   src = fetchFromGitea {
     domain = "codeberg.org";
     owner = "tenacityteam";
-    repo = pname;
+    repo = finalAttrs.pname;
     fetchSubmodules = true;
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-UU3iKfab6en4IyGlpNLUhOil3snzaZ2nI6JMqoL6DUs=";
   };
 
@@ -155,4 +155,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ irenes lheckemann ];
     platforms = platforms.linux;
   };
-}
+})
