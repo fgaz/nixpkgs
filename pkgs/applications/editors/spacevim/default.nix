@@ -26,13 +26,13 @@ let
     cp ${format.generate "init.toml" spacevim_config} $out/init.toml
   '';
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "spacevim";
   version = "1.8.0";
   src = fetchFromGitHub {
     owner = "SpaceVim";
     repo = "SpaceVim";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256:11snnh5q47nqhzjb9qya6hpnmlzc060958whqvqrh4hc7gnlnqp8";
   };
 
@@ -75,4 +75,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.all;
     mainProgram = "spacevim";
   };
-}
+})
