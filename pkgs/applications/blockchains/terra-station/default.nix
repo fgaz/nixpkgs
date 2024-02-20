@@ -23,12 +23,12 @@ let
 
 in
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "terra-station";
   version = "1.2.0";
 
   src = fetchurl {
-    url = "https://github.com/terra-money/station-desktop/releases/download/v${version}/Terra.Station_${version}_${arch}.deb";
+    url = "https://github.com/terra-money/station-desktop/releases/download/v${finalAttrs.version}/Terra.Station_${finalAttrs.version}_${arch}.deb";
     inherit sha256;
   };
 
@@ -44,20 +44,20 @@ stdenv.mkDerivation rec {
   installPhase = ''
     runHook preInstall
 
-    mkdir -p $out/bin $out/share/${pname}
+    mkdir -p $out/bin $out/share/${finalAttrs.pname}
 
     cp -a usr/share/* $out/share
-    cp -a "opt/Terra Station/"{locales,resources} $out/share/${pname}
+    cp -a "opt/Terra Station/"{locales,resources} $out/share/${finalAttrs.pname}
 
     substituteInPlace $out/share/applications/station-electron.desktop \
-      --replace "/opt/Terra Station/station-electron" ${pname}
+      --replace "/opt/Terra Station/station-electron" ${finalAttrs.pname}
 
     runHook postInstall
   '';
 
   postFixup = ''
-    makeWrapper ${electron}/bin/electron $out/bin/${pname} \
-      --add-flags $out/share/${pname}/resources/app.asar \
+    makeWrapper ${electron}/bin/electron $out/bin/${finalAttrs.pname} \
+      --add-flags $out/share/${finalAttrs.pname}/resources/app.asar \
       --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath [ gcc-unwrapped.lib ]}"
   '';
 
@@ -69,4 +69,4 @@ stdenv.mkDerivation rec {
     platforms = [ "x86_64-linux" ];
     mainProgram = "terra-station";
   };
-}
+})
