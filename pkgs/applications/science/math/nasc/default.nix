@@ -18,14 +18,14 @@
 , wrapGAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "nasc";
   version = "0.8.0";
 
   src = fetchFromGitHub {
     owner = "parnold-x";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "02b9a59a9fzsb6nn3ycwwbcbv04qfzm6x7csq2addpzx5wak6dd8";
     fetchSubmodules = true;
   };
@@ -83,4 +83,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl3Plus;
     mainProgram = "com.github.parnold_x.nasc";
   };
-}
+})
