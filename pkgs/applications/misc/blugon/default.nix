@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, python3, libX11, libXrandr }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "blugon";
   version = "1.12.1";
 
   src = fetchFromGitHub {
     owner = "jumper149";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "1i67v8jxvavgax3dwvns200iwwdcvgki04liq0x64q52lg0vrh7m";
   };
 
@@ -34,4 +34,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = with maintainers; [ jumper149 ];
   };
-}
+})
