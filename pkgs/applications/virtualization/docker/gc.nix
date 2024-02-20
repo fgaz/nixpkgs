@@ -2,7 +2,7 @@
 
 with lib;
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "docker-gc";
   version = "unstable-2015-10-5";
 
@@ -30,4 +30,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [offline];
     platforms = docker.meta.platforms;
   };
-}
+})
