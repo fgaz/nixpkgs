@@ -6,14 +6,14 @@
 , libGLU
 , freeglut }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "antiprism";
   version = "0.30";
 
   src = fetchFromGitHub {
     owner = "antiprism";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "sha256-dD3MH+KectuuKOYF7bqWtGsBo5zz+UMyY/io1tgXbgU=";
   };
 
@@ -26,4 +26,4 @@ stdenv.mkDerivation rec {
     license = with licenses; [ mit ];
     maintainers = with maintainers; [ AndersonTorres ];
   };
-}
+})
