@@ -18,14 +18,14 @@
 , hyp2mat
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "openems";
   version = "0.0.36";
 
   src = fetchFromGitHub {
     owner = "thliebig";
     repo = "openEMS";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-wdH+Zw7G2ZigzBMX8p3GKdFVx/AhbTNL+P3w+YjI/dc=";
   };
 
@@ -66,4 +66,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     badPlatforms = platforms.aarch64;
   };
-}
+})
