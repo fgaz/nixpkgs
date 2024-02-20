@@ -2,7 +2,7 @@
 , qtsvg, qtquickcontrols2, qtgraphicaleffects, qtspeech, qtx11extras, qmake
 , qttools, gst_all_1, wayland, pkg-config, wrapQtAppsHook }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "qgroundcontrol";
   version = "4.3.0";
 
@@ -20,7 +20,7 @@ stdenv.mkDerivation rec {
     wayland
   ];
 
-  buildInputs = [ SDL2 ] ++ gstInputs ++ propagatedBuildInputs;
+  buildInputs = [ SDL2 ] ++ finalAttrs.gstInputs ++ finalAttrs.propagatedBuildInputs;
   nativeBuildInputs = [ pkg-config qmake qttools wrapQtAppsHook ];
 
   preConfigure = ''
@@ -65,8 +65,8 @@ stdenv.mkDerivation rec {
   # TODO: package mavlink so we can build from a normal source tarball
   src = fetchFromGitHub {
     owner = "mavlink";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-a0+cpT413qi88PvaWQPxKABHfK7vbPE7B42n84n/SAk=";
     fetchSubmodules = true;
   };
@@ -79,4 +79,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ lopsided98 ];
     mainProgram = "QGroundControl";
   };
-}
+})
