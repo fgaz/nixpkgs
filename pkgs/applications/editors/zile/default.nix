@@ -11,12 +11,12 @@
 , vala
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "zile";
   version = "2.6.2";
 
   src = fetchurl {
-    url = "mirror://gnu/zile/${pname}-${version}.tar.gz";
+    url = "mirror://gnu/zile/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     hash = "sha256-d+t9r/PJi9yI2qGsBA3MynK4HcMvwxZuB53Xpj5Cx0E=";
   };
 
@@ -78,4 +78,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     mainProgram = "zile";
   };
-}
+})
