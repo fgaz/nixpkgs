@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, jre, makeWrapper }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "macse";
   version = "2.03";
 
   src = fetchurl {
-    url = "https://bioweb.supagro.inra.fr/${pname}/releases/${pname}_v${version}.jar";
+    url = "https://bioweb.supagro.inra.fr/${finalAttrs.pname}/releases/${finalAttrs.pname}_v${finalAttrs.version}.jar";
     sha256 = "0jnjyz4f255glg37rawzdv4m6nfs7wfwc5dny7afvx4dz2sv4ssh";
   };
 
@@ -30,4 +30,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.bzizou ];
     platforms = platforms.all;
   };
-}
+})
