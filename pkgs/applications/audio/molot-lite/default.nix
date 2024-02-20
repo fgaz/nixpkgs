@@ -1,14 +1,14 @@
 { lib, stdenv, fetchFromGitHub, lv2, cairo, pkg-config }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
 
   pname = "molot-lite";
   version = "1.1.0";
 
   src = fetchFromGitHub {
     owner = "magnetophon";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "sha256-0tmobsdCNon6udbkbQw7+EYQKBg2oaXlHIgNEf9U3XE=";
   };
 
@@ -31,4 +31,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.magnetophon ];
     platforms = platforms.linux;
   };
-}
+})
