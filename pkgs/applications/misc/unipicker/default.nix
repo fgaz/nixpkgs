@@ -1,13 +1,13 @@
 { stdenv, fetchFromGitHub, lib, fzf, xclip }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
    pname = "unipicker";
    version = "2.0.1";
 
    src = fetchFromGitHub {
       owner = "jeremija";
-      repo = pname;
-      rev = "v${version}";
+      repo = finalAttrs.pname;
+      rev = "v${finalAttrs.version}";
       sha256 = "1k4v53pm3xivwg9vq2kndpcmah0yn4679r5jzxvg38bbkfdk86c1";
    };
 
@@ -37,4 +37,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ ];
     platforms = platforms.unix;
    };
-}
+})
