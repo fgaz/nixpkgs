@@ -18,12 +18,12 @@
 , libarchive
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "midori";
   version = "9.0";
 
   src = fetchurl {
-    url = "https://github.com/midori-browser/core/releases/download/v${version}/midori-v${version}.tar.gz";
+    url = "https://github.com/midori-browser/core/releases/download/v${finalAttrs.version}/midori-v${finalAttrs.version}.tar.gz";
     sha256 = "05i04qa83dnarmgkx4xsk6fga5lw1lmslh4rb3vhyyy4ala562jy";
   };
 
@@ -60,4 +60,4 @@ stdenv.mkDerivation rec {
     platforms = with platforms; linux;
     maintainers = with maintainers; [ raskin ramkromberg ];
   };
-}
+})
