@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, groff, ncurses, bzip2, zlib }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "splat";
   version = "1.4.2";
 
   src = fetchurl {
-    url = "https://www.qsl.net/kd2bd/${pname}-${version}.tar.bz2";
+    url = "https://www.qsl.net/kd2bd/${finalAttrs.pname}-${finalAttrs.version}.tar.bz2";
     hash = "sha256-ObCzFOLpJ73wDR7aS5hl79EouoUDBfmHrsBJxP1Yopw=";
   };
 
@@ -53,4 +53,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.x86_64;
   };
 
-}
+})
