@@ -8,7 +8,7 @@
 , wrapQtAppsHook
 , cmake }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "qscreenshot";
   version = "unstable-2021-10-18";
 
@@ -36,4 +36,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.all;
     maintainers = [ maintainers.bjornfor ];
   };
-}
+})
