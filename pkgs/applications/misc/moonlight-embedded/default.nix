@@ -4,14 +4,14 @@
 , curl, expat, avahi, libuuid, libva
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "moonlight-embedded";
   version = "2.6.2";
 
   src = fetchFromGitHub {
     owner = "moonlight-stream";
     repo = "moonlight-embedded";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-57gD8vyUk4+eJB+QkD+hZzyzM+Lhvue1mY7xSApYWn8=";
     fetchSubmodules = true;
   };
@@ -33,4 +33,4 @@ stdenv.mkDerivation rec {
     mainProgram = "moonlight";
     platforms = platforms.linux;
   };
-}
+})
