@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, libtiff, gettext }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "minidjvu";
   version = "0.8";
 
   src = fetchurl {
-    url = "mirror://sourceforge/minidjvu/minidjvu-${version}.tar.gz";
+    url = "mirror://sourceforge/minidjvu/minidjvu-${finalAttrs.version}.tar.gz";
     sha256 = "0jmpvy4g68k6xgplj9zsl6brg6vi81mx3nx2x9hfbr1f4zh95j79";
   };
 
@@ -26,4 +26,4 @@ stdenv.mkDerivation rec {
     maintainers = [ lib.maintainers.viric ];
     platforms = lib.platforms.unix;
   };
-}
+})
