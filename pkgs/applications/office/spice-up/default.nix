@@ -18,14 +18,14 @@
 , pantheon
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "spice-up";
   version = "1.9.1";
 
   src = fetchFromGitHub {
     owner = "Philip-Scott";
     repo = "Spice-up";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-FI6YMbqZfaU19k8pS2eoNCnX8O8F99SHHOxMwHC5fTc=";
   };
 
@@ -67,4 +67,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl3Plus;
     mainProgram = "com.github.philip_scott.spice-up";
   };
-}
+})
