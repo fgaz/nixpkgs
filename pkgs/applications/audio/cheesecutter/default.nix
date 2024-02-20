@@ -6,7 +6,7 @@
 , patchelf
 , SDL
 }:
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "cheesecutter";
   version = "unstable-2021-02-27";
 
@@ -61,4 +61,4 @@ stdenv.mkDerivation rec {
     platforms = [ "x86_64-linux" "i686-linux" "x86_64-darwin" ];
     maintainers = with maintainers; [ OPNA2608 ];
   };
-}
+})
