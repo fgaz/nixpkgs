@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, xorg, cairo, libGL, lv2, libjack2, mesa, pkg-config }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "stone-phaser";
   version = "0.1.2";
 
   src = fetchFromGitHub {
     owner = "jpcima";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "180b32z8h9zi8p0q55r1dzxfckamnngm52zjypjjvvy7qdj3mfcd";
     fetchSubmodules = true;
   };
@@ -32,4 +32,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     license = licenses.boost;
   };
-}
+})
