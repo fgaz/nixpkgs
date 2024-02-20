@@ -20,14 +20,14 @@
 , libhandy
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "tootle";
   version = "1.0";
 
   src = fetchFromGitHub {
     owner = "bleakgrey";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     sha256 = "NRM7GiJA8c5z9AvXpGXtMl4ZaYN2GauEIbjBmoY4pdo=";
   };
 
@@ -94,4 +94,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ dtzWill ];
     platforms = platforms.linux;
   };
-}
+})
