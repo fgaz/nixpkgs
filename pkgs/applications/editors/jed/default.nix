@@ -8,12 +8,12 @@
 , slang
 } :
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "jed";
   version = "0.99-19";
 
   src = fetchzip {
-    url = "https://www.jedsoft.org/releases/${pname}/${pname}-${version}.tar.bz2";
+    url = "https://www.jedsoft.org/releases/${finalAttrs.pname}/${finalAttrs.pname}-${finalAttrs.version}.tar.bz2";
     sha256 = "sha256-vzeX0P+2+IuKtrX+2lQDeJj7VMDS6XurD2pb2jhxy2Q=";
   };
 
@@ -91,5 +91,5 @@ stdenv.mkDerivation rec {
     license = licenses.gpl2Plus;
     platforms = slang.meta.platforms;
   };
-}
+})
 # TODO: build tex documentation
