@@ -10,7 +10,7 @@
 , lp_solve
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "scalp";
   version = "unstable-2022-03-15";
 
@@ -39,7 +39,7 @@ stdenv.mkDerivation rec {
   '';
 
   cmakeFlags = [
-    "-DBUILD_TESTS=${lib.boolToString doCheck}"
+    "-DBUILD_TESTS=${lib.boolToString finalAttrs.doCheck}"
   ] ++ lib.optionals withGurobi [
     "-DGUROBI_DIR=${gurobi}"
   ] ++ lib.optionals withCplex [
@@ -55,4 +55,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = with maintainers; [ wegank ];
   };
-}
+})
