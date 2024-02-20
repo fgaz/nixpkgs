@@ -27,7 +27,7 @@
 let
   marble = callPackage ./marble.nix { };
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "blackbox";
   version = "0.14.0";
 
@@ -96,4 +96,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ chuangzhu linsui ];
     platforms = platforms.linux;
   };
-}
+})
