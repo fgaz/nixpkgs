@@ -1,11 +1,11 @@
 { stdenv, lib, fetchurl, pkg-config, meson, ninja, lv2, lilv, curl, libelf }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "lv2lint";
   version = "0.16.2";
 
   src = fetchurl {
-    url = "https://git.open-music-kontrollers.ch/lv2/${pname}/snapshot/${pname}-${version}.tar.xz";
+    url = "https://git.open-music-kontrollers.ch/lv2/${finalAttrs.pname}/snapshot/${finalAttrs.pname}-${finalAttrs.version}.tar.xz";
     sha256 = "sha256-sjgQVx8uGNPWcUwKzGUhChpfzXj/8D8cggVTpcHEXPQ=";
   };
 
@@ -14,9 +14,9 @@ stdenv.mkDerivation rec {
 
   meta = with lib; {
     description = "Check whether a given LV2 plugin is up to the specification";
-    homepage = "https://open-music-kontrollers.ch/lv2/${pname}:";
+    homepage = "https://open-music-kontrollers.ch/lv2/${finalAttrs.pname}:";
     license = licenses.artistic2;
     maintainers = [ maintainers.magnetophon ];
     platforms = platforms.all;
   };
-}
+})
