@@ -4,14 +4,14 @@
   readline,
   autoreconfHook }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "microcom";
   version = "2023.09.0";
 
   src = fetchFromGitHub {
     owner = "pengutronix";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     hash = "sha256-CT/myxOK4U3DzliGsa45WMIFcYLjcoxx6w5S1NL5c7Y=";
   };
 
@@ -27,4 +27,4 @@ stdenv.mkDerivation rec {
     platforms = with platforms; linux;
     mainProgram = "microcom";
   };
-}
+})
