@@ -14,15 +14,15 @@
 , fetchpatch
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "xsane";
   version = "0.999";
 
   src = fetchFromGitLab {
     owner = "frontend";
     group = "sane-project";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     hash = "sha256-oOg94nUsT9LLKnHocY0S5g02Y9a1UazzZAjpEI/s+yM=";
   };
 
@@ -52,4 +52,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ melling ];
   };
-}
+})
