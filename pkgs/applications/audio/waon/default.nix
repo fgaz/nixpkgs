@@ -2,14 +2,14 @@
 , libsndfile, ncurses, pkg-config
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "waon";
   version = "0.11";
 
   src = fetchFromGitHub {
     owner = "kichiki";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "1xmq8d2rj58xbp4rnyav95y1vnz3r9s9db7xxfa2rd0ilq0ps4y7";
   };
 
@@ -27,4 +27,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.puckipedia ];
     platforms = platforms.all;
   };
-}
+})
