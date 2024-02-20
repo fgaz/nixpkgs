@@ -4,12 +4,12 @@ let
   version = "0.9.2";
 in
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gmrun";
   inherit version;
 
   src = fetchurl {
-    url = "mirror://sourceforge/gmrun/${pname}-${version}.tar.gz";
+    url = "mirror://sourceforge/gmrun/${finalAttrs.pname}-${version}.tar.gz";
     sha256 = "180z6hbax1qypy5cyy2z6nn7fzxla4ib47ck8mqwr714ag77na8p";
   };
 
@@ -39,4 +39,4 @@ stdenv.mkDerivation rec {
     maintainers = [];
     platforms = platforms.all;
   };
-}
+})
