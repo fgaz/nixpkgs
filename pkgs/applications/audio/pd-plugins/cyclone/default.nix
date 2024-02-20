@@ -1,6 +1,6 @@
 { lib, stdenv, fetchFromGitHub, puredata }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "cyclone";
   version = "unstable-2023-09-12";
 
@@ -30,4 +30,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ magnetophon carlthome ];
     platforms = platforms.linux;
   };
-}
+})
