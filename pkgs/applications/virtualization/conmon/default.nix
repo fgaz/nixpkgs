@@ -10,14 +10,14 @@
 , nixosTests
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "conmon";
   version = "2.1.10";
 
   src = fetchFromGitHub {
     owner = "containers";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     hash = "sha256-WUXyx5OWIJDamzHUahN+0/rcn2pxQgCgYAE/d0mxk2A=";
   };
 
@@ -48,4 +48,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     mainProgram = "conmon";
   };
-}
+})
