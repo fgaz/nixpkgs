@@ -16,15 +16,15 @@
 , wrapQtAppsHook ? null
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "vertcoin";
   version = "0.18.0";
 
-  name = pname + toString (lib.optional (!withGui) "d") + "-" + version;
+  name = finalAttrs.pname + toString (lib.optional (!withGui) "d") + "-" + finalAttrs.version;
 
   src = fetchFromGitHub {
-    owner = pname + "-project";
-    repo = pname + "-core";
+    owner = finalAttrs.pname + "-project";
+    repo = finalAttrs.pname + "-core";
     rev = "2bd6dba7a822400581d5a6014afd671fb7e61f36";
     sha256 = "ua9xXA+UQHGVpCZL0srX58DDUgpfNa+AAIKsxZbhvMk=";
   };
@@ -66,4 +66,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.mmahut ];
     platforms = platforms.linux;
   };
-}
+})
