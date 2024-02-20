@@ -23,14 +23,14 @@ let
 
 in
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "monero-cli";
   version = "0.18.3.1";
 
   src = fetchFromGitHub {
     owner = "monero-project";
     repo = "monero";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-PYcSbwbuQm6/r9RH+vjDy7NW1AiKhK/DG1pYYt4/drg=";
   };
 
@@ -74,4 +74,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ rnhmjoj ];
     mainProgram = "monero-wallet-cli";
   };
-}
+})
