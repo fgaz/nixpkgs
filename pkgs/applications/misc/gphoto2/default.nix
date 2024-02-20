@@ -8,14 +8,14 @@
 , readline
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gphoto2";
   version = "2.5.28";
 
   src = fetchFromGitHub {
     owner = "gphoto";
     repo = "gphoto2";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-t5EnM4WaDbOTPM+rJW+hQxBgNErnnZEN9lZvxTKoDhA=";
   };
 
@@ -47,4 +47,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = [ maintainers.jcumming ];
   };
-}
+})
