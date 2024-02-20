@@ -10,7 +10,7 @@
 , wrapQtAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
 
   pname = "savvycan";
   version = "213";
@@ -18,7 +18,7 @@ stdenv.mkDerivation rec {
   src = fetchFromGitHub {
     owner = "collin80";
     repo = "SavvyCAN";
-    rev = "V${version}";
+    rev = "V${finalAttrs.version}";
     hash = "sha256-duITY6s/uadeBCFuG42JbLCaq7yaYv1qB8Q3GA8UJ0A=";
   };
 
@@ -29,7 +29,7 @@ stdenv.mkDerivation rec {
   meta = with lib; {
     description = "QT based cross platform canbus tool";
     homepage = "https://savvycan.com/";
-    changelog = "https://github.com/collin80/SavvyCAN/releases/tag/${version}";
+    changelog = "https://github.com/collin80/SavvyCAN/releases/tag/${finalAttrs.version}";
     maintainers = with maintainers; [ simoneruffini ];
     platforms = platforms.all;
     license = licenses.mit;
@@ -61,4 +61,4 @@ stdenv.mkDerivation rec {
     '';
   };
 
-}
+})
