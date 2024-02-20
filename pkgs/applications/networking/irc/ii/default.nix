@@ -1,11 +1,11 @@
 {lib, stdenv, fetchurl}:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "ii";
   version = "2.0";
 
   src = fetchurl {
-    url = "https://dl.suckless.org/tools/${pname}-${version}.tar.gz";
+    url = "https://dl.suckless.org/tools/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     sha256 = "sha256-T2evzSCMB5ObiKrb8hSXpwKtCgf5tabOhh+fOf/lQls=";
   };
 
@@ -19,4 +19,4 @@ stdenv.mkDerivation rec {
     description = "Irc it, simple FIFO based irc client";
     platforms = lib.platforms.unix;
   };
-}
+})
