@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "mednafen-server";
   version = "0.5.2";
 
   src = fetchurl {
-    url = "https://mednafen.github.io/releases/files/mednafen-server-${version}.tar.xz";
+    url = "https://mednafen.github.io/releases/files/mednafen-server-${finalAttrs.version}.tar.xz";
     sha256 = "0xm7dj5nwnrsv69r72rcnlw03jm0l8rmrg3s05gjfvxyqmlb36dq";
   };
 
@@ -18,4 +18,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ AndersonTorres ];
     platforms = platforms.unix;
   };
-}
+})
