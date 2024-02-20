@@ -9,14 +9,14 @@
 , wrapGAppsHook
 , installShellFiles
 }:
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "wofi";
   version = "1.3";
 
   src = fetchFromSourcehut {
-    repo = pname;
+    repo = finalAttrs.pname;
     owner = "~scoopta";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-GxMjEXBPQniD+Yc9QZjd8TH4ILJAX5dNzrjxDawhy8w=";
     vc = "hg";
   };
@@ -41,4 +41,4 @@ stdenv.mkDerivation rec {
     platforms = with platforms; linux;
     mainProgram = "wofi";
   };
-}
+})
