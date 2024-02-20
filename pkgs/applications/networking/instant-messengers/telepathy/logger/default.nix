@@ -3,12 +3,12 @@
 , fetchpatch, darwin
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "telepathy-logger";
   version = "0.8.2";
 
   src = fetchurl {
-    url = "https://telepathy.freedesktop.org/releases/telepathy-logger/telepathy-logger-${version}.tar.bz2";
+    url = "https://telepathy.freedesktop.org/releases/telepathy-logger/telepathy-logger-${finalAttrs.version}.tar.bz2";
     sha256 = "1bjx85k7jyfi5pvl765fzc7q2iz9va51anrc2djv7caksqsdbjlg";
   };
 
@@ -46,4 +46,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ ];
     platforms = platforms.unix;
   };
-}
+})
