@@ -1,9 +1,9 @@
 { lib, stdenv, callPackage, perl, which, coreutils, zenity, curl
 , cabextract, unzip, p7zip, gnused, gnugrep, bash } :
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "winetricks";
-  version = src.version;
+  version = finalAttrs.src.version;
 
   src = (callPackage ./sources.nix {}).winetricks;
 
@@ -20,12 +20,12 @@ stdenv.mkDerivation rec {
 
   postInstall = ''
     sed -i \
-      -e '2i PATH="${pathAdd}:$PATH"' \
+      -e '2i PATH="${finalAttrs.pathAdd}:$PATH"' \
       "$out/bin/winetricks"
   '';
 
   passthru = {
-    inherit (src) updateScript;
+    inherit (finalAttrs.src) updateScript;
   };
 
   meta = {
@@ -34,4 +34,4 @@ stdenv.mkDerivation rec {
     homepage = "https://github.com/Winetricks/winetricks";
     platforms = with lib.platforms; linux;
   };
-}
+})
