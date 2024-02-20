@@ -12,14 +12,14 @@
 , zeromq
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "sumokoin";
   version = "0.8.1.0";
 
   src = fetchFromGitHub {
     owner = "sumoprojects";
     repo = "sumokoin";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-CHZ6hh60U6mSR68CYDKMWTYyX1koF4gA7YrA1P5f0Dk=";
   };
 
@@ -53,4 +53,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ wegank ];
     platforms = platforms.linux;
   };
-}
+})
