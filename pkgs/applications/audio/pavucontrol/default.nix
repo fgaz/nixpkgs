@@ -12,12 +12,12 @@
 , wrapGAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "pavucontrol";
   version = "5.0";
 
   src = fetchurl {
-    url = "https://freedesktop.org/software/pulseaudio/${pname}/${pname}-${version}.tar.xz";
+    url = "https://freedesktop.org/software/pulseaudio/${finalAttrs.pname}/${finalAttrs.pname}-${finalAttrs.version}.tar.xz";
     sha256 = "sha256-zityw7XxpwrQ3xndgXUPlFW9IIcNHTo20gU2ry6PTno=";
   };
 
@@ -53,4 +53,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     mainProgram = "pavucontrol";
   };
-}
+})
