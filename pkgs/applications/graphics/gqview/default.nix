@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, pkg-config, gtk2, libpng }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gqview";
   version = "2.1.5";
 
   src = fetchurl {
-    url = "mirror://sourceforge/gqview/gqview-${version}.tar.gz";
+    url = "mirror://sourceforge/gqview/gqview-${finalAttrs.version}.tar.gz";
     sha256 = "0ilm5s7ps9kg4f5hzgjhg0xhn6zg0v9i7jnd67zrx9h7wsaa9zhj";
   };
 
@@ -25,4 +25,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = with maintainers; [ ];
   };
-}
+})
