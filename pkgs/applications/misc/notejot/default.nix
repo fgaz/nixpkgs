@@ -15,14 +15,14 @@
 , fetchpatch
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "notejot";
   version = "3.5.1";
 
   src = fetchFromGitHub {
     owner = "lainsce";
-    repo = pname;
-    rev = version;
+    repo = finalAttrs.pname;
+    rev = finalAttrs.version;
     hash = "sha256-p5F0OITgfZyvHwndI5r5BE524+nft7A2XfR3BJZFamU=";
   };
 
@@ -44,7 +44,7 @@ stdenv.mkDerivation rec {
 
 
   patches = [
-    # Fixes the compilation error with new Vala compiler. Remove in the next version.
+    # Fixes the compilation error with new Vala compiler. Remove in the next finalAttrs.version.
     (fetchpatch {
       url = "https://github.com/musicinmybrain/notejot/commit/c6a7cfcb792de63fb51eb174f9f3d4e02f6a2ce1.patch";
       hash = "sha256-dexPKIpUaAu/p0K2WQpElhPNt86CS+jD0dPL5+CTl4I=";
@@ -61,4 +61,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     mainProgram = "io.github.lainsce.Notejot";
   };
-}
+})
