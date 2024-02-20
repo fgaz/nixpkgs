@@ -15,14 +15,14 @@
 , libxkbcommon
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "tofi";
   version = "0.9.1";
 
   src = fetchFromGitHub {
     owner = "philj56";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-lokp6Zmdt7WuAyuRnHBkKD4ydbNiQY7pEVY97Z62U90=";
   };
 
@@ -40,4 +40,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     mainProgram = "tofi";
   };
-}
+})
