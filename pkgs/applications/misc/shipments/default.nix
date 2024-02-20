@@ -12,14 +12,14 @@
 , wrapGAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "shipments";
   version = "0.3.0";
 
   src = fetchFromSourcehut {
     owner = "~martijnbraam";
     repo = "shipments";
-    rev = version;
+    rev = finalAttrs.version;
     hash = "sha256-8wX1s5mPCdMINIQP4m5q5StKqxY6CGBBxIxyQAvU7Pc=";
   };
 
@@ -44,8 +44,8 @@ stdenv.mkDerivation rec {
   meta = with lib; {
     description = "Postal package tracking application";
     homepage = "https://sr.ht/~martijnbraam/shipments/";
-    changelog = "https://git.sr.ht/~martijnbraam/shipments/refs/${version}";
+    changelog = "https://git.sr.ht/~martijnbraam/shipments/refs/${finalAttrs.version}";
     license = licenses.lgpl3;
     maintainers = with maintainers; [ michaelgrahamevans ];
   };
-}
+})
