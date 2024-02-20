@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, python3, mpv }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "ff2mpv";
   version = "4.0.0";
 
   src = fetchFromGitHub {
     owner = "woodruffw";
-    repo = pname;
-    rev = "v${version}";
+    repo = finalAttrs.pname;
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-sxUp/JlmnYW2sPDpIO2/q40cVJBVDveJvbQMT70yjP4=";
   };
 
@@ -31,4 +31,4 @@ stdenv.mkDerivation rec {
     license = lib.licenses.mit;
     maintainers = with lib.maintainers; [ Enzime ];
   };
-}
+})
