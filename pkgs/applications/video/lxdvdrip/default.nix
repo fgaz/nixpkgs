@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, libdvdread }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "lxdvdrip";
   version = "1.77";
 
   src = fetchurl {
-    url = "mirror://sourceforge/lxdvdrip/lxdvdrip-${version}.tgz";
+    url = "mirror://sourceforge/lxdvdrip/lxdvdrip-${finalAttrs.version}.tgz";
     hash = "sha256-OzHrscftsCmJvSw7bb/Z2WDP322VCuQDY58dW2OqxB8=";
   };
 
@@ -28,4 +28,4 @@ stdenv.mkDerivation rec {
     license = lib.licenses.gpl2;
     platforms = lib.platforms.linux;
   };
-}
+})
