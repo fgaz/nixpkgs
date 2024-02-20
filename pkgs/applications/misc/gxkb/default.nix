@@ -2,14 +2,14 @@
 , appindicatorSupport ? true, libayatana-appindicator
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gxkb";
   version = "0.9.3";
 
   src = fetchFromGitHub {
     owner = "zen-tools";
     repo = "gxkb";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-9r1eZl7PgIt2ZpK+QQHaa460imIHT3Lh5mpzcFglyWc=";
   };
 
@@ -26,4 +26,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.omgbebebe ];
     platforms = platforms.linux;
   };
-}
+})
