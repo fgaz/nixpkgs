@@ -3,7 +3,7 @@
 , fetchFromGitLab
 , autoreconfHook
 }:
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "symmetrica";
   version = "3.0.1";
 
@@ -15,7 +15,7 @@ stdenv.mkDerivation rec {
   src = fetchFromGitLab {
     owner = "sagemath";
     repo = "symmetrica";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "0wfmrzw82f5i91d7rf24mcdqcj2fmgrgy02pw4pliz7ncwaq14w3";
   };
 
@@ -32,4 +32,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     homepage = "https://gitlab.com/sagemath/symmetrica";
   };
-}
+})
