@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, cmake, readline }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "tasksh";
   version = "1.2.0";
 
   src = fetchurl {
-    url = "https://taskwarrior.org/download/${pname}-${version}.tar.gz";
+    url = "https://taskwarrior.org/download/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     sha256 = "1z8zw8lld62fjafjvy248dncjk0i4fwygw0ahzjdvyyppx4zjhkf";
   };
 
@@ -19,4 +19,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ matthiasbeyer ];
     platforms = platforms.unix;
   };
-}
+})
