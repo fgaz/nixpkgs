@@ -24,14 +24,14 @@
 , AudioUnit
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "rnote";
   version = "0.9.4";
 
   src = fetchFromGitHub {
     owner = "flxzt";
     repo = "rnote";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-twysPSuCu++dVqoRKTNSvxwrO1ljUu4k2vPZEBkaj10=";
   };
 
@@ -92,4 +92,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ dotlambda gepbird yrd ];
     platforms = platforms.unix;
   };
-}
+})
