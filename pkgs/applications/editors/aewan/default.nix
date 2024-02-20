@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, fetchpatch, zlib, ncurses }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "aewan";
   version = "1.0.01";
 
   src = fetchurl {
-    url = "mirror://sourceforge/aewan/${pname}-${version}.tar.gz";
+    url = "mirror://sourceforge/aewan/${finalAttrs.pname}-${finalAttrs.version}.tar.gz";
     sha256 = "5266dec5e185e530b792522821c97dfa5f9e3892d0dca5e881d0c30ceac21817";
   };
 
@@ -28,4 +28,4 @@ stdenv.mkDerivation rec {
     license = lib.licenses.gpl2Plus;
     platforms = lib.platforms.unix;
   };
-}
+})
