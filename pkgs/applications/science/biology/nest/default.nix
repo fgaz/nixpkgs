@@ -18,14 +18,14 @@
 , withMpi ? false
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "nest";
   version = "3.6";
 
   src = fetchFromGitHub {
     owner = "nest";
     repo = "nest-simulator";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-sXtF4JmHYoLp0t3o4KF6R2E0qLnKrzSPMXOxVJAm+sU=";
   };
 
@@ -83,4 +83,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ jiegec davidcromp ];
     platforms = platforms.unix;
   };
-}
+})
