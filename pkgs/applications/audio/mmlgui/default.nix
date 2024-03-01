@@ -13,7 +13,7 @@
 , cppunit
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "mmlgui";
   version = "unstable-2023-11-16";
 
@@ -96,4 +96,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ OPNA2608 ];
     platforms = platforms.all;
   };
-}
+})
