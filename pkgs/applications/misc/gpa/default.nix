@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, intltool, pkg-config, gtk2, gpgme, libgpg-error, libassuan }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gpa";
   version = "0.10.0";
 
   src = fetchurl {
-    url = "mirror://gnupg/gpa/gpa-${version}.tar.bz2";
+    url = "mirror://gnupg/gpa/gpa-${finalAttrs.version}.tar.bz2";
     sha256 = "1cbpc45f8qbdkd62p12s3q2rdq6fa5xdzwmcwd3xrj55bzkspnwm";
   };
 
@@ -18,4 +18,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl3Plus;
     platforms = platforms.unix;
   };
-}
+})
