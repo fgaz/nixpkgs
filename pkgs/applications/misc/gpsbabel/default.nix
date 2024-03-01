@@ -6,14 +6,14 @@
 , withDoc ? false, docbook_xml_dtd_45, docbook_xsl, expat, fop, libxml2, libxslt, perl
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gpsbabel";
   version = "1.8.0";
 
   src = fetchFromGitHub {
     owner = "gpsbabel";
     repo = "gpsbabel";
-    rev = "gpsbabel_${lib.replaceStrings ["."] ["_"] version}";
+    rev = "gpsbabel_${lib.replaceStrings ["."] ["_"] finalAttrs.version}";
     sha256 = "sha256-0w8LsO+HwqZF8SQmwd8bCKma9PCM0hAzXhzWR4DgAHs=";
   };
 
@@ -115,4 +115,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = with maintainers; [ sikmir ];
   };
-}
+})
