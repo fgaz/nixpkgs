@@ -1,7 +1,7 @@
 { lib, stdenv, fetchFromGitHub, desktop-file-utils, libpng
 , pkg-config, SDL, freetype, zlib }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
 
   pname = "caprice32";
   version = "4.6.0";
@@ -11,7 +11,7 @@ stdenv.mkDerivation rec {
 
   src = fetchFromGitHub {
     repo = "caprice32";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     owner = "ColinPitrat";
     sha256 = "0hng5krwgc1h9bz1xlkp2hwnvas965nd7sb3z9mb2m6x9ghxlacz";
   };
@@ -49,4 +49,4 @@ stdenv.mkDerivation rec {
     maintainers = [ ];
     platforms = platforms.linux;
   };
-}
+})
