@@ -21,7 +21,7 @@
 , libsecret
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "muzika";
   version = "unstable-2023-11-07";
 
@@ -65,7 +65,7 @@ stdenv.mkDerivation rec {
   ];
 
   yarnOfflineCache = fetchYarnDeps {
-    yarnLock = src + "/yarn.lock";
+    yarnLock = finalAttrs.src + "/yarn.lock";
     hash = "sha256-/NkLfBmQGvgufF9ajgs7DQsBkWUUK4Bslhy7VmCBrGg=";
   };
 
@@ -90,4 +90,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl3Only;
     maintainers = with maintainers; [ onny ];
   };
-}
+})
