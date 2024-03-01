@@ -1,6 +1,6 @@
 { fetchgit, lib, stdenv, perl }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "git2cl";
   version = "unstable-2008-08-27";
 
@@ -22,4 +22,4 @@ stdenv.mkDerivation rec {
     platforms = lib.platforms.unix;
     mainProgram = "git2cl";
   };
-}
+})
