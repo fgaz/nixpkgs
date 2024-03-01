@@ -12,14 +12,14 @@
 , python3
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "lttoolbox";
   version = "3.7.1";
 
   src = fetchFromGitHub {
     owner = "apertium";
     repo = "lttoolbox";
-    rev = "refs/tags/v${version}";
+    rev = "refs/tags/v${finalAttrs.version}";
     hash = "sha256-3lHXKtwQSrMGQEGOGr27e3kB2qKkTFZcEzeAnIm89Rg=";
   };
 
@@ -62,4 +62,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl2;
     platforms = platforms.linux ++ platforms.darwin;
   };
-}
+})
