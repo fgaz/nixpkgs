@@ -84,7 +84,7 @@ let
     }
   '';
 
-in stdenv.mkDerivation rec {
+in stdenv.mkDerivation (finalAttrs: {
   inherit pname version src;
 
   nativeBuildInputs = [
@@ -110,7 +110,7 @@ in stdenv.mkDerivation rec {
       genericName = "Mind-mapper";
       exec = "freeplane";
       icon = "freeplane";
-      comment = meta.description;
+      comment = finalAttrs.meta.description;
       mimeTypes = [
         "application/x-freemind"
         "application/x-freeplane"
@@ -148,4 +148,4 @@ in stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ chaduffy ];
   };
-}
+})
