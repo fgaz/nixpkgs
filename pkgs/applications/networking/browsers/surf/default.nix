@@ -5,14 +5,14 @@
 , patches ? null
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "surf";
   version = "2.1";
 
   # tarball is missing file common.h
   src = fetchgit {
     url = "git://git.suckless.org/surf";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "1v926hiayddylq79n8l7dy51bm0dsa9n18nx9bkhg666cx973x4z";
   };
 
@@ -60,4 +60,4 @@ stdenv.mkDerivation rec {
     platforms = webkitgtk.meta.platforms;
     maintainers = with maintainers; [ joachifm ];
   };
-}
+})
