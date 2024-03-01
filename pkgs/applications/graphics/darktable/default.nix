@@ -55,12 +55,12 @@
 , lua
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "4.6.0";
   pname = "darktable";
 
   src = fetchurl {
-    url = "https://github.com/darktable-org/darktable/releases/download/release-${version}/darktable-${version}.tar.xz";
+    url = "https://github.com/darktable-org/darktable/releases/download/release-${finalAttrs.version}/darktable-${finalAttrs.version}.tar.xz";
     sha256 = "sha256-cksn4yBNGCLebcU+oJCmsc5V98MiJtNGQmiXdcaKrMI=";
   };
 
@@ -147,4 +147,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux ++ platforms.darwin;
     maintainers = with maintainers; [ goibhniu flosse mrVanDalo paperdigits freyacodes ];
   };
-}
+})
