@@ -20,12 +20,12 @@
 let
   py3 = python3.withPackages (p: [ p.mako ]);
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "clightning";
   version = "23.11.2";
 
   src = fetchurl {
-    url = "https://github.com/ElementsProject/lightning/releases/download/v${version}/clightning-v${version}.zip";
+    url = "https://github.com/ElementsProject/lightning/releases/download/v${finalAttrs.version}/clightning-v${finalAttrs.version}.zip";
     sha256 = "sha256-n1+9Q493N/N5sr7sVpzhObtbKpEejsNUUhhbYPukveg=";
   };
 
@@ -53,7 +53,7 @@ stdenv.mkDerivation rec {
 
   configureFlags = [ "--disable-valgrind" ];
 
-  makeFlags = [ "VERSION=v${version}" ];
+  makeFlags = [ "VERSION=v${finalAttrs.version}" ];
 
   enableParallelBuilding = true;
 
@@ -75,4 +75,4 @@ stdenv.mkDerivation rec {
     license = licenses.mit;
     platforms = platforms.linux ++ platforms.darwin;
   };
-}
+})
