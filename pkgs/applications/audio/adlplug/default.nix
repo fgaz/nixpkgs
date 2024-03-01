@@ -44,7 +44,7 @@ let
   }.${type};
   mainProgram = "${type}plug";
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "${lib.strings.toLower type}plug";
   version = "unstable-2021-12-17";
 
@@ -129,9 +129,9 @@ stdenv.mkDerivation rec {
   meta = with lib; {
     inherit mainProgram;
     description = "${chip} FM Chip Synthesizer";
-    homepage = src.meta.homepage;
+    homepage = finalAttrs.src.meta.homepage;
     license = licenses.boost;
     platforms = platforms.all;
     maintainers = with maintainers; [ OPNA2608 ];
   };
-}
+})
