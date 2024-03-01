@@ -16,14 +16,14 @@
 , gcc-unwrapped
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "odin2";
   version = "2.3.4";
 
   src = fetchFromGitHub {
     owner = "TheWaveWarden";
     repo = "odin2";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     fetchSubmodules = true;
     sha256 = "sha256-N96Nb7G6hqfh8DyMtHbttl/fRZUkS8f2KfPSqeMAhHY=";
   };
@@ -83,4 +83,4 @@ stdenv.mkDerivation rec {
     platforms = [ "x86_64-linux" ];
     maintainers = with maintainers; [ magnetophon ];
   };
-}
+})
