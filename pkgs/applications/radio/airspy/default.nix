@@ -2,14 +2,14 @@
 , cmake , pkg-config, libusb1
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "airspy";
   version = "1.0.10";
 
   src = fetchFromGitHub {
     owner = "airspy";
     repo = "airspyone_host";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "1v7sfkkxc6f8ny1p9xrax1agkl6q583mjx8k0lrrwdz31rf9qgw9";
   };
 
@@ -30,4 +30,4 @@ stdenv.mkDerivation rec {
     platforms = with platforms; linux ++ darwin;
     maintainers = with maintainers; [ markuskowa ];
   };
-}
+})
