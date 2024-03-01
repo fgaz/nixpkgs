@@ -6,7 +6,7 @@
   license ? with lib; licenses.lgpl3
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   inherit pname;
   version = "2019-08-10";
 
@@ -43,4 +43,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = with maintainers; [ yrashk ];
   };
-}
+})
