@@ -21,14 +21,14 @@ let
     sha256 = "sha256-qySFwY0VI2BQLO2XoCZeYshXEDnHh6SmJ3MvcBUROWU=";
   };
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "1.0.20211006";
   pname = "dcm2niix";
 
   src = fetchFromGitHub {
     owner = "rordenlab";
     repo = "dcm2niix";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-fQAVOzynMdSLDfhcYWcaXkFW/mnv4zySGLVJNE7ql/c=";
   };
 
@@ -65,4 +65,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ ashgillman rbreslow ];
     platforms = platforms.all;
   };
-}
+})
