@@ -13,13 +13,13 @@
 , wayland-protocols
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "lavalauncher";
   version = "2.1.1";
 
   src = fetchgit {
     url = "https://git.sr.ht/~leon_plickat/lavalauncher";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "hobhZ6s9m2xCdAurdj0EF1BeS88j96133zu+2jb1FMM=";
   };
 
@@ -56,4 +56,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ AndersonTorres ];
     platforms = with platforms; unix;
   };
-}
+})
