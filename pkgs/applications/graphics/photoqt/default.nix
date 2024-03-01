@@ -23,12 +23,12 @@
 , qtwayland
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "photoqt";
   version = "4.2";
 
   src = fetchurl {
-    url = "https://photoqt.org/pkgs/photoqt-${version}.tar.gz";
+    url = "https://photoqt.org/pkgs/photoqt-${finalAttrs.version}.tar.gz";
     hash = "sha256-OUqsyvmv6ccJDzcWAeS1OOmK2eXOCEgGktz6GEUzoA8=";
   };
 
@@ -84,4 +84,4 @@ stdenv.mkDerivation rec {
     maintainers = with lib.maintainers; [ wegank ];
     platforms = lib.platforms.unix;
   };
-}
+})
