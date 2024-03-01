@@ -13,7 +13,7 @@
 , accelergy
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "timeloop";
   version = "unstable-2022-11-29";
 
@@ -96,4 +96,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = with maintainers; [ gdinh ];
   };
-}
+})
