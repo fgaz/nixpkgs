@@ -24,12 +24,12 @@
 , lirc
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "fbida";
   version = "2.14";
 
   src = fetchurl {
-    url = "http://dl.bytesex.org/releases/fbida/fbida-${version}.tar.gz";
+    url = "http://dl.bytesex.org/releases/fbida/fbida-${finalAttrs.version}.tar.gz";
     sha256 = "0f242mix20rgsqz1llibhsz4r2pbvx6k32rmky0zjvnbaqaw1dwm";
   };
 
@@ -79,4 +79,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ pSub ];
     platforms = platforms.linux;
   };
-}
+})
