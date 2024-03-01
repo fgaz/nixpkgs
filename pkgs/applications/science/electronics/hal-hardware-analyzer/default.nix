@@ -49,14 +49,14 @@ let
     cmakeFlags = prev.cmakeFlags ++ [ "-DIGRAPH_USE_INTERNAL_CXSPARSE=OFF" ];
   });
 
-in stdenv.mkDerivation rec {
+in stdenv.mkDerivation (finalAttrs: {
   version = "4.2.0";
   pname = "hal-hardware-analyzer";
 
   src = fetchFromGitHub {
     owner = "emsec";
     repo = "hal";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-Yl86AClE3vWygqj1omCOXX8koJK2SjTkMZFReRThez0=";
   };
 
@@ -105,10 +105,10 @@ in stdenv.mkDerivation rec {
   ;
 
   cmakeFlags = with lib.versions; [
-    "-DHAL_VERSION_RETURN=${version}"
-    "-DHAL_VERSION_MAJOR=${major version}"
-    "-DHAL_VERSION_MINOR=${minor version}"
-    "-DHAL_VERSION_PATCH=${patch version}"
+    "-DHAL_VERSION_RETURN=${finalAttrs.version}"
+    "-DHAL_VERSION_MAJOR=${major finalAttrs.version}"
+    "-DHAL_VERSION_MINOR=${minor finalAttrs.version}"
+    "-DHAL_VERSION_PATCH=${patch finalAttrs.version}"
     "-DHAL_VERSION_TWEAK=0"
     "-DHAL_VERSION_ADDITIONAL_COMMITS=0"
     "-DHAL_VERSION_DIRTY=false"
@@ -139,4 +139,4 @@ in stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = with maintainers; [ ris shamilton ];
   };
-}
+})
