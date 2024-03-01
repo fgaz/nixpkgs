@@ -18,14 +18,14 @@
 , cmake
 , gitUpdater
 }:
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "shotcut";
   version = "24.01.13";
 
   src = fetchFromGitHub {
     owner = "mltframework";
     repo = "shotcut";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-a/PgwxD8MXItkxT4LTdEJrrExD3r9CUkxr/uhgJicD8=";
   };
 
@@ -45,7 +45,7 @@ stdenv.mkDerivation rec {
 
   env.NIX_CFLAGS_COMPILE = "-DSHOTCUT_NOUPGRADE";
   cmakeFlags = [
-    "-DSHOTCUT_VERSION=${version}"
+    "-DSHOTCUT_VERSION=${finalAttrs.version}"
   ];
 
   patches = [
@@ -79,4 +79,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     mainProgram = "shotcut";
   };
-}
+})
