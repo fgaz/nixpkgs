@@ -16,14 +16,14 @@
 , nix-update-script
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "kemai";
   version = "0.10.0";
 
   src = fetchFromGitHub {
     owner = "AlexandrePTJ";
     repo = "kemai";
-    rev = version;
+    rev = finalAttrs.version;
     hash = "sha256-wclBAgeDyAIw/nGF6lzIwbwdoZMBTu+tjxsnIxIkODM=";
   };
 
@@ -67,4 +67,4 @@ stdenv.mkDerivation rec {
     broken = stdenv.isDarwin;
     mainProgram = "Kemai";
   };
-}
+})
