@@ -16,14 +16,14 @@
 , withPipewire ? true
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "cava";
   version = "0.10.0";
 
   src = fetchFromGitHub {
     owner = "karlstav";
     repo = "cava";
-    rev = version;
+    rev = finalAttrs.version;
     hash = "sha256-AQR1qc6HgkUkXBRf7kGy4QdtfCj+YVDlYSEIWOutkTk=";
   };
 
@@ -47,7 +47,7 @@ stdenv.mkDerivation rec {
   ];
 
   preAutoreconf = ''
-    echo ${version} > version
+    echo ${finalAttrs.version} > version
   '';
 
   meta = with lib; {
@@ -58,4 +58,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     mainProgram = "cava";
   };
-}
+})
