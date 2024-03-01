@@ -14,7 +14,7 @@
 , which
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "wmii";
   version = "unstable-2022-04-04";
 
@@ -69,4 +69,4 @@ stdenv.mkDerivation rec {
     license = lib.licenses.mit;
     platforms = with lib.platforms; linux;
   };
-}
+})
