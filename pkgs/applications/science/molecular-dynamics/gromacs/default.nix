@@ -44,12 +44,12 @@ let
         hash = "sha256-Tsj40MevdrE/j9FtuOLBIOdJ3kOa6VVNn2U/gS140cs=";
       };
 
-in stdenv.mkDerivation rec {
+in stdenv.mkDerivation (finalAttrs: {
   pname = "gromacs";
   version = source.version;
 
   src = fetchurl {
-    url = "ftp://ftp.gromacs.org/pub/gromacs/gromacs-${version}.tar.gz";
+    url = "ftp://ftp.gromacs.org/pub/gromacs/gromacs-${finalAttrs.version}.tar.gz";
     inherit (source) hash;
   };
 
@@ -141,4 +141,4 @@ in stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = with maintainers; [ sheepforce markuskowa ];
   };
-}
+})
