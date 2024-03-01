@@ -9,14 +9,14 @@
 , python3
 , Cocoa
 }:
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "master_me";
   version = "1.2.0";
 
   src = fetchFromGitHub {
     owner = "trummerschlunk";
     repo = "master_me";
-    rev = version;
+    rev = finalAttrs.version;
     fetchSubmodules = true;
     sha256 = "sha256-FG3X1dOF9KRHHSnd5/zP+GrYCB2O0y+tnI5/l9tNhyE=";
   };
@@ -42,4 +42,4 @@ stdenv.mkDerivation rec {
     broken = stdenv.isDarwin; # error: no type or protocol named 'NSPasteboardType'
     license = licenses.gpl3Plus;
   };
-}
+})
