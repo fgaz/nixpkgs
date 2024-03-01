@@ -1,17 +1,17 @@
 { lib, stdenv, fetchFromGitHub, zlib }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "star";
   version = "2.7.10b";
 
   src = fetchFromGitHub {
     repo = "STAR";
     owner = "alexdobin";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-58Y4lzqXwBhRlXcionUg2IhAg5znNUuyr/FsuNZd+5Q=";
   };
 
-  sourceRoot = "${src.name}/source";
+  sourceRoot = "${finalAttrs.src.name}/source";
 
   postPatch = ''
     substituteInPlace Makefile --replace "/bin/rm" "rm"
@@ -36,4 +36,4 @@ stdenv.mkDerivation rec {
     platforms = [ "x86_64-linux" ];
     maintainers = [ maintainers.arcadio ];
   };
-}
+})
