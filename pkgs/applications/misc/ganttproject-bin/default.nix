@@ -2,12 +2,12 @@
 , jre
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "ganttproject-bin";
   version = "3.3.3300";
 
   src = fetchzip {
-    url = "https://dl.ganttproject.biz/ganttproject-${version}/ganttproject-${version}.zip";
+    url = "https://dl.ganttproject.biz/ganttproject-${finalAttrs.version}/ganttproject-${finalAttrs.version}.zip";
     stripRoot = false;
     hash = "sha256-U9x64UIBuVtW44zbsdWuMRZyEJhZ8VUWbDVtapTGPMo=";
   };
@@ -23,7 +23,7 @@ stdenv.mkDerivation rec {
       icon = "ganttproject";
       desktopName = "GanttProject";
       genericName = "Shedule and manage projects";
-      comment = meta.description;
+      comment = finalAttrs.meta.description;
       categories = [ "Office" ];
     };
 
@@ -55,4 +55,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = [ maintainers.vidbina ];
   };
-}
+})
