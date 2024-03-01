@@ -5,14 +5,14 @@
 , protobuf
  }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "goldberg-emu";
   version = "0.2.5";
 
   src = fetchFromGitLab {
     owner = "mr_goldberg";
     repo = "goldberg_emulator";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-goOgMNjtDmIKOAv9sZwnPOY0WqTN90LFJ5iEp3Vkzog=";
   };
 
@@ -50,4 +50,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = [ maintainers.ivar ];
   };
-}
+})
