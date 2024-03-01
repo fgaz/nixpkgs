@@ -15,14 +15,14 @@
 , vulkan-loader
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "flycast";
   version = "2.2";
 
   src = fetchFromGitHub {
     owner = "flyinghead";
     repo = "flycast";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-eQMKaUaZ1b0oXre4Ouli4qIyNaG64KntyRGk3/YIopc=";
     fetchSubmodules = true;
   };
@@ -60,4 +60,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = [ maintainers.ivar ];
   };
-}
+})
