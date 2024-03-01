@@ -2,14 +2,14 @@
 , gettext, systemd, perl, lib
 , enableSystemd ? true
 , enableBidi ? true
-}: stdenv.mkDerivation rec {
+}: stdenv.mkDerivation (finalAttrs: {
 
   pname = "vdr";
   version = "2.6.6";
 
   src = fetchgit {
     url = "git://git.tvdr.de/vdr.git";
-    rev = version;
+    rev = finalAttrs.version;
     hash = "sha256-3om/Q67PHtX/aIG4zMCaJTyD9bZNEcyE5LQTeb+zB+M=";
   };
 
@@ -53,4 +53,4 @@
     platforms = platforms.linux;
     license = licenses.gpl2Plus;
   };
-}
+})
