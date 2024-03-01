@@ -17,7 +17,7 @@
 , fltk ? null
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "csound";
   version = "6.18.1";
 
@@ -26,7 +26,7 @@ stdenv.mkDerivation rec {
   src = fetchFromGitHub {
     owner = "csound";
     repo = "csound";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-O7s92N54+zIl07eIdK/puoSve/qJ3O01fTh0TP+VdZA=";
   };
 
@@ -57,4 +57,4 @@ stdenv.mkDerivation rec {
     maintainers = [maintainers.marcweber];
     platforms = platforms.unix;
   };
-}
+})
