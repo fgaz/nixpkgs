@@ -23,7 +23,7 @@
 , xdg-desktop-portal
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "fractal";
   version = "6";
 
@@ -31,7 +31,7 @@ stdenv.mkDerivation rec {
     domain = "gitlab.gnome.org";
     owner = "GNOME";
     repo = "fractal";
-    rev = version;
+    rev = finalAttrs.version;
     hash = "sha256-J4Jb7G5Rfou3N7mytetIdLl0dGY5dSvTjnu8aj4kWXQ=";
   };
 
@@ -87,4 +87,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     mainProgram = "fractal";
   };
-}
+})
