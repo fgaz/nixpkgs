@@ -8,12 +8,12 @@
 , autoPatchelfHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "virtual-ans";
   version = "3.0.2c";
 
   src = fetchzip {
-    url = "https://warmplace.ru/soft/ans/virtual_ans-${version}.zip";
+    url = "https://warmplace.ru/soft/ans/virtual_ans-${finalAttrs.version}.zip";
     sha256 = "03r1v3l7rd59dakr7ndvgsqchv00ppkvi6sslgf1ng07r3rsvb1n";
   };
 
@@ -35,12 +35,12 @@ stdenv.mkDerivation rec {
     cp -R ./* $out/
 
     # Remove all executables except for current architecture
-    ls -1d $out/START*              | grep -v ${startScript}     | xargs rm -rf
-    ls -1d $out/bin/pixilang_linux* | grep -v ${linuxExecutable} | xargs rm -rf
+    ls -1d $out/START*              | grep -v ${finalAttrs.startScript}     | xargs rm -rf
+    ls -1d $out/bin/pixilang_linux* | grep -v ${finalAttrs.linuxExecutable} | xargs rm -rf
 
     # Start script performs relative search for resources, so it cannot be moved
     # to bin directory
-    ln -s $out/${startScript} $out/bin/virtual-ans
+    ln -s $out/${finalAttrs.startScript} $out/bin/virtual-ans
   '';
 
   startScript = if stdenv.isx86_32 then "START_LINUX_X86"
@@ -87,4 +87,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ jacg ];
   };
 
-}
+})
