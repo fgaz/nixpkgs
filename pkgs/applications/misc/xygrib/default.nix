@@ -1,6 +1,6 @@
 { lib, stdenv, fetchFromGitHub, wrapQtAppsHook, cmake, bzip2, qtbase, qttools, libnova, proj_7, libpng, openjpeg }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "unstable-2022-05-16";
   pname = "xygrib";
 
@@ -44,4 +44,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.all;
     maintainers = with maintainers; [ j03 ];
   };
-}
+})
