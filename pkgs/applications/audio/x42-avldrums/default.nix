@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, pkg-config, cairo, glib, libGLU, lv2, pango }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "x42-avldrums";
   version = "0.4.2";
 
   src = fetchFromGitHub {
     owner = "x42";
     repo = "avldrums.lv2";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-L9rLSHHQIM6PqZ397TIxR6O1N9GKAQtDfWCofV5R85E=";
     fetchSubmodules = true;
   };
@@ -29,4 +29,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl2Plus;
     platforms = platforms.linux;
   };
-}
+})
