@@ -17,7 +17,7 @@
 , darwin
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "emblem";
   version = "1.3.0";
 
@@ -26,7 +26,7 @@ stdenv.mkDerivation rec {
     group = "World";
     owner = "design";
     repo = "emblem";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-VA4KZ8x/MMAA/g/x59h1CyHhlj0vbZqwAFdsfTPA2Ds=";
   };
 
@@ -62,4 +62,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = with maintainers; [ figsoda foo-dogsquared ];
   };
-}
+})
