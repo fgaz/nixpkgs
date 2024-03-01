@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, fetchpatch, autoreconfHook, pkg-config, libiconv }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "readstat";
   version = "1.1.9";
 
   src = fetchFromGitHub {
     owner = "WizardMac";
     repo = "ReadStat";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-4lRJgZPB2gfaQ9fQKvDDpGhy1eDNT/nT1QmeZlCmCis=";
   };
 
@@ -38,4 +38,4 @@ stdenv.mkDerivation rec {
     maintainers = with lib.maintainers; [ swflint ];
     platforms = lib.platforms.all;
   };
-}
+})
