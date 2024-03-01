@@ -10,13 +10,13 @@
 , patches ? [ ]
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "slstatus";
   version = "1.0";
 
   src = fetchgit {
     url = "https://git.suckless.org/slstatus";
-    rev = version;
+    rev = finalAttrs.version;
     hash = "sha256-cFah6EgApslLSlJaOy/5W9ZV9Z1lzfKye/rRh9Om3T4=";
   };
 
@@ -43,4 +43,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ oxzi ];
     platforms = platforms.linux;
   };
-}
+})
