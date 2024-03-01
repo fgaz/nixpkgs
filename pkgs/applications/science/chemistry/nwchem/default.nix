@@ -52,14 +52,14 @@ let
   };
 
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "nwchem";
   version = "7.2.2";
 
   src = fetchFromGitHub {
     owner = "nwchemgit";
     repo = "nwchem";
-    rev = "v${version}-release";
+    rev = "v${finalAttrs.version}-release";
     hash = "sha256-BcYRqPaPR24OTRY0MJgBxi46HvUG4uFaY0unZmu5b9k=";
   };
 
@@ -213,4 +213,4 @@ stdenv.mkDerivation rec {
     homepage = "https://nwchemgit.github.io";
     license = licenses.ecl20;
   };
-}
+})
