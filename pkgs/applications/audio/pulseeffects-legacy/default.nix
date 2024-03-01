@@ -43,14 +43,14 @@ let
     rubberband # pitch shifting
     zam-plugins # maximizer
   ];
-in stdenv.mkDerivation rec {
+in stdenv.mkDerivation (finalAttrs: {
   pname = "pulseeffects";
   version = "4.8.7";
 
   src = fetchFromGitHub {
     owner = "wwmm";
     repo = "pulseeffects";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-ldvcA8aTHOgaascH6MF4CzmJ8I2rYOiR0eAkCZzvK/M=";
   };
 
@@ -111,4 +111,4 @@ in stdenv.mkDerivation rec {
     maintainers = with maintainers; [ ];
     platforms = platforms.linux;
   };
-}
+})
