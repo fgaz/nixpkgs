@@ -1,6 +1,6 @@
 { lib, stdenv, fetchFromGitHub, fetchpatch, makeWrapper, perl, ncurses5, taskwarrior }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "2020-12-17";
   pname = "tasknc";
 
@@ -30,7 +30,7 @@ stdenv.mkDerivation rec {
 
   hardeningDisable = [ "format" ];
 
-  buildFlags = [ "VERSION=${version}" ];
+  buildFlags = [ "VERSION=${finalAttrs.version}" ];
 
   installPhase = ''
     mkdir -p $out/bin/
@@ -50,4 +50,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux; # Cannot test others
     license = licenses.mit;
   };
-}
+})
