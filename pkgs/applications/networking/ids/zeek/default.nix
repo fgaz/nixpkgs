@@ -24,12 +24,12 @@ let
   broker = callPackage ./broker { };
   python = python3.withPackages (p: [ p.gitpython p.semantic-version ]);
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "zeek";
   version = "6.1.1";
 
   src = fetchurl {
-    url = "https://download.zeek.org/zeek-${version}.tar.gz";
+    url = "https://download.zeek.org/zeek-${finalAttrs.version}.tar.gz";
     sha256 = "sha256-j8Vl6Vc/Wu1JpDV0UoXkLcEPUjRUnvwVAq91RPaDN+U=";
   };
 
@@ -108,4 +108,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ pSub marsam tobim ];
     platforms = platforms.unix;
   };
-}
+})
