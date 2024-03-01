@@ -3,14 +3,14 @@
 , AppKit, AudioUnit, CoreAudio, CoreMIDI, CoreServices
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "fluidsynth";
   version = "2.3.4";
 
   src = fetchFromGitHub {
     owner = "FluidSynth";
     repo = "fluidsynth";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-3qLmo9Ibl44v6Jj5Ix17ixwqfPt3ITTXUqBETF5pzE4=";
   };
 
@@ -33,4 +33,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ goibhniu lovek323 ];
     platforms   = platforms.unix;
   };
-}
+})
