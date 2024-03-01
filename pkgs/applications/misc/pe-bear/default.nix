@@ -6,14 +6,14 @@
 , wrapQtAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "pe-bear";
   version = "0.6.7.3";
 
   src = fetchFromGitHub {
     owner = "hasherezade";
     repo = "pe-bear";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-We3XxSsGL1mTK5DgI2wgRm7OaziI/cZRiLd+qrvZ7SE=";
     fetchSubmodules = true;
   };
@@ -45,4 +45,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ blitz ];
     platforms = platforms.linux;
   };
-}
+})
