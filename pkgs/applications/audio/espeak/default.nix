@@ -1,6 +1,6 @@
 { lib, stdenv, fetchurl, unzip, portaudio }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "espeak";
   version = "1.48.04";
 
@@ -34,4 +34,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl3Plus;
     platforms = platforms.linux;
   };
-}
+})
