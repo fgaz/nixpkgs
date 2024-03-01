@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, autoreconfHook, openssl, protobufc, libconfig }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "umurmur";
   version = "0.2.20";
 
   src = fetchFromGitHub {
     owner = "umurmur";
     repo = "umurmur";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-jp5+NbGmT90ksffvpLYIX2q5cPeVidDCYMPvLHCiP68=";
   };
 
@@ -33,4 +33,4 @@ stdenv.mkDerivation rec {
     broken = stdenv.isDarwin && stdenv.isAarch64;
     mainProgram = "umurmurd";
   };
-}
+})
