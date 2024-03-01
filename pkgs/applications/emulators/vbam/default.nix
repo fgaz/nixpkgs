@@ -16,13 +16,13 @@
 , zlib
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "visualboyadvance-m";
   version = "2.1.8";
   src = fetchFromGitHub {
     owner = "visualboyadvance-m";
     repo = "visualboyadvance-m";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-r/LF9mYwKPwkIidMAb4k4B6Q2UYjW0TucKI5LJ2gjl0=";
   };
 
@@ -57,4 +57,4 @@ stdenv.mkDerivation rec {
     homepage = "https://vba-m.com/";
     platforms = lib.platforms.linux;
   };
-}
+})
