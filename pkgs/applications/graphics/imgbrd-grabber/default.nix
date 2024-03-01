@@ -16,14 +16,14 @@
 , typescript
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "imgbrd-grabber";
   version = "7.10.0";
 
   src = fetchFromGitHub {
     owner = "Bionus";
     repo = "imgbrd-grabber";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-AT6pN2do0LlH6xAXKcFQv+oderD88/EiG1JnCw6kOOg=";
     fetchSubmodules = true;
   };
@@ -87,7 +87,7 @@ stdenv.mkDerivation rec {
     ln -s $out/share/Grabber/Grabber-cli $out/bin/Grabber-cli
   '';
 
-  sourceRoot = "${src.name}/src";
+  sourceRoot = "${finalAttrs.src.name}/src";
 
   meta = with lib; {
     description = "Very customizable imageboard/booru downloader with powerful filenaming features";
@@ -95,4 +95,4 @@ stdenv.mkDerivation rec {
     homepage = "https://bionus.github.io/imgbrd-grabber/";
     maintainers = [ maintainers.evanjs ];
   };
-}
+})
