@@ -12,14 +12,14 @@
 , nix-update-script
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "ton";
   version = "2023.10";
 
   src = fetchFromGitHub {
     owner = "ton-blockchain";
     repo = "ton";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-K1RhhW7EvwYV7/ng3NPjSGdHEQvJZ7K97YXd7s5wghc=";
     fetchSubmodules = true;
   };
@@ -50,4 +50,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.all;
     maintainers = with maintainers; [ misuzu ];
   };
-}
+})
