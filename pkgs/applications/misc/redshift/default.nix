@@ -16,7 +16,7 @@
 let
   mkRedshift =
     { pname, version, src, meta }:
-    stdenv.mkDerivation rec {
+    stdenv.mkDerivation (finalAttrs: {
       inherit pname version src meta;
 
       patches = lib.optionals (pname != "gammastep") [
@@ -90,7 +90,7 @@ let
       '';
 
       enableParallelBuilding = true;
-    };
+    });
 in
 rec {
   redshift = mkRedshift rec {
