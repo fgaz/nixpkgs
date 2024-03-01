@@ -43,14 +43,14 @@ let
     hash = "sha256-1P9pWXhgTHogO0DztxOsFKNwvTRRfDL3nzGmMANMC9w=";
   };
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "mission-center";
   version = "0.4.3";
 
   src = fetchFromGitLab {
     owner = "mission-center-devs";
     repo = "mission-center";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-Yc3oiiD0ernuewq32hk3pDn1vQJNZFgMPPb4lArKP9w=";
   };
 
@@ -147,4 +147,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     mainProgram = "missioncenter";
   };
-}
+})
