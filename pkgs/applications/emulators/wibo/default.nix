@@ -7,14 +7,14 @@
 , unzip
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "wibo";
   version = "0.4.2";
 
   src = fetchFromGitHub {
     owner = "decompals";
     repo = "wibo";
-    rev = version;
+    rev = finalAttrs.version;
     hash = "sha256-oq/i0Hb2y5pwDEvaqSyC4+6LH1oUbvDZ/62l+V3S7Uk=";
   };
 
@@ -35,7 +35,7 @@ stdenv.mkDerivation rec {
       };
       meta.license = lib.licenses.unfree;
     };
-  in lib.optionalString doCheck ''
+  in lib.optionalString finalAttrs.doCheck ''
     MWCIncludes=../test ./wibo ${gc}/GC/2.7/mwcceppc.exe -c ../test/test.c
     file test.o | grep "ELF 32-bit"
   '';
@@ -52,4 +52,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ r-burns ];
     platforms = [ "i686-linux" ];
   };
-}
+})
