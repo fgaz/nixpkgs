@@ -1,6 +1,6 @@
 { lib, stdenv, fetchurl, fetchpatch, ncurses, autoreconfHook, flex }:
 let rev = "b17ea39dc17e5514f33b3f5c34ede92bd16e208c";
-in stdenv.mkDerivation rec {
+in stdenv.mkDerivation (finalAttrs: {
   pname = "mmh";
   version = "unstable-2020-08-21";
 
@@ -26,4 +26,4 @@ in stdenv.mkDerivation rec {
     broken = stdenv.isDarwin;
     maintainers = with maintainers; [ kaction ];
   };
-}
+})
