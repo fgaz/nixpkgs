@@ -7,14 +7,14 @@
 , libxslt
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "csound-manual";
   version = "6.18.0";
 
   src = fetchFromGitHub {
     owner = "csound";
     repo = "manual";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-W8MghqUBr3V7LPgNwU6Ugw16wdK3G37zAPuasMlZ2+I=";
   };
 
@@ -42,4 +42,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ hlolli ];
     platforms = lib.platforms.all;
   };
-}
+})
