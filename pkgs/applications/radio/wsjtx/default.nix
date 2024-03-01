@@ -2,13 +2,13 @@
   fftw, fftwFloat, gfortran, hamlib_4, libtool, libusb1, qtbase,
   qtmultimedia, qtserialport, qttools, boost, texinfo, wrapQtAppsHook }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "wsjtx";
   version = "2.6.1";
 
   src = fetchgit {
     url = "http://git.code.sf.net/p/wsjt/wsjtx";
-    rev = "wsjtx-${version}";
+    rev = "wsjtx-${finalAttrs.version}";
     hash = "sha256-fELx3B9JqCCL5vaIHab3of5ah9qdu5lemqjUnvY5DdM=";
   };
 
@@ -32,4 +32,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ lasandell numinit melling ];
   };
-}
+})
