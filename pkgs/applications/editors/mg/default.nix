@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, pkg-config, ncurses, buildPackages }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "mg";
   version = "7.3";
 
   src = fetchFromGitHub {
     owner = "ibara";
     repo = "mg";
-    rev = "mg-${version}";
+    rev = "mg-${finalAttrs.version}";
     sha256 = "sha256-88FrXN7h5uRLY8YMKSzUjBF4n18DEiiiDyoYr+7qXdQ=";
   };
 
@@ -34,4 +34,4 @@ stdenv.mkDerivation rec {
     mainProgram = "mg";
     platforms = platforms.all;
   };
-}
+})
