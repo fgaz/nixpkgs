@@ -25,14 +25,14 @@
 , preferGLES ? stdenv.hostPlatform.isAarch
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "furnace";
   version = "0.6";
 
   src = fetchFromGitHub {
     owner = "tildearrow";
     repo = "furnace";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     fetchSubmodules = true;
     hash = "sha256-8we7vKyGWjM9Rx0MJjSKLJcKBHiHt5vjuy17HHx/pP8=";
   };
@@ -117,4 +117,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ OPNA2608 ];
     platforms = platforms.all;
   };
-}
+})
