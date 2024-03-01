@@ -6,14 +6,14 @@
 , isa-l
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "fastp";
   version = "0.23.4";
 
   src = fetchFromGitHub {
     owner = "OpenGene";
     repo = "fastp";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-hkCo8CiZNJuVcL9Eg/R7YzM7/FEcGEnovV325oWa7y8=";
   };
 
@@ -30,4 +30,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ jbedo ];
     platforms = platforms.x86_64;
   };
-}
+})
