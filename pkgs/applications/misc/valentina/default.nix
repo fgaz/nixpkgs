@@ -5,14 +5,14 @@
 , autoPatchelfHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "valentina";
   version = "0.7.52";
 
   src = fetchFromGitLab {
     owner = "smart-pattern";
     repo = "valentina";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-DmNRBxqyBvDTdA7Sz9X04Dhejtxx7tOVpST+SkUNguM=";
   };
 
@@ -47,4 +47,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ ];
   };
-}
+})
