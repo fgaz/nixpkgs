@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, dee, gtk3, intltool, libdbusmenu-gtk3, libunity, pkg-config, rsync, wrapGAppsHook }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "1.3.1";
   pname = "grsync";
 
   src = fetchurl {
-    url = "mirror://sourceforge/grsync/grsync-${version}.tar.gz";
+    url = "mirror://sourceforge/grsync/grsync-${finalAttrs.version}.tar.gz";
     sha256 = "sha256-M8wOJdqmLlunCRyuo8g6jcdNxddyHEUB00nyEMSzxtM=";
   };
 
@@ -31,4 +31,4 @@ stdenv.mkDerivation rec {
     mainProgram = "grsync";
     maintainers = [ maintainers.kuznero ];
   };
-}
+})
