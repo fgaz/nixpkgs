@@ -2,12 +2,12 @@
 , qtbase, wrapQtAppsHook, autoPatchelfHook, python3
 , cmake, libjpeg, llvmPackages }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "tulip";
   version = "5.7.3";
 
   src = fetchurl {
-    url = "mirror://sourceforge/auber/tulip-${version}_src.tar.gz";
+    url = "mirror://sourceforge/auber/tulip-${finalAttrs.version}_src.tar.gz";
     hash = "sha256-arpC+FsDYGMf47phtSzyjjvDg/UYZS+akOe5CYfajdU=";
   };
 
@@ -48,4 +48,4 @@ stdenv.mkDerivation rec {
     maintainers = [ ];
     platforms = lib.platforms.all;
   };
-}
+})
