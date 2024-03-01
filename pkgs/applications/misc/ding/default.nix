@@ -9,12 +9,12 @@ let
     ];
   };
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "ding";
   version = "1.9";
 
   src = fetchurl {
-    url = "http://ftp.tu-chemnitz.de/pub/Local/urz/ding/ding-${version}.tar.gz";
+    url = "http://ftp.tu-chemnitz.de/pub/Local/urz/ding/ding-${finalAttrs.version}.tar.gz";
     sha256 = "sha256-aabIH894WihsBTo1LzIBzIZxxyhRYVxLcHpDQwmwmOU=";
   };
 
@@ -54,4 +54,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux; # homepage says: unix-like except darwin
     maintainers = [ maintainers.exi ];
   };
-}
+})
