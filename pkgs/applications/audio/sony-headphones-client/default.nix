@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, fetchpatch, cmake, pkg-config, bluez, dbus, glew, glfw, imgui, makeDesktopItem, copyDesktopItems }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "SonyHeadphonesClient";
   version = "1.3.2";
 
   src = fetchFromGitHub {
     owner = "Plutoberth";
     repo = "SonyHeadphonesClient";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-vhI97KheKzr87exCh4xNN7NDefcagdMu1tWSt67vLiU=";
     fetchSubmodules = true;
   };
@@ -25,7 +25,7 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [ cmake pkg-config copyDesktopItems ];
   buildInputs = [ bluez dbus glew glfw imgui ];
 
-  sourceRoot = "${src.name}/Client";
+  sourceRoot = "${finalAttrs.src.name}/Client";
 
   cmakeFlags = [ "-Wno-dev" ];
 
@@ -58,4 +58,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ stunkymonkey ];
     platforms = platforms.linux;
   };
-}
+})
