@@ -3,7 +3,7 @@
 , fetchFromGitHub
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "openrsync";
   version = "unstable-2022-05-08";
 
@@ -26,4 +26,4 @@ stdenv.mkDerivation rec {
     # https://github.com/kristapsdz/oconfigure#readme
     platforms = platforms.unix;
   };
-}
+})
