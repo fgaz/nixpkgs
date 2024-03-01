@@ -28,7 +28,7 @@ let
   DBversion = "1.0.0";
 in
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   inherit pname version;
 
   impulseDB = fetchFromGitHub {
@@ -74,7 +74,7 @@ stdenv.mkDerivation rec {
 
   postInstall = ''
     mkdir -p $out/share/${pname}/
-    cp  -r ${impulseDB}/* $out/share/${pname}/
+    cp  -r ${finalAttrs.impulseDB}/* $out/share/${pname}/
   '';
 
   meta = with lib; {
@@ -84,4 +84,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.magnetophon ];
     platforms = platforms.linux;
   };
-}
+})
