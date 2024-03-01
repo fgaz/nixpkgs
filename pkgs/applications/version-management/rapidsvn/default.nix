@@ -10,7 +10,7 @@
 , darwin
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "rapidsvn";
   version = "unstable-2021-08-02";
 
@@ -55,4 +55,4 @@ stdenv.mkDerivation rec {
     platforms = lib.platforms.unix;
     mainProgram = "rapidsvn";
   };
-}
+})
