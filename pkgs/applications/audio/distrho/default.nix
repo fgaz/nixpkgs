@@ -18,14 +18,14 @@ let rpathLibs = [
   fftwFloat
 ];
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "distrho-ports";
   version = "2021-03-15";
 
   src = fetchFromGitHub {
     owner = "DISTRHO";
     repo = "DISTRHO-Ports";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "00fgqwayd20akww3n2imyqscmyrjyc9jj0ar13k9dhpaxqk2jxbf";
   };
 
@@ -95,4 +95,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.goibhniu ];
     platforms = [ "x86_64-linux" ];
   };
-}
+})
