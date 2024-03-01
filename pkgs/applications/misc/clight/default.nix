@@ -4,14 +4,14 @@
 , withGeoclue ? true, geoclue2
 , withUpower ? true, upower }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "clight";
   version = "4.10";
 
   src = fetchFromGitHub {
     owner = "FedeDP";
     repo = "Clight";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-IAoz4f4XrX8bgesWL4yLK6m5F+c75WNIMFgKBj+W61Q=";
   };
 
@@ -49,4 +49,4 @@ stdenv.mkDerivation rec {
       eadwu
     ];
   };
-}
+})
