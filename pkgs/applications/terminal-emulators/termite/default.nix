@@ -27,14 +27,14 @@ let
     ];
   });
 
-in stdenv.mkDerivation rec {
+in stdenv.mkDerivation (finalAttrs: {
   pname = "termite";
   version = "15";
 
   src = fetchFromGitHub {
     owner = "thestinger";
     repo = "termite";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "0hp1x6lj098m3jgna274wv5dv60lnzg22297di68g4hw9djjyd2k";
     fetchSubmodules = true;
   };
@@ -49,7 +49,7 @@ in stdenv.mkDerivation rec {
     })
   ] ++ lib.optional stdenv.isDarwin ./remove_ldflags_macos.patch;
 
-  makeFlags = [ "VERSION=v${version}" "PREFIX=" "DESTDIR=$(out)" ];
+  makeFlags = [ "VERSION=v${finalAttrs.version}" "PREFIX=" "DESTDIR=$(out)" ];
 
   buildInputs = [ vte-ng gtk3 ncurses pcre2 ];
 
@@ -78,4 +78,4 @@ in stdenv.mkDerivation rec {
     platforms = platforms.all;
     mainProgram = "termite";
   };
-}
+})
