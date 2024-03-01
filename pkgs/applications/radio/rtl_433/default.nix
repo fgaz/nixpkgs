@@ -2,14 +2,14 @@
 , libusb1, rtl-sdr, soapysdr-with-plugins
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "23.11";
   pname = "rtl_433";
 
   src = fetchFromGitHub {
     owner = "merbanan";
     repo = "rtl_433";
-    rev = version;
+    rev = finalAttrs.version;
     hash = "sha256-qCfPweJeYHIuM1DfDmeDilkV/RLzbzlIe1sIpSx/EYc=";
   };
 
@@ -26,4 +26,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ earldouglas markuskowa ];
     platforms = platforms.all;
   };
-}
+})
