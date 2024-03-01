@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, makeWrapper, jre }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "ergo";
   version = "5.0.19";
 
   src = fetchurl {
-    url = "https://github.com/ergoplatform/ergo/releases/download/v${version}/ergo-${version}.jar";
+    url = "https://github.com/ergoplatform/ergo/releases/download/v${finalAttrs.version}/ergo-${finalAttrs.version}.jar";
     sha256 = "sha256-ogr2tdXVQcUOE26PGsYeAGi8+5zbM5m/BVuHxemVNGM=";
   };
 
@@ -26,4 +26,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ mmahut ];
     mainProgram = "ergo";
   };
-}
+})
