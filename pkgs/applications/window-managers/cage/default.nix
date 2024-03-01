@@ -6,14 +6,14 @@
 , nixosTests
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "cage";
   version = "0.1.5";
 
   src = fetchFromGitHub {
     owner = "Hjdskes";
     repo = "cage";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-Suq14YRw/MReDRvO/TQqjpZvpzAEDnHUyVbQj0BPT4c=";
   };
 
@@ -46,4 +46,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ primeos ];
     mainProgram = "cage";
   };
-}
+})
