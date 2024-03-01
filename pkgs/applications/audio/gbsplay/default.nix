@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, installShellFiles, libpulseaudio, nas }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gbsplay";
   version = "0.0.94";
 
   src = fetchFromGitHub {
     owner = "mmitch";
     repo = "gbsplay";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "VpaXbjotmc/Ref1geiKkBX9UhbPxfAGkFAdKVxP8Uxo=";
   };
 
@@ -29,4 +29,4 @@ stdenv.mkDerivation rec {
     platforms = [ "i686-linux" "x86_64-linux" ];
     maintainers = with maintainers; [ ];
   };
-}
+})
