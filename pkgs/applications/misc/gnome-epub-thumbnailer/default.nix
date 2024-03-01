@@ -13,12 +13,12 @@
 , libxml2
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gnome-epub-thumbnailer";
   version = "1.7";
 
   src = fetchurl {
-    url = "mirror://gnome/sources/gnome-epub-thumbnailer/${lib.versions.majorMinor version}/gnome-epub-thumbnailer-${version}.tar.xz";
+    url = "mirror://gnome/sources/gnome-epub-thumbnailer/${lib.versions.majorMinor finalAttrs.version}/gnome-epub-thumbnailer-${finalAttrs.version}.tar.xz";
     sha256 = "sha256-S7Ah++RCgNuY3xTBH6XkMgsWe4GpG9e6WGvqDE+il1I=";
   };
 
@@ -50,4 +50,4 @@ stdenv.mkDerivation rec {
     maintainers = teams.gnome.members;
     platforms = platforms.linux;
   };
-}
+})
