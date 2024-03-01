@@ -6,11 +6,11 @@
 let
   pname = "easytag";
   version = "2.4.3";
-in stdenv.mkDerivation rec {
+in stdenv.mkDerivation (finalAttrs: {
   name = "${pname}-${version}";
 
   src = fetchurl {
-    url = "mirror://gnome/sources/${pname}/${lib.versions.majorMinor version}/${name}.tar.xz";
+    url = "mirror://gnome/sources/${pname}/${lib.versions.majorMinor version}/${finalAttrs.name}.tar.xz";
     sha256 = "1mbxnqrw1fwcgraa1bgik25vdzvf97vma5pzknbwbqq5ly9fwlgw";
   };
 
@@ -38,4 +38,4 @@ in stdenv.mkDerivation rec {
     maintainers = with maintainers; [ ];
     platforms = platforms.linux;
   };
-}
+})
