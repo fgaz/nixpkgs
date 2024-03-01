@@ -2,12 +2,12 @@
 , autoreconfHook, pkg-config, wrapGAppsHook
 , glib, intltool, gtk3, gtksourceview }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "xpad";
   version = "5.4.0";
 
   src = fetchurl {
-    url = "https://launchpad.net/xpad/trunk/${version}/+download/xpad-${version}.tar.bz2";
+    url = "https://launchpad.net/xpad/trunk/${finalAttrs.version}/+download/xpad-${finalAttrs.version}.tar.bz2";
     sha256 = "1qpmlwn0bcw1q73ag0l0fdnlzmwawfvsy4g9y5b0vyrc58lcp5d3";
   };
 
@@ -22,4 +22,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ michalrus ];
   };
-}
+})
