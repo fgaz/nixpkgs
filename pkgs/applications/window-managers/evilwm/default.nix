@@ -9,12 +9,12 @@
 , patches ? [ ]
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "evilwm";
   version = "1.4.2";
 
   src = fetchurl {
-    url = "http://www.6809.org.uk/evilwm/evilwm-${version}.tar.gz";
+    url = "http://www.6809.org.uk/evilwm/evilwm-${finalAttrs.version}.tar.gz";
     sha256 = "sha256-QhLW2QywBbLMiIFLyFN3NrSVCrWCZLu2W4gHrGO9xLk=";
   };
 
@@ -48,4 +48,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.all;
     mainProgram = "evilwm";
   };
-}
+})
