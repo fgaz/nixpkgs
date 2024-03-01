@@ -9,12 +9,12 @@
 , gtk2
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "aumix";
   version = "2.9.1";
 
   src = fetchurl {
-    url = "http://www.jpj.net/~trevor/aumix/releases/aumix-${version}.tar.bz2";
+    url = "http://www.jpj.net/~trevor/aumix/releases/aumix-${finalAttrs.version}.tar.bz2";
     sha256 = "0a8fwyxnc5qdxff8sl2sfsbnvgh6pkij4yafiln0fxgg6bal7knj";
   };
 
@@ -46,4 +46,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ ];
     platforms = platforms.linux;
   };
-}
+})
