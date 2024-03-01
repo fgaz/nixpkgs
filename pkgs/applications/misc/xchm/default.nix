@@ -6,14 +6,14 @@
 , chmlib
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "xchm";
   version = "1.36";
 
   src = fetchFromGitHub {
     owner = "rzvncj";
     repo = "xCHM";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-+RbFE/jOD8sofHMCFgTIfgokrXYqDbCSSnN6SdEZ/b0=";
   };
 
@@ -39,4 +39,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ sikmir ];
     platforms = platforms.linux;
   };
-}
+})
