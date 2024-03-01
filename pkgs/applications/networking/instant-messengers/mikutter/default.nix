@@ -69,12 +69,12 @@ let
 
   inherit (gems) wrappedRuby;
 in
-with mikutterPaths; stdenv.mkDerivation rec {
+with mikutterPaths; stdenv.mkDerivation (finalAttrs: {
   pname = "mikutter";
   version = "4.1.4";
 
   src = fetchurl {
-    url = "https://mikutter.hachune.net/bin/mikutter-${version}.tar.gz";
+    url = "https://mikutter.hachune.net/bin/mikutter-${finalAttrs.version}.tar.gz";
     sha256 = "05253nz4i1lmnq6czj48qdab2ny4vx2mznj6nsn2l1m2z6zqkwk3";
   };
 
@@ -110,7 +110,7 @@ with mikutterPaths; stdenv.mkDerivation rec {
 
     gappsWrapperArgsHook # FIXME: currently runs at preFixup
     wrapGApp ${optPrefixDir}/mikutter.rb \
-      --prefix PATH : "${scriptPath}" \
+      --prefix PATH : "${finalAttrs.scriptPath}" \
       --set DISABLE_BUNDLER_SETUP 1
     mv ${optPrefixDir}/mikutter.rb $out/bin/mikutter
 
@@ -142,7 +142,7 @@ with mikutterPaths; stdenv.mkDerivation rec {
   '';
 
   desktopItems = [
-    (mkDesktopItem { inherit (meta) description; })
+    (mkDesktopItem { inherit (finalAttrs.meta) description; })
   ];
 
   doInstallCheck = true;
@@ -156,4 +156,4 @@ with mikutterPaths; stdenv.mkDerivation rec {
     platforms = ruby.meta.platforms;
     license = licenses.mit;
   };
-}
+})
