@@ -20,14 +20,14 @@
 , text-engine
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gnome-extension-manager";
   version = "0.4.3";
 
   src = fetchFromGitHub {
     owner = "mjakeman";
     repo = "extension-manager";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-e+s8iIUvW9Rw0Wq4aIn3IzBLGTQC6o0TmNXd5gz892Y=";
   };
 
@@ -67,4 +67,4 @@ stdenv.mkDerivation rec {
     mainProgram = "extension-manager";
     maintainers = with maintainers; [ foo-dogsquared ];
   };
-}
+})
