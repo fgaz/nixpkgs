@@ -1,11 +1,11 @@
 { fetchurl, fetchpatch, lib, stdenv, ncurses }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "elvis";
   version = "2.2_0";
 
   src = fetchurl {
-    url = "http://www.the-little-red-haired-girl.org/pub/elvis/elvis-${version}.tar.gz";
+    url = "http://www.the-little-red-haired-girl.org/pub/elvis/elvis-${finalAttrs.version}.tar.gz";
     sha256 = "182fj9qzyq6cjq1r849gpam6nq9smwv9f9xwaq84961p56r6d14s";
   };
 
@@ -46,4 +46,4 @@ stdenv.mkDerivation rec {
     description = "A vi clone for Unix and other operating systems";
     license = lib.licenses.free;
   };
-}
+})
