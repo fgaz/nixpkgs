@@ -35,7 +35,7 @@ let
     outputHashMode = "recursive";
     outputHash = "sha256-a7NBQJt5T+KwP8Djc8TQiVLNZF8UcXlXrv2G/dZ54aM=";
   };
-in stdenv.mkDerivation rec {
+in stdenv.mkDerivation (finalAttrs: {
   pname = "vivictpp";
   inherit version;
 
@@ -71,4 +71,4 @@ in stdenv.mkDerivation rec {
     maintainers = with maintainers; [ tilpner ];
     mainProgram = "vivictpp";
   };
-}
+})
