@@ -1,14 +1,14 @@
 { lib, stdenv, fetchFromGitHub, pkg-config, cmake, gtk3, wxGTK32
 , curl, gettext, glib, indi-full, libnova, wrapGAppsHook }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "phd2";
   version = "2.6.13";
 
   src = fetchFromGitHub {
     owner = "OpenPHDGuiding";
     repo = "phd2";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-GnT/tyk975caqESBSu4mdX5IWGi5O+RljLSd+CwoGWo=";
   };
 
@@ -45,4 +45,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ hjones2199 ];
     platforms = platforms.linux;
   };
-}
+})
