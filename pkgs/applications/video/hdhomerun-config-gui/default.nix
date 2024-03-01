@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, libhdhomerun, pkg-config, gtk2 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "hdhomerun-config-gui";
   version = "20221205";
 
   src = fetchurl {
-    url = "https://download.silicondust.com/hdhomerun/hdhomerun_config_gui_${version}.tgz";
+    url = "https://download.silicondust.com/hdhomerun/hdhomerun_config_gui_${finalAttrs.version}.tgz";
     sha256 = "sha256-vzrSk742Ca2I8Uk0uGo44SxpEoVY1QBn62Ahwz8E7p8=";
   };
 
@@ -29,4 +29,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.louisdk1 ];
     mainProgram = "hdhomerun_config_gui";
   };
-}
+})
