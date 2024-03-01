@@ -26,7 +26,7 @@
 let
   qtVersion = lib.versions.major qtbase.version;
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "qbittorrent"
     + lib.optionalString (guiSupport && qtVersion == "5") "-qt5"
     + lib.optionalString (!guiSupport) "-nox";
@@ -35,7 +35,7 @@ stdenv.mkDerivation rec {
   src = fetchFromGitHub {
     owner = "qbittorrent";
     repo = "qBittorrent";
-    rev = "release-${version}";
+    rev = "release-${finalAttrs.version}";
     hash = "sha256-4RVJ7xQY9zcB8+RUr80P9xKUXGxt0ATSzYmRDfZIowU=";
   };
 
@@ -97,4 +97,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = with maintainers; [ Anton-Latukha kashw2 ];
   };
-}
+})
