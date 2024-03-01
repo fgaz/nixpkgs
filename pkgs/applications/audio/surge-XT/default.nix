@@ -35,14 +35,14 @@ let
     '';
   };
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "surge-XT";
   version = "1.2.3";
 
   src = fetchFromGitHub {
     owner = "surge-synthesizer";
     repo = "surge";
-    rev = "release_xt_${version}";
+    rev = "release_xt_${finalAttrs.version}";
     fetchSubmodules = true;
     sha256 = "sha256-DGzdzoCjMGEDltEwlPvLk2tyMVRH1Ql2Iq1ypogw/m0=";
   };
@@ -97,4 +97,4 @@ stdenv.mkDerivation rec {
     platforms = [ "x86_64-linux" ];
     maintainers = with maintainers; [ magnetophon orivej ];
   };
-}
+})
