@@ -12,14 +12,14 @@
 , wrapGAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "shipments";
   version = "0.3.0";
 
   src = fetchFromSourcehut {
     owner = "~martijnbraam";
     repo = "shipments";
-    rev = version;
+    rev = finalAttrs.version;
     hash = "sha256-8wX1s5mPCdMINIQP4m5q5StKqxY6CGBBxIxyQAvU7Pc=";
   };
 
@@ -48,4 +48,4 @@ stdenv.mkDerivation rec {
     license = licenses.lgpl3;
     maintainers = with maintainers; [ michaelgrahamevans ];
   };
-}
+})
