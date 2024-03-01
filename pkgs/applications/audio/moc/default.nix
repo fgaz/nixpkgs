@@ -24,13 +24,13 @@
 , withDebug ? false
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
 
   pname = "moc";
   version = "2.5.2";
 
   src = fetchurl {
-    url = "http://ftp.daper.net/pub/soft/moc/stable/moc-${version}.tar.bz2";
+    url = "http://ftp.daper.net/pub/soft/moc/stable/moc-${finalAttrs.version}.tar.bz2";
     sha256 = "026v977kwb0wbmlmf6mnik328plxg8wykfx9ryvqhirac0aq39pk";
   };
 
@@ -97,4 +97,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ aethelz pSub jagajaga ];
     platforms = platforms.unix;
   };
-}
+})
