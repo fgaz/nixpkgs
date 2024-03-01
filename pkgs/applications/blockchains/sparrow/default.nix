@@ -160,7 +160,7 @@ let
     '';
   };
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   inherit version src;
   pname = "sparrow-unwrapped";
   nativeBuildInputs = [ makeWrapper copyDesktopItems ];
@@ -202,7 +202,7 @@ stdenv.mkDerivation rec {
     substituteInPlace $out/bin/sparrow-desktop --subst-var-by jdkModules ${jdk-modules}
 
     mkdir -p $out/share/icons
-    ln -s ${sparrow-icons}/hicolor $out/share/icons
+    ln -s ${finalAttrs.sparrow-icons}/hicolor $out/share/icons
 
     mkdir -p $out/etc/udev/rules.d
     cp ${hwi}/lib/python*/site-packages/hwilib/udev/*.rules $out/etc/udev/rules.d
@@ -224,4 +224,4 @@ stdenv.mkDerivation rec {
     platforms = [ "x86_64-linux" ];
     mainProgram = "sparrow-desktop";
   };
-}
+})
