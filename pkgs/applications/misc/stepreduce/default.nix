@@ -3,7 +3,7 @@
 , fetchFromGitLab
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "stepreduce";
   version = "unstable-2020-04-30";
 
@@ -28,4 +28,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl3Plus;
     maintainers = with maintainers; [ evils ];
   };
-}
+})
