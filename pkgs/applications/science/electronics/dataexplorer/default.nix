@@ -6,12 +6,12 @@
 , makeWrapper
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "dataexplorer";
   version = "3.8.3";
 
   src = fetchurl {
-    url = "mirror://savannah/dataexplorer/dataexplorer-${version}-src.tar.gz";
+    url = "mirror://savannah/dataexplorer/dataexplorer-${finalAttrs.version}-src.tar.gz";
     sha256 = "sha256-vU9klb6Mweg8yxnClsIdelG4uW92if64SJ7UHumYYbs=";
   };
 
@@ -63,4 +63,4 @@ stdenv.mkDerivation rec {
       binaryBytecode    # contains thirdparty jar files, e.g. javax.json, org.glassfish.json
     ];
   };
-}
+})
