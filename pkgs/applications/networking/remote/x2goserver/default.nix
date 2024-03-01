@@ -36,7 +36,7 @@ let
     xorg.xkbcomp xorg.setxkbmap
   ];
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   inherit pname version src;
 
   buildInputs = [ perlEnv bash ];
@@ -90,4 +90,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl2;
     maintainers = with maintainers; [ averelld ];
   };
-}
+})
