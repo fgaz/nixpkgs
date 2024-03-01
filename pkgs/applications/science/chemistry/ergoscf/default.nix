@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, blas, lapack } :
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "ergoscf";
   version = "3.8.2";
 
   src = fetchurl {
-    url = "http://www.ergoscf.org/source/tarfiles/ergo-${version}.tar.gz";
+    url = "http://www.ergoscf.org/source/tarfiles/ergo-${finalAttrs.version}.tar.gz";
     sha256 = "sha256-U0NVREEZ8HI0Q0ZcbwvZsYA76PWMh7bqgDG1uaUc01c=";
   };
 
@@ -43,4 +43,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.markuskowa ];
     platforms = platforms.linux;
   };
-}
+})
