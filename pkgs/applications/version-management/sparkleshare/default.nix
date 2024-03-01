@@ -22,14 +22,14 @@
   xdg-utils,
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "sparkleshare";
   version = "3.38";
 
   src = fetchFromGitHub {
     owner = "hbons";
     repo = "SparkleShare";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "1a9csflmj96iyr1l0mdm3ziv1bljfcjnzm9xb2y4qqk7ha2p6fbq";
   };
 
@@ -92,4 +92,4 @@ stdenv.mkDerivation rec {
     maintainers = with lib.maintainers; [ kevincox ];
     mainProgram = "sparkleshare";
   };
-}
+})
