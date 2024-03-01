@@ -29,16 +29,16 @@
 , fftw
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "saga";
   version = "9.3.1";
 
   src = fetchurl {
-    url = "mirror://sourceforge/saga-gis/saga-${version}.tar.gz";
+    url = "mirror://sourceforge/saga-gis/saga-${finalAttrs.version}.tar.gz";
     sha256 = "sha256-QrpEbb8zN003Afnu9UZUanWE0lIiy95POSWd1jB8EtA=";
   };
 
-  sourceRoot = "saga-${version}/saga-gis";
+  sourceRoot = "saga-${finalAttrs.version}/saga-gis";
 
   nativeBuildInputs = [
     cmake
@@ -84,4 +84,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; teams.geospatial.members ++ [ michelk mpickering ];
     platforms = with platforms; unix;
   };
-}
+})
