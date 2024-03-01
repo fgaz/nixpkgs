@@ -11,12 +11,12 @@
 let
   libtorrent = (python3.pkgs.toPythonModule (libtorrent-rasterbar-1_2_x)).python;
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "tribler";
   version = "7.13.0";
 
   src = fetchurl {
-    url = "https://github.com/Tribler/tribler/releases/download/v${version}/Tribler-${version}.tar.xz";
+    url = "https://github.com/Tribler/tribler/releases/download/v${finalAttrs.version}/Tribler-${finalAttrs.version}.tar.xz";
     hash = "sha256-j9+Kq6dOqiJCTY3vuRWGnciuwACU7L0pl73l6nkDLN4=";
   };
 
@@ -113,4 +113,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ xvapx viric mkg20001 ];
     platforms = platforms.linux;
   };
-}
+})
