@@ -5,14 +5,14 @@
 , wrapQtAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "yuview";
   version = "2.13";
 
   src = fetchFromGitHub {
     owner = "IENT";
     repo = "YUView";
-    rev = "v.${version}";
+    rev = "v.${finalAttrs.version}";
     sha256 = "sha256-2mNIuyY/ni+zkUc8V/iXUEa7JeBJyOnNod7friMYAm8=";
   };
 
@@ -43,4 +43,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     mainProgram = "YUView";
   };
-}
+})
