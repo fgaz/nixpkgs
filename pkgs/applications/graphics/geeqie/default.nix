@@ -6,14 +6,14 @@
 , nix-update-script
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "geeqie";
   version = "2.1";
 
   src = fetchFromGitHub {
     owner = "BestImageViewer";
     repo = "geeqie";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-qkM/7auZ9TMF2r8KLnitxmvlyPmIjh7q9Ugh+QKh8hw=";
   };
 
@@ -85,4 +85,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ pSub markus1189 ];
     platforms = platforms.gnu ++ platforms.linux;
   };
-}
+})
