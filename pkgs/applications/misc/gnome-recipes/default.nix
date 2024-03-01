@@ -21,7 +21,7 @@
 , nix-update-script
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gnome-recipes";
   version = "2.0.4";
 
@@ -29,7 +29,7 @@ stdenv.mkDerivation rec {
     domain = "gitlab.gnome.org";
     owner = "GNOME";
     repo = "recipes";
-    rev = version;
+    rev = finalAttrs.version;
     fetchSubmodules = true;
     sha256 = "GyFOwEYmipQdFLtTXn7+NvhDTzxBlOAghr3cZT4QpQw=";
   };
@@ -74,4 +74,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl3Plus;
     platforms = platforms.unix;
   };
-}
+})
