@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, fftw, gtk2, lv2, libsamplerate, libsndfile, pkg-config, zita-convolver }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "ir.lv2";
   version = "1.2.4";
 
   src = fetchFromGitHub {
     owner = "tomszilagyi";
     repo = "ir.lv2";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "1p6makmgr898fakdxzl4agh48qqwgv1k1kwm8cgq187n0mhiknp6";
   };
 
@@ -40,4 +40,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.magnetophon ];
     platforms = platforms.linux;
   };
-}
+})
