@@ -10,12 +10,12 @@
 , wrapQtAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "mindforger";
   version = "1.52.0";
 
   src = fetchurl {
-    url = "https://github.com/dvorka/mindforger/releases/download/${version}/mindforger_${version}.tgz";
+    url = "https://github.com/dvorka/mindforger/releases/download/${finalAttrs.version}/mindforger_${finalAttrs.version}.tgz";
     sha256 = "1pghsw8kwvjhg3jpmjs0n892h2l0pm0cs6ymi8b23fwk0kfj67rd";
   };
 
@@ -66,4 +66,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ cyplo ];
     mainProgram = "mindforger";
   };
-}
+})
