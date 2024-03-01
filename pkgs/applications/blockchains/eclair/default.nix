@@ -5,13 +5,13 @@
 , openjdk11
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "eclair";
   version = "0.8.0";
   revision = "0077471";
 
   src = fetchzip {
-    url = "https://github.com/ACINQ/eclair/releases/download/v${version}/eclair-node-${version}-${revision}-bin.zip";
+    url = "https://github.com/ACINQ/eclair/releases/download/v${finalAttrs.version}/eclair-node-${finalAttrs.version}-${finalAttrs.revision}-bin.zip";
     hash = "sha256-jkXdt1aQRVgItfFPuyh45uXjUFgJtKng/17Po5i7ang=";
   };
 
@@ -35,4 +35,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ prusnak ];
     platforms = platforms.unix;
   };
-}
+})
