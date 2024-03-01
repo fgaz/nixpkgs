@@ -2,14 +2,14 @@
 
 let
   inherit (python3.pkgs) wrapPython pyqt5;
-in stdenv.mkDerivation rec {
+in stdenv.mkDerivation (finalAttrs: {
   pname = "convertall";
   version = "0.8.0";
 
   src = fetchFromGitHub {
     owner = "doug-101";
     repo = "ConvertAll";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "02xxasgbjbivsbhyfpn3cpv52lscdx5kc95s6ns1dvnmdg0fpng0";
   };
 
@@ -34,4 +34,4 @@ in stdenv.mkDerivation rec {
     maintainers = with maintainers; [ orivej ];
     platforms = pyqt5.meta.platforms;
   };
-}
+})
