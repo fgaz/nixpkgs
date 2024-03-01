@@ -19,7 +19,7 @@
 , libsoup_3
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "boatswain";
   version = "0.3.0";
 
@@ -27,7 +27,7 @@ stdenv.mkDerivation rec {
     domain = "gitlab.gnome.org";
     owner = "World";
     repo = "boatswain";
-    rev = version;
+    rev = finalAttrs.version;
     hash = "sha256-Q16ooTaCgwbwEqa0iRzAoaS5OHCSi6dXaiVgC3uc/zc=";
   };
 
@@ -62,4 +62,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ _0xMRTT ];
     broken = stdenv.isDarwin;
   };
-}
+})
