@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, fetchpatch, erlang, cl, libGL, libGLU, runtimeShell }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "wings";
   version = "2.2.4";
 
   src = fetchurl {
-    url = "mirror://sourceforge/wings/wings-${version}.tar.bz2";
+    url = "mirror://sourceforge/wings/wings-${finalAttrs.version}.tar.bz2";
     sha256 = "1xcmifs4vq2810pqqvsjsm8z3lz24ys4c05xkh82nyppip2s89a3";
   };
 
@@ -33,13 +33,13 @@ stdenv.mkDerivation rec {
 
   # I did not test the *cl* part. I added the -pa just by imitation.
   installPhase = ''
-    mkdir -p $out/bin $out/lib/wings-${version}/ebin
-    cp ebin/* $out/lib/wings-${version}/ebin
-    cp -R textures shaders plugins $out/lib/wings-${version}
+    mkdir -p $out/bin $out/lib/wings-${finalAttrs.version}/ebin
+    cp ebin/* $out/lib/wings-${finalAttrs.version}/ebin
+    cp -R textures shaders plugins $out/lib/wings-${finalAttrs.version}
     cat << EOF > $out/bin/wings
     #!${runtimeShell}
     ${erlang}/bin/erl \
-      -pa $out/lib/wings-${version}/ebin -run wings_start start_halt "$@"
+      -pa $out/lib/wings-${finalAttrs.version}/ebin -run wings_start start_halt "$@"
     EOF
     chmod +x $out/bin/wings
   '';
@@ -51,4 +51,4 @@ stdenv.mkDerivation rec {
     maintainers = with lib.maintainers; [ viric ];
     platforms = with lib.platforms; linux;
   };
-}
+})
