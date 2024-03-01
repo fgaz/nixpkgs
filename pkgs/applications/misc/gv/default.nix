@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, libXext, Xaw3d, ghostscriptX, perl, pkg-config, libiconv }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gv";
   version = "3.7.4";
 
   src = fetchurl {
-    url = "mirror://gnu/gv/gv-${version}.tar.gz";
+    url = "mirror://gnu/gv/gv-${finalAttrs.version}.tar.gz";
     sha256 = "0q8s43z14vxm41pfa8s5h9kyyzk1fkwjhkiwbf2x70alm6rv6qi1";
   };
 
@@ -44,4 +44,4 @@ stdenv.mkDerivation rec {
     maintainers = [ ];
     platforms = lib.platforms.unix;
   };
-}
+})
