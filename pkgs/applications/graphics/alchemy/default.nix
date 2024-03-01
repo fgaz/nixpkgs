@@ -1,13 +1,13 @@
 { lib, stdenv, fetchurl, jre, runtimeShell }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "alchemy";
   version = "008";
 
   enableParallelBuilding = true;
 
   src = fetchurl {
-    url = "http://al.chemy.org/files/Alchemy-${version}.tar.gz";
+    url = "http://al.chemy.org/files/Alchemy-${finalAttrs.version}.tar.gz";
     sha256 = "0449bvdccgx1jqnws1bckzs4nv2d230523qs0jx015gi81s1q7li";
   };
 
@@ -38,4 +38,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.marcweber ];
     platforms = platforms.linux;
   };
-}
+})
