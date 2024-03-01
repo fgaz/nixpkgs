@@ -60,14 +60,14 @@
 # TODO
 # 1. detach sbsms
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "audacity";
   version = "3.4.2";
 
   src = fetchFromGitHub {
     owner = "audacity";
     repo = "audacity";
-    rev = "Audacity-${version}";
+    rev = "Audacity-${finalAttrs.version}";
     hash = "sha256-YlRWCu6kQYdzast7Mf29p4FvpXJHQLG7vqqo/5SNQCQ=";
   };
 
@@ -204,4 +204,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ lheckemann veprbl wegank ];
     platforms = platforms.unix;
   };
-}
+})
