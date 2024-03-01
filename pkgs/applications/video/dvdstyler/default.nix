@@ -31,12 +31,12 @@
 
 let
   inherit (lib) optionals makeBinPath;
-in stdenv.mkDerivation rec {
+in stdenv.mkDerivation (finalAttrs: {
   pname = "dvdstyler";
   version = "3.2.1";
 
   src = fetchurl {
-    url = "mirror://sourceforge/project/dvdstyler/dvdstyler/${version}/DVDStyler-${version}.tar.bz2";
+    url = "mirror://sourceforge/project/dvdstyler/dvdstyler/${finalAttrs.version}/DVDStyler-${finalAttrs.version}.tar.bz2";
     sha256 = "sha256-C7M0hzn0yTCXRUuBTss6WPa6zo8DD0Fhmp/ur7R0dVg=";
   };
 
@@ -130,4 +130,4 @@ in stdenv.mkDerivation rec {
     platforms = with platforms; linux;
     mainProgram = "dvdstyler";
   };
-}
+})
