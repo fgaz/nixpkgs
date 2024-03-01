@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, intltool, pkg-config, gtk2, fetchpatch }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gpicview";
   version = "0.2.4";
 
   src = fetchurl {
-    url = "mirror://sourceforge/lxde/gpicview-${version}.tar.gz";
+    url = "mirror://sourceforge/lxde/gpicview-${finalAttrs.version}.tar.gz";
     sha256 = "1svcy1c8bgk0pl12yhyv16h2fl52x5vzzcv57z6qdcv5czgvgglr";
   };
 
@@ -27,4 +27,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ lovek323 ];
     platforms = platforms.unix;
   };
-}
+})
