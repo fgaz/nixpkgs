@@ -12,14 +12,14 @@
 , trezorSupport ? true, libusb1, protobuf, python3
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "monero-gui";
   version = "0.18.3.1";
 
   src = fetchFromGitHub {
     owner = "monero-project";
     repo = "monero-gui";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-1xgecaScGLFbv0V5QlpettdvCcb9+xu7eO/J9MyPzmY=";
   };
 
@@ -54,7 +54,7 @@ stdenv.mkDerivation rec {
   postPatch = ''
     # set monero-gui version
     substituteInPlace src/version.js.in \
-       --replace '@VERSION_TAG_GUI@' '${version}'
+       --replace '@VERSION_TAG_GUI@' '${finalAttrs.version}'
 
     # use monerod from the monero package
     substituteInPlace src/daemon/DaemonManager.cpp \
@@ -82,7 +82,7 @@ stdenv.mkDerivation rec {
   postInstall = ''
     # install desktop entry
     install -Dm644 -t $out/share/applications \
-      ${desktopItem}/share/applications/*
+      ${finalAttrs.desktopItem}/share/applications/*
 
     # install icons
     for n in 16 24 32 48 64 96 128 256; do
@@ -101,4 +101,4 @@ stdenv.mkDerivation rec {
     maintainers  = with maintainers; [ rnhmjoj ];
     mainProgram  = "monero-wallet-gui";
   };
-}
+})
