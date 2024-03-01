@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, cmake, unzip, pkg-config, libXpm, fltk13, freeimage }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "posterazor";
   version = "1.5.1";
 
   src = fetchurl {
-    url = "mirror://sourceforge/posterazor/${version}/PosteRazor-${version}-Source.zip";
+    url = "mirror://sourceforge/posterazor/${finalAttrs.version}/PosteRazor-${finalAttrs.version}-Source.zip";
     sha256 = "1dqpdk8zl0smdg4fganp3hxb943q40619qmxjlga9jhjc01s7fq5";
   };
 
@@ -36,4 +36,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl3Plus;
     platforms = platforms.linux;
   };
-}
+})
