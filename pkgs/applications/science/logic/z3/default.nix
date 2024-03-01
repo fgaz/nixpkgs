@@ -19,7 +19,7 @@ assert ocamlBindings -> ocaml != null && findlib != null && zarith != null;
 with lib;
 
 let common = { version, sha256, patches ? [ ], tag ? "z3" }:
-  stdenv.mkDerivation rec {
+  stdenv.mkDerivation (finalAttrs: {
     pname = "z3";
     inherit version sha256 patches;
     src = fetchFromGitHub {
@@ -85,7 +85,7 @@ let common = { version, sha256, patches ? [ ], tag ? "z3" }:
       platforms = platforms.unix;
       maintainers = with maintainers; [ thoughtpolice ttuegel ];
     };
-  };
+  });
 in
 {
   z3_4_12 = common {
