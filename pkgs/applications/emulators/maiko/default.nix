@@ -1,6 +1,6 @@
 { lib, stdenv, fetchFromGitHub, cmake, xorg }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "maiko";
   version = "2021-04-14";
   src = fetchFromGitHub {
@@ -23,4 +23,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ ehmry ];
     inherit (xorg.libX11.meta) platforms;
   };
-}
+})
