@@ -2,14 +2,14 @@
 , xcbutilcursor, xcbutilkeysyms, xcbutil, libXrandr, libXinerama, libXcursor
 , alsa-lib, libjack2, lv2, gcc-unwrapped, curl}:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "LibreArp";
   version = "2.4";
 
   src = fetchFromGitLab {
     owner = "LibreArp";
     repo = "LibreArp";
-    rev = version;
+    rev = finalAttrs.version;
     hash = "sha256-jEpES68NuHhelUq/L46CxEeadk3LbuPZ72JaGDbw8fg=";
     fetchSubmodules = true;
   };
@@ -50,4 +50,4 @@ stdenv.mkDerivation rec {
     platforms = [ "x86_64-linux" ];
     maintainers = with maintainers; [ magnetophon ];
   };
-}
+})
