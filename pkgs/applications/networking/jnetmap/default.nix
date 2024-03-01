@@ -1,12 +1,12 @@
 { lib, stdenv, fetchurl, jre, makeWrapper }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "jnetmap";
   version = "0.5.5";
   versionSuffix = "-703";
 
   src = fetchurl {
-    url = "mirror://sourceforge/project/jnetmap/jNetMap%20${version}/jNetMap-${version}${versionSuffix}.jar";
+    url = "mirror://sourceforge/project/jnetmap/jNetMap%20${finalAttrs.version}/jNetMap-${finalAttrs.version}${finalAttrs.versionSuffix}.jar";
     sha256 = "sha256-e4Ssm2Sq/v1YZ7ZudAqgQ7Cz2ffwWbSmLFoKhaZvTPg=";
   };
 
@@ -21,7 +21,7 @@ stdenv.mkDerivation rec {
     mkdir -p "$out/bin"
     mkdir -p "$out/lib"
 
-    cp "${src}" "$out/lib/jnetmap.jar"
+    cp "${finalAttrs.src}" "$out/lib/jnetmap.jar"
     makeWrapper "${jre}/bin/java" "$out/bin/jnetmap" \
         --add-flags "-jar \"$out/lib/jnetmap.jar\""
 
@@ -37,4 +37,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = [ maintainers.bjornfor ];
   };
-}
+})
