@@ -13,14 +13,14 @@
 , stdenv
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "lite-xl";
   version = "2.1.1";
 
   src = fetchFromGitHub {
     owner = "lite-xl";
     repo = "lite-xl";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-tZ9bCazs4ygNl5RKFNUtxboaMcG8a7mIz2FuiExX1d4=";
   };
 
@@ -45,4 +45,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     mainProgram = "lite-xl";
   };
-}
+})
