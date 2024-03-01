@@ -26,14 +26,14 @@
 , useExternalRenderer ? false
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "beamerpresenter";
   version = "0.2.4";
 
   src = fetchFromGitHub {
     owner = "stiglers-eponym";
     repo = "BeamerPresenter";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-UQbyzkFjrIDPcrE6yGuOWsXNjz8jWyJEWiQwHmf91/8=";
   };
 
@@ -92,4 +92,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ pacien dotlambda ];
     mainProgram = "beamerpresenter";
   };
-}
+})
