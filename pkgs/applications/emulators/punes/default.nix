@@ -17,14 +17,14 @@
 , wrapQtAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "punes";
   version = "0.110";
 
   src = fetchFromGitHub {
     owner = "punesemu";
     repo = "puNES";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-+hL168r40aYUjyLbWFXWk9G2srrrG1TH1gLYMliHftU=";
   };
 
@@ -76,4 +76,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ OPNA2608 ];
     platforms = with platforms; linux ++ freebsd ++ openbsd ++ windows;
   };
-}
+})
