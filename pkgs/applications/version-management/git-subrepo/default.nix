@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, git, makeWrapper, which, installShellFiles }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "git-subrepo";
   version = "0.4.6";
 
   src = fetchFromGitHub {
     owner = "ingydotnet";
     repo = "git-subrepo";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-83N0Ek6DawUrOc6s2Utzi8776bX4UTGS/a/OffkV44Y=";
   };
 
@@ -44,4 +44,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = with maintainers; [ ryantrinkle ];
   };
-}
+})
