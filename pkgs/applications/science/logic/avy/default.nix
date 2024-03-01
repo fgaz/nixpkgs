@@ -1,6 +1,6 @@
 { lib, stdenv, fetchgit, cmake, zlib, boost }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "avy";
   version = "2019.05.01"; # date of cav19 tag
 
@@ -44,4 +44,4 @@ stdenv.mkDerivation rec {
     maintainers = with lib.maintainers; [ thoughtpolice ];
     platforms   = lib.platforms.linux;
   };
-}
+})
