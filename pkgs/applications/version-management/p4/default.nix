@@ -38,7 +38,7 @@ let
     paths = [ libcxx libcxxabi ];
   };
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "p4";
   version = "2022.2.2407422";
 
@@ -99,8 +99,8 @@ stdenv.mkDerivation rec {
     runHook preInstall
     mkdir -p $bin/bin $dev $out
     cp bin.unix/p4 $bin/bin
-    cp -r bin.unix/p4api-${version}/include $dev
-    cp -r bin.unix/p4api-${version}/lib $out
+    cp -r bin.unix/p4api-${finalAttrs.version}/include $dev
+    cp -r bin.unix/p4api-${finalAttrs.version}/lib $out
     runHook postInstall
   '';
 
@@ -112,4 +112,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = with maintainers; [ corngood impl ];
   };
-}
+})
