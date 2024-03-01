@@ -36,12 +36,12 @@
 , zlib
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "hugin";
   version = "2022.0.0";
 
   src = fetchurl {
-    url = "mirror://sourceforge/hugin/hugin-${version}.tar.bz2";
+    url = "mirror://sourceforge/hugin/hugin-${finalAttrs.version}.tar.bz2";
     hash = "sha256-l8hWKgupp0PguVWkPf3gSLHGDNnl8u4rad4agWRuBac=";
   };
 
@@ -104,4 +104,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ hrdinka ];
     platforms = platforms.linux;
   };
-}
+})
