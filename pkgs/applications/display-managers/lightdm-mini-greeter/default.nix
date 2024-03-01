@@ -1,13 +1,13 @@
 { lib, stdenv, linkFarm, lightdm-mini-greeter, fetchFromGitHub, autoreconfHook, pkg-config, lightdm, gtk3, glib, gdk-pixbuf, wrapGAppsHook, librsvg }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "lightdm-mini-greeter";
   version = "0.5.1";
 
   src = fetchFromGitHub {
     owner = "prikhi";
     repo = "lightdm-mini-greeter";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-Pm7ExfusFIPktX2C4UE07qgOVhcWhVxnaD3QARpmu7Y=";
   };
 
@@ -35,4 +35,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     changelog = "https://github.com/prikhi/lightdm-mini-greeter/blob/master/CHANGELOG.md";
   };
-}
+})
