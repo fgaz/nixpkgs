@@ -2,7 +2,7 @@
 
 let version = "1.1.1"; in
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "tcpkali";
   inherit version;
   src = fetchFromGitHub {
@@ -19,9 +19,9 @@ stdenv.mkDerivation rec {
   meta = {
     description = "High performance TCP and WebSocket load generator and sink";
     license = lib.licenses.bsd2;
-    inherit (src.meta) homepage;
+    inherit (finalAttrs.src.meta) homepage;
     platforms = lib.platforms.linux;
     maintainers = with lib.maintainers; [ ethercrow ];
     mainProgram = "tcpkali";
   };
-}
+})
