@@ -7,12 +7,12 @@
 let
   luaEnv = lua.withPackages(ps: [ ps.lpeg ]);
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "vis";
   version  = "0.8";
 
   src = fetchFromGitHub {
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-XvWj6fZxzXeRA5oCAqIIwlfjrJcHnDrjeiPExEQKSkY=";
     repo = "vis";
     owner = "martanne";
@@ -43,7 +43,7 @@ stdenv.mkDerivation rec {
       exec = "vis %U";
       type = "Application";
       icon = "accessories-text-editor";
-      comment = meta.description;
+      comment = finalAttrs.meta.description;
       desktopName = "vis";
       genericName = "Text editor";
       categories = [ "Application" "Development" "IDE" ];
@@ -60,4 +60,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ vrthra ramkromberg ];
     platforms = platforms.unix;
   };
-}
+})
