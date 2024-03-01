@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, pkg-config, cmake, flex, cadical, symfpu, gmp, python3, gtest, libantlr3c, antlr3_4, boost, jdk }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "cvc5";
   version = "1.1.1";
 
   src = fetchFromGitHub {
     owner  = "cvc5";
     repo   = "cvc5";
-    rev    = "cvc5-${version}";
+    rev    = "cvc5-${finalAttrs.version}";
     hash  = "sha256-TU2ZG6/9bXRPozvEVUiSWixImY38iavD3huhSU8DbCw=";
   };
 
@@ -35,4 +35,4 @@ stdenv.mkDerivation rec {
     platforms   = platforms.unix;
     maintainers = with maintainers; [ shadaj ];
   };
-}
+})
