@@ -1,13 +1,13 @@
 { lib, python3, stdenv, substituteAll, fetchFromGitHub }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "novnc";
   version = "1.4.0";
 
   src = fetchFromGitHub {
     owner = "novnc";
     repo = "noVNC";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-G7Rtv7pQFR9UrzhYXDyBf+FRqtjo5NAXU7m/HeXhI1k=";
   };
 
@@ -39,4 +39,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ neverbehave ];
     mainProgram = "novnc";
   };
-}
+})
