@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, ffmpeg, libkeyfinder }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "keyfinder-cli";
   version = "1.1.1";
 
   src = fetchFromGitHub {
     repo = "keyfinder-cli";
     owner = "EvanPurkhiser";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "1mlcygbj3gqii3cz8jd6ks1lz612i4jp0343qjg293xm39fg47ns";
   };
 
@@ -18,7 +18,7 @@ stdenv.mkDerivation rec {
   enableParallelBuilding = true;
 
   meta = with lib; {
-    inherit (src.meta) homepage;
+    inherit (finalAttrs.src.meta) homepage;
     description = "Musical key detection for digital audio (command-line tool)";
     longDescription = ''
       This small utility is the automation-oriented DJ's best friend. By making
@@ -28,4 +28,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl3Plus;
     platforms = platforms.linux;
   };
-}
+})
