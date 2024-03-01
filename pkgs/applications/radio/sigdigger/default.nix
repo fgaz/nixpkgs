@@ -15,14 +15,14 @@
 , volk
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "sigdigger";
   version = "0.3.0";
 
   src = fetchFromGitHub {
     owner = "BatchDrake";
     repo = "SigDigger";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-dS+Fc0iQz7GIlGaR556Ur/EQh3Uzhqm9uBW42IuEqoE=";
   };
 
@@ -56,4 +56,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.all;
     maintainers = with maintainers; [ polygon oxapentane ];
   };
-}
+})
