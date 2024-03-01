@@ -7,14 +7,14 @@
 , cplex
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "fast-downward";
   version = "23.06.0";
 
   src = fetchFromGitHub {
     owner = "aibasel";
     repo = "downward";
-    rev = "release-${version}";
+    rev = "release-${finalAttrs.version}";
     sha256 = "sha256-yNaMyS47yxc/p5Rs/kHwD/pgjGXnHBdybYdo1GIEmA4=";
   };
 
@@ -64,4 +64,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = with maintainers; [ abbradar ];
   };
-}
+})
