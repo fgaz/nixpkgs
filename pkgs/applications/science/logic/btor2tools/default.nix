@@ -1,8 +1,8 @@
 { lib, stdenv, cmake, fetchFromGitHub, fetchpatch, fixDarwinDylibNames }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "btor2tools";
-  version = "1.0.0-pre_${src.rev}";
+  version = "1.0.0-pre_${finalAttrs.src.rev}";
 
   src = fetchFromGitHub {
     owner  = "boolector";
@@ -43,4 +43,4 @@ stdenv.mkDerivation rec {
     platforms   = platforms.unix;
     maintainers = with maintainers; [ thoughtpolice ];
   };
-}
+})
