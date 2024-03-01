@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, fetchpatch, nano }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "cvs";
   version = "1.12.13";
 
   src = fetchurl {
-    url = "mirror://savannah/cvs/source/feature/${version}/cvs-${version}.tar.bz2";
+    url = "mirror://savannah/cvs/source/feature/${finalAttrs.version}/cvs-${finalAttrs.version}.tar.bz2";
     sha256 = "0pjir8cwn0087mxszzbsi1gyfc6373vif96cw4q3m1x6p49kd1bq";
   };
 
@@ -52,4 +52,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl2Plus; # library is GPLv2, main is GPLv1
     platforms = platforms.all;
   };
-}
+})
