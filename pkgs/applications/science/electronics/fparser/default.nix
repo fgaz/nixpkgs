@@ -3,7 +3,7 @@
 , cmake
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "fparser";
   version = "unstable-2015-09-25";
 
@@ -23,4 +23,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ matthuszagh ];
     platforms = platforms.linux;
   };
-}
+})
