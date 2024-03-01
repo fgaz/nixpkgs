@@ -27,7 +27,7 @@
 let
   marble = callPackage ./marble.nix { };
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "blackbox";
   version = "0.14.0";
 
@@ -35,7 +35,7 @@ stdenv.mkDerivation rec {
     domain = "gitlab.gnome.org";
     owner = "raggesilver";
     repo = "blackbox";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-ebwh9WTooJuvYFIygDBn9lYC7+lx9P1HskvKU8EX9jw=";
   };
 
@@ -96,4 +96,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ chuangzhu linsui ];
     platforms = platforms.linux;
   };
-}
+})
