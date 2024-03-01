@@ -2,7 +2,7 @@
   stdenv, lib, cmake, extra-cmake-modules, fetchFromGitHub, qtbase, kdeFrameworks
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "plasma-theme-switcher";
   version = "0.1";
   dontWrapQtApps = true;
@@ -10,7 +10,7 @@ stdenv.mkDerivation rec {
   src = fetchFromGitHub {
     owner = "maldoinc";
     repo = "plasma-theme-switcher";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sdcJ6K5QmglJEDIEl4sd8x7DuCPCqMHRxdYbcToM46Q=";
   };
 
@@ -39,4 +39,4 @@ stdenv.mkDerivation rec {
     license = with licenses; [ gpl2Only ];
     maintainers = with maintainers; [ kevink ];
   };
-}
+})
