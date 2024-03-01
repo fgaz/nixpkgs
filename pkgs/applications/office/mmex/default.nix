@@ -15,14 +15,14 @@
 , darwin
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "money-manager-ex";
   version = "1.6.3";
 
   src = fetchFromGitHub {
     owner = "moneymanagerex";
     repo = "moneymanagerex";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     fetchSubmodules = true;
     hash = "sha256-TQgJ2Q4Z7+OtwuwkfPBgm2BmMKML9nmyFLSkmKJ1RE4=";
   };
@@ -75,4 +75,4 @@ stdenv.mkDerivation rec {
     platforms = with lib.platforms; unix;
     mainProgram = "mmex";
   };
-}
+})
