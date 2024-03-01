@@ -11,12 +11,12 @@
 , gnome
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "bluefish";
   version = "2.2.14";
 
   src = fetchurl {
-    url = "mirror://sourceforge/bluefish/bluefish-${version}.tar.bz2";
+    url = "mirror://sourceforge/bluefish/bluefish-${finalAttrs.version}.tar.bz2";
     sha256 = "sha256-IszfnOTlyWIQY+bPfXOr+wc2q3pyvOCG0Gxc9e4SXt4=";
   };
 
@@ -38,4 +38,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.all;
     mainProgram = "bluefish";
   };
-}
+})
