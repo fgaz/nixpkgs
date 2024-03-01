@@ -31,13 +31,13 @@ let
     sha256 = "0cpna0nxcd1dw3nnzli36nf9zj28d2g9jf5y0zl9j18lvanvniha";
   };
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = if withGui then "bitcoin" else "bitcoind";
   version = "26.0";
 
   src = fetchurl {
     urls = [
-      "https://bitcoincore.org/bin/bitcoin-core-${version}/bitcoin-${version}.tar.gz"
+      "https://bitcoincore.org/bin/bitcoin-core-${finalAttrs.version}/bitcoin-${finalAttrs.version}.tar.gz"
     ];
     # hash retrieved from signed SHA256SUMS
     sha256 = "ab1d99276e28db62d1d9f3901e85ac358d7f1ebcb942d348a9c4e46f0fcdc0a1";
@@ -79,7 +79,7 @@ stdenv.mkDerivation rec {
   configureFlags = [
     "--with-boost-libdir=${boost.out}/lib"
     "--disable-bench"
-  ] ++ lib.optionals (!doCheck) [
+  ] ++ lib.optionals (!finalAttrs.doCheck) [
     "--disable-tests"
     "--disable-gui-tests"
   ] ++ lib.optionals (!withWallet) [
@@ -120,4 +120,4 @@ stdenv.mkDerivation rec {
     license = licenses.mit;
     platforms = platforms.unix;
   };
-}
+})
