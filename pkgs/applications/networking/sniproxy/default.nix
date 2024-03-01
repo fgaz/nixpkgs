@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, autoreconfHook, gettext, libev, pcre, pkg-config, udns }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "sniproxy";
   version = "0.6.1";
 
   src = fetchFromGitHub {
     owner = "dlundquist";
     repo = "sniproxy";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-htM9CrzaGnn1dnsWQ+0V6N65Og7rsFob3BlSc4UGfFU=";
   };
 
@@ -23,4 +23,4 @@ stdenv.mkDerivation rec {
     mainProgram = "sniproxy";
   };
 
-}
+})
