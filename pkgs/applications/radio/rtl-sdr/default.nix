@@ -6,21 +6,21 @@
 , libusb1
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "rtl-sdr";
   version = "0.8.0";
 
   src = fetchFromGitHub {
     owner = "librtlsdr";
     repo = "librtlsdr";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-s03h+3EfC5c7yRYBM6aCRWtmstwRJWuBywuyVt+k/bk=";
   };
 
   postPatch = ''
     substituteInPlace CMakeLists.txt \
       --replace '/etc/udev/rules.d' "$out/etc/udev/rules.d" \
-      --replace "VERSION_INFO_PATCH_VERSION git" "VERSION_INFO_PATCH_VERSION ${lib.versions.patch version}"
+      --replace "VERSION_INFO_PATCH_VERSION git" "VERSION_INFO_PATCH_VERSION ${lib.versions.patch finalAttrs.version}"
 
     substituteInPlace rtl-sdr.rules \
       --replace 'MODE:="0666"' 'ENV{ID_SOFTWARE_RADIO}="1", MODE="0660", GROUP="plugdev"'
@@ -42,4 +42,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ bjornfor ];
     platforms = platforms.linux ++ platforms.darwin;
   };
-}
+})
