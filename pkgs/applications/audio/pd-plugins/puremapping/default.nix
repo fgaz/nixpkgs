@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, unzip, puredata }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "puremapping";
   version = "20160130";
 
   src = fetchurl {
-    url = "https://www.chnry.net/data/puremapping-${version}-generic.zip";
+    url = "https://www.chnry.net/data/puremapping-${finalAttrs.version}-generic.zip";
     name = "puremapping";
     sha256 = "1h7qgqd8srrxw2y1rkdw5js4k6f5vc8x6nlm2mq9mq9vjck7n1j7";
   };
@@ -29,4 +29,4 @@ stdenv.mkDerivation rec {
     maintainers = [ lib.maintainers.magnetophon ];
     platforms = lib.platforms.linux;
   };
-}
+})
