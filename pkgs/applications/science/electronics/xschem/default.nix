@@ -11,14 +11,14 @@
 , tk
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "xschem";
   version = "3.4.4";
 
   src = fetchFromGitHub {
     owner = "StefanSchippers";
     repo = "xschem";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-1jP1SJeq23XNkOQgcl2X+rBrlka4a04irmfhoKRM1j4=";
   };
 
@@ -44,4 +44,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ fbeffa ];
     platforms = platforms.all;
   };
-}
+})
