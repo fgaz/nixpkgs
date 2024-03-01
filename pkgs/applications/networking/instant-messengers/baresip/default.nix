@@ -26,13 +26,13 @@
 , cmake
 , dbusSupport ? true
 }:
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "3.8.1";
   pname = "baresip";
   src = fetchFromGitHub {
     owner = "baresip";
     repo = "baresip";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-39HRvRTyA0V8NKFUUpj7UGc01KVXULTE3HUd9Kh06bw=";
   };
   prePatch = lib.optionalString (!dbusSupport) ''
@@ -130,4 +130,4 @@ stdenv.mkDerivation rec {
     license = lib.licenses.bsd3;
     platforms = lib.platforms.unix;
   };
-}
+})
