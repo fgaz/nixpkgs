@@ -2,12 +2,12 @@
 , speex, flac
 , autoreconfHook }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "vorbis-tools";
   version = "1.4.2";
 
   src = fetchurl {
-    url = "http://downloads.xiph.org/releases/vorbis/vorbis-tools-${version}.tar.gz";
+    url = "http://downloads.xiph.org/releases/vorbis/vorbis-tools-${finalAttrs.version}.tar.gz";
     sha256 = "1c7h4ivgfdyygz2hyh6nfibxlkz8kdk868a576qkkjgj5gn78xyv";
   };
 
@@ -34,5 +34,5 @@ stdenv.mkDerivation rec {
     license = licenses.gpl2;
     platforms = platforms.all;
   };
-}
+})
 
