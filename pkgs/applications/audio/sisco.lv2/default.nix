@@ -20,7 +20,7 @@ let
     sha256 = "0gk16nrvnrffqqw0yd015kja9wkgbzvb648bl1pagriabhznhfxl";
   };
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "sisco.lv2";
   inherit version;
 
@@ -30,7 +30,7 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [ pkg-config ];
   buildInputs = [ lv2 pango cairo libjack2 libGLU libGL ];
 
-  postUnpack = "chmod u+w -R ${robtkName}-src; mv ${robtkName}-src/* ${sourceRoot}/robtk";
+  postUnpack = "chmod u+w -R ${robtkName}-src; mv ${robtkName}-src/* ${finalAttrs.sourceRoot}/robtk";
   sisco_VERSION = version;
   preConfigure = "makeFlagsArray=(PREFIX=$out)";
 
@@ -41,4 +41,4 @@ stdenv.mkDerivation rec {
     maintainers = [ ];
     platforms = platforms.linux;
   };
-}
+})
