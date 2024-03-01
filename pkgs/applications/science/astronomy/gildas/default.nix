@@ -6,7 +6,7 @@ let
   python3Env = python3.withPackages(ps: with ps; [ numpy setuptools ]);
 in
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   srcVersion = "aug23a";
   version = "20230801_a";
   pname = "gildas";
@@ -14,8 +14,8 @@ stdenv.mkDerivation rec {
   src = fetchurl {
     # For each new release, the upstream developers of Gildas move the
     # source code of the previous release to a different directory
-    urls = [ "http://www.iram.fr/~gildas/dist/gildas-src-${srcVersion}.tar.xz"
-      "http://www.iram.fr/~gildas/dist/archive/gildas/gildas-src-${srcVersion}.tar.xz" ];
+    urls = [ "http://www.iram.fr/~gildas/dist/gildas-src-${finalAttrs.srcVersion}.tar.xz"
+      "http://www.iram.fr/~gildas/dist/archive/gildas/gildas-src-${finalAttrs.srcVersion}.tar.xz" ];
     sha256 = "sha256-jlyv2K1V+510C4uLek4oofm13d40nGJ46wqjW+tjfq4=";
   };
 
@@ -42,9 +42,9 @@ stdenv.mkDerivation rec {
 
   postInstall=''
     mkdir -p $out/bin
-    cp -a ../gildas-exe-${srcVersion}/* $out
+    cp -a ../gildas-exe-${finalAttrs.srcVersion}/* $out
     mv $out/$GAG_EXEC_SYSTEM $out/libexec
-    for i in ${userExec} ; do
+    for i in ${finalAttrs.userExec} ; do
       cp admin/wrapper.sh $out/bin/$i
       chmod 755 $out/bin/$i
     done
@@ -69,4 +69,4 @@ stdenv.mkDerivation rec {
     broken = stdenv.isDarwin && stdenv.isAarch64;
   };
 
-}
+})
