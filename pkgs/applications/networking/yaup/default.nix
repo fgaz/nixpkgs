@@ -8,7 +8,7 @@
 , miniupnpc
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "yaup";
   version = "unstable-2019-10-16";
 
@@ -45,4 +45,4 @@ stdenv.mkDerivation rec {
     broken = stdenv.isDarwin;
     mainProgram = "yaup";
   };
-}
+})
