@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, xorg, cairo, lv2, pkg-config }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "bsequencer";
   version = "1.8.10";
 
   src = fetchFromGitHub {
     owner = "sjaehn";
     repo = "BSEQuencer";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-1PSICm5mw37nO3gkHA9MNUH+CFULeOZURjimYEA/dXA=";
   };
 
@@ -25,4 +25,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     license = licenses.gpl3;
   };
-}
+})
