@@ -16,14 +16,14 @@
 , wrapQtAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "CopyQ";
   version = "7.1.0";
 
   src = fetchFromGitHub {
     owner = "hluk";
     repo = "CopyQ";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-aAmpFKIIFZLPWUaOcf4V1d/wVQ7xRcnXFsqFjROsabg=";
   };
 
@@ -70,4 +70,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     mainProgram = "copyq";
   };
-}
+})
