@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, autoreconfHook, pkg-config, SDL2 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "lambda-delta";
   version = "0.98.3";
 
   src = fetchFromGitHub {
     owner = "dseagrav";
     repo = "ld";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "02m43fj9dzc1i1jl01qwnhjiq1rh03jw1xq59sx2h3bhn7dk941x";
   };
 
@@ -23,4 +23,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ siraben ];
     platforms = platforms.unix;
   };
-}
+})
