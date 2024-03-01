@@ -36,14 +36,14 @@ let
     )
     (lib.importJSON ./deps.json);
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "cudatext";
   version = "1.202.1";
 
   src = fetchFromGitHub {
     owner = "Alexey-T";
     repo = "CudaText";
-    rev = version;
+    rev = finalAttrs.version;
     hash = "sha256-ZFMO986D4RtrTnLFdcL0a2BNjcsB+9pIolylblku7j4=";
   };
 
@@ -64,7 +64,7 @@ stdenv.mkDerivation rec {
     ++ lib.optional (widgetset == "gtk3") gtk3
     ++ lib.optional (widgetset == "qt5") libqt5pas;
 
-  NIX_LDFLAGS = "--as-needed -rpath ${lib.makeLibraryPath buildInputs}";
+  NIX_LDFLAGS = "--as-needed -rpath ${lib.makeLibraryPath finalAttrs.buildInputs}";
 
   buildPhase = lib.concatStringsSep "\n" (lib.mapAttrsToList (name: dep: ''
     cp -r ${dep} ${name}
@@ -120,4 +120,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     mainProgram = "cudatext";
   };
-}
+})
