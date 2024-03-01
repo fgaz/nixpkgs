@@ -5,12 +5,12 @@
 , autoreconfHook, gtk-doc
 , portaudio, portmidi, fftw, wrapGAppsHook }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "denemo";
   version = "2.6.0";
 
   src = fetchurl {
-    url = "https://ftp.gnu.org/gnu/denemo/denemo-${version}.tar.gz";
+    url = "https://ftp.gnu.org/gnu/denemo/denemo-${finalAttrs.version}.tar.gz";
     sha256 = "sha256-S+WXDGmEf5fx+HYnXJdE5QNOfJg7EqEEX7IMI2SUtV0=";
   };
 
@@ -54,4 +54,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = [ maintainers.olynch ];
   };
-}
+})
