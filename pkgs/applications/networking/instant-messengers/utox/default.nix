@@ -2,7 +2,7 @@
 , libtoxcore, filter-audio, dbus, libvpx, libX11, openal, freetype, libv4l
 , libXrender, fontconfig, libXext, libXft, libsodium, libopus }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "utox";
 
   version = "0.18.1";
@@ -10,7 +10,7 @@ stdenv.mkDerivation rec {
   src = fetchFromGitHub {
     owner  = "uTox";
     repo   = "uTox";
-    rev    = "v${version}";
+    rev    = "v${finalAttrs.version}";
     sha256 = "sha256-DxnolxUTn+CL6TbZHKLHOUMTHhtTSWufzzOTRpKjOwc=";
     fetchSubmodules = true;
   };
@@ -27,7 +27,7 @@ stdenv.mkDerivation rec {
 
   cmakeFlags = [
     "-DENABLE_AUTOUPDATE=OFF"
-    "-DENABLE_TESTS=${if doCheck then "ON" else "OFF"}"
+    "-DENABLE_TESTS=${if finalAttrs.doCheck then "ON" else "OFF"}"
   ];
 
   doCheck = stdenv.hostPlatform == stdenv.buildPlatform;
@@ -40,4 +40,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ ];
     platforms = platforms.all;
   };
-}
+})
