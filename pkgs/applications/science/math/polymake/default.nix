@@ -26,14 +26,14 @@ in
 # don't have those packages. other missing optional dependencies:
 # javaview, libnormaliz, scip, soplex, jreality.
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "polymake";
   version = "4.11";
 
   src = fetchurl {
     # "The minimal version is a packager friendly version which omits
     # the bundled sources of cdd, lrs, libnormaliz, nauty and jReality."
-    url = "https://polymake.org/lib/exe/fetch.php/download/polymake-${version}-minimal.tar.bz2";
+    url = "https://polymake.org/lib/exe/fetch.php/download/polymake-${finalAttrs.version}-minimal.tar.bz2";
     sha256 = "sha256-XfbwrNcAEZvQxLV2Z2KFL/vYV3ZbXcyIgC/10hCK3SM=";
   };
 
@@ -80,4 +80,4 @@ stdenv.mkDerivation rec {
     maintainers = teams.sage.members;
     platforms = platforms.linux;
   };
-}
+})
