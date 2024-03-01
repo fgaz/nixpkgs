@@ -19,7 +19,7 @@
 , sqlite
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "valent";
   version = "unstable-2023-11-11";
 
@@ -63,9 +63,9 @@ stdenv.mkDerivation rec {
   meta = with lib; {
     description = "An implementation of the KDE Connect protocol, built on GNOME platform libraries";
     homepage = "https://github.com/andyholmes/valent/";
-    changelog = "https://github.com/andyholmes/valent/blob/${src.rev}/CHANGELOG.md";
+    changelog = "https://github.com/andyholmes/valent/blob/${finalAttrs.src.rev}/CHANGELOG.md";
     license = with licenses; [ gpl3Plus cc0 ];
     maintainers = with maintainers; [ federicoschonborn aleksana ];
     platforms = platforms.linux;
   };
-}
+})
