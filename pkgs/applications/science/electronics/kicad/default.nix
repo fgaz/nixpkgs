@@ -153,7 +153,7 @@ let
 
   inherit (lib) concatStringsSep flatten optionalString optionals;
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
 
   # Common libraries, referenced during runtime, via the wrapper.
   passthru.libraries = callPackages ./libraries.nix { inherit libSrc; };
@@ -167,9 +167,9 @@ stdenv.mkDerivation rec {
   };
 
   inherit pname;
-  version = if (stable) then kicadVersion else builtins.substring 0 10 src.src.rev;
+  version = if (stable) then kicadVersion else builtins.substring 0 10 finalAttrs.src.src.rev;
 
-  src = base;
+  src = finalAttrs.base;
   dontUnpack = true;
   dontConfigure = true;
   dontBuild = true;
@@ -187,15 +187,15 @@ stdenv.mkDerivation rec {
   # https://gitlab.com/kicad/code/kicad/-/issues/14792
   template_dir = symlinkJoin {
     name = "KiCad_template_dir";
-    paths = with passthru.libraries; [
+    paths = with finalAttrs.passthru.libraries; [
       "${templates}/share/kicad/template"
       "${footprints}/share/kicad/template"
       "${symbols}/share/kicad/template"
     ];
   };
   # We are emulating wrapGAppsHook, along with other variables to the wrapper
-  makeWrapperArgs = with passthru.libraries; [
-    "--prefix XDG_DATA_DIRS : ${base}/share"
+  makeWrapperArgs = with finalAttrs.passthru.libraries; [
+    "--prefix XDG_DATA_DIRS : ${finalAttrs.base}/share"
     "--prefix XDG_DATA_DIRS : ${hicolor-icon-theme}/share"
     "--prefix XDG_DATA_DIRS : ${gnome.adwaita-icon-theme}/share"
     "--prefix XDG_DATA_DIRS : ${gtk3}/share/gsettings-schemas/${gtk3.name}"
@@ -207,7 +207,7 @@ stdenv.mkDerivation rec {
     "--set-default MOZ_DBUS_REMOTE 1"
     "--set-default KICAD7_FOOTPRINT_DIR ${footprints}/share/kicad/footprints"
     "--set-default KICAD7_SYMBOL_DIR ${symbols}/share/kicad/symbols"
-    "--set-default KICAD7_TEMPLATE_DIR ${template_dir}"
+    "--set-default KICAD7_TEMPLATE_DIR ${finalAttrs.template_dir}"
   ]
   ++ optionals (addons != [ ]) (
     let stockDataPath = symlinkJoin {
@@ -242,17 +242,17 @@ stdenv.mkDerivation rec {
       (flatten [
         "runHook preInstall"
 
-        (optionalString (withScripting) "buildPythonPath \"${base} $pythonPath\" \n")
+        (optionalString (withScripting) "buildPythonPath \"${finalAttrs.base} $pythonPath\" \n")
 
         # wrap each of the directly usable tools
         (map
-          (tool: "makeWrapper ${base}/${bin}/${tool} $out/bin/${tool} $makeWrapperArgs"
+          (tool: "makeWrapper ${finalAttrs.base}/${bin}/${tool} $out/bin/${tool} $makeWrapperArgs"
             + optionalString (withScripting) " --set PYTHONPATH \"$program_PYTHONPATH\""
           )
           tools)
 
         # link in the CLI utils
-        (map (util: "ln -s ${base}/${bin}/${util} $out/bin/${util}") utils)
+        (map (util: "ln -s ${finalAttrs.base}/${bin}/${util} $out/bin/${util}") utils)
 
         "runHook postInstall"
       ])
@@ -261,10 +261,10 @@ stdenv.mkDerivation rec {
 
   postInstall = ''
     mkdir -p $out/share
-    ln -s ${base}/share/applications $out/share/applications
-    ln -s ${base}/share/icons $out/share/icons
-    ln -s ${base}/share/mime $out/share/mime
-    ln -s ${base}/share/metainfo $out/share/metainfo
+    ln -s ${finalAttrs.base}/share/applications $out/share/applications
+    ln -s ${finalAttrs.base}/share/icons $out/share/icons
+    ln -s ${finalAttrs.base}/share/mime $out/share/mime
+    ln -s ${finalAttrs.base}/share/metainfo $out/share/metainfo
   '';
 
   passthru.updateScript = {
@@ -289,4 +289,4 @@ stdenv.mkDerivation rec {
     broken = stdenv.isDarwin;
     mainProgram = "kicad";
   };
-}
+})
