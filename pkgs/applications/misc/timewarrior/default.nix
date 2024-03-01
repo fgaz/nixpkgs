@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, cmake, asciidoctor, installShellFiles }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "timewarrior";
   version = "1.7.1";
 
   src = fetchFromGitHub {
     owner = "GothenburgBitFactory";
     repo = "timewarrior";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-sc4AfdXLuA9evoGU6Z97+Hq7zj9nx093+nPALRkhziQ=";
     fetchSubmodules = true;
   };
@@ -29,5 +29,5 @@ stdenv.mkDerivation rec {
     mainProgram = "timew";
     platforms = platforms.linux ++ platforms.darwin;
   };
-}
+})
 
