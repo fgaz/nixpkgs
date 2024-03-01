@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, fetchpatch, cvs, zlib }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "cvsps";
   version = "2.1";
 
   src = fetchurl {
-    url = "mirror://debian/pool/main/c/cvsps/cvsps_${version}.orig.tar.gz";
+    url = "mirror://debian/pool/main/c/cvsps/cvsps_${finalAttrs.version}.orig.tar.gz";
     sha256 = "0nh7q7zcmagx0i63h6fqqkkq9i55k77myvb8h6jn2f266f5iklwi";
   };
 
@@ -59,4 +59,4 @@ stdenv.mkDerivation rec {
     platforms = lib.platforms.unix;
     mainProgram = "cvsps";
   };
-}
+})
