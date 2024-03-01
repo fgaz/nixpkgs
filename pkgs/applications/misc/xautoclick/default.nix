@@ -5,14 +5,14 @@
 , qtSupport ? true, qt5
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "xautoclick";
   version = "0.34";
 
   src = fetchFromGitHub {
     owner = "qarkai";
     repo = "xautoclick";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "GN3zI5LQnVmRC0KWffzUTHKrxcqnstiL55hopwTTwpE=";
   };
 
@@ -28,4 +28,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl2;
     platforms = platforms.linux;
   };
-}
+})
