@@ -1,12 +1,12 @@
 { lib, stdenv, fetchFromGitHub, fetchpatch }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "kakoune-unwrapped";
   version = "2023.08.05";
   src = fetchFromGitHub {
     repo = "kakoune";
     owner = "mawww";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-RR3kw39vEjsg+6cIY6cK2i3ecGHlr1yzuBKaDtGlOGo=";
   };
   patches = [
@@ -24,7 +24,7 @@ stdenv.mkDerivation rec {
   makeFlags = [ "debug=no" "PREFIX=${placeholder "out"}" ];
 
   preConfigure = ''
-    export version="v${version}"
+    export version="v${finalAttrs.version}"
   '';
 
   enableParallelBuilding = true;
@@ -51,4 +51,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ vrthra ];
     platforms = platforms.unix;
   };
-}
+})
