@@ -3,7 +3,7 @@
 , fetchpatch, darwin
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "telepathy-logger";
   version = "0.8.2";
 
@@ -46,4 +46,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ ];
     platforms = platforms.unix;
   };
-}
+})
