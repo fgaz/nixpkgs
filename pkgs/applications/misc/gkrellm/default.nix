@@ -15,12 +15,12 @@
 , wrapGAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gkrellm";
   version = "2.3.11";
 
   src = fetchurl {
-    url = "http://gkrellm.srcbox.net/releases/gkrellm-${version}.tar.bz2";
+    url = "http://gkrellm.srcbox.net/releases/gkrellm-${finalAttrs.version}.tar.bz2";
     sha256 = "01lccz4fga40isv09j8rjgr0qy10rff9vj042n6gi6gdv4z69q0y";
   };
 
@@ -73,4 +73,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ khumba ];
     platforms = platforms.linux;
   };
-}
+})
