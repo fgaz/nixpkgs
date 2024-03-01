@@ -3,12 +3,12 @@
 , pcre, python3, qtsvg, qttools, wrapQtAppsHook, desktopToDarwinBundle
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "pulseview";
   version = "0.4.2";
 
   src = fetchurl {
-    url = "https://sigrok.org/download/source/pulseview/pulseview-${version}.tar.gz";
+    url = "https://sigrok.org/download/source/pulseview/pulseview-${finalAttrs.version}.tar.gz";
     hash = "sha256-8EL3ej4bNb8wZmMw427Dj6uNJIw2k8N7fjXUAcO/q8s=";
   };
 
@@ -42,4 +42,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ bjornfor ];
     platforms = platforms.unix;
   };
-}
+})
