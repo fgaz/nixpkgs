@@ -2,13 +2,13 @@
 , withTLS ? true
 , withDocs ? true
 }:
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "libcoap";
   version = "4.3.4";
   src = fetchFromGitHub {
     repo = "libcoap";
     owner = "obgm";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     fetchSubmodules = true;
     sha256 = "sha256-x8r5fHY8J0NYE7nPSw/bPpK/iTLKioKpQKmVw73KOtg=";
   };
@@ -30,4 +30,4 @@ stdenv.mkDerivation rec {
     license = licenses.bsd2;
     maintainers = [ maintainers.kmein ];
   };
-}
+})
