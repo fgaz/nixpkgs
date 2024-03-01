@@ -4,14 +4,14 @@
 , cmake
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "uarmsolver";
   version = "0.2.6";
 
   src = fetchFromGitHub {
    owner = "firefly-cpp";
    repo = "uARMSolver";
-   rev = version;
+   rev = finalAttrs.version;
    sha256 = "sha256-E8hc7qoIDaNERMUhVlh+iBvQX1odzd/szeMSh8TCNFo=";
   };
 
@@ -28,4 +28,4 @@ stdenv.mkDerivation rec {
     platforms   = platforms.linux;
     maintainers = with maintainers; [ firefly-cpp ];
   };
-}
+})
