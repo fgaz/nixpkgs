@@ -1,6 +1,6 @@
 { lib, stdenv, fetchFromGitHub, perl }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "speedread";
   version = "unstable-2016-09-21";
 
@@ -25,9 +25,9 @@ stdenv.mkDerivation rec {
       reading points. This allows reading text at a much more rapid
       pace than usual as the eye can stay fixed on a single place.
     '';
-    homepage = src.meta.homepage;
+    homepage = finalAttrs.src.meta.homepage;
     license = licenses.mit;
     platforms = platforms.unix;
     maintainers = [ maintainers.oxij ];
   };
-}
+})
