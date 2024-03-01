@@ -1,11 +1,11 @@
 { stdenv, lib, fetchurl, ncurses }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "ht";
   version = "2.1.0";
 
   src = fetchurl {
-    url = "mirror://sourceforge/project/hte/ht-source/ht-${version}.tar.bz2";
+    url = "mirror://sourceforge/project/hte/ht-source/ht-${finalAttrs.version}.tar.bz2";
     sha256 = "0w2xnw3z9ws9qrdpb80q55h6ynhh3aziixcfn45x91bzrbifix9i";
   };
 
@@ -27,4 +27,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ ];
     mainProgram = "ht";
   };
-}
+})
