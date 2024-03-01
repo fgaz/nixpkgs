@@ -4,14 +4,14 @@
 , mpi
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "RAxML${lib.optionalString useMpi "-mpi"}";
   version = "8.2.13";
 
   src = fetchFromGitHub {
     owner = "stamatak";
     repo = "standard-RAxML";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-w+Eqi0GhVira1H6ZnMNeZGBMzDjiGT7JSFpQEVXONyk=";
   };
 
@@ -37,4 +37,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.unode ];
     platforms = [ "i686-linux" "x86_64-linux" ];
   };
-}
+})
