@@ -22,14 +22,14 @@
 let
   qtVersion = lib.versions.major qtbase.version;
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "mediaelch";
   version = "2.10.6";
 
   src = fetchFromGitHub {
     owner = "Komet";
     repo = "MediaElch";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-qc7HaCMAmALY9MoIKmaCWF0cnwBBFDAXwqiBzwzu2bU=";
     fetchSubmodules = true;
   };
@@ -74,4 +74,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ stunkymonkey ];
     platforms = platforms.linux;
   };
-}
+})
