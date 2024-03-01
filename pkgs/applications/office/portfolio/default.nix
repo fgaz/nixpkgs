@@ -25,12 +25,12 @@ let
 
   runtimeLibs = lib.makeLibraryPath [ gtk3 webkitgtk ];
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "PortfolioPerformance";
   version = "0.67.2";
 
   src = fetchurl {
-    url = "https://github.com/buchen/portfolio/releases/download/${version}/PortfolioPerformance-${version}-linux.gtk.x86_64.tar.gz";
+    url = "https://github.com/buchen/portfolio/releases/download/${finalAttrs.version}/PortfolioPerformance-${finalAttrs.version}-linux.gtk.x86_64.tar.gz";
     hash = "sha256-YmbnV5/wwaDiuDUTx00sIdbVgtqD8vtvpTNFxXutP3U=";
   };
 
@@ -77,4 +77,4 @@ stdenv.mkDerivation rec {
     mainProgram = "portfolio";
     platforms = [ "x86_64-linux" ];
   };
-}
+})
