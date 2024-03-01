@@ -1,6 +1,6 @@
 { stdenv, lib, fetchurl, meson, ninja, pkg-config, zathura_core, girara, libspectre, gettext }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "zathura-ps";
   version = "0.2.7";
 
@@ -25,5 +25,5 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = with maintainers; [ ];
   };
-}
+})
 
