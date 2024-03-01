@@ -4,12 +4,12 @@ assert (blas.isILP64 == lapack.isILP64 &&
         blas.isILP64 == arpack.isILP64 &&
         !blas.isILP64);
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "calculix";
   version = "2.19";
 
   src = fetchurl {
-    url = "http://www.dhondt.de/ccx_${version}.src.tar.bz2";
+    url = "http://www.dhondt.de/ccx_${finalAttrs.version}.src.tar.bz2";
     sha256 = "01vdy9sns58hkm39z6d0r5y7gzqf5z493d18jin9krqib1l6jnn7";
   };
 
@@ -31,7 +31,7 @@ stdenv.mkDerivation rec {
   '';
 
   installPhase = ''
-    install -Dm0755 ccx_${version} $out/bin/ccx
+    install -Dm0755 ccx_${finalAttrs.version} $out/bin/ccx
   '';
 
   meta = with lib; {
@@ -41,4 +41,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ gebner ];
     platforms = platforms.unix;
   };
-}
+})
