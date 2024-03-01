@@ -19,14 +19,14 @@
 , gettext
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "done";
   version = "0.2.0";
 
   src = fetchFromGitHub {
     owner = "done-devs";
     repo = "done";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-97bWBayEyhCMjTxxxFVdO8V2pBZuVzss1Tp9/TnfDB0=";
   };
 
@@ -69,8 +69,8 @@ stdenv.mkDerivation rec {
   meta = with lib; {
     description = "The ultimate task management solution for seamless organization and efficiency";
     homepage = "https://done.edfloreshz.dev/";
-    changelog = "https://github.com/done-devs/done/blob/${src.rev}/CHANGES.md";
+    changelog = "https://github.com/done-devs/done/blob/${finalAttrs.src.rev}/CHANGES.md";
     license = licenses.mpl20;
     maintainers = with maintainers; [ figsoda ];
   };
-}
+})
