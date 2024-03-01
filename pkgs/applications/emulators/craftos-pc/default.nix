@@ -31,7 +31,7 @@ let
   };
 in
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "craftos-pc";
   inherit version;
 
@@ -80,4 +80,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ siraben tomodachi94 ];
     mainProgram = "craftos";
   };
-}
+})
