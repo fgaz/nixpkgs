@@ -13,14 +13,14 @@
 , wrapGAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gpx-viewer";
   version = "0.5.0";
 
   src = fetchFromGitHub {
     owner = "DaveDavenport";
     repo = "gpx-viewer";
-    rev = version;
+    rev = finalAttrs.version;
     hash = "sha256-6AChX0UEIrQExaq3oo9Be5Sr13+POHFph7pZegqcjio=";
   };
 
@@ -52,9 +52,9 @@ stdenv.mkDerivation rec {
   meta = with lib; {
     homepage = "https://blog.sarine.nl/tag/gpxviewer/";
     description = "Simple tool to visualize tracks and waypoints stored in a gpx file";
-    changelog = "https://github.com/DaveDavenport/gpx-viewer/blob/${src.rev}/NEWS";
+    changelog = "https://github.com/DaveDavenport/gpx-viewer/blob/${finalAttrs.src.rev}/NEWS";
     platforms = with platforms; linux;
     license = licenses.gpl2Plus;
     maintainers = with maintainers; [ dotlambda ];
   };
-}
+})
