@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, makeWrapper, jre }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "revanced-cli";
   version = "4.4.0";
 
   src = fetchurl {
-    url = "https://github.com/revanced/revanced-cli/releases/download/v${version}/revanced-cli-${version}-all.jar";
+    url = "https://github.com/revanced/revanced-cli/releases/download/v${finalAttrs.version}/revanced-cli-${finalAttrs.version}-all.jar";
     hash = "sha256-ydP9iPClWNKlbBhsNC1bzqfJYRyit1WsxIgwbQQbgi8=";
   };
 
@@ -33,4 +33,4 @@ stdenv.mkDerivation rec {
     sourceProvenance = with sourceTypes; [ binaryBytecode ];
     maintainers = with maintainers; [ jopejoe1 ];
   };
-}
+})
