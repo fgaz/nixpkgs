@@ -2,14 +2,14 @@
 , gsettings-desktop-schemas, wrapGAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "vimb";
   version = "3.6.0";
 
   src = fetchFromGitHub {
     owner = "fanglingsu";
     repo = "vimb";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-Eq4riJSznKpkW9JJDnTCLxZ9oMJTmWkIoGphOiCcSAg=";
   };
 
@@ -35,4 +35,4 @@ stdenv.mkDerivation rec {
     maintainers = [];
     platforms = with lib.platforms; linux;
   };
-}
+})
