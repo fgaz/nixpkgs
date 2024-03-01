@@ -1,11 +1,11 @@
 { stdenv, lib, fetchzip, qtbase, qttools, cmake, sqlite, wrapQtAppsHook }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "tagainijisho";
   version = "1.2.2";
 
   src = fetchzip {
-    url = "https://github.com/Gnurou/tagainijisho/releases/download/${version}/tagainijisho-${version}.tar.gz";
+    url = "https://github.com/Gnurou/tagainijisho/releases/download/${finalAttrs.version}/tagainijisho-${finalAttrs.version}.tar.gz";
     hash = "sha256-CTDMoYGbVE4W0SDerW//aAdUVsySWFQycSy0I3a9+94=";
   };
 
@@ -28,4 +28,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ vbgl ];
   };
-}
+})
