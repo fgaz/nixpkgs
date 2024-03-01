@@ -1,12 +1,12 @@
 { lib, stdenv, fetchgit, ocamlPackages, autoreconfHook, libxml2, pkg-config, getopt }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "virt-top";
   version = "1.1.1";
 
   src = fetchgit {
     url = "git://git.annexia.org/virt-top.git";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-IKIkqzx7YWki0L6D5WbwQiVWJfDFGdI2nsGgg212CcE=";
   };
 
@@ -40,4 +40,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     mainProgram = "virt-top";
   };
-}
+})
