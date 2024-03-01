@@ -2,7 +2,7 @@
 , autoreconfHook, intltool, pkg-config
 , gtk3, libayatana-appindicator, xdotool, which, wrapGAppsHook }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "clipit";
   version = "1.4.5";
 
@@ -27,9 +27,9 @@ stdenv.mkDerivation rec {
 
   meta = with lib; {
     description = "Lightweight GTK Clipboard Manager";
-    inherit (src.meta) homepage;
+    inherit (finalAttrs.src.meta) homepage;
     license     = licenses.gpl3;
     platforms   = platforms.linux;
     maintainers = with maintainers; [ kamilchm ];
   };
-}
+})
