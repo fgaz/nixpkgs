@@ -3,12 +3,12 @@
 , CoreServices, CoreMIDI
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "snd";
   version = "24.0";
 
   src = fetchurl {
-    url = "mirror://sourceforge/snd/snd-${version}.tar.gz";
+    url = "mirror://sourceforge/snd/snd-${finalAttrs.version}.tar.gz";
     sha256 = "sha256-DU7AtPoLH+WXXsmree8GbHePvNYmPP7MxYSfhEzgOtU=";
   };
 
@@ -30,4 +30,4 @@ stdenv.mkDerivation rec {
     license = licenses.free;
     maintainers = with maintainers; [ ];
   };
-}
+})
