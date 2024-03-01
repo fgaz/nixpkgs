@@ -16,14 +16,14 @@ let
     rev = "v7.6";
     sha256 = "sha256-btg9DMdYg+C8h0H7MU+uoo2Kb4OeLHoxFYHAv7LbLBA=";
   };
-in stdenv.mkDerivation rec {
+in stdenv.mkDerivation (finalAttrs: {
   pname = "lazpaint";
   version = "7.2.2";
 
   src = fetchFromGitHub {
     owner = "bgrabitmap";
     repo = "lazpaint";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-J6s0GnGJ7twEYW5+B72bB3EX4AYvLnhSPLbdhZWzlkw=";
   };
 
@@ -31,7 +31,7 @@ in stdenv.mkDerivation rec {
 
   buildInputs = [ pango cairo glib atk gtk2 libX11 gdk-pixbuf ];
 
-  NIX_LDFLAGS = "--as-needed -rpath ${lib.makeLibraryPath buildInputs}";
+  NIX_LDFLAGS = "--as-needed -rpath ${lib.makeLibraryPath finalAttrs.buildInputs}";
 
   preConfigure = ''
     patchShebangs configure
@@ -70,4 +70,4 @@ in stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ ];
   };
-}
+})
