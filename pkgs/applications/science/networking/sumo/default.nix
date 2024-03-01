@@ -3,14 +3,14 @@
   libpng, libtiff, libxcrypt, openscenegraph , proj, python3,
   python3Packages, stdenv, swig, xercesc, xorg, zlib }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "sumo";
   version = "1.19.0";
 
   src = fetchFromGitHub {
     owner = "eclipse";
     repo = "sumo";
-    rev = "v${lib.replaceStrings ["."] ["_"] version}";
+    rev = "v${lib.replaceStrings ["."] ["_"] finalAttrs.version}";
     sha256 = "sha256-uB7Gy0uX3LsZDeeITyjl7DN76TFJQKgsQs4RoDVfSmY=";
     fetchSubmodules = true;
   };
@@ -66,4 +66,4 @@ stdenv.mkDerivation rec {
     license = licenses.epl20;
     maintainers = with maintainers; [ mtreca ];
   };
-}
+})
