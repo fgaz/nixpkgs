@@ -22,14 +22,14 @@
 , withWallet ? true
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = if withGui then "elements" else "elementsd";
   version = "23.2.1";
 
   src = fetchFromGitHub {
     owner = "ElementsProject";
     repo = "elements";
-    rev = "elements-${version}";
+    rev = "elements-${finalAttrs.version}";
     sha256 = "sha256-qHtSgfZGZ4Beu5fsJAOZm8ejj7wfHBbOS6WAjOrCuw4=";
   };
 
@@ -47,7 +47,7 @@ stdenv.mkDerivation rec {
   configureFlags = [
     "--with-boost-libdir=${boost.out}/lib"
     "--disable-bench"
-  ] ++ lib.optionals (!doCheck) [
+  ] ++ lib.optionals (!finalAttrs.doCheck) [
     "--disable-tests"
     "--disable-gui-tests"
   ] ++ lib.optionals (!withWallet) [
@@ -86,4 +86,4 @@ stdenv.mkDerivation rec {
     license = licenses.mit;
     platforms = platforms.unix;
   };
-}
+})
