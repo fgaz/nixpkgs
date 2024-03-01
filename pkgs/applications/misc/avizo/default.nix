@@ -18,14 +18,14 @@
 , brightnessctl
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "avizo";
   version = "1.2.1";
 
   src = fetchFromGitHub {
     owner = "misterdanb";
     repo = "avizo";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-ainU4nXWFp1udVujPHZUeWIfJE4RrjU1hn9J17UuuzU=";
   };
 
@@ -45,4 +45,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = [ maintainers.berbiche ];
   };
-}
+})
