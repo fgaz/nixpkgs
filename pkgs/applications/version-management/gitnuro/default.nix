@@ -7,12 +7,12 @@
 , jre
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gitnuro";
   version = "1.1.1";
 
   src = fetchurl {
-    url = "https://github.com/JetpackDuba/Gitnuro/releases/download/v${version}/Gitnuro-linux-${version}.jar";
+    url = "https://github.com/JetpackDuba/Gitnuro/releases/download/v${finalAttrs.version}/Gitnuro-linux-${finalAttrs.version}.jar";
     hash = "sha256-ugZBk/aQ2pjL9xY66g20MorAQ02GHIdJTv8ejadaBgY=";
   };
 
@@ -42,7 +42,7 @@ stdenv.mkDerivation rec {
       icon = "com.jetpackduba.Gitnuro";
       desktopName = "Gitnuro";
       categories = [ "Development" ];
-      comment = meta.description;
+      comment = finalAttrs.meta.description;
     })
   ];
 
@@ -54,4 +54,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ zendo ];
     mainProgram = "gitnuro";
   };
-}
+})
