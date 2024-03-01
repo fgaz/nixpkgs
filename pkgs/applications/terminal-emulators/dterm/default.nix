@@ -4,12 +4,12 @@
 , readline
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "dterm";
   version = "0.5";
 
   src = fetchurl {
-    url = "http://www.knossos.net.nz/downloads/dterm-${version}.tgz";
+    url = "http://www.knossos.net.nz/downloads/dterm-${finalAttrs.version}.tgz";
     hash = "sha256-lFM7558e7JZeWYhtXwCjXLZ1xdsdiUGfJTu3LxQKvds=";
   };
 
@@ -40,4 +40,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     mainProgram = "dterm";
   };
-}
+})
