@@ -24,14 +24,14 @@
 , AudioUnit
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "rnote";
   version = "0.9.4";
 
   src = fetchFromGitHub {
     owner = "flxzt";
     repo = "rnote";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-twysPSuCu++dVqoRKTNSvxwrO1ljUu4k2vPZEBkaj10=";
   };
 
@@ -86,10 +86,10 @@ stdenv.mkDerivation rec {
 
   meta = with lib; {
     homepage = "https://github.com/flxzt/rnote";
-    changelog = "https://github.com/flxzt/rnote/releases/tag/${src.rev}";
+    changelog = "https://github.com/flxzt/rnote/releases/tag/${finalAttrs.src.rev}";
     description = "Simple drawing application to create handwritten notes";
     license = licenses.gpl3Plus;
     maintainers = with maintainers; [ dotlambda gepbird yrd ];
     platforms = platforms.unix;
   };
-}
+})
