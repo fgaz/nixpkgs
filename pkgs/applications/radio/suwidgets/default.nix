@@ -8,7 +8,7 @@
 , fftwSinglePrec
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "suwidgets";
   version = "unstable-2022-04-03";
 
@@ -48,4 +48,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.all;
     maintainers = with maintainers; [ polygon oxapentane ];
   };
-}
+})
