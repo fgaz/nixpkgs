@@ -1,13 +1,13 @@
 { stdenv, lib, fetchFromGitHub, makeWrapper, git, gnupg, gawk }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "git-secret";
   version = "0.5.0";
 
   src = fetchFromGitHub {
     repo = "git-secret";
     owner = "sobolevn";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-Vdlv3H99BZcT1O66ZCpq5olENOaUSubx58B1PQ/OlMU=";
   };
 
@@ -31,4 +31,4 @@ stdenv.mkDerivation rec {
     platforms = lib.platforms.all;
     mainProgram = "git-secret";
   };
-}
+})
