@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, gtk2, libXft, intltool, automake, autoconf, libtool, pkg-config }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "pcmanx-gtk2";
   version = "1.3";
 
   src = fetchFromGitHub {
     owner = "pcman-bbs";
     repo = "pcmanx";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "0fbwd149wny67rfhczz4cbh713a1qnswjiz7b6c2bxfcwh51f9rc";
   };
 
@@ -27,4 +27,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.sifmelcara ];
     platforms = platforms.linux;
   };
-}
+})
