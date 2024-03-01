@@ -50,13 +50,13 @@ let
     sha256 = "0qfhbrzji05hh5kwgd1wvq2lbf81ylbi7v7aqk28aws27f8d2hk0";
   };
 
-  djv-deps = stdenv.mkDerivation rec {
+  djv-deps = stdenv.mkDerivation (finalAttrs: {
     pname = "djv-dependencies";
     version = djvVersion;
 
     src = djvSrc;
 
-    sourceRoot = "${src.name}/etc/SuperBuild";
+    sourceRoot = "${finalAttrs.src.name}/etc/SuperBuild";
 
     nativeBuildInputs = [ cmake ];
     buildInputs = [
@@ -100,7 +100,7 @@ let
 
     dontInstall = true;
     doCheck = true;
-  };
+  });
 
 in
 stdenv.mkDerivation rec {
