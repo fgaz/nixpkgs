@@ -1,11 +1,11 @@
 {lib, stdenv, fetchurl}:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "batik";
   version = "1.17";
 
   src = fetchurl {
-    url = "mirror://apache/xmlgraphics/batik/binaries/batik-bin-${version}.tar.gz";
+    url = "mirror://apache/xmlgraphics/batik/binaries/batik-bin-${finalAttrs.version}.tar.gz";
     sha256 = "sha256-sEJphF3grlwZCEt3gHHm4JF8RpvKKBLLvKXf2lu/dhA=";
   };
 
@@ -21,4 +21,4 @@ stdenv.mkDerivation rec {
     mkdir $out
     cp -r * $out/
   '';
-}
+})
