@@ -10,14 +10,14 @@
 , ncurses
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "0.7.29";
   pname = "pynac";
 
   src = fetchFromGitHub {
     owner = "pynac";
     repo = "pynac";
-    rev = "pynac-${version}";
+    rev = "pynac-${finalAttrs.version}";
     sha256 = "sha256-ocR7emXtKs+Xe2f6dh4xEDAacgiolY8mtlLnWnNBS8A=";
   };
 
@@ -57,4 +57,4 @@ stdenv.mkDerivation rec {
     maintainers = teams.sage.members;
     platforms   = platforms.unix;
   };
-}
+})
