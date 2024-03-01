@@ -12,14 +12,14 @@
 , wrapQtAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "focuswriter";
   version = "1.8.6";
 
   src = fetchFromGitHub {
     owner = "gottcode";
     repo = "focuswriter";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-z3DQaMgaTjzj2Oh1QI7A5v9G7GxjlGj/7jInxH/tDaY=";
   };
 
@@ -36,4 +36,4 @@ stdenv.mkDerivation rec {
     homepage = "https://gottcode.org/focuswriter/";
     mainProgram = "focuswriter";
   };
-}
+})
