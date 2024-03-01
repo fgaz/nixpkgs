@@ -27,14 +27,14 @@
 , vala
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gedit";
   version = "46.1";
 
   outputs = [ "out" "devdoc" ];
 
   src = fetchurl {
-    url = "mirror://gnome/sources/gedit/${lib.versions.major version}/gedit-${version}.tar.xz";
+    url = "mirror://gnome/sources/gedit/${lib.versions.major finalAttrs.version}/gedit-${finalAttrs.version}.tar.xz";
     sha256 = "oabjfwQXZd/3InofVXi29J+q8Bax4X6GnK9b+5TGqk4=";
   };
 
@@ -99,4 +99,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     mainProgram = "gedit";
   };
-}
+})
