@@ -19,14 +19,14 @@
 , wrapGAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "cqrlog";
   version = "2.5.2";
 
   src = fetchFromGitHub {
     owner = "ok2cqr";
     repo = "cqrlog";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "0zzcg0bl6mq4wfifj998x9x09w8sigbh46synpqx034fpr0swyhb";
   };
 
@@ -100,4 +100,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ shamilton ];
     platforms = platforms.linux;
   };
-}
+})
