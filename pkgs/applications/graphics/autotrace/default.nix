@@ -13,14 +13,14 @@
 , darwin
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "autotrace";
   version = "0.31.9";
 
   src = fetchFromGitHub {
     owner = "autotrace";
     repo = "autotrace";
-    rev = version;
+    rev = finalAttrs.version;
     hash = "sha256-8qqB6oKmbz95dNLtdLvb69cEj/P7TzdoKEyJ8+4ITzs=";
   };
 
@@ -56,4 +56,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ hodapp ];
     license = licenses.gpl2;
   };
-}
+})
