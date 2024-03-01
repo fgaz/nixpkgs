@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, fetchpatch, autoreconfHook, groff, pkg-config, guile, gtk2, flex, gawk, perl }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "geda";
   version = "1.10.2";
 
   src = fetchurl {
-    url = "http://ftp.geda-project.org/geda-gaf/stable/v${lib.versions.majorMinor version}/${version}/geda-gaf-${version}.tar.gz";
+    url = "http://ftp.geda-project.org/geda-gaf/stable/v${lib.versions.majorMinor finalAttrs.version}/${finalAttrs.version}/geda-gaf-${finalAttrs.version}.tar.gz";
     hash = "sha256-6GKrJBUoU4+jvuJzkmH1aAERArYMXjmi8DWGY8BCyKQ=";
   };
 
@@ -32,4 +32,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     license = licenses.gpl2;
   };
-}
+})
