@@ -1,12 +1,12 @@
 { lib, stdenv, python, perl, fetchFromGitHub, installShellFiles }:
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "git-publish";
   version = "1.8.1";
 
   src = fetchFromGitHub {
     owner = "stefanha";
     repo = "git-publish";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "14rz5kli6sz171cvdc46z3z0nnpd57rliwr6nn6vjjc49yyfwgl4";
   };
 
@@ -30,4 +30,4 @@ stdenv.mkDerivation rec {
     homepage = "https://github.com/stefanha/git-publish";
     mainProgram = "git-publish";
   };
-}
+})
