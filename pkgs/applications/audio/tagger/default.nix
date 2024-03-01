@@ -16,14 +16,14 @@
 , chromaprint # fpcalc
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "tagger";
   version = "2022.11.2";
 
   src = fetchFromGitHub {
     owner = "nlogozzo";
     repo = "NickvisionTagger";
-    rev = version;
+    rev = finalAttrs.version;
     hash = "sha256-gFpnTuUROYwPANrkD+g7a3FHSCVY2oB97flCK+LLowY=";
   };
 
@@ -64,4 +64,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ zendo ];
   };
-}
+})
