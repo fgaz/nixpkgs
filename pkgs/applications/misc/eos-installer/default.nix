@@ -3,14 +3,14 @@
 , coreutils, gnome-desktop, gnupg, gtk3, systemdMinimal, udisks
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "eos-installer";
   version = "5.1.0";
 
   src = fetchFromGitHub {
     owner = "endlessm";
     repo = "eos-installer";
-    rev = "Release_${version}";
+    rev = "Release_${finalAttrs.version}";
     sha256 = "BqvZglzFJabGXkI8hnLiw1r+CvM7kSKQPj8IKYBB6S4=";
     fetchSubmodules = true;
   };
@@ -50,4 +50,4 @@ stdenv.mkDerivation rec {
     mainProgram = "gnome-image-installer";
     platforms = platforms.linux;
   };
-}
+})
