@@ -24,7 +24,7 @@
 , wrapQtAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "nextcloud-client";
   version = "3.11.1";
 
@@ -33,7 +33,7 @@ stdenv.mkDerivation rec {
   src = fetchFromGitHub {
     owner = "nextcloud";
     repo = "desktop";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-gskFI6nxRb5lx6EwWuqghqg7NmCaj0JS7PpV0i4qUqQ=";
   };
 
@@ -100,4 +100,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     mainProgram = "nextcloud";
   };
-}
+})
