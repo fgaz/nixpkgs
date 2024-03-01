@@ -27,14 +27,14 @@ let
     rev = "3b66e59eaae85ebc583ce20baa3bdf27811349c4";
     hash = "sha256-wOZKqwYxJLllyxCr44rAcropKhohLUIVCtsR5tz9TRw=";
   };
-in stdenv.mkDerivation rec {
+in stdenv.mkDerivation (finalAttrs: {
   pname = "organicmaps";
   version = "2023.12.20-4";
 
   src = fetchFromGitHub {
     owner = "organicmaps";
     repo = "organicmaps";
-    rev = "${version}-android";
+    rev = "${finalAttrs.version}-android";
     hash = "sha256-9yQMBP5Jta6P/FmYL6Ek3MzU1DKtVEwlwYAkNxC5pn4=";
     fetchSubmodules = true;
   };
@@ -44,7 +44,7 @@ in stdenv.mkDerivation rec {
     echo "exit 0" > tools/unix/check_cert.sh
 
     # crude fix for https://github.com/organicmaps/organicmaps/issues/1862
-    echo "echo ${lib.replaceStrings ["." "-"] ["" ""] version}" > tools/unix/version.sh
+    echo "echo ${lib.replaceStrings ["." "-"] ["" ""] finalAttrs.version}" > tools/unix/version.sh
 
     # TODO use system boost instead, see https://github.com/organicmaps/organicmaps/issues/5345
     patchShebangs 3party/boost/tools/build/src/engine/build.sh
@@ -97,4 +97,4 @@ in stdenv.mkDerivation rec {
     platforms = platforms.all;
     mainProgram = "OMaps";
   };
-}
+})
