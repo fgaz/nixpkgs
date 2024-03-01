@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, gfortran, blas, lapack }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "JAGS";
   version = "4.3.2";
 
   src = fetchurl {
-    url = "mirror://sourceforge/mcmc-jags/JAGS-${version}.tar.gz";
+    url = "mirror://sourceforge/mcmc-jags/JAGS-${finalAttrs.version}.tar.gz";
     sha256 = "sha256-hx9VavQDp8LOag8C8Vz4WlcnY+CT0mZY66xVxKtHL8g=";
   };
 
@@ -22,4 +22,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.andres ];
     platforms = platforms.unix;
   };
-}
+})
