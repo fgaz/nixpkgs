@@ -1,19 +1,19 @@
 { lib, stdenv, fetchurl, cmake, gfortran, blas, lapack, mpi, petsc, python3 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "getdp";
   version = "3.5.0";
   src = fetchurl {
-    url = "http://getdp.info/src/getdp-${version}-source.tgz";
+    url = "http://getdp.info/src/getdp-${finalAttrs.version}-source.tgz";
     sha256 = "sha256-C/dsSe+puIQBpFfBL3qr2XWXrUnvYy0/uTCKqOpDe9w=";
   };
 
   inherit (petsc) mpiSupport;
   nativeBuildInputs = [ cmake python3 ];
   buildInputs = [ gfortran blas lapack petsc ]
-    ++ lib.optional mpiSupport mpi
+    ++ lib.optional finalAttrs.mpiSupport mpi
   ;
-  cmakeFlags = lib.optional mpiSupport "-DENABLE_MPI=1";
+  cmakeFlags = lib.optional finalAttrs.mpiSupport "-DENABLE_MPI=1";
 
   meta = with lib; {
     description = "A General Environment for the Treatment of Discrete Problems";
@@ -29,4 +29,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ ];
     platforms = platforms.linux;
   };
-}
+})
