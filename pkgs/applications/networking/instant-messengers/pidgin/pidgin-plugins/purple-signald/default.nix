@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, pidgin, json-glib, signald }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "purple-signald";
   version = "0.11.0";
 
   src = fetchFromGitHub {
     owner = "hoehermann";
     repo = "libpurple-signald";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-2LiHjVRBwdPbfravIVM+gvsh3Gq4bhjtRD6eWAbkWmc=";
     fetchSubmodules = true;
   };
@@ -29,4 +29,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ hufman ];
   };
-}
+})
