@@ -24,14 +24,14 @@
 let
   inherit (darwin.apple_sdk.frameworks) Cocoa;
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "lenmus";
   version = "6.0.1";
 
   src = fetchFromGitHub {
     owner = "lenmus";
     repo = "lenmus";
-    rev = "Release_${version}";
+    rev = "Release_${finalAttrs.version}";
     sha256 = "sha256-qegOAc6vs2+6VViDHVjv0q+qjLZyTT7yPF3hFpTt5zE=";
   };
 
@@ -95,4 +95,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers;  [ ramkromberg ];
     platforms = with platforms; unix;
   };
-}
+})
