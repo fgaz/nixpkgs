@@ -12,14 +12,14 @@
 , libirc
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "huggle";
   version = "3.4.12";
 
   src = fetchFromGitHub {
     owner = "huggle";
     repo = "huggle3-qt-lx";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "scNGmMVZ6z9FTQuZCdwRYk0WP5qKfdb/M9Co8TbiMDE=";
     fetchSubmodules = true;
   };
@@ -35,7 +35,7 @@ stdenv.mkDerivation rec {
   patches = [ ./00-remove-third-party.patch ./01-extensions.patch ];
   postPatch = ''
     rm -r src/3rd
-    echo ${version} > src/huggle_core/version.txt
+    echo ${finalAttrs.version} > src/huggle_core/version.txt
     substituteInPlace src/huggle_core/definitions_prod.hpp --subst-var out
     substituteInPlace src/CMakeLists.txt --replace '@libirc_includes@' '${libirc.out}'
   '';
@@ -61,4 +61,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.fee1-dead ];
     platforms = platforms.x86_64;
   };
-}
+})
