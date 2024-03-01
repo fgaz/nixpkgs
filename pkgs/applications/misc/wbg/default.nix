@@ -18,7 +18,7 @@
 , libwebp
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "wbg";
   version = "1.1.0";
 
@@ -26,7 +26,7 @@ stdenv.mkDerivation rec {
     domain = "codeberg.org";
     owner = "dnkl";
     repo = "wbg";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-JJIIqSc0qHgjtpGKai8p6vihXg16unsO7vW91pioAmc=";
   };
 
@@ -62,4 +62,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ AndersonTorres ];
     platforms = with platforms; linux;
   };
-}
+})
