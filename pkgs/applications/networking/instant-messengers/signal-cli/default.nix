@@ -1,12 +1,12 @@
 { stdenv, lib, fetchurl, makeWrapper, openjdk17_headless, libmatthew_java, dbus, dbus_java }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "signal-cli";
   version = "0.12.2";
 
   # Building from source would be preferred, but is much more involved.
   src = fetchurl {
-    url = "https://github.com/AsamK/signal-cli/releases/download/v${version}/signal-cli-${version}-Linux.tar.gz";
+    url = "https://github.com/AsamK/signal-cli/releases/download/v${finalAttrs.version}/signal-cli-${finalAttrs.version}-Linux.tar.gz";
     hash = "sha256-XhLTovymqjbc19X717WyNIi4jdpwnyttXGqkkHBFwQA=";
   };
 
@@ -52,4 +52,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ ivan ];
     platforms = platforms.all;
   };
-}
+})
