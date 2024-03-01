@@ -66,12 +66,12 @@ let
       pygobject3
     ] ++ inkex.propagatedBuildInputs);
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "inkscape";
   version = "1.3.2";
 
   src = fetchurl {
-    url = "https://inkscape.org/release/inkscape-${version}/source/archive/xz/dl/inkscape-${version}.tar.xz";
+    url = "https://inkscape.org/release/inkscape-${finalAttrs.version}/source/archive/xz/dl/inkscape-${finalAttrs.version}.tar.xz";
     sha256 = "sha256-29GETcRD/l4Q0+mohxROX7ciOFL/8ZHPte963qsOCGs=";
   };
 
@@ -186,4 +186,4 @@ stdenv.mkDerivation rec {
       If you want to import .eps files install ps2edit.
     '';
   };
-}
+})
