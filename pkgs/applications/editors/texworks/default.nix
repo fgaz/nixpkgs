@@ -12,14 +12,14 @@
 , withLua ? true, lua
 , withPython ? true, python3 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "texworks";
   version = "0.6.8";
 
   src = fetchFromGitHub {
     owner = "TeXworks";
     repo = "texworks";
-    rev = "release-${version}";
+    rev = "release-${finalAttrs.version}";
     sha256 = "sha256-X0VuXNghHoNsNNDfZJXXJ++nfUa5ofjW8rv3CHOUzxQ=";
   };
 
@@ -46,7 +46,7 @@ stdenv.mkDerivation rec {
     ++ lib.optional withPython "-DWITH_PYTHON=ON";
 
   meta = with lib; {
-    changelog = "https://github.com/TeXworks/texworks/blob/${src.rev}/NEWS";
+    changelog = "https://github.com/TeXworks/texworks/blob/${finalAttrs.src.rev}/NEWS";
     description = "Simple TeX front-end program inspired by TeXShop";
     homepage = "http://www.tug.org/texworks/";
     license = licenses.gpl2Plus;
@@ -54,4 +54,4 @@ stdenv.mkDerivation rec {
     platforms = with platforms; linux;
     mainProgram = "texworks";
   };
-}
+})
