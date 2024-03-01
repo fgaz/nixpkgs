@@ -12,14 +12,14 @@
 , zlib
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "osmium-tool";
   version = "1.16.0";
 
   src = fetchFromGitHub {
     owner = "osmcode";
     repo = "osmium-tool";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-DObqbzdPA4RlrlcZhqA0MQtWBE+D6GRD1pd9U4DARIk=";
   };
 
@@ -52,4 +52,4 @@ stdenv.mkDerivation rec {
     license = with licenses; [ gpl3Plus mit bsd3 ];
     maintainers = with maintainers; [ das-g ];
   };
-}
+})
