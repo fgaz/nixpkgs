@@ -10,12 +10,12 @@
 , libvterm
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "vwm";
   version = "2.1.3";
 
   src = fetchurl {
-    url = "mirror://sourceforge/vwm/vwm-${version}.tar.gz";
+    url = "mirror://sourceforge/vwm/vwm-${finalAttrs.version}.tar.gz";
     sha256 = "1r5wiqyfqwnyx7dfihixlnavbvg8rni36i4gq169aisjcg7laxaf";
   };
 
@@ -46,4 +46,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     mainProgram = "vwm";
   };
-}
+})
