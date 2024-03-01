@@ -46,14 +46,14 @@ let
     terminal = true;
   };
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "looking-glass-client";
   version = "B6";
 
   src = fetchFromGitHub {
     owner = "gnif";
     repo = "LookingGlass";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-6vYbNmNJBCoU23nVculac24tHqH7F4AZVftIjL93WJU=";
     fetchSubmodules = true;
   };
@@ -74,7 +74,7 @@ stdenv.mkDerivation rec {
 
 
   postUnpack = ''
-    echo ${src.rev} > source/VERSION
+    echo ${finalAttrs.src.rev} > source/VERSION
     export sourceRoot="source/client"
   '';
 
@@ -99,4 +99,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ alexbakker babbaj j-brn ];
     platforms = [ "x86_64-linux" ];
   };
-}
+})
