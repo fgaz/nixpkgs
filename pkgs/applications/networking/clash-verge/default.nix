@@ -11,12 +11,12 @@
 , libayatana-appindicator
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "clash-verge";
   version = "1.3.8";
 
   src = fetchurl {
-    url = "https://github.com/zzzgydi/clash-verge/releases/download/v${version}/clash-verge_${version}_amd64.deb";
+    url = "https://github.com/zzzgydi/clash-verge/releases/download/v${finalAttrs.version}/clash-verge_${finalAttrs.version}_amd64.deb";
     hash = "sha256-kOju4yaa+EKzFWDrk0iSJVoWkQMBjQG3hKLfAsqlsy8=";
   };
 
@@ -60,4 +60,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ zendo ];
     mainProgram = "clash-verge";
   };
-}
+})
