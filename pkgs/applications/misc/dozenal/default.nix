@@ -1,12 +1,12 @@
 { lib, stdenv, fetchFromGitHub, ncurses, hdate, lua5_2 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "12010904";
   pname = "dozenal";
   src = fetchFromGitHub {
     owner = "dgoodmaniii";
     repo = "dozenal";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "1ic63gpdda762x6ks3al71dwgmsy2isicqyr2935bd245jx8s209";
   };
   makeFlags = [
@@ -66,4 +66,4 @@ stdenv.mkDerivation rec {
     maintainers = with lib.maintainers; [ CharlesHD ];
     license = lib.licenses.gpl3;
   };
-}
+})
