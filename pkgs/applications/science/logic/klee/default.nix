@@ -43,14 +43,14 @@ let
   kleeuClibc = callPackage ./klee-uclibc.nix {
     inherit stdenv clang llvm extraKleeuClibcConfig debugRuntime runtimeAsserts;
   };
-in stdenv.mkDerivation rec {
+in stdenv.mkDerivation (finalAttrs: {
   pname = "klee";
   version = "3.0";
 
   src = fetchFromGitHub {
     owner = "klee";
     repo = "klee";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-y5lWmtIcLAthQ0oHYQNd+ir75YaxHZR9Jgiz+ZUFQjY=";
   };
 
@@ -131,4 +131,4 @@ in stdenv.mkDerivation rec {
     platforms = [ "x86_64-linux" ];
     maintainers = with maintainers; [ numinit ];
   };
-}
+})
