@@ -7,7 +7,7 @@
 , wrapQtAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "communi";
   version = "3.6.0";
 
@@ -75,4 +75,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ hrdinka ];
     platforms = platforms.all;
   };
-}
+})
