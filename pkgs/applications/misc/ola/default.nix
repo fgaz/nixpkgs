@@ -15,7 +15,7 @@
 , python3
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "ola";
   version = "unstable-2020-07-17";
 
@@ -55,4 +55,4 @@ stdenv.mkDerivation rec {
     license = with licenses; [ lgpl21 gpl2Plus ];
     platforms = platforms.all;
   };
-}
+})
