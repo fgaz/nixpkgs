@@ -1,6 +1,6 @@
 { lib, stdenv, fetchgit, ant, jdk, makeWrapper, jre, coreutils, which }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "projectlibre";
   version = "1.7.0";
 
@@ -18,7 +18,7 @@ stdenv.mkDerivation rec {
   '';
 
   resourcesPath = "openproj_build/resources";
-  desktopItem = "${resourcesPath}/projectlibre.desktop";
+  desktopItem = "${finalAttrs.resourcesPath}/projectlibre.desktop";
 
   installPhase = ''
     mkdir -p $out/share/{applications,projectlibre/samples,pixmaps,doc/projectlibre} $out/bin
@@ -42,4 +42,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.Mogria ];
     license = licenses.cpal10;
   };
-}
+})
