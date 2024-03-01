@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, cmake, wrapQtAppsHook, qtbase }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "QtRVSim";
   version = "0.9.6";
 
   src = fetchFromGitHub {
     owner = "cvut";
     repo = "qtrvsim";
-    rev = "refs/tags/v${version}";
+    rev = "refs/tags/v${finalAttrs.version}";
     sha256 = "sha256-cC3DvQj2VBnGad6ZDn3x4gHQfsPpySzjTi17PQoaxPU=";
   };
 
@@ -27,4 +27,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ jdupak ];
     mainProgram = "qtrvsim_gui";
   };
-}
+})
