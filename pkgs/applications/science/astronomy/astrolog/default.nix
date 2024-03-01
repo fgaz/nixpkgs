@@ -3,7 +3,7 @@
 , withEphemeris ? true
 , withMoonsEphemeris ? true
 }:
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "astrolog";
   version = "7.30";
 
@@ -61,4 +61,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     license = licenses.gpl2Plus;
   };
-}
+})
