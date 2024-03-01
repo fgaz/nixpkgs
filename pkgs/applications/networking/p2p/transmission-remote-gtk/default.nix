@@ -20,14 +20,14 @@
 , wrapGAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "transmission-remote-gtk";
   version = "1.6.0";
 
   src = fetchFromGitHub {
     owner = "transmission-remote-gtk";
     repo = "transmission-remote-gtk";
-    rev = "refs/tags/${version}";
+    rev = "refs/tags/${finalAttrs.version}";
     hash = "sha256-/syZI/5LhuYLvXrNknnpbGHEH0z5iHeye2YRNJFWZJ0=";
   };
 
@@ -65,4 +65,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ ehmry ];
     platforms = platforms.linux;
   };
-}
+})
