@@ -3,14 +3,14 @@
 , cmake, ninja, installShellFiles
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "ericw-tools";
   version = "0.18.1";
 
   src = fetchFromGitHub {
     owner = "ericwa";
     repo = "ericw-tools";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "11sap7qv0rlhw8q25azvhgjcwiql3zam09q0gim3i04cg6fkh0vp";
   };
   postUnpack = ''
@@ -53,4 +53,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ astro ];
     platforms = platforms.unix;
   };
-}
+})
