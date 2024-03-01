@@ -8,14 +8,14 @@
 , qttools
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "lpd8editor";
   version = "0.0.16";
 
   src = fetchFromGitHub {
     owner = "charlesfleche";
     repo = "lpd8editor";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-lRp2RhNiIf1VrryfKqYFSbKG3pktw3M7B49fXVoj+C8=";
   };
 
@@ -38,4 +38,4 @@ stdenv.mkDerivation rec {
     mainProgram = "lpd8editor";
     platforms = platforms.all;
   };
-}
+})
