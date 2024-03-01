@@ -13,14 +13,14 @@
 let
   inherit (darwin.apple_sdk_11_0.frameworks) Carbon CoreServices OpenCL;
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "xmrig";
   version = "6.21.0";
 
   src = fetchFromGitHub {
     owner = "xmrig";
     repo = "xmrig";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-7OHfFo8+MUNSI3vpOIODKQH41jmraHDJOyqfLBp/v9o=";
   };
 
@@ -70,4 +70,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = with maintainers; [ kim0 ];
   };
-}
+})
