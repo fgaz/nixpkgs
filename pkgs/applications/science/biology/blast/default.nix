@@ -1,15 +1,15 @@
 { lib, stdenv, buildPackages, fetchurl, zlib, bzip2, perl, cpio, gawk, coreutils, ApplicationServices }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "blast";
   version = "2.14.1";
 
   src = fetchurl {
-    url = "https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/${version}/ncbi-blast-${version}+-src.tar.gz";
+    url = "https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/${finalAttrs.version}/ncbi-blast-${finalAttrs.version}+-src.tar.gz";
     sha256 = "sha256-cSwtvfD7E8wcLU9O9d0c5LBsO1fpbf6o8j5umfWxZQ4=";
   };
 
-  sourceRoot = "ncbi-blast-${version}+-src/c++";
+  sourceRoot = "ncbi-blast-${finalAttrs.version}+-src/c++";
 
   configureFlags = [
     # With flat Makefile we can use all_projects in order not to build extra.
@@ -106,4 +106,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ luispedro ];
   };
-}
+})
