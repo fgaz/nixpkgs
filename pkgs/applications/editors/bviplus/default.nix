@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, fetchpatch, ncurses }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "bviplus";
   version = "1.0";
 
   src = fetchurl {
-    url = "mirror://sourceforge/project/bviplus/bviplus/${version}/bviplus-${version}.tgz";
+    url = "mirror://sourceforge/project/bviplus/bviplus/${finalAttrs.version}/bviplus-${finalAttrs.version}.tgz";
     sha256 = "08q2fdyiirabbsp5qpn3v8jxp4gd85l776w6gqvrbjwqa29a8arg";
   };
 
@@ -37,4 +37,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ ];
     mainProgram = "bviplus";
   };
-}
+})
