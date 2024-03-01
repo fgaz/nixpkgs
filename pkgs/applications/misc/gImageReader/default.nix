@@ -14,14 +14,14 @@ let
   variant = "gtk";
   pythonEnv = python3.withPackages( ps: with ps;[ pygobject3 ] );
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gImageReader";
   version = "3.4.1";
 
   src = fetchFromGitHub {
     owner= "manisandro";
     repo = "gImageReader";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-vW4FbviMHBiJ3rwJY/yS7JDOoCT72nGV6jEeo+k6ylU=";
   };
 
@@ -67,4 +67,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [teto];
     platforms = platforms.linux;
   };
-}
+})
