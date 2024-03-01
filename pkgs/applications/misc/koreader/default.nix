@@ -12,23 +12,23 @@
 let
   luajit_lua52 = luajit.override { enable52Compat = true; };
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "koreader";
   version = "2023.04";
 
 
   src = if stdenv.isAarch64 then fetchurl {
-    url = "https://github.com/koreader/koreader/releases/download/v${version}/koreader-${version}-arm64.deb";
+    url = "https://github.com/koreader/koreader/releases/download/v${finalAttrs.version}/koreader-${finalAttrs.version}-arm64.deb";
     sha256 = "sha256-uuspjno0750hQMIB5HEhbV63wCna2izKOHEGIg/X0bU=";
   } else fetchurl {
-    url = "https://github.com/koreader/koreader/releases/download/v${version}/koreader-${version}-amd64.deb";
+    url = "https://github.com/koreader/koreader/releases/download/v${finalAttrs.version}/koreader-${finalAttrs.version}-amd64.deb";
     sha256 = "sha256-tRUeRB1+UcWT49dchN0YDvd0L5n1YRdtMSFc8yy6m5o=";
   };
 
   src_repo = fetchFromGitHub {
     repo = "koreader";
     owner = "koreader";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     fetchSubmodules = true;
     sha256 = "sha256-c3j6hs0W0H2jDg6JVfU6ov7r7kucbqrQqf9PAvYBcJ0=";
   };
@@ -43,7 +43,7 @@ stdenv.mkDerivation rec {
     sdcv
     SDL2
   ];
-  unpackCmd = "dpkg-deb -x ${src} .";
+  unpackCmd = "dpkg-deb -x ${finalAttrs.src} .";
 
   dontConfigure = true;
   dontBuild = true;
@@ -54,7 +54,7 @@ stdenv.mkDerivation rec {
     ln -sf ${luajit_lua52}/bin/luajit $out/lib/koreader/luajit
     ln -sf ${sdcv}/bin/sdcv $out/lib/koreader/sdcv
     ln -sf ${gnutar}/bin/tar $out/lib/koreader/tar
-    find ${src_repo}/resources/fonts -type d -execdir cp -r '{}' $out/lib/koreader/fonts \;
+    find ${finalAttrs.src_repo}/resources/fonts -type d -execdir cp -r '{}' $out/lib/koreader/fonts \;
     find $out -xtype l -print -delete
     wrapProgram $out/bin/koreader --prefix LD_LIBRARY_PATH : ${
       lib.makeLibraryPath [ gtk3-x11 SDL2 glib ]
@@ -70,4 +70,4 @@ stdenv.mkDerivation rec {
     license = licenses.agpl3Only;
     maintainers = with maintainers; [ contrun neonfuz];
   };
-}
+})
