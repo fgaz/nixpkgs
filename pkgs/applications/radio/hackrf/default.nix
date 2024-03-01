@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, cmake, pkg-config, libusb1, fftwSinglePrec }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "hackrf";
   version = "2023.01.1";
 
   src = fetchFromGitHub {
     owner = "greatscottgadgets";
     repo = "hackrf";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-zvSSCNtqHOZVlrBggjgxEyUTqTiAIAhdzUkm4Pm9b3k=";
   };
 
@@ -39,4 +39,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.all;
     maintainers = with maintainers; [ sjmackenzie ];
   };
-}
+})
