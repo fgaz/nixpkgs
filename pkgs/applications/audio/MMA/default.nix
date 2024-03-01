@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, makeWrapper, python3, alsa-utils, timidity }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "21.09";
   pname = "mma";
 
   src = fetchurl {
-    url = "https://www.mellowood.ca/mma/mma-bin-${version}.tar.gz";
+    url = "https://www.mellowood.ca/mma/mma-bin-${finalAttrs.version}.tar.gz";
     sha256 = "sha256-5YzdaZ499AGiKAPUsgBCj3AQ9s0WlfgAbHhOQSOLLO8=";
   };
 
@@ -67,4 +67,4 @@ stdenv.mkDerivation rec {
     maintainers = [ lib.maintainers.magnetophon ];
     platforms = lib.platforms.linux;
   };
-}
+})
