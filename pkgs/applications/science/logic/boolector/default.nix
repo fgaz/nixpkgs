@@ -2,14 +2,14 @@
 , cmake, lingeling, btor2tools, gtest, gmp
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "boolector";
   version = "3.2.2";
 
   src = fetchFromGitHub {
     owner  = "boolector";
     repo   = "boolector";
-    rev    = version;
+    rev    = finalAttrs.version;
     sha256 = "1smcy6yp8wvnw2brgnv5bf40v87k4v4fbdbrhi7987vja632k50z";
   };
 
@@ -67,4 +67,4 @@ stdenv.mkDerivation rec {
     platforms   = with platforms; linux ++ darwin;
     maintainers = with maintainers; [ thoughtpolice ];
   };
-}
+})
