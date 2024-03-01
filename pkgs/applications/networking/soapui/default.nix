@@ -1,11 +1,11 @@
 { fetchurl, lib, stdenv, writeText, jdk, makeWrapper, nixosTests }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "soapui";
   version = "5.7.0";
 
   src = fetchurl {
-    url = "https://s3.amazonaws.com/downloads.eviware/soapuios/${version}/SoapUI-${version}-linux-bin.tar.gz";
+    url = "https://s3.amazonaws.com/downloads.eviware/soapuios/${finalAttrs.version}/SoapUI-${finalAttrs.version}-linux-bin.tar.gz";
     sha256 = "sha256-qzhy4yHmOk13dFUd2KEZhXtWY86QwyjJgYxx9GGoN80=";
   };
 
@@ -25,7 +25,7 @@ stdenv.mkDerivation rec {
 
   patches = [
     # Adjust java path to point to derivation paths
-    (writeText "soapui-${version}.patch" ''
+    (writeText "soapui-${finalAttrs.version}.patch" ''
       --- a/bin/soapui.sh
       +++ b/bin/soapui.sh
       @@ -50,7 +50,7 @@
@@ -57,4 +57,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.all;
     mainProgram = "soapui";
   };
-}
+})
