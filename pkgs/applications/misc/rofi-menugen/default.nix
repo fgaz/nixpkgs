@@ -1,6 +1,6 @@
 { lib, stdenv, fetchFromGitHub, rofi, gnused }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "rofi-menugen";
   version = "unstable-2015-12-28";
 
@@ -29,4 +29,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ ];
     platforms = platforms.all;
   };
-}
+})
