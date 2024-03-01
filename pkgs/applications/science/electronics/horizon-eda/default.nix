@@ -10,7 +10,7 @@
 let
   base = callPackage ./base.nix { };
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   inherit (base) pname version src meta CASROOT;
 
   # provide base for python module
@@ -35,4 +35,4 @@ stdenv.mkDerivation rec {
   ];
 
   enableParallelBuilding = true;
-}
+})
