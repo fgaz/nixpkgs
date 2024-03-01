@@ -5,14 +5,14 @@
 , withContrib ? true
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "20231221";
   pname = "neomutt";
 
   src = fetchFromGitHub {
     owner  = "neomutt";
     repo   = "neomutt";
-    rev    = version;
+    rev    = finalAttrs.version;
     sha256 = "sha256-IXly2N/DD2+XBXVIXJw1sE/0eJwbUaONDNRMi7n1T44=";
   };
 
@@ -73,12 +73,12 @@ stdenv.mkDerivation rec {
   ''
   # https://github.com/neomutt/neomutt-contrib
   # Contains vim-keys, keybindings presets and more.
-  + lib.optionalString withContrib "${lib.getExe lndir} ${passthru.contrib} $out/share/doc/neomutt";
+  + lib.optionalString withContrib "${lib.getExe lndir} ${finalAttrs.passthru.contrib} $out/share/doc/neomutt";
 
   doCheck = true;
 
   preCheck = ''
-    cp -r ${passthru.test-files} $(pwd)/test-files
+    cp -r ${finalAttrs.passthru.test-files} $(pwd)/test-files
     chmod -R +w test-files
     (cd test-files && ./setup.sh)
 
@@ -110,4 +110,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ erikryb vrthra ma27 raitobezarius ];
     platforms   = platforms.unix;
   };
-}
+})
