@@ -24,14 +24,14 @@ let
     categories = [ "Graphics" "Education" "Science" "Chemistry" ];
   };
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "16.1.51";
   pname = "jmol";
 
   src = let
-    baseVersion = "${lib.versions.major version}.${lib.versions.minor version}";
+    baseVersion = "${lib.versions.major finalAttrs.version}.${lib.versions.minor finalAttrs.version}";
   in fetchurl {
-    url = "mirror://sourceforge/jmol/Jmol/Version%20${baseVersion}/Jmol%20${version}/Jmol-${version}-binary.tar.gz";
+    url = "mirror://sourceforge/jmol/Jmol/Version%20${baseVersion}/Jmol%20${finalAttrs.version}/Jmol-${finalAttrs.version}-binary.tar.gz";
     hash = "sha256-7YOBpUeGutFPbMlQ1NnJ6BNyLbw54Meezwfs6mL71BQ=";
   };
 
@@ -59,4 +59,4 @@ stdenv.mkDerivation rec {
      platforms = platforms.all;
      maintainers = with maintainers; [ mounium ] ++ teams.sage.members;
   };
-}
+})
