@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, pkg-config, pidgin, json-glib }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "pidgin-skypeweb";
   version = "1.7";
 
   src = fetchFromGitHub {
     owner = "EionRobb";
     repo = "skype4pidgin";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "11snyrjhm58gjvdmr5h5ajii3ah4a7c8zw3cavjv9xnnwrpfm5rb";
   };
 
@@ -28,4 +28,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ ];
   };
-}
+})
