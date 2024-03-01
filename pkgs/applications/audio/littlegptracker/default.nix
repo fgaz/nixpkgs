@@ -6,7 +6,7 @@
 , Foundation
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "littlegptracker";
   version = "unstable-2020-11-26";
 
@@ -71,4 +71,4 @@ stdenv.mkDerivation rec {
     # https://github.com/NixOS/nixpkgs/pull/91766#issuecomment-688751821
     broken = stdenv.isDarwin;
   };
-}
+})
