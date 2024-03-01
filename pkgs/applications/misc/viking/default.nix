@@ -13,12 +13,12 @@
 , withRealtimeGPSTracking ? (!stdenv.isDarwin), gpsd
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "viking";
   version = "1.10";
 
   src = fetchurl {
-    url = "mirror://sourceforge/viking/viking-${version}.tar.bz2";
+    url = "mirror://sourceforge/viking/viking-${finalAttrs.version}.tar.bz2";
     sha256 = "sha256-lFXIlfmLwT3iS9ayNM0PHV7NwbBotMvG62ZE9hJuRaw=";
   };
 
@@ -78,4 +78,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ pSub sikmir ];
     platforms = with platforms; unix;
   };
-}
+})
