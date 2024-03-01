@@ -74,21 +74,21 @@ let
       hash = "sha256-L0DH1GJZ/3vatQAU/KZj/2xTKE6Fwcw9eQYzLdqX2N4=";
     };
 
-    tmd = stdenv.mkDerivation rec {
+    tmd = stdenv.mkDerivation (finalAttrs: {
       name = "TriangleMeshDistance";
 
       src = fetchFromGitHub {
         owner = "InteractiveComputerGraphics";
-        repo = name;
+        repo = finalAttrs.name;
         rev = "e55a15c20551f36242fd6368df099a99de71d43a";
         hash = "sha256-vj6TMMT8mp7ciLa5nzVAhMWPcAHXq+ZwHlWsRA3uCmg=";
       };
 
       installPhase = ''
         mkdir -p $out/include/tmd
-        cp ${name}/include/tmd/${name}.h $out/include/tmd/
+        cp ${finalAttrs.name}/include/tmd/${finalAttrs.name}.h $out/include/tmd/
       '';
-    };
+    });
 
     sdflib = stdenv.mkDerivation rec {
       name = "SdfLib";
