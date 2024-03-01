@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, ruby, makeWrapper, git }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "svn2git";
   version = "2.4.0";
 
   src = fetchFromGitHub {
     owner = "nirvdrum";
     repo = "svn2git";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-w649l/WO68vYYxZOBKzI8XhGFkaSwWx/O3oVOtnGg6w=";
   };
 
@@ -36,4 +36,4 @@ stdenv.mkDerivation rec {
     platforms = lib.platforms.unix;
     mainProgram = "svn2git";
   };
-}
+})
