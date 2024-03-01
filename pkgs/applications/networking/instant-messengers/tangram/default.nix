@@ -23,14 +23,14 @@
 , wrapGAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "tangram";
   version = "3.0";
 
   src = fetchFromGitHub {
     owner = "sonnyp";
     repo = "Tangram";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-6QOkvsYFgFFyxnDlA5Xpl3FnsSZOj9ooehCPOmpKe8M=";
     fetchSubmodules = true;
   };
@@ -87,4 +87,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ austinbutler chuangzhu ];
   };
-}
+})
