@@ -1,7 +1,7 @@
 { stdenv, lib, fetchFromGitHub, fftw
 , qtbase, qmake, wrapQtAppsHook }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "smartdeblur";
   version = "unstable-2018-10-29";
 
@@ -12,7 +12,7 @@ stdenv.mkDerivation rec {
     sha256 = "151vdd5ld0clw0vgp0fvp2gp2ybwpx9g43dad9fvbvwkg60izs87";
   };
 
-  sourceRoot = "${src.name}/src";
+  sourceRoot = "${finalAttrs.src.name}/src";
 
   nativeBuildInputs = [ qmake wrapQtAppsHook ];
   buildInputs = [ qtbase fftw ];
@@ -32,4 +32,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ ];
     platforms = platforms.linux;
   };
-}
+})
