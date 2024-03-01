@@ -23,14 +23,14 @@
 , CoreMedia
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "freedv";
   version = "1.9.7.2";
 
   src = fetchFromGitHub {
     owner = "drowe67";
     repo = "freedv-gui";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-JbLP65fC6uHrHXpSUwtgYHB+VLfheo5RU3C44lx8QlQ=";
   };
 
@@ -93,4 +93,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ mvs wegank ];
     platforms = platforms.unix;
   };
-}
+})
