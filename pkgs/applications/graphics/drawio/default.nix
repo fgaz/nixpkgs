@@ -11,20 +11,20 @@
 , electron
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "drawio";
   version = "22.1.18";
 
   src = fetchFromGitHub {
     owner = "jgraph";
     repo = "drawio-desktop";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     fetchSubmodules = true;
     hash = "sha256-qOZm7XbF8QOx5rD5EJY0lJhaq2Yhp/nppOA4BIWheyE=";
   };
 
   offlineCache = fetchYarnDeps {
-    yarnLock = src + "/yarn.lock";
+    yarnLock = finalAttrs.src + "/yarn.lock";
     hash = "sha256-TwI3NCIn5NnKXuwW5dBl4q6Ma5rZR7NVNb5hoKbmNLM=";
   };
 
@@ -113,4 +113,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ qyliss darkonion0 ];
     platforms = platforms.darwin ++ platforms.linux;
   };
-}
+})
