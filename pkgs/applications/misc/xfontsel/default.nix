@@ -4,12 +4,12 @@
 
 { lib, stdenv, fetchurl, makeWrapper, xorg, pkg-config }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "xfontsel";
   version = "1.0.6";
 
   src = fetchurl {
-    url = "mirror://xorg/individual/app/xfontsel-${version}.tar.bz2";
+    url = "mirror://xorg/individual/app/xfontsel-${finalAttrs.version}.tar.bz2";
     sha256 = "0700lf6hx7dg88wq1yll7zjvf9gbwh06xff20yffkxb289y0pai5";
   };
 
@@ -36,4 +36,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ viric ];
     platforms = platforms.unix;
   };
-}
+})
