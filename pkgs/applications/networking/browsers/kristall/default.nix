@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, wrapQtAppsHook, qmake, qtmultimedia }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "kristall";
   version = "0.3";
 
   src = fetchFromGitHub {
     owner = "MasterQ32";
     repo = "kristall";
-    rev = "V${version}";
+    rev = "V${finalAttrs.version}";
     sha256 = "07nf7w6ilzs5g6isnvsmhh4qa1zsprgjyf0zy7rhpx4ikkj8c8zq";
   };
 
@@ -41,4 +41,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl3Only;
     inherit (qtmultimedia.meta) platforms;
   };
-}
+})
