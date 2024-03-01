@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "your-editor";
   version = "1506";
 
   src = fetchFromGitHub {
     owner = "your-editor";
     repo = "yed";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-QmUquXoDGhoan+Y1kdkTirdkIvYPBkeAEkMLkaE9QKk=";
   };
 
@@ -27,4 +27,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ uniquepointer ];
     mainProgram = "yed";
   };
-}
+})
