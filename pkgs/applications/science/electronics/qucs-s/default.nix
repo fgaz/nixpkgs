@@ -16,14 +16,14 @@
 , kernels ? [ ngspice ]
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "qucs-s";
   version = "2.1.0";
 
   src = fetchFromGitHub {
     owner = "ra3xdh";
     repo = "qucs_s";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-C7TLOuC0CHredDiWFIAFmOlV8ivX0j4bs3b8IB8FsqE=";
   };
 
@@ -51,4 +51,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ mazurel kashw2 ];
     platforms = with platforms; linux;
   };
-}
+})
