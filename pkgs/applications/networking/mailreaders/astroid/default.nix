@@ -9,14 +9,14 @@
 , extraPythonPackages ? []
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "astroid";
   version = "0.16";
 
   src = fetchFromGitHub {
     owner = "astroidmail";
     repo = "astroid";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-6xQniOLNUk8tDkooDN3Tp6sb43GqoynO6+fN9yhNqZ4=";
   };
 
@@ -62,4 +62,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl3Plus;
     platforms = platforms.linux;
   };
-}
+})
