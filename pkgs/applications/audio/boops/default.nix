@@ -1,13 +1,13 @@
 { stdenv, lib, fetchFromGitHub, xorg, cairo, lv2, libsndfile, pkg-config }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "boops";
   version = "1.8.2";
 
   src = fetchFromGitHub {
     owner = "sjaehn";
     repo = "BOops";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "0nvpawk58g189z96xnjs4pyri5az3ckdi9mhi0i9s0a7k4gdkarr";
   };
 
@@ -25,4 +25,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     license = licenses.gpl3Plus;
   };
-}
+})
