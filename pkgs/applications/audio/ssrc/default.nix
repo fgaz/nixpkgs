@@ -1,6 +1,6 @@
 { lib, stdenv, fetchFromGitHub }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "ssrc";
   version = "1.33";
 
@@ -38,4 +38,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ leenaars];
     platforms = platforms.linux;
   };
-}
+})
