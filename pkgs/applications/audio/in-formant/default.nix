@@ -19,7 +19,7 @@
 , tomlplusplus
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "in-formant";
   version = "unstable-2022-09-15";
 
@@ -68,4 +68,4 @@ stdenv.mkDerivation rec {
     platforms = [ "x86_64-linux" ];
     maintainers = with maintainers; [ ckie ];
   };
-}
+})
