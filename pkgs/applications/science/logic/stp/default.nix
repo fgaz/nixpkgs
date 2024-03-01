@@ -1,14 +1,14 @@
 { lib, stdenv, cmake, boost, bison, flex, fetchFromGitHub, perl
 , python3, python3Packages, zlib, minisat, cryptominisat }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "stp";
   version = "2.3.3";
 
   src = fetchFromGitHub {
     owner = "stp";
     repo = "stp";
-    rev    = version;
+    rev    = finalAttrs.version;
     sha256 = "1yg2v4wmswh1sigk47drwsxyayr472mf4i47lqmlcgn9hhbx1q87";
   };
 
@@ -30,4 +30,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     license = licenses.mit;
   };
-}
+})
