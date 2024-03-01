@@ -38,14 +38,14 @@
 , zita-convolver
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "easyeffects";
   version = "7.1.3";
 
   src = fetchFromGitHub {
     owner = "wwmm";
     repo = "easyeffects";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-OJy8HhojfpUwWo3zg+FgdFI4pMzWA61VMsdPE03MfeE=";
   };
 
@@ -116,4 +116,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     mainProgram = "easyeffects";
   };
-}
+})
