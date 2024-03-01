@@ -1,14 +1,14 @@
 { stdenv, lib, fetchFromGitHub, pkg-config, cmake, libeb, lzo
 , qtmultimedia, qttools, qtwebengine, wrapQtAppsHook }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "qolibri";
   version = "2.1.4";
 
   src = fetchFromGitHub {
     owner = "ludios";
     repo = "qolibri";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "jyLF1MKDVH0Lt8lw+O93b+LQ4J+s42O3hebthJk83hg=";
   };
 
@@ -28,4 +28,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ ];
     license = licenses.gpl2;
   };
-}
+})
