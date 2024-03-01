@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "tthsum";
   version = "1.3.2";
 
   src = fetchurl {
-    url = "http://tthsum.devs.nu/pkg/tthsum-${version}.tar.bz2";
+    url = "http://tthsum.devs.nu/pkg/tthsum-${finalAttrs.version}.tar.bz2";
     sha256 = "0z6jq8lbg9rasv98kxfs56936dgpgzsg3yc9k52878qfw1l2bp59";
   };
 
@@ -39,4 +39,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.ebzzry ];
     platforms = platforms.unix;
   };
-}
+})
