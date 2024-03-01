@@ -1,13 +1,13 @@
 { lib, stdenv, fetchurl, jre, makeWrapper }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "bfg-repo-cleaner";
   version = "1.13.0";
 
-  jarName = "bfg-${version}.jar";
+  jarName = "bfg-${finalAttrs.version}.jar";
 
   src = fetchurl {
-    url = "mirror://maven/com/madgag/bfg/${version}/${jarName}";
+    url = "mirror://maven/com/madgag/bfg/${finalAttrs.version}/${finalAttrs.jarName}";
     sha256 = "1kn84rsvms1v5l1j2xgrk7dc7mnsmxkc6sqd94mnim22vnwvl8mz";
   };
 
@@ -45,4 +45,4 @@ stdenv.mkDerivation rec {
     downloadPage = "https://mvnrepository.com/artifact/com.madgag/bfg/${version}";
   };
 
-}
+})
