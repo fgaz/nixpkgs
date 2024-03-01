@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, SDL_compat, libX11, libXext }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "rvvm";
   version = "0.5";
 
   src = fetchFromGitHub {
     owner = "LekKit";
     repo = "RVVM";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-1wAKijRYB0FGBe4cSHUynkO4ePVG4QvVIgSoWzNbqtE=";
   };
 
@@ -27,4 +27,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ ];
     mainProgram = "rvvm";
   };
-}
+})
