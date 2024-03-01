@@ -74,14 +74,14 @@ let
   inherit (lib) optionals;
 
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "freerdp";
   version = "2.11.5";
 
   src = fetchFromGitHub {
     owner = "FreeRDP";
     repo = "FreeRDP";
-    rev = version;
+    rev = finalAttrs.version;
     hash = "sha256-WyYBIiIQNDHydJqU3jWNItJU2/sYnRpGHCXE9Xhom5M=";
   };
 
@@ -209,4 +209,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ peterhoeg lheckemann ];
     platforms = platforms.unix;
   };
-}
+})
