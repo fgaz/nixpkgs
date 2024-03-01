@@ -9,12 +9,12 @@
 , gnuplot
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "tsung";
   version = "1.8.0";
 
   src = fetchurl {
-    url = "http://tsung.erlang-projects.org/dist/tsung-${version}.tar.gz";
+    url = "http://tsung.erlang-projects.org/dist/tsung-${finalAttrs.version}.tar.gz";
     hash = "sha256-kehkMCYBfj0AiKZxD7EcT2F0d+gm6+TF/lhqpjFH/JI=";
   };
 
@@ -57,4 +57,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ uskudnik ];
     platforms = platforms.unix;
   };
-}
+})
