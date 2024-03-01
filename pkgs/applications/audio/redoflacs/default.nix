@@ -7,7 +7,7 @@
 , sox
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "redoflacs";
   version = "0.30.20190903";
 
@@ -39,9 +39,9 @@ stdenv.mkDerivation rec {
 
   meta = with lib; {
     description = "Parallel BASH commandline FLAC compressor, verifier, organizer, analyzer, and retagger";
-    homepage = src.meta.homepage;
+    homepage = finalAttrs.src.meta.homepage;
     license = licenses.gpl2;
     maintainers = with maintainers; [ peterhoeg ];
     platforms = platforms.all;
   };
-}
+})
