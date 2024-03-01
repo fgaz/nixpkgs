@@ -1,13 +1,13 @@
 { stdenv, lib, fetchFromGitHub, jq, nix, makeWrapper }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "terranix";
   version = "2.7.0";
 
   src = fetchFromGitHub {
     owner = "mrVanDalo";
     repo = "terranix";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-xiUfVD6rtsVWFotVtUW3Q1nQh4obKzgvpN1wqZuGXvM=";
   };
 
@@ -28,4 +28,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = with maintainers; [ mrVanDalo ];
   };
-}
+})
