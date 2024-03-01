@@ -1,6 +1,6 @@
 { lib, stdenv, fetchFromGitHub, coreutils, git, gnugrep, gnused, makeWrapper, inotify-tools }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "git-sync";
   version = "unstable-2022-03-20";
 
@@ -29,7 +29,7 @@ stdenv.mkDerivation rec {
   ] ++ lib.optionals stdenv.isLinux [ inotify-tools ]);
 
   postFixup = ''
-    wrap_path="${wrapperPath}":$out/bin
+    wrap_path="${finalAttrs.wrapperPath}":$out/bin
 
     wrapProgram $out/bin/git-sync \
       --prefix PATH : $wrap_path
@@ -45,4 +45,4 @@ stdenv.mkDerivation rec {
     license = lib.licenses.cc0;
     platforms = with lib.platforms; unix;
   };
-}
+})
