@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, libX11, libXinerama, libXft, zlib, patches ? null }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "dmenu";
   version = "5.2";
 
   src = fetchurl {
-    url = "https://dl.suckless.org/tools/dmenu-${version}.tar.gz";
+    url = "https://dl.suckless.org/tools/dmenu-${finalAttrs.version}.tar.gz";
     sha256 = "sha256-1NTKd7WRQPJyJy21N+BbuRpZFPVoAmUtxX5hp3PUN5I=";
   };
 
@@ -32,4 +32,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.all;
     mainProgram = "dmenu";
   };
-}
+})
