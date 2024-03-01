@@ -11,14 +11,14 @@
 , python3
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "siglo";
   version = "0.9.9";
 
   src = fetchFromGitHub {
     owner = "theironrobin";
     repo = "siglo";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-4jKsRpzuyHH31LXndC3Ua4TYcI0G0v9qqe0cbvLuCDA=";
   };
 
@@ -67,4 +67,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ ];
     platforms = platforms.linux;
   };
-}
+})
