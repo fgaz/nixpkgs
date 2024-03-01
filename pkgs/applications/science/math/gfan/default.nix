@@ -1,10 +1,10 @@
 {lib, stdenv, fetchurl, gmp, mpir, cddlib}:
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gfan";
   version = "0.6.2";
 
   src = fetchurl {
-    url = "http://home.math.au.dk/jensen/software/gfan/gfan${version}.tar.gz";
+    url = "http://home.math.au.dk/jensen/software/gfan/gfan${finalAttrs.version}.tar.gz";
     sha256 = "02pihqb1lb76a0xbfwjzs1cd6ay3ldfxsm8dvsbl6qs3vkjxax56";
   };
 
@@ -27,4 +27,4 @@ stdenv.mkDerivation rec {
     platforms = lib.platforms.unix;
     homepage = "http://home.math.au.dk/jensen/software/gfan/gfan.html";
   };
-}
+})
