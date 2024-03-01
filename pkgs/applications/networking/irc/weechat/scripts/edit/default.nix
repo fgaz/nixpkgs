@@ -1,6 +1,6 @@
 { lib, stdenv, fetchFromGitHub, weechat }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "edit-weechat";
   version = "1.0.2";
 
@@ -27,4 +27,4 @@ stdenv.mkDerivation rec {
     license = licenses.mit;
     maintainers = with maintainers; [ eraserhd ];
   };
-}
+})
