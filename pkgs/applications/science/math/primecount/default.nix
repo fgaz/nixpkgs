@@ -5,14 +5,14 @@
 , primesieve
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "primecount";
   version = "7.10";
 
   src = fetchFromGitHub {
     owner = "kimwalisch";
     repo = "primecount";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-z7sHGR6zZSTV1PbL0WPGHf52CYQ572KC1yznCuIEJbQ=";
   };
 
@@ -53,4 +53,4 @@ stdenv.mkDerivation rec {
     license = licenses.bsd2;
     inherit (primesieve.meta) maintainers platforms;
   };
-}
+})
