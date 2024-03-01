@@ -14,14 +14,14 @@
 , zita-resampler
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "infamousPlugins";
   version = "0.3.2";
 
   src = fetchFromGitHub {
     owner = "ssj71";
     repo = "infamousPlugins";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-AhW4hLmCxz7yHMdxM6kOvtCXk1jEg/XtyPgt4yk1xqs=";
   };
 
@@ -48,4 +48,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.magnetophon ];
     platforms = platforms.linux;
   };
-}
+})
