@@ -5,7 +5,7 @@
 , openssl
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "btcdeb";
   version = "unstable-2022-04-03";
 
@@ -26,4 +26,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ akru ];
     platforms = platforms.unix;
   };
-}
+})
