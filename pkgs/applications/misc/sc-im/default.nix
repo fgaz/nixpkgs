@@ -14,18 +14,18 @@
 , xlsSupport ? false
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "sc-im";
   version = "0.8.3";
 
   src = fetchFromGitHub {
     owner = "andmarti1424";
     repo = "sc-im";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-QlnxMe0WsRX9J2xzpf2Udcf9+N3MvQWqmYl2YKsGpYM=";
   };
 
-  sourceRoot = "${src.name}/src";
+  sourceRoot = "${finalAttrs.src.name}/src";
 
   nativeBuildInputs = [
     makeWrapper
@@ -51,11 +51,11 @@ stdenv.mkDerivation rec {
   '';
 
   meta = with lib; {
-    changelog = "https://github.com/andmarti1424/sc-im/blob/${src.rev}/CHANGES";
+    changelog = "https://github.com/andmarti1424/sc-im/blob/${finalAttrs.src.rev}/CHANGES";
     homepage = "https://github.com/andmarti1424/sc-im";
     description = "An ncurses spreadsheet program for terminal";
     license = licenses.bsdOriginal;
     maintainers = with maintainers; [ dotlambda ];
     platforms = platforms.unix;
   };
-}
+})
