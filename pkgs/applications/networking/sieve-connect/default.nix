@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, makeWrapper, perlPackages, installShellFiles }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "sieve-connect";
   version = "0.90";
 
   src = fetchFromGitHub {
     owner = "philpennock";
     repo = "sieve-connect";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "1ghvfa5ifa68b6imh85bkmy00r93c5f9hs6d039axb73gmma580p";
   };
 
@@ -18,7 +18,7 @@ stdenv.mkDerivation rec {
     # Fixes failing build when not building in git repo
     mkdir .git
     touch .git/HEAD
-    echo "${version}" > versionfile
+    echo "${finalAttrs.version}" > versionfile
     echo "$(date +%Y-%m-%d)" > datefile
   '';
 
@@ -48,4 +48,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ das_j ];
     mainProgram = "sieve-connect";
   };
-}
+})
