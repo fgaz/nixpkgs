@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, pkg-config, ncurses, ocamlPackages }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "prooftree";
   version = "0.13";
 
   src = fetchurl {
-    url = "https://askra.de/software/prooftree/releases/prooftree-${version}.tar.gz";
+    url = "https://askra.de/software/prooftree/releases/prooftree-${finalAttrs.version}.tar.gz";
     sha256 = "0z1z4wqbqwgppkh2bm89fgy07a0y2m6g4lvcyzs09sm1ysklk2dh";
   };
 
@@ -41,4 +41,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.jwiegley ];
     license = licenses.gpl3;
   };
-}
+})
