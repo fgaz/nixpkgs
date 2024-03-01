@@ -1,7 +1,7 @@
 { lib, stdenv, fetchurl, dpkg, autoPatchelfHook, makeWrapper, electron
 , alsa-lib, glibc, gtk3, libxshmfence, mesa, nss }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "threema-desktop";
   version = "1.2.31";
 
@@ -52,4 +52,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ wolfangaukang ];
     platforms = [ "x86_64-linux" ];
   };
-}
+})
