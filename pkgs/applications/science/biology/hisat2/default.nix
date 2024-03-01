@@ -1,13 +1,13 @@
 {lib, stdenv, fetchFromGitHub, unzip, which, python3, perl}:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "hisat2";
   version = "2.2.1";
 
   src = fetchFromGitHub {
     owner = "DaehwanKimLab";
     repo = "hisat2";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "0lmzdhzjkvxw7n5w40pbv5fgzd4cz0f9pxczswn3d4cr0k10k754";
   };
 
@@ -43,4 +43,4 @@ stdenv.mkDerivation rec {
     platforms = [ "x86_64-linux" "i686-linux" ];
   };
 
-}
+})
