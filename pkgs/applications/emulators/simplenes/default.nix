@@ -4,7 +4,7 @@
 , sfml
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "simplenes";
   version = "unstable-2019-03-13";
 
@@ -30,4 +30,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ ivar ];
     platforms = platforms.linux;
   };
-}
+})
