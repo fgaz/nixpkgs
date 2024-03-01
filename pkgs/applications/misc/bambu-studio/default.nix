@@ -56,14 +56,14 @@ let
     buildInputs = [ openexr boost179 tbb_2021_8 jemalloc c-blosc ilmbase ];
   });
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "bambu-studio";
   version = "01.08.04.51";
 
   src = fetchFromGitHub {
     owner = "bambulab";
     repo = "BambuStudio";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-rqD1+3Q4ZUBgS57iCItuLX6ZMP7VQuedaJmgKB1szgs=";
   };
 
@@ -108,7 +108,7 @@ stdenv.mkDerivation rec {
     xorg.libX11
   ] ++ lib.optionals withSystemd [
     systemd
-  ] ++ checkInputs;
+  ] ++ finalAttrs.checkInputs;
 
   patches = [
     # Fix for webkitgtk linking
@@ -172,4 +172,4 @@ stdenv.mkDerivation rec {
     mainProgram = "bambu-studio";
     platforms = platforms.linux;
   };
-}
+})
