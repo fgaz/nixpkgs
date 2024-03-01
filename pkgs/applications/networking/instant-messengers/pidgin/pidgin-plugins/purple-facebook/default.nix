@@ -9,14 +9,14 @@ let
     sha256 = "06imlhsps4wrjgjb92zpaxprxfxl2pjb2x9pl859c8cryssrz2jv";
   };
 
-in stdenv.mkDerivation rec {
+in stdenv.mkDerivation (finalAttrs: {
   pname = "purple-facebook";
   version = "0.9.5";
 
   src = fetchFromGitHub {
     owner = "dequis";
     repo = "purple-facebook";
-    rev = "v${version}-9ff9acf9fa14";
+    rev = "v${finalAttrs.version}-9ff9acf9fa14";
     sha256 = "0a1860bkzrmyxahm9rlxi80z335w491wzdaqaw6j9ccavbymhwhs";
   };
 
@@ -57,10 +57,10 @@ in stdenv.mkDerivation rec {
   buildInputs = [ pidgin glib json-glib ];
 
   meta = with lib; {
-    inherit (src.meta) homepage;
+    inherit (finalAttrs.src.meta) homepage;
     description = "Facebook protocol plugin for libpurple";
     license = licenses.gpl2;
     platforms = platforms.linux;
     maintainers = with maintainers; [ davorb ];
   };
-}
+})
