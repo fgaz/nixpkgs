@@ -18,14 +18,14 @@
 , glib-networking
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "ephemeral";
   version = "7.1.0";
 
   src = fetchFromGitHub {
     owner = "cassidyjames";
     repo = "ephemeral";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-07HO8nC2Pwz2EAea4ZzmqyMfQdgX8FVqDepdA6j/NT8=";
   };
 
@@ -67,4 +67,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl3;
     mainProgram = "com.github.cassidyjames.ephemeral";
   };
-}
+})
