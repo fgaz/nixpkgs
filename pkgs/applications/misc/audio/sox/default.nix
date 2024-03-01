@@ -35,7 +35,7 @@
 , libpulseaudio
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "sox";
   version = "unstable-2021-05-09";
 
@@ -88,4 +88,4 @@ stdenv.mkDerivation rec {
     license = if enableAMR then licenses.unfree else licenses.gpl2Plus;
     platforms = platforms.unix;
   };
-}
+})
