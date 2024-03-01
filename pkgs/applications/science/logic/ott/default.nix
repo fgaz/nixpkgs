@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, pkg-config, ocamlPackages, opaline }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "ott";
   version = "0.33";
 
   src = fetchFromGitHub {
     owner = "ott-lang";
     repo = "ott";
-    rev = version;
+    rev = finalAttrs.version;
     hash = "sha256-GzeEiok5kigcmfqf/K/UxvlKkl55zy0vOyiRZ2HyMiE=";
   };
 
@@ -45,4 +45,4 @@ stdenv.mkDerivation rec {
     maintainers = with lib.maintainers; [ jwiegley ];
     platforms = lib.platforms.unix;
   };
-}
+})
