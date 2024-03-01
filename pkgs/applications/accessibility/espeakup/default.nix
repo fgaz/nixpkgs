@@ -10,14 +10,14 @@
 , systemd
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "espeakup";
   version = "0.90";
 
   src = fetchFromGitHub {
     owner = "linux-speakup";
     repo = "espeakup";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "0lmjwafvfxy07zn18v3dzjwwpnid2xffgvy2dzlwkbns8gb60ds2";
   };
 
@@ -44,4 +44,4 @@ stdenv.mkDerivation rec {
     platforms = with platforms; linux;
     mainProgram = "espeakup";
   };
-}
+})
