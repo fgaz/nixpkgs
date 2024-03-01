@@ -8,14 +8,14 @@
 , llvmPackages
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "iqtree";
   version = "2.2.2.7";
 
   src = fetchFromGitHub {
     owner = "iqtree";
     repo = "iqtree2";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-XyjVo5TYMoB+ZOAGc4ivYqFGnEO1M7mhxXrG45TP44Y=";
     fetchSubmodules = true;
   };
@@ -37,4 +37,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ bzizou ];
     platforms = [ "x86_64-linux" "x86_64-darwin" ];
   };
-}
+})
