@@ -9,14 +9,14 @@
 , postgresql
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "pgmodeler";
   version = "1.0.6";
 
   src = fetchFromGitHub {
     owner = "pgmodeler";
     repo = "pgmodeler";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-Km4PWvbIzgc1Kxsp26HYLCA4OkCfOsGWsdWYLmWf/NA=";
   };
 
@@ -33,4 +33,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.esclear ];
     platforms = platforms.linux;
   };
-}
+})
