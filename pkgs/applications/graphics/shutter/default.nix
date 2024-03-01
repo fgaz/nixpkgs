@@ -63,14 +63,14 @@ let
       TypesSerialiser
     ];
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "shutter";
   version = "0.99.2";
 
   src = fetchFromGitHub {
     owner = "shutter-project";
     repo = "shutter";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-o95skSr6rszh0wsHQTpu1GjqCDmde7aygIP+i4XQW9A=";
   };
 
@@ -109,4 +109,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.all;
     maintainers = [ maintainers.bjornfor ];
   };
-}
+})
