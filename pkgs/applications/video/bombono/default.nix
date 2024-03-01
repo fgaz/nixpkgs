@@ -25,14 +25,14 @@ let
       url = "https://aur.archlinux.org/cgit/aur.git/plain/${name}?h=766dd4ba1715fc921fe26ce1bdcf22c30f4fc073";
     };
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "bombono";
   version = "1.2.4";
 
   src = fetchFromGitHub {
     owner = "bombono-dvd";
     repo = "bombono-dvd";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-aRW8H8+ca/61jGLxUs7u3R7yEiulwr5viMEuZWbc4dM=";
   };
 
@@ -92,4 +92,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ symphorien ];
     platforms = platforms.linux;
   };
-}
+})
