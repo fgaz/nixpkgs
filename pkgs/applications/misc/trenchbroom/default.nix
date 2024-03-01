@@ -6,14 +6,14 @@
 , copyDesktopItems, makeDesktopItem
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "TrenchBroom";
   version = "2023.1";
 
   src = fetchFromGitHub {
     owner = "TrenchBroom";
     repo = "TrenchBroom";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-62xcFKSqxPS+J54+kLo/hewM+Wu/rVBGD8oiECDCJpA=";
     fetchSubmodules = true;
   };
@@ -64,9 +64,9 @@ stdenv.mkDerivation rec {
     '';
   postPatch = ''
     substituteInPlace common/src/Version.h.in \
-      --subst-var-by APP_VERSION_YEAR ${lib.versions.major version} \
-      --subst-var-by APP_VERSION_NUMBER ${lib.versions.minor version} \
-      --subst-var-by GIT_DESCRIBE v${version}
+      --subst-var-by APP_VERSION_YEAR ${lib.versions.major finalAttrs.version} \
+      --subst-var-by APP_VERSION_NUMBER ${lib.versions.minor finalAttrs.version} \
+      --subst-var-by GIT_DESCRIBE v${finalAttrs.version}
     substituteInPlace app/CMakeLists.txt \
       --replace 'set(CPACK_PACKAGING_INSTALL_PREFIX "/usr")' 'set(CPACK_PACKAGING_INSTALL_PREFIX "'$out'")'
   '';
@@ -109,7 +109,7 @@ stdenv.mkDerivation rec {
       name = "TrenchBroom";
       desktopName = "TrenchBroom level editor";
       icon = "trenchbroom";
-      comment = meta.description;
+      comment = finalAttrs.meta.description;
       categories = [ "Development" ];
       exec = "trenchbroom";
     })
@@ -123,4 +123,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ astro ];
     platforms = [ "x86_64-linux" ];
   };
-}
+})
