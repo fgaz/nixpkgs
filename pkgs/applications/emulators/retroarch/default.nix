@@ -44,7 +44,7 @@ let
     lib.optional withVulkan vulkan-loader ++
     lib.optional withGamemode (lib.getLib gamemode);
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "retroarch-bare";
   version = "1.16.0.3";
 
@@ -52,7 +52,7 @@ stdenv.mkDerivation rec {
     owner = "libretro";
     repo = "RetroArch";
     hash = "sha256-BT+LzRDoQF03aNT2Kg7YaSWhK74CvOOiHUeHDtFpe9s=";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
   };
 
   nativeBuildInputs = [ pkg-config wrapQtAppsHook ] ++
@@ -138,4 +138,4 @@ stdenv.mkDerivation rec {
     # https://github.com/libretro/RetroArch/blob/71eb74d256cb4dc5b8b43991aec74980547c5069/.gitlab-ci.yml#L330
     broken = stdenv.isDarwin;
   };
-}
+})
