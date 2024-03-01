@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "filet";
   version = "0.1.3";
 
   src = fetchFromGitHub {
     owner = "buffet";
     repo = "filet";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "0hm7589ih30axafqxhhs4fg1pvfhlqzyzzmfi2ilx8haq5111fsf";
   };
 
@@ -20,4 +20,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.all;
     maintainers = with maintainers; [ buffet ];
   };
-}
+})
