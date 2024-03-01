@@ -4,14 +4,14 @@
 , cmake
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "primesieve";
   version = "11.2";
 
   src = fetchFromGitHub {
     owner = "kimwalisch";
     repo = "primesieve";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-HtVuUS4dmTC7KosyBhqZ0QRstvon9WMxYf9Ocs1XIrs=";
   };
 
@@ -34,4 +34,4 @@ stdenv.mkDerivation rec {
       (with maintainers; [ abbradar AndersonTorres ]);
     platforms = platforms.unix;
   };
-}
+})
