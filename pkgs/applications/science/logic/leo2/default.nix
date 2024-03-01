@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, fetchpatch, makeWrapper, eprover, ocaml, camlp4, perl, zlib }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "leo2";
   version = "1.7.0";
 
   src = fetchurl {
-    url = "https://page.mi.fu-berlin.de/cbenzmueller/leo/leo2_v${version}.tgz";
+    url = "https://page.mi.fu-berlin.de/cbenzmueller/leo/leo2_v${finalAttrs.version}.tgz";
     sha256 = "sha256:1b2q7vsz6s9ighypsigqjm1mzjiq3xgnz5id5ssb4rh9zm190r82";
   };
 
@@ -50,4 +50,4 @@ stdenv.mkDerivation rec {
     license = licenses.bsd3;
     homepage = "http://www.leoprover.org/";
   };
-}
+})
