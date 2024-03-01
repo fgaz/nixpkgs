@@ -10,14 +10,14 @@
 , speechd
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "rhvoice";
   version = "1.8.0";
 
   src = fetchFromGitHub {
     owner = "RHVoice";
     repo = "RHVoice";
-    rev = version;
+    rev = finalAttrs.version;
     fetchSubmodules = true;
     hash = "sha256-G5886rjBaAp0AXcr07O0q7K1OXTayfIbd4zniKwDiLw=";
   };
@@ -52,4 +52,4 @@ stdenv.mkDerivation rec {
     maintainers = with lib.maintainers; [ berce ];
     platforms = with lib.platforms; all;
   };
-}
+})
