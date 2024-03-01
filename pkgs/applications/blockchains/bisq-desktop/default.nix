@@ -36,12 +36,12 @@ let
     exec ${tor}/bin/tor "$@"
   '';
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "bisq-desktop";
   version = "1.9.14";
 
   src = fetchurl {
-    url = "https://github.com/bisq-network/bisq/releases/download/v${version}/Bisq-64bit-${version}.deb";
+    url = "https://github.com/bisq-network/bisq/releases/download/v${finalAttrs.version}/Bisq-64bit-${finalAttrs.version}.deb";
     sha256 = "0xbq94qbp59523xjp80bly38aisfwkfi0y9hmyhf8xlw084b82kz";
   };
 
@@ -61,7 +61,7 @@ stdenv.mkDerivation rec {
       name = "Bisq";
       exec = "bisq-desktop";
       icon = "bisq";
-      desktopName = "Bisq ${version}";
+      desktopName = "Bisq ${finalAttrs.version}";
       genericName = "Decentralized bitcoin exchange";
       categories = [ "Network" "P2P" ];
     })
@@ -70,7 +70,7 @@ stdenv.mkDerivation rec {
       name = "Bisq-hidpi";
       exec = "bisq-desktop-hidpi";
       icon = "bisq";
-      desktopName = "Bisq ${version} (HiDPI)";
+      desktopName = "Bisq ${finalAttrs.version} (HiDPI)";
       genericName = "Decentralized bitcoin exchange";
       categories = [ "Network" "P2P" ];
     })
@@ -123,4 +123,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ juaningan emmanuelrosa ];
     platforms = [ "x86_64-linux" ];
   };
-}
+})
