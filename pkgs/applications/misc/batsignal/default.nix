@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, libnotify, pkg-config, glib }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "batsignal";
   version = "1.8.0";
 
   src = fetchFromGitHub {
     owner = "electrickite";
     repo = "batsignal";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-yngd2yP6XtRp8y8ZUd0NISdf8+8wJvpLogrQQMdB0lA=";
   };
 
@@ -23,4 +23,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     mainProgram = "batsignal";
   };
-}
+})
