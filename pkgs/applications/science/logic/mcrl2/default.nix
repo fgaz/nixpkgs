@@ -1,12 +1,12 @@
 {lib, stdenv, fetchurl, cmake, libGLU, libGL, qt5, boost}:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "202206";
   build_nr = "1";
   pname = "mcrl2";
 
   src = fetchurl {
-    url = "https://www.mcrl2.org/download/release/mcrl2-${version}.${build_nr}.tar.gz";
+    url = "https://www.mcrl2.org/download/release/mcrl2-${finalAttrs.version}.${finalAttrs.build_nr}.tar.gz";
     sha256 = "KoLt8IU/vCdYqzJukNuaZfl8bWiOKB0UxWHEdQj3buU=";
   };
 
@@ -28,4 +28,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ moretea ];
     platforms = platforms.unix;
   };
-}
+})
