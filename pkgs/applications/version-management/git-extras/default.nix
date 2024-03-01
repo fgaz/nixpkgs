@@ -5,14 +5,14 @@
 , which
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "git-extras";
   version = "7.1.0";
 
   src = fetchFromGitHub {
     owner = "tj";
     repo = "git-extras";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-e1UUAHXTRNgNWrYZuLGdrQIAD8WADmA2B9bVnDNidf8=";
   };
 
@@ -44,4 +44,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.all;
     maintainers = with maintainers; [ cko SuperSandro2000 ];
   };
-}
+})
