@@ -53,7 +53,7 @@ let
   };
 
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "mucommander";
   inherit version src postPatch;
   nativeBuildInputs = [ gradle_7 perl makeWrapper ];
@@ -87,7 +87,7 @@ stdenv.mkDerivation rec {
   buildPhase = ''
     export GRADLE_USER_HOME=$(mktemp -d)
 
-    gradle --offline --init-script ${gradleInit} --no-daemon tgz
+    gradle --offline --init-script ${finalAttrs.gradleInit} --no-daemon tgz
   '';
 
   installPhase = ''
@@ -106,4 +106,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ jiegec ];
     platforms = platforms.all;
   };
-}
+})
