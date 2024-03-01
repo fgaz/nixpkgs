@@ -8,14 +8,14 @@
 , libjack2
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "qmidiarp";
   version = "0.7.0";
 
   src = fetchgit {
     url = "https://git.code.sf.net/p/qmidiarp/code";
     sha256 = "sha256-oUdgff2xsXTis+C2Blv0tspWNIMGSODrKxWDpMDYnEU=";
-    rev = "qmidiarp-${version}";
+    rev = "qmidiarp-${finalAttrs.version}";
   };
 
   nativeBuildInputs = [
@@ -45,4 +45,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ sjfloat ];
   };
-}
+})
