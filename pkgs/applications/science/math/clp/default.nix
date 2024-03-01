@@ -1,12 +1,12 @@
 { lib, stdenv, fetchFromGitHub, pkg-config, coin-utils, zlib, osi }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "1.17.9";
   pname = "clp";
   src = fetchFromGitHub {
     owner = "coin-or";
     repo = "Clp";
-    rev = "releases/${version}";
+    rev = "releases/${finalAttrs.version}";
     hash = "sha256-kHCDji+yIf5mCoxKB2b/HaATGmwwIAPEV74tthIMeMY=";
   };
 
@@ -23,4 +23,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.darwin ++ platforms.linux;
     maintainers = [ maintainers.vbgl ];
   };
-}
+})
