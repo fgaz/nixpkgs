@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, makeWrapper, zlib, perl, perlPackages, openmp }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "4.8.1";
   pname = "cd-hit";
 
   src = fetchFromGitHub {
     owner = "weizhongli";
     repo = "cdhit";
-    rev = "V${version}";
+    rev = "V${finalAttrs.version}";
     sha256 = "032nva6iiwmw59gjipm1mv0xlcckhxsf45mc2qbnv19lbis0q22i";
   };
 
@@ -35,4 +35,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.bzizou ];
     platforms = platforms.unix;
   };
-}
+})
