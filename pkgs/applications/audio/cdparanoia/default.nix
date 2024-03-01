@@ -3,12 +3,12 @@
 , IOKit, Carbon
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "cdparanoia-III";
   version = "10.2";
 
   src = fetchurl {
-    url = "https://downloads.xiph.org/releases/cdparanoia/cdparanoia-III-${version}.src.tgz";
+    url = "https://downloads.xiph.org/releases/cdparanoia/cdparanoia-III-${finalAttrs.version}.src.tgz";
     sha256 = "1pv4zrajm46za0f6lv162iqffih57a8ly4pc69f7y0gfyigb8p80";
   };
 
@@ -59,4 +59,4 @@ stdenv.mkDerivation rec {
     license = with licenses; [ gpl2Plus lgpl21Plus ];
     platforms = platforms.unix;
   };
-}
+})
