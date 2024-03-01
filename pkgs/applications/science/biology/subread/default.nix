@@ -4,12 +4,12 @@
 , zlib
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "subread";
   version = "2.0.6";
 
   src = fetchurl {
-    url = "mirror://sourceforge/subread/subread-${version}/subread-${version}-source.tar.gz";
+    url = "mirror://sourceforge/subread/subread-${finalAttrs.version}/subread-${finalAttrs.version}-source.tar.gz";
     sha256 = "sha256-8P3aa5hjTSlGAolIwiAlPhCg8nx/pfJJE7ZbOsbLsEU=";
   };
 
@@ -38,4 +38,4 @@ stdenv.mkDerivation rec {
     homepage = "https://subread.sourceforge.net/";
   };
 
-}
+})
