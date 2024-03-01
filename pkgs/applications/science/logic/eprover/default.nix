@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, which, enableHO ? false }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "eprover";
   version = "3.0.03";
 
   src = fetchurl {
-    url = "https://wwwlehre.dhbw-stuttgart.de/~sschulz/WORK/E_DOWNLOAD/V_${version}/E.tgz";
+    url = "https://wwwlehre.dhbw-stuttgart.de/~sschulz/WORK/E_DOWNLOAD/V_${finalAttrs.version}/E.tgz";
     hash = "sha256-cS5zUe2N9Kd9uzbNpeBtvLbgUN0c3N3tGcYczK3KsdQ=";
   };
 
@@ -28,4 +28,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ raskin gebner ];
     platforms = platforms.all;
   };
-}
+})
