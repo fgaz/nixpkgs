@@ -20,14 +20,14 @@
 , ffmpeg
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "headlines";
   version = "0.7.2";
 
   src = fetchFromGitLab {
     owner = "caveman250";
     repo = "Headlines";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-wamow0UozX5ecKbXWOgsWCerInL4J0gK0+Muf+eoO9k=";
   };
 
@@ -70,4 +70,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ chuangzhu ];
     mainProgram = "headlines";
   };
-}
+})
