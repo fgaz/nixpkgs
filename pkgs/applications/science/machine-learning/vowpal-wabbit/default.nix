@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, fetchpatch, cmake, boost, eigen, rapidjson, spdlog, zlib }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "vowpal-wabbit";
   version = "9.6.0";
 
   src = fetchFromGitHub {
     owner = "VowpalWabbit";
     repo = "vowpal_wabbit";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-iSsxpeTRZjIhZaYBeoKLHl9j1aBIXWjONmAInmKvU/I=";
   };
 
@@ -52,4 +52,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ jackgerrits ];
     platforms = platforms.unix;
   };
-}
+})
