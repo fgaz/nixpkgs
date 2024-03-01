@@ -55,7 +55,7 @@
 , VideoToolbox
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "dolphin-emu";
   version = "5.0-20347";
 
@@ -130,8 +130,8 @@ stdenv.mkDerivation rec {
 
   cmakeFlags = [
     "-DDISTRIBUTOR=NixOS"
-    "-DDOLPHIN_WC_REVISION=${src.rev}"
-    "-DDOLPHIN_WC_DESCRIBE=${version}"
+    "-DDOLPHIN_WC_REVISION=${finalAttrs.src.rev}"
+    "-DDOLPHIN_WC_DESCRIBE=${finalAttrs.version}"
     "-DDOLPHIN_WC_BRANCH=master"
   ] ++ lib.optionals stdenv.isDarwin [
     "-DOSX_USE_DEFAULT_SEARCH_PATH=True"
@@ -171,7 +171,7 @@ stdenv.mkDerivation rec {
     tests.version = testers.testVersion {
       package = dolphin-emu;
       command = "dolphin-emu-nogui --version";
-      version = if stdenv.hostPlatform.isDarwin then "Dolphin 5.0" else version;
+      version = if stdenv.hostPlatform.isDarwin then "Dolphin 5.0" else finalAttrs.version;
     };
 
     updateScript = writeShellScript "dolphin-update-script" ''
@@ -199,4 +199,4 @@ stdenv.mkDerivation rec {
       ivar
     ];
   };
-}
+})
