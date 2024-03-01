@@ -1,10 +1,10 @@
 { lib, stdenv, fetchzip, jdk11, wrapGAppsHook }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "igv";
   version = "2.17.1";
   src = fetchzip {
-    url = "https://data.broadinstitute.org/igv/projects/downloads/${lib.versions.majorMinor version}/IGV_${version}.zip";
+    url = "https://data.broadinstitute.org/igv/projects/downloads/${lib.versions.majorMinor finalAttrs.version}/IGV_${finalAttrs.version}.zip";
     sha256 = "sha256-EXI1jVr8cJPYLLe81hzqLpP3IypHBZ0cb6z+WrDeFKQ=";
   };
 
@@ -33,4 +33,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = [ maintainers.mimame ];
   };
-}
+})
