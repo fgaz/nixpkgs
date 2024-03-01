@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, autoreconfHook, intltool, pkg-config, ffmpeg, wxGTK32, gtk3, wrapGAppsHook }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "spek";
   version = "0.8.5";
 
   src = fetchFromGitHub {
     owner = "alexkay";
     repo = "spek";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-VYt2so2k3Rk3sLSV1Tf1G2pESYiXygrKr9Koop8ChCg=";
   };
 
@@ -22,4 +22,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ bjornfor ];
     platforms = platforms.all;
   };
-}
+})
