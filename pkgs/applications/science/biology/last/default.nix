@@ -7,14 +7,14 @@
 , parallel
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "last";
   version = "1519";
 
   src = fetchFromGitLab {
     owner = "mcfrith";
     repo = "last";
-    rev = "refs/tags/${version}";
+    rev = "refs/tags/${finalAttrs.version}";
     hash = "sha256-659YiC7NA6ottOR41jo3ayh4lwReWj46NKMhMPuebF4=";
   };
 
@@ -44,4 +44,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ jbedo ];
     platforms = platforms.x86_64;
   };
-}
+})
