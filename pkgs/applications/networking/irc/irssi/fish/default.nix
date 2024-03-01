@@ -1,6 +1,6 @@
 { lib, stdenv, fetchFromGitHub, cmake, pkg-config, glib, openssl, irssi }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "fish-irssi";
   version = "unstable-2021-04-16";
 
@@ -25,4 +25,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ viric ];
     platforms = platforms.unix;
   };
-}
+})
