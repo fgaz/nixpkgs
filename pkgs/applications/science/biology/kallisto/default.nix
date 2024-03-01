@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, autoconf, cmake, hdf5, zlib }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "kallisto";
   version = "0.50.1";
 
   src = fetchFromGitHub {
     repo = "kallisto";
     owner = "pachterlab";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-JJZJOl4u6FzngrrMuC2AfD5ry2LBOT8tdz2piH+9LFE=";
   };
 
@@ -27,4 +27,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ arcadio ];
   };
-}
+})
