@@ -19,7 +19,7 @@ let
 
   contents = appimageTools.extract { inherit name src; };
 
-  git-remote-rad = stdenv.mkDerivation rec {
+  git-remote-rad = stdenv.mkDerivation (finalAttrs: {
     pname = "git-remote-rad";
     inherit version;
     src = contents;
@@ -31,7 +31,7 @@ let
       mkdir -p $out/bin/
       cp ${contents}/resources/git-remote-rad $out/bin/git-remote-rad
     '';
-  };
+  });
 
   # FIXME: a dependency of the `proxy` component of radicle-upstream (radicle-macros
   # v0.1.0) uses unstable rust features, making a from source build impossible at
