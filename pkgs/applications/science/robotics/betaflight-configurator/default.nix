@@ -11,11 +11,11 @@ let
     genericName = "Flight controller configuration tool";
   };
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   inherit pname;
   version = "10.9.0";
   src = fetchurl {
-    url = "https://github.com/betaflight/${pname}/releases/download/${version}/${pname}_${version}_linux64-portable.zip";
+    url = "https://github.com/betaflight/${pname}/releases/download/${finalAttrs.version}/${pname}_${finalAttrs.version}_linux64-portable.zip";
     sha256 = "sha256-9FzMyBIR2u1zXHtTWJABM6RF1+OyjYdEPlRwtig9blI=";
   };
 
@@ -54,4 +54,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ wucke13 ];
     platforms   = platforms.linux;
   };
-}
+})
