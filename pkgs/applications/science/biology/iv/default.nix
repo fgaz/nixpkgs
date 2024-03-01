@@ -7,12 +7,12 @@
 , patchelf
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "iv";
   version = "19";
 
   src = fetchurl {
-    url = "https://www.neuron.yale.edu/ftp/neuron/versions/v${neuron-version}/iv-${version}.tar.gz";
+    url = "https://www.neuron.yale.edu/ftp/neuron/versions/v${neuron-version}/iv-${finalAttrs.version}.tar.gz";
     sha256 = "07a3g8zzay4h0bls7fh89dd0phn7s34c2g15pij6dsnwpmjg06yx";
   };
 
@@ -40,4 +40,4 @@ stdenv.mkDerivation rec {
     homepage = "http://www.neuron.yale.edu/neuron";
     platforms = platforms.all;
   };
-}
+})
