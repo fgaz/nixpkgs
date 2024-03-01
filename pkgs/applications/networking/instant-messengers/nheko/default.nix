@@ -32,14 +32,14 @@
 , libnice
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "nheko";
   version = "0.11.3";
 
   src = fetchFromGitHub {
     owner = "Nheko-Reborn";
     repo = "nheko";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-2daXxTbpSUlig47y901JOkWRxbZGH4qrvNMepJbvS3o=";
   };
 
@@ -116,4 +116,4 @@ stdenv.mkDerivation rec {
     # https://github.com/NixOS/nixpkgs/pull/85922#issuecomment-619287177
     broken = stdenv.hostPlatform.isDarwin;
   };
-}
+})
