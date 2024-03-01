@@ -1,6 +1,6 @@
 { lib, stdenv, fetchurl, zlib, bzip2 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "cbc";
   version = "2.10.4";
 
@@ -8,7 +8,7 @@ stdenv.mkDerivation rec {
   # that breaks or-tools https://github.com/coin-or/Clp/issues/130
 
   src = fetchurl {
-    url = "https://www.coin-or.org/download/source/Cbc/Cbc-${version}.tgz";
+    url = "https://www.coin-or.org/download/source/Cbc/Cbc-${finalAttrs.version}.tgz";
     sha256 = "0zq66j1vvpslswhzi9yfgkv6vmg7yry4pdmfgqaqw2vhyqxnsy39";
   };
 
@@ -31,4 +31,4 @@ stdenv.mkDerivation rec {
     platforms = lib.platforms.linux ++ lib.platforms.darwin;
     description = "A mixed integer programming solver";
   };
-}
+})
