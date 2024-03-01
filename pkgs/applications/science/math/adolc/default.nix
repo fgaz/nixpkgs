@@ -1,6 +1,6 @@
 { lib, stdenv, fetchFromGitHub }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "adolc";
   version = "2.7.2";
 
@@ -8,7 +8,7 @@ stdenv.mkDerivation rec {
     owner = "coin-or";
     repo = "ADOL-C";
     sha256 = "1w0x0p32r1amfmh2lyx33j4cb5bpkwjr5z0ll43zi5wf5gsvckd1";
-    rev = "releases/${version}";
+    rev = "releases/${finalAttrs.version}";
   };
 
   configureFlags = [ "--with-openmp-flag=-fopenmp" ];
@@ -19,5 +19,5 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.bzizou ];
     license = licenses.gpl2Plus;
   };
-}
+})
 
