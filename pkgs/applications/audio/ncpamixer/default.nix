@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, fetchurl, cmake, ncurses, libpulseaudio, pandoc, pkg-config }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "ncpamixer";
   version = "1.3.7";
 
   src = fetchFromGitHub {
     owner = "fulhax";
     repo = "ncpamixer";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-GJ2zSIxSnL53nFZ2aeGlVI7i4APt+aALVEhNP5RkpMc=";
   };
 
@@ -40,4 +40,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = teams.c3d2.members;
   };
-}
+})
