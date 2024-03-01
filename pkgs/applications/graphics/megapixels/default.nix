@@ -27,14 +27,14 @@ let
     ++ optionals jpgSupport [ graphicsmagick exiftool ]
   );
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "megapixels";
   version = "1.7.0";
 
   src = fetchFromGitLab {
     owner = "postmarketOS";
     repo = "megapixels";
-    rev = version;
+    rev = finalAttrs.version;
     hash = "sha256-ejTCYZMDkqz8P3vroq8XAl+pUGgcS56cm3tzOTE3rfc=";
   };
 
@@ -72,4 +72,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ dotlambda ];
     platforms = platforms.linux;
   };
-}
+})
