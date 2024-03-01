@@ -11,12 +11,12 @@
 , portaudio
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "puredata";
   version = "0.54-0";
 
   src = fetchurl {
-    url = "http://msp.ucsd.edu/Software/pd-${version}.src.tar.gz";
+    url = "http://msp.ucsd.edu/Software/pd-${finalAttrs.version}.src.tar.gz";
     hash = "sha256-6MFKfYV5CWxuOsm1V4LaYChIRIlx0Qcwah5SbtBFZIU=";
   };
 
@@ -58,4 +58,4 @@ stdenv.mkDerivation rec {
     mainProgram = "pd";
     changelog = "https://msp.puredata.info/Pd_documentation/x5.htm#s1";
   };
-}
+})
