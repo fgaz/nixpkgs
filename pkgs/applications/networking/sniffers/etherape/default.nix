@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, pkg-config, libtool, gtk3, libpcap, goocanvas2,
 popt, itstool, libxml2 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "etherape";
   version = "0.9.20";
   src = fetchurl {
-    url = "mirror://sourceforge/etherape/etherape-${version}.tar.gz";
+    url = "mirror://sourceforge/etherape/etherape-${finalAttrs.version}.tar.gz";
     sha256 = "sha256-9UsQtWOXB1yYofGS4rMIF+ISWBsJKd0DBOFfqOr1n5Y=";
   };
 
@@ -20,4 +20,4 @@ stdenv.mkDerivation rec {
     platforms = with platforms; linux;
     maintainers = with maintainers; [ symphorien ];
   };
-}
+})
