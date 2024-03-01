@@ -1,6 +1,6 @@
 { lib, stdenv, fetchFromGitHub, autoreconfHook }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gpx";
   version = "2.6.8";
 
@@ -9,7 +9,7 @@ stdenv.mkDerivation rec {
   src = fetchFromGitHub {
     owner = "markwal";
     repo = "GPX";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "1izs8s5npkbfrsyk17429hyl1vyrbj9dp6vmdlbb2vh6mfgl54h8";
   };
 
@@ -20,4 +20,4 @@ stdenv.mkDerivation rec {
     platforms = lib.platforms.unix;
     maintainers = [ lib.maintainers.leo60228 ];
   };
-}
+})
