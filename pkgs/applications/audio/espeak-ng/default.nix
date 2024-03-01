@@ -23,14 +23,14 @@
 , makeWrapper
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "espeak-ng";
   version = "1.51.1";
 
   src = fetchFromGitHub {
     owner = "espeak-ng";
     repo = "espeak-ng";
-    rev = version;
+    rev = finalAttrs.version;
     hash = "sha256-aAJ+k+kkOS6k835mEW7BvgAIYGhUHxf7Q4P5cKO8XTk=";
   };
 
@@ -98,4 +98,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.all;
     mainProgram = "espeak-ng";
   };
-}
+})
