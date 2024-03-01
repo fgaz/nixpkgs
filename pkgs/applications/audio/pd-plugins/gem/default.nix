@@ -13,7 +13,7 @@
 , file
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gem-unstable";
   version = "2023-07-28";
 
@@ -48,4 +48,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ raboof carlthome ];
     platforms = platforms.linux;
   };
-}
+})
