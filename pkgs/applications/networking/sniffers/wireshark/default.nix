@@ -52,7 +52,7 @@
 
 assert withQt -> qt6 != null;
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "wireshark-${if withQt then "qt" else "cli"}";
   version = "4.2.2";
 
@@ -61,7 +61,7 @@ stdenv.mkDerivation rec {
   src = fetchFromGitLab {
     repo = "wireshark";
     owner = "wireshark";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-4SxrlNrVg8Yc1THyRPEQDM/yQzDTLM1ppVwCw9vResE=";
   };
 
@@ -192,4 +192,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ bjornfor fpletz ];
     mainProgram = if withQt then "wireshark" else "tshark";
   };
-}
+})
