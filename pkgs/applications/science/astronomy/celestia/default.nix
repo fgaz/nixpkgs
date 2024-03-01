@@ -2,14 +2,14 @@
 , libjpeg_turbo, libtheora, libXmu, lua, libGLU, libGL, perl, autoreconfHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "celestia";
   version = "1.6.4";
 
   src = fetchFromGitHub {
     owner = "CelestiaProject";
     repo = "Celestia";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-MkElGo1ZR0ImW/526QlDE1ePd+VOQxwkX7l+0WyZ6Vs=";
   };
 
@@ -34,4 +34,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ hjones2199 ];
     platforms = platforms.linux;
   };
-}
+})
