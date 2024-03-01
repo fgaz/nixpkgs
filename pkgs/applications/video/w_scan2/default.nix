@@ -4,14 +4,14 @@
   fetchFromGitHub,
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "w_scan2";
   version = "1.0.15";
 
   src = fetchFromGitHub {
     owner = "stefantalpalaru";
     repo = "w_scan2";
-    rev = version;
+    rev = finalAttrs.version;
     hash = "sha256-ToD02W9H9HqddhpZsQm2Uzy/cVtv4KnfYmpCl2KEGSY=";
   };
 
@@ -23,4 +23,4 @@ stdenv.mkDerivation rec {
     license = lib.licenses.gpl2Only;
     mainProgram = "w_scan2";
   };
-}
+})
