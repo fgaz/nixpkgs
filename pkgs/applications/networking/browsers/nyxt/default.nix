@@ -6,7 +6,7 @@
 , xclip, wl-clipboard, notify-osd, enchant
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "nyxt";
   inherit (sbclPackages.nyxt) version;
 
@@ -25,9 +25,9 @@ stdenv.mkDerivation rec {
     mailcap pango gtk3
     glib-networking gsettings-desktop-schemas
     notify-osd enchant
-  ] ++ gstBuildInputs;
+  ] ++ finalAttrs.gstBuildInputs;
 
-  GST_PLUGIN_SYSTEM_PATH_1_0 = lib.makeSearchPathOutput "lib" "lib/gstreamer-1.0" gstBuildInputs;
+  GST_PLUGIN_SYSTEM_PATH_1_0 = lib.makeSearchPathOutput "lib" "lib/gstreamer-1.0" finalAttrs.gstBuildInputs;
 
   # The executable is already built in sbclPackages.nyxt, buildPhase tries to build using the makefile which we ignore
   dontBuild = true;
@@ -43,7 +43,7 @@ stdenv.mkDerivation rec {
 
     mkdir -p $out/bin && makeWrapper $src/bin/nyxt $out/bin/nyxt \
       --prefix PATH : ${lib.makeBinPath [ xclip wl-clipboard ]} \
-      --prefix GST_PLUGIN_SYSTEM_PATH_1_0 : "${GST_PLUGIN_SYSTEM_PATH_1_0}" \
+      --prefix GST_PLUGIN_SYSTEM_PATH_1_0 : "${finalAttrs.GST_PLUGIN_SYSTEM_PATH_1_0}" \
       --argv0 nyxt "''${gappsWrapperArgs[@]}"
   '';
 
@@ -58,4 +58,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ lewo dariof4 ];
     platforms = platforms.all;
   };
-}
+})
