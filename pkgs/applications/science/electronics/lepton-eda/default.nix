@@ -17,12 +17,12 @@
 , libstroke
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "lepton-eda";
   version = "1.9.18-20220529";
 
   src = fetchurl {
-    url = "https://github.com/lepton-eda/lepton-eda/releases/download/${version}/lepton-eda-${builtins.head (lib.splitString "-" version)}.tar.gz";
+    url = "https://github.com/lepton-eda/lepton-eda/releases/download/${finalAttrs.version}/lepton-eda-${builtins.head (lib.splitString "-" finalAttrs.version)}.tar.gz";
     hash = "sha256-X9yNuosNR1Jf3gYWQZeOnKdxzJLld29Sn9XYsPGWYYI=";
   };
 
@@ -40,7 +40,7 @@ stdenv.mkDerivation rec {
   ];
 
   postInstall = ''
-    libs="${lib.makeLibraryPath propagatedBuildInputs}"
+    libs="${lib.makeLibraryPath finalAttrs.propagatedBuildInputs}"
     for program in $out/bin/*; do
       wrapProgram "$program" \
         --prefix LD_LIBRARY_PATH : "$libs" \
@@ -59,4 +59,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ tesq0 ];
   };
-}
+})
