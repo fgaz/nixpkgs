@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, ncurses }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "neo";
   version = "0.6.1";
 
   src = fetchurl {
-    url = "https://github.com/st3w/neo/releases/download/v${version}/neo-${version}.tar.gz";
+    url = "https://github.com/st3w/neo/releases/download/v${finalAttrs.version}/neo-${finalAttrs.version}.tar.gz";
     sha256 = "sha256-pV5O1e/QpK8kjRYBinqq07YX7x06wF0pKiWKOKr0ank=";
   };
 
@@ -22,4 +22,4 @@ stdenv.mkDerivation rec {
     platforms = ncurses.meta.platforms;
     maintainers = [ maintainers.abbe ];
   };
-}
+})
