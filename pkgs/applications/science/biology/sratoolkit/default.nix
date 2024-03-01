@@ -20,12 +20,12 @@ let
 
 in
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "sratoolkit";
   version = "2.11.3";
 
   src = fetchurl {
-    url = "https://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/${version}/sratoolkit.${version}-ubuntu64.tar.gz";
+    url = "https://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/${finalAttrs.version}/sratoolkit.${finalAttrs.version}-ubuntu64.tar.gz";
     sha256 = "1590lc4cplxr3lhjqci8fjncy67imn2h14qd2l87chmhjh243qvx";
   };
 
@@ -40,7 +40,7 @@ stdenv.mkDerivation rec {
     stdenv.cc.cc.lib
   ];
 
-  sourceRoot = "sratoolkit.${version}-ubuntu64/bin";
+  sourceRoot = "sratoolkit.${finalAttrs.version}-ubuntu64/bin";
 
   installPhase = ''
     find -L . -executable -type f -! -name "*remote-fuser*" -exec install -m755 -D {} $out/bin/{} \;
@@ -53,4 +53,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ thyol ];
     platforms = [ "x86_64-linux" ];
   };
-}
+})
