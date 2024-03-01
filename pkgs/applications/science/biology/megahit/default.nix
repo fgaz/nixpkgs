@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, cmake, zlib }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname    = "megahit";
   version = "1.2.9";
 
   src = fetchFromGitHub {
     owner = "voutcn";
     repo = "megahit";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "1r5d9nkdmgjsbrpj43q9hy3s8jwsabaz3ji561v18hy47v58923c";
   };
 
@@ -24,4 +24,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ luispedro ];
     platforms = [ "x86_64-linux" ];
   };
-}
+})
