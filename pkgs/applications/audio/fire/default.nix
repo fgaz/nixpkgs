@@ -30,14 +30,14 @@ let
     sha256 = "sha256-g7NX7Ucl5GWw3u6TiUOITjhv7492ByTzACtWR0Ph2Jc=";
   };
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "fire";
   version = "1.0.0.3";
 
   src = fetchFromGitHub {
     owner = "jerryuhoo";
     repo = "Fire";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     fetchSubmodules = true;
     sha256 = "sha256-X3pzTrNd0G6BouCDkr3dukQTFDzZ7qblIYxFQActKGE=";
   };
@@ -116,4 +116,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = with maintainers; [ OPNA2608 ];
   };
-}
+})
