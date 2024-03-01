@@ -4,7 +4,7 @@
 , installShellFiles
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "with";
   version = "unstable-2018-03-20";
 
@@ -73,4 +73,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ AndersonTorres ];
     platforms = platforms.unix;
   };
-}
+})
