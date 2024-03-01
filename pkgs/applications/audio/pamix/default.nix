@@ -2,14 +2,14 @@
 , pkg-config, cmake
 , libpulseaudio, ncurses }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "pamix";
   version = "1.6";
 
   src = fetchFromGitHub {
     owner  = "patroclos";
     repo   = "pamix";
-    rev    = version;
+    rev    = finalAttrs.version;
     sha256 = "1d44ggnwkf2gff62959pj45v3a2k091q8v154wc5pmzamam458wp";
   };
 
@@ -41,4 +41,4 @@ stdenv.mkDerivation rec {
     platforms   = platforms.linux;
     maintainers = with maintainers; [ ericsagnes ];
   };
-}
+})
