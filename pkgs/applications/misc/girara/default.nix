@@ -16,7 +16,7 @@
 , zathura
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "girara";
   version = "0.4.2";
 
@@ -26,7 +26,7 @@ stdenv.mkDerivation rec {
     domain = "git.pwmt.org";
     owner = "pwmt";
     repo = "girara";
-    rev = version;
+    rev = finalAttrs.version;
     hash = "sha256-/9pj6gB46sKIilImDGdJ8H7UHip/z5ckZWZnJLw/0YU=";
   };
 
@@ -84,4 +84,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux ++ platforms.darwin;
     maintainers = [ ];
   };
-}
+})
