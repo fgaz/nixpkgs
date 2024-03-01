@@ -10,7 +10,7 @@
 , gnugrep
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gitstats";
   version = "2016-01-08";
 
@@ -47,7 +47,7 @@ stdenv.mkDerivation rec {
 
   makeFlags = [
     "PREFIX=$(out)"
-    "VERSION=${version}"
+    "VERSION=${finalAttrs.version}"
   ];
 
   buildFlags = [ "man" ];
@@ -64,4 +64,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ bjornfor ];
     mainProgram = "gitstats";
   };
-}
+})
