@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, fetchpatch, cmake, boost }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "SkypeExport";
   version = "1.4.0";
 
   src = fetchFromGitHub {
     owner = "Temptin";
     repo = "SkypeExport";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "1ilkh0s3dz5cp83wwgmscnfmnyck5qcwqg1yxp9zv6s356dxnbak";
   };
 
@@ -32,4 +32,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = with maintainers; [ yana ];
   };
-}
+})
