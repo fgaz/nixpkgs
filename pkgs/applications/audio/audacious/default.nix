@@ -10,12 +10,12 @@
 , wrapQtAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "audacious";
   version = "4.3.1";
 
   src = fetchurl {
-    url = "http://distfiles.audacious-media-player.org/audacious-${version}.tar.bz2";
+    url = "http://distfiles.audacious-media-player.org/audacious-${finalAttrs.version}.tar.bz2";
     sha256 = "sha256-heniaEFQW1HjQu5yotBfGb74lPVnoCnrs/Pgwa20IEI=";
   };
 
@@ -53,4 +53,4 @@ stdenv.mkDerivation rec {
       lgpl2Plus #http://redmine.audacious-media-player.org/issues/46
     ];
   };
-}
+})
