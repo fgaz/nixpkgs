@@ -90,12 +90,12 @@ let
   disableFeatures = optional enableVideoAcceleration "UseChromeOSDirectVideoDecoder";
 in
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "brave";
   version = "1.62.153";
 
   src = fetchurl {
-    url = "https://github.com/brave/brave-browser/releases/download/v${version}/brave-browser_${version}_amd64.deb";
+    url = "https://github.com/brave/brave-browser/releases/download/v${finalAttrs.version}/brave-browser_${finalAttrs.version}_amd64.deb";
     hash = "sha256-7ifBFWKsegXe0zBdVQO2BiKoBd2zhYX8RYiYcs8v0bg=";
   };
 
@@ -209,4 +209,4 @@ stdenv.mkDerivation rec {
     platforms = [ "x86_64-linux" ];
     mainProgram = "brave";
   };
-}
+})
