@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, cmake, pkg-config, glib, gettext, readline }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "sdcv";
   version = "0.5.5";
 
   src = fetchFromGitHub {
     owner = "Dushistov";
     repo = "sdcv";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-EyvljVXhOsdxIYOGTzD+T16nvW7/RNx3DuQ2OdhjXJ4=";
   };
 
@@ -28,4 +28,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl2;
     platforms = platforms.unix;
   };
-}
+})
