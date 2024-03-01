@@ -2,14 +2,14 @@
 , gtk3, poppler, freetype, libpthreadstubs, libXdmcp, libxshmfence, wrapGAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "0.1.5";
   pname = "apvlv";
 
   src = fetchFromGitHub {
     owner = "naihe2010";
     repo = "apvlv";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "1n4xiic8lqnv3mqi7wpdv866gyyakax71gffv3n9427rmcld465i";
   };
 
@@ -71,4 +71,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.ardumont ];
   };
 
-}
+})
