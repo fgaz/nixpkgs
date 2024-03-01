@@ -19,14 +19,14 @@
 , withGui ? true
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "mrtrix";
   version = "3.0.4";
 
   src = fetchFromGitHub {
     owner = "MRtrix3";
     repo = "mrtrix3";
-    rev = "refs/tags/${version}";
+    rev = "refs/tags/${finalAttrs.version}";
     hash = "sha256-87zBAoBLWQPccGS37XyQ8H0GhL01k8GQFgcLL6IwbcM=";
     fetchSubmodules = true;
   };
@@ -109,4 +109,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     license   = licenses.mpl20;
   };
-}
+})
