@@ -40,14 +40,14 @@
 , zstd
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "entangle";
   version = "3.0";
 
   src = fetchFromGitLab {
     owner = "entangle";
     repo = "entangle";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "hz2WSDOjriQSavFlDT+35x1X5MeInq80ZrSP1WR/td0=";
   };
 
@@ -135,4 +135,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ ShamrockLee ];
     mainProgram = "entangle";
   };
-}
+})
