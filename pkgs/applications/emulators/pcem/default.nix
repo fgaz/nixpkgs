@@ -1,12 +1,12 @@
 { stdenv, lib, fetchzip, wxGTK32, coreutils, SDL2, openal, alsa-lib, pkg-config, gtk3, wrapGAppsHook
 , autoreconfHook, withNetworking ? true, withALSA ? true }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "pcem";
   version = "17";
 
   src = fetchzip {
-    url = "https://pcem-emulator.co.uk/files/PCemV${version}Linux.tar.gz";
+    url = "https://pcem-emulator.co.uk/files/PCemV${finalAttrs.version}Linux.tar.gz";
     stripRoot = false;
     sha256 = "067pbnc15h6a4pnnym82klr1w8qwfm6p0pkx93gx06wvwqsxvbdv";
   };
@@ -26,4 +26,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.terin ];
     platforms = platforms.linux ++ platforms.windows;
   };
-}
+})
