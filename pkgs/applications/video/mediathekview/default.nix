@@ -1,10 +1,10 @@
 { lib, stdenv, fetchurl, makeWrapper, libglvnd, libnotify, jre, zip }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "14.0.0";
   pname = "mediathekview";
   src = fetchurl {
-    url = "https://download.mediathekview.de/stabil/MediathekView-${version}-linux.tar.gz";
+    url = "https://download.mediathekview.de/stabil/MediathekView-${finalAttrs.version}-linux.tar.gz";
     sha256 = "sha256-vr0yqKVRodtXalHEIsm5gdEp9wPU9U5nnYhMk7IiPF4=";
   };
 
@@ -46,4 +46,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ moredread ];
     platforms = platforms.all;
   };
-}
+})
