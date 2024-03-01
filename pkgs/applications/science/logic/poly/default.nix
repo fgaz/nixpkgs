@@ -1,6 +1,6 @@
 {lib, stdenv, fetchFromGitHub, gmp, cmake, python3}:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "libpoly";
   version = "0.1.13";
 
@@ -24,4 +24,4 @@ stdenv.mkDerivation rec {
     license = licenses.lgpl3;
     platforms = platforms.all;
   };
-}
+})
