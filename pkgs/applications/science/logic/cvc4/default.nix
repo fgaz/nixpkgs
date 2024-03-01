@@ -2,14 +2,14 @@
 , readline, libantlr3c, boost, jdk, python3, antlr3_4
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "cvc4";
   version = "1.8";
 
   src = fetchFromGitHub {
     owner  = "cvc4";
     repo   = "cvc4";
-    rev    = version;
+    rev    = finalAttrs.version;
     sha256 = "1rhs4pvzaa1wk00czrczp58b2cxfghpsnq534m0l3snnya2958jp";
   };
 
@@ -45,4 +45,4 @@ stdenv.mkDerivation rec {
     platforms   = platforms.unix;
     maintainers = with maintainers; [ vbgl thoughtpolice gebner ];
   };
-}
+})
