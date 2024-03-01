@@ -6,14 +6,14 @@
 , isa-l
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "seqtk";
   version = "1.4";
 
   src = fetchFromGitHub {
     owner = "lh3";
     repo = "seqtk";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-W6IUn7R9tlnWrKe/qOHJL+43AL4EZB7zj7M5u9l83WE=";
   };
 
@@ -36,4 +36,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.all;
     maintainers = with maintainers; [ bwlang ];
   };
-}
+})
