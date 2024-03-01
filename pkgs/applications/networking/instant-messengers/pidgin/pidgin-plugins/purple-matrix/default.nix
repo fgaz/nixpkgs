@@ -1,6 +1,6 @@
 { lib, stdenv, fetchFromGitHub, pkg-config, pidgin, json-glib, glib, http-parser, sqlite, olm, libgcrypt } :
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "purple-matrix-unstable";
   version = "2019-06-06";
 
@@ -35,4 +35,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = with maintainers; [ symphorien ];
   };
-}
+})
