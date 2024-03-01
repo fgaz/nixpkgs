@@ -1,11 +1,11 @@
 { stdenv, fetchzip, makeWrapper, mono, lib }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "natural-docs";
   version = "2.2";
 
   src = fetchzip {
-    url = "https://naturaldocs.org/download/natural_docs/${version}/Natural_Docs_${version}.zip";
+    url = "https://naturaldocs.org/download/natural_docs/${finalAttrs.version}/Natural_Docs_${finalAttrs.version}.zip";
     sha256 = "sha256-W0E9wamzABnPleVhHHXTIdWJk8kWnrUHojM+pcsowy8=";
   };
 
@@ -33,4 +33,4 @@ stdenv.mkDerivation rec {
     license = licenses.agpl3Only;
     maintainers = [ maintainers.nkpvk ];
   };
-}
+})
