@@ -7,14 +7,14 @@
 , mpi
 , openmp
 }:
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "hh-suite";
   version = "3.3.0";
 
   src = fetchFromGitHub {
     owner = "soedinglab";
     repo = "hh-suite";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-kjNqJddioCZoh/cZL3YNplweIGopWIGzCYQOnKDqZmw=";
   };
 
@@ -34,4 +34,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ natsukium ];
     platforms = platforms.unix;
   };
-}
+})
