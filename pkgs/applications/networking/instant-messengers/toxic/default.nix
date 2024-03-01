@@ -2,14 +2,14 @@
 , libtoxcore, openal, libvpx, freealut, libconfig, pkg-config, libopus
 , qrencode, gdk-pixbuf, libnotify }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "toxic";
   version = "0.11.3";
 
   src = fetchFromGitHub {
     owner  = "Tox";
     repo   = "toxic";
-    rev    = "v${version}";
+    rev    = "v${finalAttrs.version}";
     sha256 = "sha256-BabRY9iu5ccEXo5POrWkWaIWAeQU4MVlMK8I+Iju6aQ=";
   };
 
@@ -23,10 +23,10 @@ stdenv.mkDerivation rec {
   ];
   nativeBuildInputs = [ pkg-config libconfig ];
 
-  meta = with lib; src.meta // {
+  meta = with lib; finalAttrs.src.meta // {
     description = "Reference CLI for Tox";
     license = licenses.gpl3Plus;
     maintainers = with maintainers; [ ehmry ];
     platforms = platforms.linux;
   };
-}
+})
