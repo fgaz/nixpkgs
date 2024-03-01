@@ -6,7 +6,7 @@
 , pidgin
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "purple-plugin-pack";
   version = "2.8.0";
 
@@ -39,4 +39,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ bdimcheff ];
   };
-}
+})
