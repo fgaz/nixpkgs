@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, pkg-config, smlnj, rsync }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "twelf";
   version = "1.7.1";
 
   src = fetchurl {
-    url = "http://twelf.plparty.org/releases/twelf-src-${version}.tar.gz";
+    url = "http://twelf.plparty.org/releases/twelf-src-${finalAttrs.version}.tar.gz";
     sha256 = "0fi1kbs9hrdrm1x4k13angpjasxlyd1gc3ys8ah54i75qbcd9c4i";
   };
 
@@ -48,4 +48,4 @@ stdenv.mkDerivation rec {
     maintainers = with lib.maintainers; [ jwiegley ];
     platforms = lib.platforms.unix;
   };
-}
+})
