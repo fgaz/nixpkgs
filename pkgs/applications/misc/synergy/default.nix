@@ -35,14 +35,14 @@
 , ScreenSaver
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "synergy";
   version = "1.14.6.19-stable";
 
   src = fetchFromGitHub {
     owner = "symless";
     repo = "synergy-core";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-0QqklfSsvcXh7I2jaHk82k0nY8gQOj9haA4WOjGqBqY=";
     fetchSubmodules = true;
   };
@@ -145,4 +145,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ talyz ivar ];
     platforms = platforms.unix;
   };
-}
+})
