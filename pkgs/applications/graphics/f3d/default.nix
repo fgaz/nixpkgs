@@ -12,7 +12,7 @@
 , OpenGL
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "f3d";
   version = "2.3.0";
 
@@ -21,7 +21,7 @@ stdenv.mkDerivation rec {
   src = fetchFromGitHub {
     owner = "f3d-app";
     repo = "f3d";
-    rev = "refs/tags/v${version}";
+    rev = "refs/tags/v${finalAttrs.version}";
     hash = "sha256-pr2xuCy5yoUuj2cjkTh3Xwpg3g7zBspjErEi5luRD6Y=";
   };
 
@@ -53,4 +53,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ bcdarwin pbsds ];
     platforms = with platforms; unix;
   };
-}
+})
