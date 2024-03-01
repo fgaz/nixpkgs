@@ -28,14 +28,14 @@
 , zip
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "xiphos";
   version = "4.2.1";
 
   src = fetchFromGitHub {
     owner = "crosswire";
     repo = "xiphos";
-    rev = version;
+    rev = finalAttrs.version;
     hash = "sha256-H5Q+azE2t3fgu77C9DxrkeUCJ7iJz3Cc91Ln4dqLvD8=";
   };
 
@@ -91,7 +91,7 @@ stdenv.mkDerivation rec {
 
   preConfigure =  ''
     # The build script won't continue without the version saved locally.
-    echo "${version}" > cmake/source_version.txt
+    echo "${finalAttrs.version}" > cmake/source_version.txt
 
     export SWORD_HOME=${sword};
   '';
@@ -109,4 +109,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.AndersonTorres ];
     platforms = platforms.linux;
   };
-}
+})
