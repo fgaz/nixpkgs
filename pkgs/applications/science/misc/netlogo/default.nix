@@ -13,12 +13,12 @@ let
 
 in
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "netlogo";
   version = "6.1.1";
 
   src = fetchurl {
-    url = "https://ccl.northwestern.edu/netlogo/${version}/NetLogo-${version}-64.tgz";
+    url = "https://ccl.northwestern.edu/netlogo/${finalAttrs.version}/NetLogo-${finalAttrs.version}-64.tgz";
     sha256 = "1j08df68pgggxqkmpzd369w4h97q0pivmmljdb48hjghx7hacblp";
   };
 
@@ -38,7 +38,7 @@ stdenv.mkDerivation rec {
     # launcher with `cd` is required b/c otherwise the model library isn't usable
     makeWrapper "${jre}/bin/java" "$out/bin/netlogo" \
       --chdir "$out/share/netlogo/app" \
-      --add-flags "-jar netlogo-${version}.jar"
+      --add-flags "-jar netlogo-${finalAttrs.version}.jar"
 
     cp $src1 $out/share/icons/hicolor/256x256/apps/netlogo.png
     cp ${desktopItem}/share/applications/* $out/share/applications
@@ -56,4 +56,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.dpaetzel ];
     platforms = platforms.linux;
   };
-}
+})
