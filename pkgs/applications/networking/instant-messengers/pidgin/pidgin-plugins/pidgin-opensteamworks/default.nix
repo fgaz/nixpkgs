@@ -2,18 +2,18 @@
 , libsecret
 } :
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "pidgin-opensteamworks";
   version = "1.7.2";
 
   src = fetchFromGitHub {
     owner = "EionRobb";
     repo = "pidgin-opensteamworks";
-    rev = version;
+    rev = finalAttrs.version;
     sha256 = "sha256-VWsoyFG+Ro+Y6ngSTMQ7yBYf6awCMNOc6U0WqNeg/jU=";
   };
 
-  sourceRoot = "${src.name}/steam-mobile";
+  sourceRoot = "${finalAttrs.src.name}/steam-mobile";
 
   installFlags = [
     "PLUGIN_DIR_PURPLE=${placeholder "out"}/lib/purple-2"
@@ -34,4 +34,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ arobyn ];
   };
-}
+})
