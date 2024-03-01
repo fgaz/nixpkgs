@@ -1,7 +1,7 @@
 { lib, stdenv, fetchFromGitHub, autoreconfHook, automake, pkg-config
 , cairo, ghostscript, ngspice, tcl, tk, xorg, zlib }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "3.10.37";
   pname = "xcircuit";
 
@@ -30,4 +30,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ john-shaffer spacefrogg thoughtpolice ];
   };
-}
+})
