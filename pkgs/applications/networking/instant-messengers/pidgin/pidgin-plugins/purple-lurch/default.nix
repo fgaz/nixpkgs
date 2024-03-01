@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, cmake, pidgin, minixml, libxml2, sqlite, libgcrypt }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "purple-lurch";
   version = "0.7.0";
 
   src = fetchFromGitHub {
     owner = "gkdr";
     repo = "lurch";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-yyzotKL1Z4B2BxloJndJKemONMPLG9pVDVe2K5AL05g=";
     fetchSubmodules = true;
   };
@@ -28,4 +28,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ emmanuelrosa ];
   };
-}
+})
