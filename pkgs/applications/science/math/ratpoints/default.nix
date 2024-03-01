@@ -1,10 +1,10 @@
 { lib, stdenv, fetchurl, fetchpatch, gmp }:
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "ratpoints";
   version = "2.1.3.p4";
 
   src = fetchurl {
-    url = "http://www.mathe2.uni-bayreuth.de/stoll/programs/ratpoints-${version}.tar.gz";
+    url = "http://www.mathe2.uni-bayreuth.de/stoll/programs/ratpoints-${finalAttrs.version}.tar.gz";
     sha256 = "0zhad84sfds7izyksbqjmwpfw4rvyqk63yzdjd3ysd32zss5bgf4";
   };
 
@@ -32,4 +32,4 @@ stdenv.mkDerivation rec {
     platforms = lib.platforms.unix;
     homepage = "http://www.mathe2.uni-bayreuth.de/stoll/programs/";
   };
-}
+})
