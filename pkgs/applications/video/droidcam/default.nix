@@ -3,14 +3,14 @@
 , pkg-config
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "droidcam";
   version = "2.1.2";
 
   src = fetchFromGitHub {
     owner = "aramg";
     repo = "droidcam";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     sha256 = "sha256-NZ6sKLE/Sq4VBJSf7iG0CgdVwmU8JXQH/utbobBEFi0=";
   };
 
@@ -58,4 +58,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.suhr ];
     platforms = platforms.linux;
   };
-}
+})
