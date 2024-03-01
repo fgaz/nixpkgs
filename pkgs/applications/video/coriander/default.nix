@@ -13,12 +13,12 @@
 , GConf
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "coriander";
   version = "2.0.1";
 
   src = fetchurl {
-    url = "http://damien.douxchamps.net/ieee1394/coriander/archives/coriander-${version}.tar.gz";
+    url = "http://damien.douxchamps.net/ieee1394/coriander/archives/coriander-${finalAttrs.version}.tar.gz";
     sha256 = "0l6hpfgy5r4yardilmdrggsnn1fbfww516sk5a90g1740cd435x5";
   };
 
@@ -42,4 +42,4 @@ stdenv.mkDerivation rec {
     platforms = with lib.platforms; linux;
     mainProgram = "coriander";
   };
-}
+})
