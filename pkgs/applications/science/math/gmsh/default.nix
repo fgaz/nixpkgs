@@ -5,12 +5,12 @@
 assert (!blas.isILP64) && (!lapack.isILP64);
 assert enablePython -> (python != null);
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gmsh";
   version = "4.11.1";
 
   src = fetchurl {
-    url = "https://gmsh.info/src/gmsh-${version}-source.tgz";
+    url = "https://gmsh.info/src/gmsh-${finalAttrs.version}-source.tgz";
     sha256 = "sha256-xf4bfL1AOIioFJKfL9D11p4nYAIioYx4bbW3boAFs2U=";
   };
 
@@ -67,4 +67,4 @@ stdenv.mkDerivation rec {
     homepage = "https://gmsh.info/";
     license = lib.licenses.gpl2Plus;
   };
-}
+})
