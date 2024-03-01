@@ -1,10 +1,10 @@
 {lib, stdenv, fetchurl, pkg-config, gtk2, synergy}:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "quicksynergy";
   version = "0.9.0";
   src = fetchurl {
-    url = "mirror://sourceforge/project/quicksynergy/Linux/${version}/quicksynergy-${version}.tar.gz";
+    url = "mirror://sourceforge/project/quicksynergy/Linux/${finalAttrs.version}/quicksynergy-${finalAttrs.version}.tar.gz";
     sha256 = "1pi8503bg8q1psw50y6d780i33nnvfjqiy9vnr3v52pdcfip8pix";
   };
 
@@ -34,4 +34,4 @@ stdenv.mkDerivation rec {
     maintainers = [ lib.maintainers.spinus ];
     platforms = lib.platforms.linux;
   };
-}
+})
