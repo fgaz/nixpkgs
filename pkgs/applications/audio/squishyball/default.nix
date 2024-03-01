@@ -2,7 +2,7 @@
 , opusfile, pkg-config
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "squishyball";
   version = "unstable-2020-11-23";
 
@@ -57,4 +57,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ michalrus ];
     platforms = platforms.linux;
   };
-}
+})
