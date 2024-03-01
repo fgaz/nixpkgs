@@ -33,14 +33,14 @@ let
     hash = "sha256-CJv96TbPv1k/C7MQWEntE6khIRX1iIEiF9wEdsQGiFQ=";
   };
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "wownero";
   version = "0.11.0.1";
 
   src = fetchFromGitHub {
     owner = "wownero-project";
     repo = "wownero";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     fetchSubmodules = false;
     hash = "sha256-zmGsSbPpVwL0AhCQkdMKORruM5kYrrLe/BYfMphph8c=";
   };
@@ -94,4 +94,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ ];
     platforms = platforms.unix;
   };
-}
+})
