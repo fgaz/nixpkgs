@@ -4,14 +4,14 @@
 , libsepol, libsysprof-capture, libthai, libxkbcommon, pcre, pkg-config
 , python3, sqlite, stdenv }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "ChowPhaser";
   version = "1.1.1";
 
   src = fetchFromGitHub {
     owner = "jatinchowdhury18";
     repo = "ChowPhaser";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     fetchSubmodules = true;
     sha256 = "sha256-9wo7ZFMruG3QNvlpILSvrFh/Sx6J1qnlWc8+aQyS4tQ=";
   };
@@ -73,4 +73,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ magnetophon ];
     platforms = platforms.linux;
   };
-}
+})
