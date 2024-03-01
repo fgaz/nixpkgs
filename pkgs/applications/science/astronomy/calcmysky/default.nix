@@ -9,14 +9,14 @@
 , stellarium
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "calcmysky";
   version = "0.3.1";
 
   src = fetchFromGitHub {
     owner = "10110111";
     repo = "CalcMySky";
-    rev = "refs/tags/v${version}";
+    rev = "refs/tags/v${finalAttrs.version}";
     hash = "sha256-oqYOXoIPVqCD3HL7ShNoF89W725hFHX0Ei/yVJNTS5I=";
   };
 
@@ -37,4 +37,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl3Only;
     maintainers = with maintainers; [ nickcao ];
   };
-}
+})
