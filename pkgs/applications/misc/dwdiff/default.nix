@@ -6,12 +6,12 @@
 , icu
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "dwdiff";
   version = "2.1.4";
 
   src = fetchurl {
-    url = "https://os.ghalkes.nl/dist/dwdiff-${version}.tar.bz2";
+    url = "https://os.ghalkes.nl/dist/dwdiff-${finalAttrs.version}.tar.bz2";
     sha256 = "sha256-3xb+xE3LRn1lpCRqQ2KPk3QZlsF3PpMLkMbd4i3Vjgo=";
   };
 
@@ -29,4 +29,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ onny ];
   };
 
-}
+})
