@@ -19,7 +19,7 @@
 , wrapGAppsHook
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gmpc";
   version = "11.8.16";
 
@@ -27,7 +27,7 @@ stdenv.mkDerivation rec {
     pname = "libmpd";
     version = "11.8.17";
     src = fetchurl {
-      url = "https://download.sarine.nl/Programs/gmpc/${lib.versions.majorMinor version}/libmpd-${version}.tar.gz";
+      url = "https://download.sarine.nl/Programs/gmpc/${lib.versions.majorMinor finalAttrs.version}/libmpd-${finalAttrs.version}.tar.gz";
       sha256 = "10vspwsgr8pwf3qp2bviw6b2l8prgdiswgv7qiqiyr0h1mmk487y";
     };
     patches = [ ./libmpd-11.8.17-remove-strndup.patch ];
@@ -49,7 +49,7 @@ stdenv.mkDerivation rec {
     libmpdclient
     libsoup
     libunique
-    libmpd
+    finalAttrs.libmpd
     libSM
     libICE
     sqlite
@@ -63,5 +63,5 @@ stdenv.mkDerivation rec {
     maintainers = [];
     platforms = platforms.linux;
   };
-}
+})
 # TODO: what is this libmpd derivation embedded above?
