@@ -25,13 +25,13 @@
 , nix-update-script
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "tuba";
   version = "0.6.2";
   src = fetchFromGitHub {
     owner = "GeopJr";
     repo = "Tuba";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-SRK3I4sKJEaWBNs9VOs7Bhth/7gxybWpXJTn4DiQi6U=";
   };
 
@@ -81,4 +81,4 @@ stdenv.mkDerivation rec {
     changelog = "https://github.com/GeopJr/Tuba/releases/tag/v${version}";
     maintainers = with maintainers; [ chuangzhu aleksana ];
   };
-}
+})
