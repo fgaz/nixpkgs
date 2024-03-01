@@ -1,6 +1,6 @@
 { lib, stdenv, fetchFromGitHub, cmake, gmp, coreutils }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "lean";
   version = "3.51.0";
 
@@ -24,11 +24,11 @@ stdenv.mkDerivation rec {
   # library.
   doCheck = true;
 
-  preConfigure = assert builtins.stringLength src.rev == 40; ''
+  preConfigure = assert builtins.stringLength finalAttrs.src.rev == 40; ''
      substituteInPlace src/githash.h.in \
-       --subst-var-by GIT_SHA1 "${src.rev}"
+       --subst-var-by GIT_SHA1 "${finalAttrs.src.rev}"
      substituteInPlace library/init/version.lean.in \
-       --subst-var-by GIT_SHA1 "${src.rev}"
+       --subst-var-by GIT_SHA1 "${finalAttrs.src.rev}"
   '';
 
   postPatch = "patchShebangs .";
@@ -46,5 +46,5 @@ stdenv.mkDerivation rec {
     platforms   = platforms.unix;
     maintainers = with maintainers; [ thoughtpolice gebner ];
   };
-}
+})
 
