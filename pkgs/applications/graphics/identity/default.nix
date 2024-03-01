@@ -21,7 +21,7 @@
 , libwebp
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "identity";
   version = "0.6.0";
 
@@ -29,7 +29,7 @@ stdenv.mkDerivation rec {
     domain = "gitlab.gnome.org";
     owner = "YaLTeR";
     repo = "identity";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-AiOaTjYOc7Eo+9kl1H91TKAkCKNUJNWobmBENZlHBhQ=";
   };
 
@@ -74,4 +74,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
     maintainers = with maintainers; [ ];
   };
-}
+})
