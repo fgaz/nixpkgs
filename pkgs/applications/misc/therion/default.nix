@@ -28,14 +28,14 @@
 , tkimg
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "therion";
   version = "6.1.8";
 
   src = fetchFromGitHub {
     owner = "therion";
     repo = "therion";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-bmp0IZ4uAqDpe2e8UeIDUdFaaocx4OBIYuhnaHirqGc=";
   };
 
@@ -90,8 +90,8 @@ stdenv.mkDerivation rec {
   meta = with lib; {
     description = "Therion – cave surveying software";
     homepage = "https://therion.speleo.sk/";
-    changelog = "https://github.com/therion/therion/blob/${src.rev}/CHANGES";
+    changelog = "https://github.com/therion/therion/blob/${finalAttrs.src.rev}/CHANGES";
     license = licenses.gpl2Only;
     maintainers = with maintainers; [ matthewcroughan ];
   };
-}
+})
