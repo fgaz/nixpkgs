@@ -5,7 +5,7 @@
 
 assert portaudioSupport -> portaudio != null;
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "dsd";
   version = "2022-03-14";
 
@@ -35,4 +35,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = with maintainers; [ andrew-d ];
   };
-}
+})
