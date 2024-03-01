@@ -15,12 +15,12 @@
 let
   inherit (cudaPackages) cudatoolkit;
 
-  hwloc = stdenv.mkDerivation rec {
+  hwloc = stdenv.mkDerivation (finalAttrs: {
     pname = "hwloc";
     version = "2.2.0";
 
     src = fetchzip {
-      url = "https://download.open-mpi.org/release/hwloc/v${lib.versions.majorMinor version}/hwloc-${version}.tar.gz";
+      url = "https://download.open-mpi.org/release/hwloc/v${lib.versions.majorMinor finalAttrs.version}/hwloc-${finalAttrs.version}.tar.gz";
       sha256 = "1ibw14h9ppg8z3mmkwys8vp699n85kymdz20smjd2iq9b67y80b6";
     };
 
@@ -47,7 +47,7 @@ let
     enableParallelBuilding = true;
 
     outputs = [ "out" "lib" "dev" "doc" "man" ];
-  };
+  });
 
 in
 stdenv.mkDerivation rec {
