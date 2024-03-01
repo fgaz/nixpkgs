@@ -18,12 +18,12 @@
 , xorg
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "wavebox";
   version = "10.120.10-2";
 
   src = fetchurl {
-    url = "https://download.wavebox.app/stable/linux/tar/Wavebox_${version}.tar.gz";
+    url = "https://download.wavebox.app/stable/linux/tar/Wavebox_${finalAttrs.version}.tar.gz";
     sha256 = "sha256-9kA3nJUNlNHbWYkIy0iEnWCrmIYTjULdMAGGnO4JCkg=";
   };
 
@@ -91,4 +91,4 @@ stdenv.mkDerivation rec {
     platforms = [ "x86_64-linux" ];
     hydraPlatforms = [ ];
   };
-}
+})
