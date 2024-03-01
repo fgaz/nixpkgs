@@ -20,7 +20,7 @@
 , CoreAudioKit
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "dexed";
   version = "unstable-2022-07-09";
 
@@ -106,4 +106,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.all;
     maintainers = with maintainers; [ OPNA2608 ];
   };
-}
+})
