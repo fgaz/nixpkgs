@@ -3,7 +3,7 @@
 , freetype, giflib, gtk3, lcms2, libjpeg, libpng, libtiff, openjpeg, gifsicle
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname  = "mtPaint";
   version = "3.50.01";
 
@@ -37,5 +37,5 @@ stdenv.mkDerivation rec {
     platforms = lib.platforms.linux;
     maintainers = [ lib.maintainers.vklquevs ];
   };
-}
+})
 
