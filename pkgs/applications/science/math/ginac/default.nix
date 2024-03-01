@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, cln, pkg-config, readline, gmp, python3 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "ginac";
   version = "1.8.7";
 
   src = fetchurl {
-    url = "https://www.ginac.de/ginac-${version}.tar.bz2";
+    url = "https://www.ginac.de/ginac-${finalAttrs.version}.tar.bz2";
     sha256 = "sha256-cf9PLYoA5vB86P7mm3bcweu7cnvmdgtYfB+7XM97Yeo=";
   };
 
@@ -31,4 +31,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl2;
     platforms = platforms.all;
   };
-}
+})
