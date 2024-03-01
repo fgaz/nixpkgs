@@ -22,19 +22,19 @@
 , gtk-mac-integration
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "rawtherapee";
   version = "5.9";
 
   src = fetchFromGitHub {
     owner = "Beep6581";
     repo = "RawTherapee";
-    rev = version;
+    rev = finalAttrs.version;
     hash = "sha256-kdctfjss/DHEcaSDPXcmT20wXTwkI8moRX/i/5wT5Hg=";
   };
 
   postPatch = ''
-    echo "set(HG_VERSION ${version})" > ReleaseInfo.cmake
+    echo "set(HG_VERSION ${finalAttrs.version})" > ReleaseInfo.cmake
     substituteInPlace tools/osx/Info.plist.in rtgui/config.h.in \
       --replace "/Applications" "${placeholder "out"}/Applications"
   '';
@@ -96,4 +96,4 @@ stdenv.mkDerivation rec {
     maintainers = with lib.maintainers; [ jcumming mahe ];
     platforms = with lib.platforms; unix;
   };
-}
+})
