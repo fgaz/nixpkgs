@@ -26,7 +26,7 @@ let
     })
   ];
 
-in stdenv.mkDerivation rec {
+in stdenv.mkDerivation (finalAttrs: {
   pname = "paraview";
   inherit version;
 
@@ -111,4 +111,4 @@ in stdenv.mkDerivation rec {
     maintainers = with maintainers; [ guibert ];
     platforms = platforms.linux;
   };
-}
+})
