@@ -68,7 +68,7 @@ let
 
 in
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "mplayer";
   version = "unstable-2022-02-03";
 
@@ -205,4 +205,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ eelco ];
     platforms = [ "i686-linux" "x86_64-linux" "x86_64-darwin" "aarch64-darwin" "aarch64-linux" ];
   };
-}
+})
