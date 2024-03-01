@@ -1,11 +1,11 @@
 { lib, stdenv, fetchurl, coreutils, fltk, libjpeg }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   version = "5.0.5";
   pname = "seaview";
 
   src = fetchurl {
-    url = "ftp://pbil.univ-lyon1.fr/pub/mol_phylogeny/seaview/archive/seaview_${version}.tar.gz";
+    url = "ftp://pbil.univ-lyon1.fr/pub/mol_phylogeny/seaview/archive/seaview_${finalAttrs.version}.tar.gz";
     sha256 = "sha256-zo9emLpHiDv6kekbx55NOibxWN2Zg7XngzGkUqSx+PI=";
   };
 
@@ -38,4 +38,4 @@ stdenv.mkDerivation rec {
     maintainers = [ maintainers.iimog ];
     platforms = platforms.linux;
   };
-}
+})
