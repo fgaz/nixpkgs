@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, qmake, qtbase, qtsvg, poppler, libzip, pkg-config, wrapQtAppsHook }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "kitsas";
   version = "4.0.5";
 
   src = fetchFromGitHub {
     owner = "artoh";
     repo = "kitupiikki";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-ODl1yrtrCVhuBWbA1AvHl22d+JSdySG/Gi2hlpVW3jg=";
   };
 
@@ -45,4 +45,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl3Plus;
     platforms = platforms.unix;
   };
-}
+})
